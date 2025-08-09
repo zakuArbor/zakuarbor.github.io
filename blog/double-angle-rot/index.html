@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Deriving Double Angles through Matrix Rotations</title>
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Deriving Double Angles through Matrix Rotations" />
+<meta name="author" content="Ju Hong Kim" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A simple illustration of deriving double angles" />
+<meta property="og:description" content="A simple illustration of deriving double angles" />
+<link rel="canonical" href="http://localhost:4000/blog/double-angle-rot/" />
+<meta property="og:url" content="http://localhost:4000/blog/double-angle-rot/" />
+<meta property="og:site_name" content="zakuarbor" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-06-19T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Deriving Double Angles through Matrix Rotations" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Ju Hong Kim"},"dateModified":"2022-06-19T00:00:00-04:00","datePublished":"2022-06-19T00:00:00-04:00","description":"A simple illustration of deriving double angles","headline":"Deriving Double Angles through Matrix Rotations","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/double-angle-rot/"},"url":"http://localhost:4000/blog/double-angle-rot/"}</script>
+<!-- End Jekyll SEO tag -->
+
+        <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta property="og:description" content="A while back I decided to pick up Math Girls by Hiroshi Yuki and one of the 
+topics is about rotations (only 2 pages in fact is dedicated to rotation). The 
+author describes one method of deriving double angle formula through rotations 
+and it’s a very simple and elegant illustration of the power of rotation 
+but does require elementary exposure to linear algebra.
+" />
+    
+    <meta name="author" content="zakuarbor" />
+
+    
+    <meta property="og:title" content="Deriving Double Angles through Matrix Rotations" />
+    <meta property="twitter:title" content="Deriving Double Angles through Matrix Rotations" />
+    
+
+    
+    <meta property="og:image" content="http://localhost:4000/blog/images/pikachu_pfp.png"/>
+    <meta property="twitter:image" content="http://localhost:4000/blog/images/pikachu_pfp.png"/>
+    
+    <meta property="og:site_name" content="zakuarbor"/>
+
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/style.css" />
+    <link rel="alternate" type="application/rss+xml" title="zakuarbor - A random blog by a random human" href="/blog/feed.xml" />
+    <!--<link rel="canonical" href="http://localhost:4000/double-angle-rot/" />-->
+    <meta http-equiv='content-language' content='en-ca'> 
+    <meta name="theme-color" content="#000000">
+    <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32.png">
+
+
+<script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+     loader: {load: ['[tex]/cancel']},
+      TeX: { 
+        equationNumbers: { autoNumber: "all" },
+        packages: {'[+]': ['cancel']}
+      } 
+    }); 
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script src = "/blog/assets/js/script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+  </head>
+
+  <body>
+    <div id="bar"></div>
+    <div class="wrapper-container">
+      <div class="wrapper-masthead">
+        <div class="container">
+          <header class="masthead clearfix">
+            <a href="/blog/" class="site-avatar"><img src="/blog/images/pikachu_pfp_bw.png" alt="" alt="Site avator that links to main page"/></a>
+
+            <div class="site-info">
+              <h2 class="site-name"><a href="/blog/" alt = "home page">zakuarbor</a></h2>
+              <p class="site-description">A random blog by a random human</p> 
+            </div>
+
+            <nav>
+              <a href="/blog/archive" alt = "archive page">Archives</a>
+              <a href="/blog/personal" alt = "personal page">Personal</a>
+              <a href="/blog/programming" alt = "programming page">Programming</a>
+              <a href="/blog/math-physics" alt = "math page">Math</a>
+              <a href="/blog/about" alt = "about page">About</a>
+            </nav>
+          </header>
+        </div>
+      </div>
+
+      <div class="wrapper-main">
+        <div id = "top"/>
+        <div id="main" role="main" class="container">
+          <article class="post detailed">
+  <h1>Deriving Double Angles through Matrix Rotations</h1>
+
+  <div>
+    <p class="author_title">Ju Hong Kim  ·  June 19, 2022</p>
+    
+    <div class="post-tags">
+      
+      
+        <a href="/blog/categories/#math">math</a>
+        &nbsp;
+      
+        <a href="/blog/categories/#trig">trig</a>
+        &nbsp;
+      
+        <a href="/blog/categories/#linear-algebra">linear-algebra</a>
+        
+      
+    </div>
+    <p class = "bug"><a alt = "See a mistake? Open an issue. I make a lot of mistakes" href = "https://github.com/zakuArbor/blog/issues/new?labels=bug&title=[bug]:&assignee=zakuarbor&body=**Link:** [http://localhost:4000/blog/double-angle-rot/](http://localhost:4000/blog/double-angle-rot/)%0A**Description:**<!--See an issue with the site or the content, please provide a fix-->"> Report a bug</a></p>
+  </div>
+    
+  <div class="entry">
+    <p>A while back I decided to pick up <a href="http://bentobooks.com/mathgirls/">Math Girls by Hiroshi Yuki</a> and one of the 
+topics is about rotations (only 2 pages in fact is dedicated to rotation). The 
+author describes one method of deriving double angle formula through rotations 
+and it’s a very simple and elegant illustration of the power of rotation 
+but does require elementary exposure to linear algebra.</p>
+
+<p>To represent a rotation of a 2d vector is given as the following matrix:
+\(\begin{pmatrix}
+\cos\theta &amp; -\sin\theta\\ 
+\sin\theta &amp; \cos\theta
+\end{pmatrix}\)</p>
+
+<p>If you don’t believe me, you could try deriving this yourself but it requires some knowledge 
+of trig identities. Anyhow, to convince you that this indeed works, let’s see an example.</p>
+
+<p>Let’s say we have a unit vector lying on the axis (i.e. a vector from the origin to the point (1, 0))</p>
+
+<p><img src="../assets/math-physics/double-angle/1.png" alt="Illustration of a vector from the origin to the point (1,0)" /></p>
+
+<p>and we want to rotate this vector $180^\circ$ CCW (Counter-clockwise) to the point (-1, 0). When working 
+with angles and especially with trigonmetric functions, it is best to deal in radians. So rotating a vector 
+by $180^\circ$ is the same as saying rotate the vector by $\pi$.</p>
+
+<p><img src="../assets/math-physics/double-angle/2.gif" alt="Rotating a vector from 0 to 180 degrees (i.e. from (1,0) to (-1,0))" /></p>
+
+<p>The way to represent this rotation using matrices is the following:</p>
+
+\[\begin{align*}
+\left[\begin{array}{cc}
+\cos\theta &amp; -\sin\theta\\                                                      
+\sin\theta &amp; \cos\theta                                                         
+\end{array}\right]
+\left[\begin{array}{c}x \\ y \end{array}\right]
+&amp;=
+\left[\begin{array}{cc}                                                         
+\cos\pi &amp; -\sin\pi\\                                                      
+\sin\pi &amp; \cos\pi                                                         
+\end{array}\right]                                                              
+\left[\begin{array}{c}1 \\ 0 \end{array}\right] \\
+&amp;= \left[\begin{array}{cc}                                                         
+-1 &amp; 0\\                                                            
+0 &amp; -1                                                               
+\end{array}\right]                                                              
+\left[\begin{array}{c}1 \\ 0 \end{array}\right]\\
+&amp;= 
+\left[\begin{array}{c}-1 \\ 0 \end{array}\right]
+\end{align*}\]
+
+<h2 id="what-does-rotation-have-to-do-with-double-angles">What Does Rotation Have to Do With Double Angles?</h2>
+
+<p>You rightfully are probably asking what does rotation have to do with double angles? 
+I swear I’ll connect the dots soon. There are two double angle formula to consider, $\cos2\theta$ and $\sin2\theta$.
+Notice how the double angle formulas are rotating $\theta$ twice. How would one represent this using matrices? 
+The simple way to rotate the matrix twice is to simply multiply the angle by 2 just like how the double angle 
+formula does:</p>
+
+\[\left[\begin{array}{cc}                                                         
+\cos2\theta &amp; -\sin2\theta\\                                                      
+\sin2\theta &amp; \cos2\theta                                                         
+\end{array}\right]\]
+
+<p>Those who have studied linear algebra will notice that there is another way to rotate a matrix multiple times. 
+One property of the rotation matrix is that a matrix multiplied by another matrix produces another rotation matrix. 
+As the book puts it “Two rotations by $\theta$ are equivalent to squaring the matrix”</p>
+
+\[\left[\begin{array}{cc}                                                         
+\cos\theta &amp; -\sin\theta\\                                                      
+\sin\theta &amp; \cos\theta                                                         
+\end{array}\right]^2   
+= \left[\begin{array}{cc}                                                         
+\cos^2\theta - \sin^2\theta &amp; -2\sin\theta\cos\theta\\  
+2\sin\theta\cos\theta &amp; \cos^2\theta - \sin^2\theta    
+\end{array}\right]\]
+
+<p>So if we bring it all together, we get the following:
+\(\left[\begin{array}{cc}                                                         
+\color{orange}{\textrm{$\cos2\theta$}} &amp; -\sin2\theta\\                            
+\color{cyan}{\textrm{$\sin2\theta$}} &amp; \cos2\theta                              
+\end{array}\right]
+=
+\left[\begin{array}{cc}                                                         
+\color{orange}{\textrm{$\cos^2\theta - \sin^2\theta$}} &amp; -2\sin\theta\cos\theta\\                                                      
+\color{cyan}{\textrm{$2\sin\theta\cos\theta$}} &amp; \cos^2\theta - \sin^2\theta                                                        
+\end{array}\right]\)</p>
+
+<p>where</p>
+
+\[\cos2\theta = \cos^2\theta - \sin^2\theta \nonumber \\
+\sin2\theta = 2\sin\theta\cos\theta\]
+
+<p>So the next time you have trouble remembering the double angle formula, you could 
+also derive it on spot. Math Girls is filled with interesting examples so I encourage 
+anyone interested to take a look at the book.</p>
+
+<hr />
+
+<p><b> Footnotes:</b> The images and gifs are created using Manim, a Python library made by 3Blue1Brown. It’s my 
+first time playing with the library. If I have time, I am thinking of using Manim to create an entire animation 
+that also covers the other approach to derive the double angles using geometry. But it took my an extremely 
+long time to animate a rotation … so probably not.</p>
+
+  </div>
+
+  <div>
+    <p><span class="share-box">Share:</span> <a href="http://twitter.com/share?text=Deriving Double Angles through Matrix Rotations&url=http://localhost:4000/double-angle-rot/" target="_blank">Twitter</a>, <a href="https://www.facebook.com/sharer.php?u=http://localhost:4000/double-angle-rot/" target="_blank">Facebook</a></p>
+  </div>
+
+  <!--<div class="date">
+    Written on June 19, 2022
+  </div>-->
+
+  <script src="https://giscus.app/client.js"
+        data-repo="zakuarbor/discussions"
+        data-repo-id="R_kgDOMjvVJA"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOMjvVJM4Chqhy"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="dark"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+</article>
+
+        </div>
+      </div>
+      <button onclick="toTop()" id="top_btn" title="Go to top">Top</button>
+      <div class="wrapper-footer">
+        <div class="container">
+          <footer class="footer">
+            <a href = "../privacy">Privacy</a><br/>
+            
+
+
+
+<a alt = "github page" href="https://github.com/zakuarbor"><i class="svg-icon github"></i></a>
+
+<a alt = "linkedin page" href="https://www.linkedin.com/in/ju-hong-kim-zaku"><i class="svg-icon linkedin"></i></a>
+
+<a alt = "rss feed" href="/blog/feed.xml"><i class="svg-icon rss"></i></a>
+
+
+
+
+
+
+          </footer>
+        </div>
+      </div>
+    </div>
+    
+
+  </body>
+</html>
+

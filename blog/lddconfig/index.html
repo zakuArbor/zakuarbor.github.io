@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Error Loading Shared Library Even If File Exists</title>
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Error Loading Shared Library Even If File Exists" />
+<meta name="author" content="Ju Hong Kim" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Debugging loading shared library even though file exists" />
+<meta property="og:description" content="Debugging loading shared library even though file exists" />
+<link rel="canonical" href="http://localhost:4000/blog/lddconfig/" />
+<meta property="og:url" content="http://localhost:4000/blog/lddconfig/" />
+<meta property="og:site_name" content="zakuarbor" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-05-27T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Error Loading Shared Library Even If File Exists" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Ju Hong Kim"},"dateModified":"2021-05-27T00:00:00-04:00","datePublished":"2021-05-27T00:00:00-04:00","description":"Debugging loading shared library even though file exists","headline":"Error Loading Shared Library Even If File Exists","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/lddconfig/"},"url":"http://localhost:4000/blog/lddconfig/"}</script>
+<!-- End Jekyll SEO tag -->
+
+        <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta property="og:description" content="Have you ever encountered an error running a program where it’s missing a dll or a shared library?
+" />
+    
+    <meta name="author" content="zakuarbor" />
+
+    
+    <meta property="og:title" content="Error Loading Shared Library Even If File Exists" />
+    <meta property="twitter:title" content="Error Loading Shared Library Even If File Exists" />
+    
+
+    
+    <meta property="og:image" content="http://localhost:4000/blog/images/pikachu_pfp.png"/>
+    <meta property="twitter:image" content="http://localhost:4000/blog/images/pikachu_pfp.png"/>
+    
+    <meta property="og:site_name" content="zakuarbor"/>
+
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/style.css" />
+    <link rel="alternate" type="application/rss+xml" title="zakuarbor - A random blog by a random human" href="/blog/feed.xml" />
+    <!--<link rel="canonical" href="http://localhost:4000/lddconfig/" />-->
+    <meta http-equiv='content-language' content='en-ca'>
+    <meta name="theme-color" content="#000000">
+    <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32.png">
+    <script src = "/blog/assets/js/script.js"></script>
+<!--<script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+-->
+  </head>
+
+  <body>
+    <div id="bar"></div>
+    <div class="wrapper-container">
+      <div class="wrapper-masthead">
+        <div class="container">
+          <header class="masthead clearfix">
+            <a href="/blog/" class="site-avatar"><img src="/blog/images/pikachu_pfp_bw.png" alt="Site avator that links to main page" /></a>
+
+            <div class="site-info">
+              <h2 class="site-name"><a href="/blog/" alt = "home page">zakuarbor</a></h2>
+              <p class="site-description">A random blog by a random human</p> 
+            </div>
+
+            <nav>
+              <a href="/blog/archive" alt = "archive page">Archives</a>
+              <a href="/blog/personal" alt = "personal page">Personal</a>
+              <a href="/blog/programming" alt = "programming page">Programming</a>
+              <a href="/blog/math-physics" alt = "math page">Math</a>
+              <a href="/blog/about" alt = "about page">About</a>
+            </nav>
+          </header>
+        </div>
+      </div>
+
+      <div class="wrapper-main">
+        <div id="main" role="main" class="container">
+          <div id = "top"/>
+          <article class="post detailed">
+  <h1>Error Loading Shared Library Even If File Exists</h1>
+
+  <div>
+    <p class="author_title"><!--Ju Hong Kim  ·  -->May 27, 2021</p>
+    
+    <div class="post-tags">
+      
+      
+        <a href="/blog/categories/#programming">programming</a>
+        &nbsp;
+      
+        <a href="/blog/categories/#c/c++">c/c++</a>
+        &nbsp;
+      
+        <a href="/blog/categories/#linker">linker</a>
+        
+      
+    </div>
+    <p class = "bug">
+      <a alt = "See a mistake? Open an issue. I make a lot of mistakes" href = "https://github.com/zakuArbor/blog/issues/new?labels=bug&title=[bug]:&assignee=zakuarbor&body=**Link:** [http://localhost:4000/blog/lddconfig/](http://localhost:4000/blog/lddconfig/)%0A**Description:**<!--See an issue with the site or the content, please provide a fix-->">
+      Report a bug</a></p>
+  </div>
+    
+  <div class="entry">
+    <p>Have you ever encountered an error running a program where it’s missing a dll or a shared library?</p>
+
+<p><img src="https://filestore.community.support.microsoft.com/api/images/21f18fc5-2ff9-4fc8-a4b3-3734461b5b10" alt="An image of a missing dll when trying to run Skype" /></p>
+
+<p>In my previous blogs such as <a href="https://zakuarbor.github.io/blog/building-code/">A Dive to the Build Process</a> or <a href="https://zakuarbor.github.io/blog/ldd-to-debug-expr/">Debugging expr with ldd</a>, I have explained briefly went over 
+ldd and the usage of shared libraries. Today, I want to expand on this topic by going over something I encountered at work.</p>
+
+<hr />
+
+<p>At work, one of my tasks was to do a proof of concept (PoC) on transferring and running a development build of our product to some new internal development environment.
+During my work, I kept encountering a lot of minor errors where the generated object files or libraries would be missing simply due to differences in the project structure and the development environments. 
+After writing a script to resolve all these minor issues, it was time to test run some sanity tests to ensure the product works as intended in the new environment.</p>
+
+<p>However, I kept encountering a lot of linking errors even though I resolved the issue of missing generated object files and libraries in the new environment.</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>db2iset <span class="nt">-a</span> kimju10
+db2iset: error <span class="k">while </span>loading shared libraries: libdb2.so.1: cannot open shared object file: No such file or directory
+</code></pre></div></div>
+
+<p>If we were to run <code class="language-plaintext highlighter-rouge">ldd</code>, it should tell us if <code class="language-plaintext highlighter-rouge">libdb2.so</code> is missing and where our dynamic linker would find <code class="language-plaintext highlighter-rouge">libdb2.so</code>:</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>ldd db2iset | <span class="nb">grep</span> <span class="s1">'libdb2.so'</span> 
+        libdb2.so.1 <span class="o">=&gt;</span> /home/kimju10/build/lib64/libdb2.so.1 <span class="o">(</span>0x00007fdf3293a000<span class="o">)</span>
+</code></pre></div></div>
+
+<p>I proceeded to check manually if the file exists:</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">readlink</span> <span class="nt">-f</span> /home/kimju10/build/lib64/libdb2.so.1
+/home/kimju10/&lt;project&gt;/&lt;component&gt;/lib/libdb2.so.1
+<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span> /home/kimju10/&lt;project&gt;/&lt;component&gt;/lib/libdb2.so.1
+<span class="nt">-rwxr-xr-x</span> 1 kimju10 build 55152984 Apr 24 05:22 /home/kimju10/&lt;project&gt;/&lt;component&gt;/lib/libdb2.so.1
+</code></pre></div></div>
+
+<p>The file existed so this stumbled me for a bit. I got a bit desparate and thought perhaps I needed to check <b><code class="language-plaintext highlighter-rouge">LD_LIBRARY_PATH</code></b> was set correctly. Though I think <code class="language-plaintext highlighter-rouge">ldd</code> would have complained about not being able to find the library if 
+that was the issue. I completely forgot the run-time linker uses a cache. While I always thought updating <code class="language-plaintext highlighter-rouge">LD_LIBRARY_PATH</code> would suffice, in this case I needed to regenerate the links and cache that is used by the runtime linker.
+While I am not knowledgeable as to why simply running <code class="language-plaintext highlighter-rouge">ldconfig</code> did not suffice, it may be due to the fact that <code class="language-plaintext highlighter-rouge">libdb2.so</code> was stored in some non-standard path (i.e. under <i><code class="language-plaintext highlighter-rouge">/home</code></i>). 
+To resolve the issue, I simply added the path to the config: <i><code class="language-plaintext highlighter-rouge">/etc/ld.so.conf</code></i> and ran <code class="language-plaintext highlighter-rouge">ldconfig</code> to regenerate the cache.</p>
+
+<p>Here’s the description of <b><code class="language-plaintext highlighter-rouge">ldconfig</code></b> from the man pages:</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DESCRIPTION
+       ldconfig  creates  the  necessary  links and cache to the most recent shared libraries found <span class="k">in </span>the directories specified on the <span class="nb">command </span>line, <span class="k">in </span>the file /etc/ld.so.conf, and <span class="k">in </span>the trusted directories, /lib and /usr/lib <span class="o">(</span>on
+       some 64-bit architectures such as x86-64, /lib and /usr/lib are the trusted directories <span class="k">for </span>32-bit libraries, <span class="k">while</span> /lib64 and /usr/lib64 are used <span class="k">for </span>64-bit libraries<span class="o">)</span><span class="nb">.</span>
+
+       The cache is used by the run-time linker, ld.so or ld-linux.so.  ldconfig checks the header and filenames of the libraries it encounters when determining which versions should have their links updated.
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="summary">Summary</h2>
+
+<hr />
+
+<p>If you get an error about missing a shared library, try:</p>
+<ul>
+  <li>using <b><code class="language-plaintext highlighter-rouge">ldd</code></b> to see if the library exists</li>
+  <li>check if the linker library path is correct (i.e. <b><code class="language-plaintext highlighter-rouge">LD_LIBRARY_PATH</code></b>)</li>
+  <li>recreate the cache using <b><code class="language-plaintext highlighter-rouge">ldconfig</code></b></li>
+  <li>You may need to edit the linker config under <i><code class="language-plaintext highlighter-rouge">/etc/ld.so.conf</code></i> before running <b><code class="language-plaintext highlighter-rouge">ldconfig</code></b></li>
+</ul>
+
+
+  </div>
+
+  <div>
+    <p><span class="share-box">Share:</span> <a href="http://twitter.com/share?text=Error Loading Shared Library Even If File Exists&url=http://localhost:4000/lddconfig/" target="_blank">Twitter</a>, <a href="https://www.facebook.com/sharer.php?u=http://localhost:4000/lddconfig/" target="_blank">Facebook</a></p>
+  </div>
+
+  <!--<div class="date">
+    Written on May 27, 2021
+  </div>-->
+
+  <script src="https://giscus.app/client.js"
+        data-repo="zakuarbor/discussions"
+        data-repo-id="R_kgDOMjvVJA"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOMjvVJM4Chqhy"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="dark"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+</article>
+
+        </div>
+      </div>
+      <button onclick="toTop()" id="top_btn" title="Go to top">Top</button>
+      <div class="wrapper-footer">
+        <div class="container">
+          <footer class="footer">
+            <a href = "../privacy/">Privacy</a><br/>
+            
+
+
+
+<a alt = "github page" href="https://github.com/zakuarbor"><i class="svg-icon github"></i></a>
+
+<a alt = "linkedin page" href="https://www.linkedin.com/in/ju-hong-kim-zaku"><i class="svg-icon linkedin"></i></a>
+
+<a alt = "rss feed" href="/blog/feed.xml"><i class="svg-icon rss"></i></a>
+
+
+
+
+
+
+          </footer>
+        </div>
+      </div>
+    </div> 
+    
+
+  </body>
+</html>
+

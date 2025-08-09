@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Duplicate a Fluent-Bit Plugin</title>
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Duplicate a Fluent-Bit Plugin" />
+<meta name="author" content="Ju Hong Kim" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A walkthrough installing a duplicating a fluent bit plugin" />
+<meta property="og:description" content="A walkthrough installing a duplicating a fluent bit plugin" />
+<link rel="canonical" href="http://localhost:4000/blog/fluentd-kafka-copy/" />
+<meta property="og:url" content="http://localhost:4000/blog/fluentd-kafka-copy/" />
+<meta property="og:site_name" content="zakuarbor" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-05-27T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Duplicate a Fluent-Bit Plugin" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Ju Hong Kim"},"dateModified":"2023-05-27T00:00:00-04:00","datePublished":"2023-05-27T00:00:00-04:00","description":"A walkthrough installing a duplicating a fluent bit plugin","headline":"Duplicate a Fluent-Bit Plugin","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/fluentd-kafka-copy/"},"url":"http://localhost:4000/blog/fluentd-kafka-copy/"}</script>
+<!-- End Jekyll SEO tag -->
+
+        <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta property="og:description" content="Today I am exploring how to create a copy of Kafka plugin on Fluent-Bit so that you can modify the plugin without affecting the original plugin. Don’t ask me why 
+would anyone want to do that, it happens. I didn’t even know what Fluent-Bit and Kafka was till very recently and I happened to come across the need to duplicate 
+the plugin to fiddle around with. Mainly to understand what is going on. Not an interesting topic but I haven’t written much blogs this year so this is the topic I chose to write. What is interesting about Fluent Bit is that you are supposed to write the plugins in C which was surprising when I heard this. Though you could probably choose to write the plugins in other languages like Go I assume.
+" />
+    
+    <meta name="author" content="zakuarbor" />
+
+    
+    <meta property="og:title" content="Duplicate a Fluent-Bit Plugin" />
+    <meta property="twitter:title" content="Duplicate a Fluent-Bit Plugin" />
+    
+
+    
+    <meta property="og:image" content="http://localhost:4000/blog/images/pikachu_pfp.png"/>
+    <meta property="twitter:image" content="http://localhost:4000/blog/images/pikachu_pfp.png"/>
+    
+    <meta property="og:site_name" content="zakuarbor"/>
+
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/style.css" />
+    <link rel="alternate" type="application/rss+xml" title="zakuarbor - A random blog by a random human" href="/blog/feed.xml" />
+    <!--<link rel="canonical" href="http://localhost:4000/fluentd-kafka-copy/" />-->
+    <meta http-equiv='content-language' content='en-ca'>
+    <meta name="theme-color" content="#000000">
+    <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32.png">
+    <script src = "/blog/assets/js/script.js"></script>
+<!--<script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+-->
+  </head>
+
+  <body>
+    <div id="bar"></div>
+    <div class="wrapper-container">
+      <div class="wrapper-masthead">
+        <div class="container">
+          <header class="masthead clearfix">
+            <a href="/blog/" class="site-avatar"><img src="/blog/images/pikachu_pfp_bw.png" alt="Site avator that links to main page" /></a>
+
+            <div class="site-info">
+              <h2 class="site-name"><a href="/blog/" alt = "home page">zakuarbor</a></h2>
+              <p class="site-description">A random blog by a random human</p> 
+            </div>
+
+            <nav>
+              <a href="/blog/archive" alt = "archive page">Archives</a>
+              <a href="/blog/personal" alt = "personal page">Personal</a>
+              <a href="/blog/programming" alt = "programming page">Programming</a>
+              <a href="/blog/math-physics" alt = "math page">Math</a>
+              <a href="/blog/about" alt = "about page">About</a>
+            </nav>
+          </header>
+        </div>
+      </div>
+
+      <div class="wrapper-main">
+        <div id="main" role="main" class="container">
+          <div id = "top"/>
+          <article class="post detailed">
+  <h1>Duplicate a Fluent-Bit Plugin</h1>
+
+  <div>
+    <p class="author_title"><!--Ju Hong Kim  ·  -->May 27, 2023</p>
+    
+    <div class="post-tags">
+      
+      
+        <a href="/blog/categories/#programming">programming</a>
+        &nbsp;
+      
+        <a href="/blog/categories/#kafka">kafka</a>
+        &nbsp;
+      
+        <a href="/blog/categories/#fluent-bit">fluent-bit</a>
+        &nbsp;
+      
+        <a href="/blog/categories/#compilation">compilation</a>
+        
+      
+    </div>
+    <p class = "bug">
+      <a alt = "See a mistake? Open an issue. I make a lot of mistakes" href = "https://github.com/zakuArbor/blog/issues/new?labels=bug&title=[bug]:&assignee=zakuarbor&body=**Link:** [http://localhost:4000/blog/fluentd-kafka-copy/](http://localhost:4000/blog/fluentd-kafka-copy/)%0A**Description:**<!--See an issue with the site or the content, please provide a fix-->">
+      Report a bug</a></p>
+  </div>
+    
+  <div class="entry">
+    <p>Today I am exploring how to create a copy of Kafka plugin on Fluent-Bit so that you can modify the plugin without affecting the original plugin. Don’t ask me why 
+would anyone want to do that, it happens. I didn’t even know what Fluent-Bit and Kafka was till very recently and I happened to come across the need to duplicate 
+the plugin to fiddle around with. Mainly to understand what is going on. Not an interesting topic but I haven’t written much blogs this year so this is the topic I chose to write. What is interesting about Fluent Bit is that you are supposed to write the plugins in C which was surprising when I heard this. Though you could probably choose to write the plugins in other languages like Go I assume.</p>
+
+<p>To develop plugins for Fluent Bit, I am going to build Fluent Bit from the source code since I need access to some of the source code. Perhaps you could use containers but I ain’t going to waste my time looking into that for the moment.</p>
+
+<h2 id="downloading-and-installing-fluent-bit">Downloading and Installing Fluent Bit</h2>
+
+<p>Building fluent bit isn’t difficult, just follow the instruction from Fluent Bit’s website: <a href="https://docs.fluentbit.io/manual/installation/sources/download-source-code">https://docs.fluentbit.io/manual/installation/sources/download-source-code</a>. The only thing I needed to install additionally from my setup was <code class="language-plaintext highlighter-rouge">libyaml-devel</code> (on Fedora) but if you don’t use your machine for development, you may need to install more packages. Fluent Bit does a good job listing their dependencies, so do install all the packages they ask for.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git clone https://github.com/fluent/fluent-bit
+$ cd fluent-bit/build
+$ cmake ../
+$ make
+$ make install
+</code></pre></div></div>
+
+<p>Once you have finished building fluent-bit, it’s time to create a duplicate copy of fluent-bit and change some configurations. Unsurprisingly, plugins are installed under the <code class="language-plaintext highlighter-rouge">plugins</code> directory.</p>
+
+<h2 id="making-a-copy-of-kafka-plugin">Making a Copy of Kafka Plugin</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cd ../plugins
+$ cp -r out_kafka out_kafka2
+</code></pre></div></div>
+
+<p>Since the plugin is written in C, it is likely that plugins are compiled as a shared library and either dynamically linked to Fluent Bit or dynamically loaded to Fluent Bit. So it would make no sense if there were two libraries with the same name, so we need to change the name of the copied plugin by editing the <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code>:</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ diff ../out_kafka/CMakeLists.txt CMakeLists.txt 
+<span class="p">7,8c7,8
+</span><span class="gd">&lt; FLB_PLUGIN(out_kafka "${src}" "rdkafka")
+&lt; target_link_libraries(flb-plugin-out_kafka -lpthread)
+</span><span class="p">---
+</span><span class="gi">&gt; FLB_PLUGIN(out_kafka2 "${src}" "rdkafka")
+&gt; target_link_libraries(flb-plugin-out_kafka2 -lpthread)
+</span></code></pre></div></div>
+
+<h2 id="enabling-the-new-plugin">Enabling the New Plugin</h2>
+
+<p>Before compiling the plugin, we first need to enable the plugin by modifying the <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code>.</p>
+
+<p>1.) Edit the <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code> in the root of the project directory to create the option variable:</p>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">option</span><span class="p">(</span>FLB_OUT_KAFKA2                  <span class="s2">"Enable Kafka output plugin duplicate"</span>         Yes<span class="p">)</span>
+</code></pre></div></div>
+
+<p><strong>Diff:</strong></p>
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">git diff CMakeLists.txt
+</span><span class="gh">diff --git a/CMakeLists.txt b/CMakeLists.txt
+index d3847ef11..78edc9dab 100644
+</span><span class="gd">--- a/CMakeLists.txt
+</span><span class="gi">+++ b/CMakeLists.txt
+</span><span class="p">@@ -237,6 +237,7 @@</span> option(FLB_OUT_FLOWCOUNTER             "Enable flowcount output plugin"
+ option(FLB_OUT_LOGDNA                  "Enable LogDNA output plugin"              Yes)
+ option(FLB_OUT_LOKI                    "Enable Loki output plugin"                Yes)
+ option(FLB_OUT_KAFKA                   "Enable Kafka output plugin"                No)
+<span class="gi">+option(FLB_OUT_KAFKA2                  "Enable Kafka output plugin duplicate"     Yes)
+</span> option(FLB_OUT_KAFKA_REST              "Enable Kafka Rest output plugin"          Yes)
+ option(FLB_OUT_CLOUDWATCH_LOGS         "Enable AWS CloudWatch output plugin"      Yes)
+ option(FLB_OUT_KINESIS_FIREHOSE        "Enable AWS Firehose output plugin"        Yes)
+</code></pre></div></div>
+
+<p><strong>Note:</strong> By default, <code class="language-plaintext highlighter-rouge">kafka</code> plugin is disabled</p>
+
+<p>2.) Next is to edit <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code> again but this time it’s located under the <code class="language-plaintext highlighter-rouge">plugins</code> directory  (i.e. <code class="language-plaintext highlighter-rouge">plugins/CMakeLists.txt</code>):</p>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">REGISTER_OUT_PLUGIN</span><span class="p">(</span><span class="s2">"out_kafka2"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><strong>Diff:</strong></p>
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">git diff CMakeLists.txt
+</span><span class="gh">diff --git a/plugins/CMakeLists.txt b/plugins/CMakeLists.txt&lt;/b&gt;
+index 78f007a81..6f534c485 100644&lt;/b&gt;
+</span><span class="gd">--- a/plugins/CMakeLists.txt&lt;/b&gt;
+</span><span class="gi">+++ b/plugins/CMakeLists.txt&lt;/b&gt;
+</span><span class="p">@@ -296,6 +296,7 @@</span> REGISTER_OUT_PLUGIN("out_influxdb")
+ REGISTER_OUT_PLUGIN("out_logdna")
+ REGISTER_OUT_PLUGIN("out_loki")
+ REGISTER_OUT_PLUGIN("out_kafka")
+<span class="gi">+REGISTER_OUT_PLUGIN("out_kafka2")
+</span> REGISTER_OUT_PLUGIN("out_kafka_rest")
+ REGISTER_OUT_PLUGIN("out_nats")
+ REGISTER_OUT_PLUGIN("out_nrlogs")
+</code></pre></div></div>
+
+<p>3.) Generate the Build Files for our duplicate plugin:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cmake -DFLB_OUT_KAFKA2=On ../ 
+</code></pre></div></div>
+
+<h2 id="building-the-plugin">Building the Plugin</h2>
+
+<p>Now that the build files are generated, we can now build. But will it actually compile or are there more steps to consider?
+It turns out now, here’s the first error you’ll encounter:</p>
+
+<div class="language-plaintext highlighter-rouge">
+<pre class="highlight"><code>[ 69%] <span style="color:#26A269">Building C object plugins/out_kafka2/CMakeFiles/flb-plugin-out_kafka2.dir/kafka_config.c.o</span>
+In file included from <b>/home/zaku/Downloads/fluent-bit/plugins/out_kafka2/kafka_config.h:29</b>,
+                 from <b>/home/zaku/Downloads/fluent-bit/plugins/out_kafka2/kafka_config.c:26</b>:
+<b>/home/zaku/Downloads/fluent-bit/include/fluent-bit/flb_kafka.h:28:10:</b> <span style="color:#C01C28"><b>fatal error: </b></span>rdkafka.h: No such file or directory
+   28 | #include <span style="color:#C01C28"><b>&lt;rdkafka.h&gt;</b></span>
+</code></pre></div>
+
+<p>This error seems oddly weird because the <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code> for <code class="language-plaintext highlighter-rouge">kafka</code> should have specified that the plugin is dependent on Kafka libraries:</p>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">FLB_PLUGIN</span><span class="p">(</span>out_kafka2 <span class="s2">"</span><span class="si">${</span><span class="nv">src</span><span class="si">}</span><span class="s2">"</span> <span class="s2">"rdkafka"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>which if we look at <code class="language-plaintext highlighter-rouge">plugins/CMakeLists.txt</code>, we can see <code class="language-plaintext highlighter-rouge">FLB_PLUGIN</code> is a macro defined as:</p>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># FLB_PLUGIN: used by plugins to perform registration and linking</span>
+<span class="nb">macro</span><span class="p">(</span>FLB_PLUGIN name src deps<span class="p">)</span>
+  <span class="nb">add_library</span><span class="p">(</span>flb-plugin-<span class="si">${</span><span class="nv">name</span><span class="si">}</span> STATIC <span class="si">${</span><span class="nv">src</span><span class="si">}</span><span class="p">)</span>
+  <span class="nf">add_sanitizers</span><span class="p">(</span>flb-plugin-<span class="si">${</span><span class="nv">name</span><span class="si">}</span><span class="p">)</span>
+  <span class="nb">target_link_libraries</span><span class="p">(</span>flb-plugin-<span class="si">${</span><span class="nv">name</span><span class="si">}</span> fluent-bit-static msgpack-c-static <span class="si">${</span><span class="nv">deps</span><span class="si">}</span><span class="p">)</span>
+<span class="nb">endmacro</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>So what is going on? The library should be linked to our binary. It turns out that if we peek further into <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code> under the root directory:</p>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">if</span><span class="p">(</span>FLB_IN_KAFKA OR FLB_OUT_KAFKA<span class="p">)</span>
+    <span class="nf">FLB_OPTION</span><span class="p">(</span>RDKAFKA_BUILD_STATIC    On<span class="p">)</span>
+    <span class="nf">FLB_OPTION</span><span class="p">(</span>RDKAFKA_BUILD_EXAMPLES Off<span class="p">)</span>
+    <span class="nf">FLB_OPTION</span><span class="p">(</span>RDKAFKA_BUILD_TESTS    Off<span class="p">)</span>
+    <span class="nf">FLB_OPTION</span><span class="p">(</span>ENABLE_LZ4_EXT         Off<span class="p">)</span>
+</code></pre></div></div>
+
+<p>We can see that we need to set the option to build with Kafka library.</p>
+
+<p><strong>diff:</strong></p>
+
+<div class="language-plaintext highlighter-rouge">
+<pre class="highlight"><code><span style="color:#C01C28">-if(FLB_IN_KAFKA OR FLB_OUT_KAFKA)</span>
+<span style="color:#26A269">+if(FLB_IN_KAFKA OR FLB_OUT_KAFKA OR FLB_OUT_KAFKA2)</span>
+     FLB_OPTION(RDKAFKA_BUILD_STATIC    On)
+     FLB_OPTION(RDKAFKA_BUILD_EXAMPLES Off)
+     FLB_OPTION(RDKAFKA_BUILD_TESTS    Off)
+</code></pre></div>
+
+<p>Is this the end of the errors? Now we fact the classic undefined reference errors:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/usr/bin/ld: ../library/libfluent-bit.a(flb_config.c.o): in function `flb_plugins_register':
+/home/zaku/Downloads/fluent-bit/include/fluent-bit/flb_plugins.h:606: undefined reference to `out_kafka2_plugin'
+collect2: error: ld returned 1 exit status
+make[2]: *** [src/CMakeFiles/fluent-bit-bin.dir/build.make:391: bin/fluent-bit] Error 1
+make[1]: *** [CMakeFiles/Makefile2:7449: src/CMakeFiles/fluent-bit-bin.dir/all] Error 2
+make: *** [Makefile:156: all] Error 2
+</code></pre></div></div>
+
+<p>This yet another configuration change we need to make in <code class="language-plaintext highlighter-rouge">plugins/CMakeLists.txt</code> but which one? This was the trickiest part of the build process for me. Looking at the error, the undefined reference was made when trying to compile <code class="language-plaintext highlighter-rouge">fluent-bit</code>. So if we go under <code class="language-plaintext highlighter-rouge">src/CMakeLists.txt</code>:</p>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">if</span><span class="p">(</span>FLB_IN_KAFKA OR FLB_OUT_KAFKA<span class="p">)</span>
+  <span class="nb">set</span><span class="p">(</span>src
+    <span class="si">${</span><span class="nv">src</span><span class="si">}</span>
+    <span class="s2">"flb_kafka.c"</span>
+    <span class="p">)</span>
+<span class="nb">endif</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>So similarly to the previous configuration change, we just need to add another <code class="language-plaintext highlighter-rouge">OR</code> statement.</p>
+
+<div class="language-plaintext highlighter-rouge">
+<pre class="highlight"><code><span style="color:#D0CFCC"><b>$ </b></span>git diff CMakeLists.txt
+<b>diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt</b>
+<b>index b6233d9f7..bf0936634 100644</b>
+<b>--- a/src/CMakeLists.txt</b>
+<b>+++ b/src/CMakeLists.txt</b>
+<span style="color:#2AA1B3">@@ -186,7 +186,7 @@</span> if(FLB_LUAJIT)
+     )
+ endif()
+ 
+<span style="color:#C01C28">-if(FLB_IN_KAFKA OR FLB_OUT_KAFKA)</span>
+<span style="color:#26A269">+if(FLB_IN_KAFKA OR FLB_OUT_KAFKA OR FLB_OUT_KAFKA2)</span>
+   set(src
+     ${src}
+     &quot;flb_kafka.c&quot;
+</code></pre></div>
+
+<p>It turns out that this may not be a configuration change :(</p>
+
+<p>I guess it’s an actual code error even though we made no code changes at all. It turns out that when we renamed the plugin from <code class="language-plaintext highlighter-rouge">out_kafka</code> to <code class="language-plaintext highlighter-rouge">out_kafka2</code>, 
+we needed to update <code class="language-plaintext highlighter-rouge">kafka.c</code> as well. The thought process behind this is to <code class="language-plaintext highlighter-rouge">grep</code> the reference of <code class="language-plaintext highlighter-rouge">out_kafka_plugin</code>:</p>
+
+<div class="language-plaintext highlighter-rouge">
+<pre class="highlight"><code><span style="color:#D0CFCC"><b>$ </b></span>grep -r out_kafka_plugin *
+<span style="color:#A347BA">out_kafka/kafka.c</span><span style="color:#2AA1B3">:</span>struct flb_output_plugin <span style="color:#C01C28"><b>out_kafka_plugin</b></span> = {
+<span style="color:#A347BA">out_kafka2/kafka.c</span><span style="color:#2AA1B3">:</span>struct flb_output_plugin <span style="color:#C01C28"><b>out_kafka_plugin</b></span> = {
+</code></pre></div>
+
+<p>So rename the struct to the correct name. This should resolve the issue. There is one final step you have to do but you can refer to <a href="https://www.cncf.io/blog/2022/05/04/how-to-write-a-fluent-bit-plugin/">this</a> blog to see the final step. All I was interested in today was the compilation</p>
+
+<p><strong>update:</strong> If you followed the next step and enabled the plugin, you may notice the following error:</p>
+
+<div class="language-plaintext highlighter-rouge">
+<pre class="highlight"><code><span style="color:#D0CFCC"><b>$ </b></span>build/bin/fluent-bit -i cpu -t my_cpu -o out_kafka2
+<b>Fluent Bit v2.1.5</b>
+* <span style="color:#E9AD0C"><b>Copyright (C) 2015-2022 The Fluent Bit Authors</b></span>
+* Fluent Bit is a CNCF sub-project under the umbrella of Fluentd
+* https://fluentbit.io
+
+<b>[</b>2023/05/30 23:25:49<b>]</b> [<span style="color:#F66151">error</span>] [config] section &apos;out_kafka2&apos; tried to instance a plugin name that don&apos;t exists
+<b>[</b>2023/05/30 23:25:49<b>]</b> [<span style="color:#F66151">error</span>] configuration file contains errors, aborting.
+</code></pre></div>
+
+<p>I forgot to mention that you also need to change the name of the plugin under <code class="language-plaintext highlighter-rouge">kafka.c</code>:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="n">flb_output_plugin</span> <span class="n">out_kafka2_plugin</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">.</span><span class="n">name</span>         <span class="o">=</span> <span class="s">"kafka2"</span><span class="p">,</span>
+</code></pre></div></div>
+
+<p>Assuming you wrote the configuration correctly under <code class="language-plaintext highlighter-rouge">conf/fluent-bit.conf</code> and specified the <code class="language-plaintext highlighter-rouge">brokers</code> with your Kafka instance, everything should work now.</p>
+
+<h2 id="summary">Summary</h2>
+
+<p>Making another copy of the plugin requires more than just copy and paste of the plugin’s source code. You also need to change <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code> under root, <code class="language-plaintext highlighter-rouge">plugins</code>, and <code class="language-plaintext highlighter-rouge">src</code>. In addition, you need to modify <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code> of the new plugin you created and change the struct name to reflect the new plugin’s name in <code class="language-plaintext highlighter-rouge">kafka.c</code>.</p>
+
+<p>On a side note, if you are looking to write your own plugin, the CNCF has a nice blog on <a href="https://www.cncf.io/blog/2022/05/04/how-to-write-a-fluent-bit-plugin/">this</a>.</p>
+
+  </div>
+
+  <div>
+    <p><span class="share-box">Share:</span> <a href="http://twitter.com/share?text=Duplicate a Fluent-Bit Plugin&url=http://localhost:4000/fluentd-kafka-copy/" target="_blank">Twitter</a>, <a href="https://www.facebook.com/sharer.php?u=http://localhost:4000/fluentd-kafka-copy/" target="_blank">Facebook</a></p>
+  </div>
+
+  <!--<div class="date">
+    Written on May 27, 2023
+  </div>-->
+
+  <script src="https://giscus.app/client.js"
+        data-repo="zakuarbor/discussions"
+        data-repo-id="R_kgDOMjvVJA"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOMjvVJM4Chqhy"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="dark"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+</article>
+
+        </div>
+      </div>
+      <button onclick="toTop()" id="top_btn" title="Go to top">Top</button>
+      <div class="wrapper-footer">
+        <div class="container">
+          <footer class="footer">
+            <a href = "../privacy/">Privacy</a><br/>
+            
+
+
+
+<a alt = "github page" href="https://github.com/zakuarbor"><i class="svg-icon github"></i></a>
+
+<a alt = "linkedin page" href="https://www.linkedin.com/in/ju-hong-kim-zaku"><i class="svg-icon linkedin"></i></a>
+
+<a alt = "rss feed" href="/blog/feed.xml"><i class="svg-icon rss"></i></a>
+
+
+
+
+
+
+          </footer>
+        </div>
+      </div>
+    </div> 
+    
+
+  </body>
+</html>
+

@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>What is Name Mangling</title>
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="What is Name Mangling" />
+<meta name="author" content="Ju Hong Kim" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Exploring name mangling through extern C" />
+<meta property="og:description" content="Exploring name mangling through extern C" />
+<link rel="canonical" href="http://localhost:4000/blog/extern-c-name-mangling/" />
+<meta property="og:url" content="http://localhost:4000/blog/extern-c-name-mangling/" />
+<meta property="og:site_name" content="zakuarbor" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-07-12T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="What is Name Mangling" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Ju Hong Kim"},"dateModified":"2021-07-12T00:00:00-04:00","datePublished":"2021-07-12T00:00:00-04:00","description":"Exploring name mangling through extern C","headline":"What is Name Mangling","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/extern-c-name-mangling/"},"url":"http://localhost:4000/blog/extern-c-name-mangling/"}</script>
+<!-- End Jekyll SEO tag -->
+
+        <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta property="og:description" content="Today I want to explore what name mangling is in C++ and what does extern "C" 
+means.
+" />
+    
+    <meta name="author" content="zakuarbor" />
+
+    
+    <meta property="og:title" content="What is Name Mangling" />
+    <meta property="twitter:title" content="What is Name Mangling" />
+    
+
+    
+    <meta property="og:image" content="http://localhost:4000/blog/images/pikachu_pfp.png"/>
+    <meta property="twitter:image" content="http://localhost:4000/blog/images/pikachu_pfp.png"/>
+    
+    <meta property="og:site_name" content="zakuarbor"/>
+
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/style.css" />
+    <link rel="alternate" type="application/rss+xml" title="zakuarbor - A random blog by a random human" href="/blog/feed.xml" />
+    <!--<link rel="canonical" href="http://localhost:4000/extern-c-name-mangling/" />-->
+    <meta http-equiv='content-language' content='en-ca'>
+    <meta name="theme-color" content="#000000">
+    <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32.png">
+    <script src = "/blog/assets/js/script.js"></script>
+<!--<script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+-->
+  </head>
+
+  <body>
+    <div id="bar"></div>
+    <div class="wrapper-container">
+      <div class="wrapper-masthead">
+        <div class="container">
+          <header class="masthead clearfix">
+            <a href="/blog/" class="site-avatar"><img src="/blog/images/pikachu_pfp_bw.png" alt="Site avator that links to main page" /></a>
+
+            <div class="site-info">
+              <h2 class="site-name"><a href="/blog/" alt = "home page">zakuarbor</a></h2>
+              <p class="site-description">A random blog by a random human</p> 
+            </div>
+
+            <nav>
+              <a href="/blog/archive" alt = "archive page">Archives</a>
+              <a href="/blog/personal" alt = "personal page">Personal</a>
+              <a href="/blog/programming" alt = "programming page">Programming</a>
+              <a href="/blog/math-physics" alt = "math page">Math</a>
+              <a href="/blog/about" alt = "about page">About</a>
+            </nav>
+          </header>
+        </div>
+      </div>
+
+      <div class="wrapper-main">
+        <div id="main" role="main" class="container">
+          <div id = "top"/>
+          <article class="post detailed">
+  <h1>What is Name Mangling</h1>
+
+  <div>
+    <p class="author_title"><!--Ju Hong Kim  ·  -->July 12, 2021</p>
+    
+    <div class="post-tags">
+      
+      
+        <a href="/blog/categories/#programming">programming</a>
+        &nbsp;
+      
+        <a href="/blog/categories/#c/c++">c/c++</a>
+        
+      
+    </div>
+    <p class = "bug">
+      <a alt = "See a mistake? Open an issue. I make a lot of mistakes" href = "https://github.com/zakuArbor/blog/issues/new?labels=bug&title=[bug]:&assignee=zakuarbor&body=**Link:** [http://localhost:4000/blog/extern-c-name-mangling/](http://localhost:4000/blog/extern-c-name-mangling/)%0A**Description:**<!--See an issue with the site or the content, please provide a fix-->">
+      Report a bug</a></p>
+  </div>
+    
+  <div class="entry">
+    <p>Today I want to explore what name mangling is in C++ and what does <code class="language-plaintext highlighter-rouge">extern "C"</code> 
+means.</p>
+
+<hr />
+
+<h2 id="prelude">Prelude</h2>
+
+<hr />
+
+<p>Recently I came across a question about name mangling from a new intern who 
+was working with a developer to resolved an <code class="language-plaintext highlighter-rouge">Undefined symbol</code> error causing 
+our aix builds to fail. While the solution was to update our makefile, the 
+intern was curious as to what <code class="language-plaintext highlighter-rouge">FOO_EXTERNC</code> was. When they approached me, I 
+had no clue. But after being told that the internal wiki states it 
+was used to prevent mangling, I had a general idea of what <code class="language-plaintext highlighter-rouge">FOO_EXTERNC</code> meant in 
+our code.</p>
+
+<p>Before jumping on me that it should have been obvious based on the name, 
+take into consideration the following:</p>
+<ul>
+  <li>we are not part of the development team but rather part of DevOps meaning 
+we are not familiar with the source code and the macros used</li>
+  <li>the intern and I are not C++ programmers (I only dabbled in C++ recently 
+after playing with C for many years)</li>
+</ul>
+
+<hr />
+
+<h2 id="what-is-name-mangling">What is Name Mangling</h2>
+
+<hr />
+
+<p>In C++, there’s a concept called mangling which gives variables and functions 
+unique names so that the linker can distinguish between them. If you are a C 
+programmer, you may be confused because every variable and function is
+unique. To illustrate, you cannot declare two variables with the same name 
+if they have the same scope or declare two functions with the same name.</p>
+
+<p>However, in C++ function overloading is possible. Function overloading gives 
+the ability to create functions with the same name but with different 
+implementations as long as there is a way to distinguish between the functions. 
+Your compiler allows function overloading as long as the functions have 
+a different number of arguments, different types of arguments or the presence 
+of an ellipsis. For instance, in the example below, we have two definitions of 
+<code class="language-plaintext highlighter-rouge">print_val</code> where the first one takes in an integer and the latter takes in a 
+<code class="language-plaintext highlighter-rouge">struct Point</code> as an argument.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="nc">Point</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">y</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kt">void</span> <span class="nf">print_data</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">print_data</span><span class="p">(</span><span class="k">struct</span> <span class="nc">Point</span><span class="o">&amp;</span> <span class="n">pt</span><span class="p">)</span> <span class="p">{</span>
+ <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"x: "</span> <span class="o">&lt;&lt;</span> <span class="n">pt</span><span class="p">.</span><span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="s">" y: "</span> <span class="o">&lt;&lt;</span> <span class="n">pt</span><span class="p">.</span><span class="n">y</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">point</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+  <span class="k">struct</span> <span class="nc">Point</span> <span class="n">pt</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">};</span>
+  <span class="n">print_data</span><span class="p">(</span><span class="n">point</span><span class="p">);</span>
+  <span class="n">print_data</span><span class="p">(</span><span class="n">pt</span><span class="p">);</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Since C++ allows function overloading, the compiler needs to encode the 
+function and variable so that it can uniquely identify between them so that 
+the linker can do its job to link the correct function. For instance, on my 
+machine (using gcc), <code class="language-plaintext highlighter-rouge">print_data</code> gets encoded as:</p>
+
+<pre style="background: #282a36; color: white; padding: 15px; font-size: 15px">$ nm a.out | grep -E &quot;print_data|Point&quot;
+0000000000401287 t _GLOBAL__sub_I__Z10<font color="#C01C28"><b>print_data</b></font>i
+0000000000401186 T _Z10<font color="#C01C28"><b>print_data</b></font>i
+00000000004011b0 T _Z10<font color="#C01C28"><b>print_data</b></font>R5<font color="#C01C28"><b>Point</b></font></pre>
+
+<p>As you can see we have two versions of <code class="language-plaintext highlighter-rouge">print_data</code>, one that has an <code class="language-plaintext highlighter-rouge">i</code> suffix for integer and the latter having <code class="language-plaintext highlighter-rouge">R5Point</code> to 
+represent the <code class="language-plaintext highlighter-rouge">struct Point</code>. Every compiler encodes the symbols differently as there are no standards on how to mangle.</p>
+
+<hr />
+
+<h3 id="aside-my-exposure-to-name-mangling">Aside: My Exposure to Name Mangling</h3>
+
+<hr />
+
+<p>As I stated earlier, I only recently dabbled in C++ so I wouldn’t have a need 
+to learn about mangling. I never took a compiler course (which is a shame) 
+but I have seen enough build logs to notice its existence.</p>
+
+<p>Whenever an AIX build fails, I always see a loadmap is generated where I see 
+all sorts of weird mangled symbols. And it’s not rare to see them in our logs 
+when our product fails during BVT testing. It was only when I read 
+Dennis Yurichev’s, the author of <em>Reverse Engineering for Beginners</em>, <a href="https://yurichev.com/writings/C-notes-en.pdf">C/C++ Pogramming Language Notes</a> 
+did I realize what those weird symbols were.</p>
+
+<hr />
+
+<h2 id="what-does-extern-c-have-anything-to-do-with-mangling">What Does <code class="language-plaintext highlighter-rouge">extern "C"</code> Have Anything To Do With Mangling</h2>
+
+<hr />
+
+<p>A lot of C++ applications rely on C libraries, especially projects with older 
+source code. This mix of languages can cause issues if you do not consider 
+the possibility of mangling as seen in <a href="https://peeterjoot.wordpress.com/2011/10/11/name-mangling-link-errors-with-mixed-c-and-c/">this person’s blog</a>.</p>
+
+<p>The main issue with mixing C libraries into C++ applications is that the linker 
+will be unable to find the required symbol from the library because the C++ 
+object file will be referencing the mangled variable/function which does 
+not exist in the C compiled library. Hence why we need to enclose the 
+function declaration within <code class="language-plaintext highlighter-rouge">extern "C"</code> block to 
+tell the compiler to not mangle the symbols so that our linker can resolve 
+symbols in our program. It also tells the linker the language linkage (i.e. is 
+this symbol using C or C++ linkage. Though this is just my surface level understanding). 
+Here’s a sample of how the header file should be 
+formatted to prevent mangling of our C functions/variables.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#ifndef HEADER_H
+#define HEADER_H
+</span>
+<span class="cp">#ifdef __cplusplus
+</span><span class="k">extern</span> <span class="s">"C"</span> <span class="p">{</span>
+<span class="cp">#endif
+</span>
+<span class="c1">//place the function and variable declaration here</span>
+<span class="kt">void</span> <span class="n">foo</span><span class="p">();</span>
+
+<span class="cp">#ifdef __cplusplus
+</span><span class="p">}</span>
+<span class="cp">#endif
+</span>
+<span class="cp">#endif
+</span></code></pre></div></div>
+
+<p>The macro <code class="language-plaintext highlighter-rouge">__cplusplus</code> is defined by our C++ compiler. If the header file 
+is preprocessed by a C compiler, <code class="language-plaintext highlighter-rouge">__cplusplus</code> would be evaluated to be false 
+causing the functions to not be enclosed within the <code class="language-plaintext highlighter-rouge">extern "C"</code> block. You must 
+ensure the resulting code to the compiler contains <code class="language-plaintext highlighter-rouge">extern "C"</code> only 
+if <code class="language-plaintext highlighter-rouge">__cplusplus</code> is defined or else you will get the following result:</p>
+
+<pre style="background: #282a36; color: white; padding: 15px; font-size: 15px">In file included from <b>bluetooth.c:1</b>:
+<b>bluetooth.h:11:8:</b> <font color="#C01C28"><b>error: </b></font>expected identifier or ‘<b>(</b>’ before string constant
+   11 | extern <font color="#C01C28"><b>&quot;C&quot;</b></font> {
+      |        <font color="#C01C28"><b>^~~</b></font>
+</pre>
+
+<p>This technique can be seen in every major C library such as <a href="https://www.gnu.org/software/m68hc11/examples/stdio_8h-source.html"><code class="language-plaintext highlighter-rouge">stdio.h</code></a>:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mo">00026</span> <span class="err">#</span><span class="n">ifndef</span> <span class="n">_STDIO_H_</span>
+<span class="mo">00027</span> <span class="err">#</span><span class="n">ifdef</span> <span class="n">__cplusplus</span>
+<span class="mo">0002</span><span class="mi">8</span> <span class="k">extern</span> <span class="s">"C"</span> <span class="p">{</span>
+<span class="mo">0002</span><span class="mi">9</span> <span class="err">#</span><span class="n">endif</span>
+<span class="mo">00030</span> <span class="err">#</span><span class="n">define</span> <span class="n">_STDIO_H_</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="demo">Demo</h2>
+
+<hr />
+
+<p>Let’s go through a simple example. Let’s say we are creating a program that 
+tries to connect to a bluetooth device and we have the following into our 
+bluetooth library:</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">"bluetooth.h"</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span>
+<span class="c1">//bluetooth stuff</span>
+<span class="c1">// ...</span>
+<span class="c1">// ...</span>
+
+<span class="kt">int</span> <span class="nf">bt_cmp</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">dev1</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">dev2</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">//do stuff</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Let’s compile <code class="language-plaintext highlighter-rouge">bluetooth</code> using our beloved C compiler (I’ll be using gcc).</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ gcc -c bluetooth.c -o bt.o
+</code></pre></div></div>
+
+<p>Since the bluetooth binary has been created, we can use the functions from the 
+binary in our C++ applications by including the header file <code class="language-plaintext highlighter-rouge">bluetooth.h</code>:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span> <span class="cpf">"bluetooth.h"</span><span class="cp">
+</span>
+<span class="kt">int</span> <span class="nf">main</span> <span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"Hello world</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+  <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">dev</span> <span class="o">=</span> <span class="s">"00:11:22:33:FF:EE"</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">bt_cmp</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">dev</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Whether or not this program will compile will depend on how the header file is 
+written. Without the functions enclosed in <code class="language-plaintext highlighter-rouge">extern "C"</code>, we get the following:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/usr/bin/ld: /tmp/ccv7dyLJ.o: in function `main':
+test.c:(.text+0x37): undefined reference to `bt_cmp(char const*, char const*)'
+collect2: error: ld returned 1 exit status
+</code></pre></div></div>
+
+<p><strong>Note:</strong> The command to compile is: <code class="language-plaintext highlighter-rouge">g++ test.c bt.o -o prog</code></p>
+
+<p>Let’s examine the issue further by compiling <code class="language-plaintext highlighter-rouge">test.c</code> separately (i.e. do 
+not link with <code class="language-plaintext highlighter-rouge">bt.o</code>) and compare the symbol defined for <code class="language-plaintext highlighter-rouge">bt_cmp</code> in each of 
+the binaries. As expected, <code class="language-plaintext highlighter-rouge">bt.o</code> does not mangle our symbol:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ nm bt.o | grep bt_cmp
+000000000000001d T bt_cmp
+</code></pre></div></div>
+
+<p>With the command <code class="language-plaintext highlighter-rouge">g++ -c test.c -o test.o</code>, we can compile our C++ code without 
+linking. In the resulting binary, we see the following mangled symbol:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nm test.o | grep bt_cmp
+                 U _Z6bt_cmpPKcS0_
+</code></pre></div></div>
+
+<p>The resulting symbol definitely does not match with the symbol defined in 
+our bluetooth binary. Hence why the linker fails to resolve the symbol.</p>
+
+<p>On a side note, you may find <code class="language-plaintext highlighter-rouge">c++filt</code> to be useful when debugging C++ programs. 
+<code class="language-plaintext highlighter-rouge">c++filt</code> demangles symbols to be more human-readable. For instance, 
+<code class="language-plaintext highlighter-rouge">U _Z6bt_cmpPKcS0_</code> looks plain gibberish but using <code class="language-plaintext highlighter-rouge">c++filt</code> I can now 
+see it’s just <code class="language-plaintext highlighter-rouge">bt_cmp</code>. Definitely useful when working with programs that 
+have multiple overloaded functions since it can be hard to understand 
+which version of the function you are working on. For instance, let’s say 
+we have a function <code class="language-plaintext highlighter-rouge">foo</code> that takes in no parameter and another version of 
+<code class="language-plaintext highlighter-rouge">foo</code> that takes in a single integer value. We get the following mangled 
+symbols:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>000000000040110d T _Z3fooi
+0000000000401106 T _Z3foov
+</code></pre></div></div>
+<p>This may not be obvious as to what the suffix <code class="language-plaintext highlighter-rouge">i</code> and <code class="language-plaintext highlighter-rouge">v</code> mean. But if we were 
+to demangle, we can see clearly the definition of each symbol 
+(<code class="language-plaintext highlighter-rouge">nm a.out | grep foo| c++filt</code>):</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>000000000040110d T foo(int)
+0000000000401106 T foo()
+</code></pre></div></div>
+
+<p>To resolve the undef error, we simply need to change the bluetooth header file 
+with <code class="language-plaintext highlighter-rouge">extern "C</code> when the header file goes through a C++ compiler.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#ifndef BLUETOOTH_H
+#define BLUETOOTH_H
+</span>
+<span class="cp">#ifdef __cplusplus
+</span>
+<span class="k">extern</span> <span class="s">"C"</span> <span class="p">{</span>
+
+<span class="cp">#endif
+</span>
+<span class="kt">int</span> <span class="n">bt_cmp</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">dev1</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">dev2</span><span class="p">);</span>
+
+<span class="cp">#ifdef __cplusplus
+</span><span class="p">}</span>
+<span class="cp">#endif
+</span>
+<span class="cp">#endif
+</span></code></pre></div></div>
+
+<hr />
+
+<h2 id="summary">Summary</h2>
+
+<hr />
+
+<p>When mixing C libraries into C++ applications, it is important to enclose the 
+function declarations (in the header file) with <code class="language-plaintext highlighter-rouge">extern "C"</code> to avoid undefined 
+symbol errors during linktime.</p>
+
+<p>Mangling is an encoding the compiler does to represent a variable or function 
+to ensure uniqueness since C++ allows function overloading (i.e. functions 
+that have the same name but accept different number of arguments or argument 
+types).</p>
+
+
+  </div>
+
+  <div>
+    <p><span class="share-box">Share:</span> <a href="http://twitter.com/share?text=What is Name Mangling&url=http://localhost:4000/extern-c-name-mangling/" target="_blank">Twitter</a>, <a href="https://www.facebook.com/sharer.php?u=http://localhost:4000/extern-c-name-mangling/" target="_blank">Facebook</a></p>
+  </div>
+
+  <!--<div class="date">
+    Written on July 12, 2021
+  </div>-->
+
+  <script src="https://giscus.app/client.js"
+        data-repo="zakuarbor/discussions"
+        data-repo-id="R_kgDOMjvVJA"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOMjvVJM4Chqhy"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="dark"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+</article>
+
+        </div>
+      </div>
+      <button onclick="toTop()" id="top_btn" title="Go to top">Top</button>
+      <div class="wrapper-footer">
+        <div class="container">
+          <footer class="footer">
+            <a href = "../privacy/">Privacy</a><br/>
+            
+
+
+
+<a alt = "github page" href="https://github.com/zakuarbor"><i class="svg-icon github"></i></a>
+
+<a alt = "linkedin page" href="https://www.linkedin.com/in/ju-hong-kim-zaku"><i class="svg-icon linkedin"></i></a>
+
+<a alt = "rss feed" href="/blog/feed.xml"><i class="svg-icon rss"></i></a>
+
+
+
+
+
+
+          </footer>
+        </div>
+      </div>
+    </div> 
+    
+
+  </body>
+</html>
+

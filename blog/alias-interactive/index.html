@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Utilizing Aliases and Interactive Mode to Force Users to Think Twice Before Deleting Files</title>
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Utilizing Aliases and Interactive Mode to Force Users to Think Twice Before Deleting Files" />
+<meta name="author" content="Ju Hong Kim" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Using interactive mode and alias to force users to think twice before overwriting files" />
+<meta property="og:description" content="Using interactive mode and alias to force users to think twice before overwriting files" />
+<link rel="canonical" href="http://localhost:4000/blog/alias-interactive/" />
+<meta property="og:url" content="http://localhost:4000/blog/alias-interactive/" />
+<meta property="og:site_name" content="zakuarbor" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-12-29T00:00:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Utilizing Aliases and Interactive Mode to Force Users to Think Twice Before Deleting Files" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Ju Hong Kim"},"dateModified":"2024-12-29T00:00:00-05:00","datePublished":"2024-12-29T00:00:00-05:00","description":"Using interactive mode and alias to force users to think twice before overwriting files","headline":"Utilizing Aliases and Interactive Mode to Force Users to Think Twice Before Deleting Files","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/alias-interactive/"},"url":"http://localhost:4000/blog/alias-interactive/"}</script>
+<!-- End Jekyll SEO tag -->
+
+        <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta property="og:description" content="I previously mentioned in my microblog that I lost my file by accidentally overwriting my file using the cp command. This got me thinking as to why this would be impossible on 
+my work laptop since I would be constantly bombarded with a prompt to confirm my intention to overwrite the file.
+" />
+    
+    <meta name="author" content="zakuarbor" />
+
+    
+    <meta property="og:title" content="Utilizing Aliases and Interactive Mode to Force Users to Think Twice Before Deleting Files" />
+    <meta property="twitter:title" content="Utilizing Aliases and Interactive Mode to Force Users to Think Twice Before Deleting Files" />
+    
+
+    
+    <meta property="og:image" content="http://localhost:4000/blog/images/pikachu_pfp.png"/>
+    <meta property="twitter:image" content="http://localhost:4000/blog/images/pikachu_pfp.png"/>
+    
+    <meta property="og:site_name" content="zakuarbor"/>
+
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/style.css" />
+    <link rel="alternate" type="application/rss+xml" title="zakuarbor - A random blog by a random human" href="/blog/feed.xml" />
+    <!--<link rel="canonical" href="http://localhost:4000/alias-interactive/" />-->
+    <meta http-equiv='content-language' content='en-ca'>
+    <meta name="theme-color" content="#000000">
+    <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32.png">
+    <script src = "/blog/assets/js/script.js"></script>
+<!--<script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+-->
+  </head>
+
+  <body>
+    <div id="bar"></div>
+    <div class="wrapper-container">
+      <div class="wrapper-masthead">
+        <div class="container">
+          <header class="masthead clearfix">
+            <a href="/blog/" class="site-avatar"><img src="/blog/images/pikachu_pfp_bw.png" alt="Site avator that links to main page" /></a>
+
+            <div class="site-info">
+              <h2 class="site-name"><a href="/blog/" alt = "home page">zakuarbor</a></h2>
+              <p class="site-description">A random blog by a random human</p> 
+            </div>
+
+            <nav>
+              <a href="/blog/archive" alt = "archive page">Archives</a>
+              <a href="/blog/personal" alt = "personal page">Personal</a>
+              <a href="/blog/programming" alt = "programming page">Programming</a>
+              <a href="/blog/math-physics" alt = "math page">Math</a>
+              <a href="/blog/about" alt = "about page">About</a>
+            </nav>
+          </header>
+        </div>
+      </div>
+
+      <div class="wrapper-main">
+        <div id="main" role="main" class="container">
+          <div id = "top"/>
+          <article class="post detailed">
+  <h1>Utilizing Aliases and Interactive Mode to Force Users to Think Twice Before Deleting Files</h1>
+
+  <div>
+    <p class="author_title"><!--Ju Hong Kim  ·  -->December 29, 2024</p>
+    
+    <div class="post-tags">
+      
+      
+        <a href="/blog/categories/#linux">linux</a>
+        
+      
+    </div>
+    <p class = "bug">
+      <a alt = "See a mistake? Open an issue. I make a lot of mistakes" href = "https://github.com/zakuArbor/blog/issues/new?labels=bug&title=[bug]:&assignee=zakuarbor&body=**Link:** [http://localhost:4000/blog/alias-interactive/](http://localhost:4000/blog/alias-interactive/)%0A**Description:**<!--See an issue with the site or the content, please provide a fix-->">
+      Report a bug</a></p>
+  </div>
+    
+  <div class="entry">
+    <p>I previously mentioned in my microblog that <a href="https://randombits.neocities.org/micro/2024/12/jekyll-cache">I lost my file</a> by accidentally overwriting my file using the <code class="language-plaintext highlighter-rouge">cp</code> command. This got me thinking as to why this would be impossible on 
+my work laptop since I would be constantly bombarded with a prompt to confirm my intention to overwrite the file.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cp 2024-12-01-template.md 2024-12-30-alias-interactive.md
+cp: overwrite '2024-12-30-alias-interactive.md'?
+</code></pre></div></div>
+
+<p>Commands like <code class="language-plaintext highlighter-rouge">mv</code> and <code class="language-plaintext highlighter-rouge">cp</code> have an <strong>interactive</strong> flag <code class="language-plaintext highlighter-rouge">-i</code> to prompt before overwriting the file. As seen in <code class="language-plaintext highlighter-rouge">man 1 cp</code></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-i, --interactive
+              prompt before overwrite (overrides a previous -n option)
+</code></pre></div></div>
+
+<p>To force everyone at work to have this flag enabled, they made <code class="language-plaintext highlighter-rouge">cp</code> and <code class="language-plaintext highlighter-rouge">mv</code> an alias in our default shell configs:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">alias cp</span><span class="o">=</span><span class="s2">"cp -i"</span>
+<span class="nb">alias mv</span><span class="o">=</span><span class="s2">"mv -i"</span>
+</code></pre></div></div>
+
+<p>Which you can also verify using the <code class="language-plaintext highlighter-rouge">type</code> command:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ type cp
+cp is aliased to `cp -i'
+$ type mv
+mv is aliased to `mv -i'
+</code></pre></div></div>
+
+  </div>
+
+  <div>
+    <p><span class="share-box">Share:</span> <a href="http://twitter.com/share?text=Utilizing Aliases and Interactive Mode to Force Users to Think Twice Before Deleting Files&url=http://localhost:4000/alias-interactive/" target="_blank">Twitter</a>, <a href="https://www.facebook.com/sharer.php?u=http://localhost:4000/alias-interactive/" target="_blank">Facebook</a></p>
+  </div>
+
+  <!--<div class="date">
+    Written on December 29, 2024
+  </div>-->
+
+  <script src="https://giscus.app/client.js"
+        data-repo="zakuarbor/discussions"
+        data-repo-id="R_kgDOMjvVJA"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOMjvVJM4Chqhy"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="dark"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+</article>
+
+        </div>
+      </div>
+      <button onclick="toTop()" id="top_btn" title="Go to top">Top</button>
+      <div class="wrapper-footer">
+        <div class="container">
+          <footer class="footer">
+            <a href = "../privacy/">Privacy</a><br/>
+            
+
+
+
+<a alt = "github page" href="https://github.com/zakuarbor"><i class="svg-icon github"></i></a>
+
+<a alt = "linkedin page" href="https://www.linkedin.com/in/ju-hong-kim-zaku"><i class="svg-icon linkedin"></i></a>
+
+<a alt = "rss feed" href="/blog/feed.xml"><i class="svg-icon rss"></i></a>
+
+
+
+
+
+
+          </footer>
+        </div>
+      </div>
+    </div> 
+    
+
+  </body>
+</html>
+

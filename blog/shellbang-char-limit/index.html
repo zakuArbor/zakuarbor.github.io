@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Shellbang Character limit</title>
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Shellbang Character limit" />
+<meta name="author" content="Ju Hong Kim" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A quick note to myself on shebang’s character limit" />
+<meta property="og:description" content="A quick note to myself on shebang’s character limit" />
+<link rel="canonical" href="http://localhost:4000/blog/shellbang-char-limit/" />
+<meta property="og:url" content="http://localhost:4000/blog/shellbang-char-limit/" />
+<meta property="og:site_name" content="zakuarbor" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-10-04T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Shellbang Character limit" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Ju Hong Kim"},"dateModified":"2022-10-04T00:00:00-04:00","datePublished":"2022-10-04T00:00:00-04:00","description":"A quick note to myself on shebang’s character limit","headline":"Shellbang Character limit","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/shellbang-char-limit/"},"url":"http://localhost:4000/blog/shellbang-char-limit/"}</script>
+<!-- End Jekyll SEO tag -->
+
+        <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta property="og:description" content="A short  blog, more like a note to myself about the character limit on shebang. 
+Shebang in the UNIX-like world is the characters #! at the beginning of a script 
+to indicate the interpreter’s path.
+" />
+    
+    <meta name="author" content="zakuarbor" />
+
+    
+    <meta property="og:title" content="Shellbang Character limit" />
+    <meta property="twitter:title" content="Shellbang Character limit" />
+    
+
+    
+    <meta property="og:image" content="http://localhost:4000/blog/images/pikachu_pfp.png"/>
+    <meta property="twitter:image" content="http://localhost:4000/blog/images/pikachu_pfp.png"/>
+    
+    <meta property="og:site_name" content="zakuarbor"/>
+
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/style.css" />
+    <link rel="alternate" type="application/rss+xml" title="zakuarbor - A random blog by a random human" href="/blog/feed.xml" />
+    <!--<link rel="canonical" href="http://localhost:4000/shellbang-char-limit/" />-->
+    <meta http-equiv='content-language' content='en-ca'>
+    <meta name="theme-color" content="#000000">
+    <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32.png">
+    <script src = "/blog/assets/js/script.js"></script>
+<!--<script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+-->
+  </head>
+
+  <body>
+    <div id="bar"></div>
+    <div class="wrapper-container">
+      <div class="wrapper-masthead">
+        <div class="container">
+          <header class="masthead clearfix">
+            <a href="/blog/" class="site-avatar"><img src="/blog/images/pikachu_pfp_bw.png" alt="Site avator that links to main page" /></a>
+
+            <div class="site-info">
+              <h2 class="site-name"><a href="/blog/" alt = "home page">zakuarbor</a></h2>
+              <p class="site-description">A random blog by a random human</p> 
+            </div>
+
+            <nav>
+              <a href="/blog/archive" alt = "archive page">Archives</a>
+              <a href="/blog/personal" alt = "personal page">Personal</a>
+              <a href="/blog/programming" alt = "programming page">Programming</a>
+              <a href="/blog/math-physics" alt = "math page">Math</a>
+              <a href="/blog/about" alt = "about page">About</a>
+            </nav>
+          </header>
+        </div>
+      </div>
+
+      <div class="wrapper-main">
+        <div id="main" role="main" class="container">
+          <div id = "top"/>
+          <article class="post detailed">
+  <h1>Shellbang Character limit</h1>
+
+  <div>
+    <p class="author_title"><!--Ju Hong Kim  ·  -->October  4, 2022</p>
+    
+    <div class="post-tags">
+      
+      
+        <a href="/blog/categories/#programming">programming</a>
+        &nbsp;
+      
+        <a href="/blog/categories/#shell">shell</a>
+        
+      
+    </div>
+    <p class = "bug">
+      <a alt = "See a mistake? Open an issue. I make a lot of mistakes" href = "https://github.com/zakuArbor/blog/issues/new?labels=bug&title=[bug]:&assignee=zakuarbor&body=**Link:** [http://localhost:4000/blog/shellbang-char-limit/](http://localhost:4000/blog/shellbang-char-limit/)%0A**Description:**<!--See an issue with the site or the content, please provide a fix-->">
+      Report a bug</a></p>
+  </div>
+    
+  <div class="entry">
+    <p>A short  blog, more like a note to myself about the character limit on shebang. 
+Shebang in the UNIX-like world is the characters <code class="language-plaintext highlighter-rouge">#!</code> at the beginning of a script 
+to indicate the interpreter’s path.</p>
+
+<p><strong>tldr:</strong></p>
+<ul>
+  <li>character limit is 256 on modern Linux systems including the shebang</li>
+  <li>specified by <code class="language-plaintext highlighter-rouge">BINPRM_BUF_SIZE</code></li>
+</ul>
+
+<p><strong>TOC:</strong></p>
+<ul>
+  <li><a href="#intro">Introduction</a></li>
+</ul>
+
+<p><a name="intro"></a></p>
+<h2 id="introduction---what-is-a-shebang">Introduction - What is a Shebang</h2>
+
+<p>A script is essentially a textfile that is useless without a program to interpret 
+the commands. Unlike a program where there exists either a static or dynamic program loader, 
+a script is “interpreted” line by line by a program called the interpreter which translates<br />
+the commands in your script into a series of instructions that the OS, CPU or another program 
+can understand (I could be wrong on the technicalities). For a script to be executed 
+without feeding the program into an interpreter manually, the shebang is used to 
+indicate to the shell or the shell’s program loader I guess to execute the specified 
+interpreter so that the script can be run.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sh test.sh
+perl test.pl
+python test.py
+</code></pre></div></div>
+
+<p class="caption">An example of manually running the script into an interpreter</p>
+
+<p>In UNIX-like environments, you can set a file to be executable. However, if it’s not a 
+compiled program (an actual executable file such as an ELF file), the OS or shell needs to know 
+how to execute the program. While I don’t know the internals how the OS knows how to 
+execute the program, I believe if the file is not under some executable format like 
+COFF or ELF, it’ll look at the shebang at the beginning of the file to see if 
+there’s an interpreter in the specified file.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/usr/bin/sh
+#!/usr/bin/perl
+#!/usr/bin/python
+</code></pre></div></div>
+
+<p class="caption">An example of how to specify the path of the interpreterin Shell Bourne, Perl, and Python respectively</p>
+
+<p>Below is an example of an error one may see if there’s no shebang at the beginning of a script:</p>
+
+<div class="language-plaintext highlighter-rouge">                              
+<pre class="highlight"><font color="#26A269"><b>13:45 </b></font><font color="#D0CFCC"><b>[</b></font><font color="#2AA1B3">zaku</font><font color="#D0CFCC"><b>:</b></font><font color="#A347BA">/tmp</font><font color="#D0CFCC"><b>]</b></font>
+<font color="#D0CFCC"><b>$ </b></font>cat test.py
+print(&quot;Hello World&quot;)
+<font color="#26A269"><b>13:45 </b></font><font color="#D0CFCC"><b>[</b></font><font color="#2AA1B3">zaku</font><font color="#D0CFCC"><b>:</b></font><font color="#A347BA">/tmp</font><font color="#D0CFCC"><b>]</b></font>
+<font color="#D0CFCC"><b>$ </b></font>./test.py 
+./test.py: line 1: syntax error near unexpected token `&quot;Hello World&quot;&apos;
+./test.py: line 1: `print(&quot;Hello World&quot;)&apos;
+<font color="#26A269"><b>13:45 </b></font><font color="#D0CFCC"><b>[</b></font><font color="#2AA1B3">zaku</font><font color="#D0CFCC"><b>:</b></font><font color="#A347BA">/tmp</font><font color="#D0CFCC"><b>]</b></font>
+</pre>
+</div>
+
+<p class="caption">An example of a python program that cannot be executed on the shell because the shell does not know how to interpret the script</p>
+
+<p>With the shebang, the shell will know how to execute the script:</p>
+
+<div class="language-plaintext highlighter-rouge">                              
+<pre class="highlight"><font color="#26A269"><b>13:45 </b></font><font color="#D0CFCC"><b>[</b></font><font color="#2AA1B3">zaku</font><font color="#D0CFCC"><b>:</b></font><font color="#A347BA">/tmp</font><font color="#D0CFCC"><b>]</b></font>
+<font color="#D0CFCC"><b>$ </b></font>cat test.py
+#!/usr/bin/python
+print(&quot;Hello World&quot;)
+<font color="#26A269"><b>13:51 </b></font><font color="#D0CFCC"><b>[</b></font><font color="#2AA1B3">zaku</font><font color="#D0CFCC"><b>:</b></font><font color="#A347BA">/tmp</font><font color="#D0CFCC"><b>]</b></font>
+<font color="#D0CFCC"><b>$ </b></font>./test.py 
+Hello World
+</pre></div>
+
+<p class="caption">An example of a python program being executed since the shebang points to the interpreter telling the shell to load the script into the interpreter</p>
+
+<p>Here’s an example if you provide an invalid interpreter path:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ./test.py 
+bash: ./test.py: /usr/bin/python#: bad interpreter: No such file or directory
+</code></pre></div></div>
+
+<!--
+<div class="language-plaintext highlighter-rouge">                              
+<pre class = "highlight">
+</pre></div>
+-->
+
+<h2 id="character-limit">Character Limit</h2>
+
+<p>Being bored on my morning commute to school (being on the bus at 6:50am is not fun), I noticed someone mentioned how there was a 255 character limit in shebang 
+on the school’s computer science discord that I lurk around despite being a Math student. 
+I got curious and decided to speculate before taking a look online. I speculated it must have to do with <code class="language-plaintext highlighter-rouge">PATH_MAX</code> or <code class="language-plaintext highlighter-rouge">NAME_MAX</code> 
+specified in <code class="language-plaintext highlighter-rouge">limits.h</code> because of encountering issues on Window Builds in the past at two places I worked at before 
+where the builds would fail because the path was too long. However, my speculation was wrong when 
+I did a quick google search:</p>
+
+<blockquote>
+  <p>Limited to 127 chars on 99.9% of systems due to kernel compile time buffer limit.
+It’s limited in the kernel by BINPRM_BUF_SIZE, set in include/linux/binfmts.h.
+– <a href="https://stackoverflow.com/questions/10813538/shebang-line-limit-in-bash-and-linux-kernel">Stackoverflow</a></p>
+</blockquote>
+
+<p>As this contradicted what a student said, I decided to take a look at the file as the answer was from 2012. Surely 
+enough, it was 256 characters long as the student stated.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/*
+ * These are the maximum length and maximum number of strings passed to the
+ * execve() system call.  MAX_ARG_STRLEN is essentially random but serves to
+ * prevent the kernel from being unduly impacted by misaddressed pointers.
+ * MAX_ARG_STRINGS is chosen to fit in a signed 32-bit integer.
+ */
+#define MAX_ARG_STRLEN (PAGE_SIZE * 32)
+#define MAX_ARG_STRINGS 0x7FFFFFFF
+
+/* sizeof(linux_binprm-&gt;buf) */
+#define BINPRM_BUF_SIZE 256
+</code></pre></div></div>
+
+<p class="caption">A snippet of binfmts.h. Source: <a href="https://elixir.bootlin.com/linux/latest/source/include/uapi/linux/binfmts.h#L19" alt="binfmts.h source code">Elixir Source Code Viewer: /include/uapi/linux/binfmts.h</a></p>
+
+<p>We can test this theory ourselves by padding <code class="language-plaintext highlighter-rouge">//</code> at the beginning or <code class="language-plaintext highlighter-rouge">./</code> in between the path.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/./././././././././././usr/bin/python
+</code></pre></div></div>
+
+<p>If the path is over 256 characters, we can see an error occurs as expected:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ head -n 1 test.py | wc -c
+290
+$ ./test.py 
+./test.py: line 2: syntax error near unexpected token `"Hello World"'
+./test.py: line 2: `print("Hello World")'
+</code></pre></div></div>
+
+<p>But if we have exactly 256 characters (256) characters, the program runs 
+as expected:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ./test.py 
+$ head -n 1 test.py | wc -c
+256
+$ ./test.py 
+Hello World
+</code></pre></div></div>
+
+<p><strong>Note:</strong> The path length includes two characters from the shebang <code class="language-plaintext highlighter-rouge">#!</code></p>
+
+<hr />
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Nothing exciting but as I said, it’s a note to myself that the interpreter path 
+is restricted to 256 characters in length including the shebang (i.e. length of 
+the path is 254 characters long). Hopefully there’ll be a more exciting post 
+in the near future but no guarantees.</p>
+
+<p>The only implication of this finding 
+I can think of is when your system has some very ridiculous path to an interpreter 
+such as Python which can occur. At one place I worked at, we did store compilers 
+in some shared mount that has a somewhat long path but nowhere near the limit. But 
+I could imagine there would be some places where they do exceed that limit whether it 
+being in some ridiculous location or the workspace name on their Jenkins setup is 
+long (though I think this rarely happens).</p>
+
+  </div>
+
+  <div>
+    <p><span class="share-box">Share:</span> <a href="http://twitter.com/share?text=Shellbang Character limit&url=http://localhost:4000/shellbang-char-limit/" target="_blank">Twitter</a>, <a href="https://www.facebook.com/sharer.php?u=http://localhost:4000/shellbang-char-limit/" target="_blank">Facebook</a></p>
+  </div>
+
+  <!--<div class="date">
+    Written on October  4, 2022
+  </div>-->
+
+  <script src="https://giscus.app/client.js"
+        data-repo="zakuarbor/discussions"
+        data-repo-id="R_kgDOMjvVJA"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOMjvVJM4Chqhy"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="dark"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+</article>
+
+        </div>
+      </div>
+      <button onclick="toTop()" id="top_btn" title="Go to top">Top</button>
+      <div class="wrapper-footer">
+        <div class="container">
+          <footer class="footer">
+            <a href = "../privacy/">Privacy</a><br/>
+            
+
+
+
+<a alt = "github page" href="https://github.com/zakuarbor"><i class="svg-icon github"></i></a>
+
+<a alt = "linkedin page" href="https://www.linkedin.com/in/ju-hong-kim-zaku"><i class="svg-icon linkedin"></i></a>
+
+<a alt = "rss feed" href="/blog/feed.xml"><i class="svg-icon rss"></i></a>
+
+
+
+
+
+
+          </footer>
+        </div>
+      </div>
+    </div> 
+    
+
+  </body>
+</html>
+
