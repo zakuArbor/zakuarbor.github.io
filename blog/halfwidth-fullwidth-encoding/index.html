@@ -150,7 +150,7 @@ zenkaku (full-width) and hankaku (half-width) characters, look at the image belo
 
 <p>As you can see, half-width characters unsurprisingly takes up less space visually than the full-width characters.</p>
 
-<p><img src="https://zakuarbor.github.io/blog/assets/programming/encoding/full-half-width.png" alt="Full and Half Width Characters encoded on UTF-8" /></p>
+<p><img src="http://localhost:4000/blog/assets/programming/encoding/full-half-width.png" alt="Full and Half Width Characters encoded on UTF-8" /></p>
 <p class="caption">Full and Half Width encoded on UTF-8 as seen through Vim</p>
 
 <p>While I have read and typed Korean during my younger years when I was forced to learn Korean, it never clicked to me how much space Korean
@@ -212,7 +212,7 @@ chinese-1.md,3
 
 <p><strong>Note:</strong> Do not attempt to display UTF-16 encoded files on the terminal without changing your locale (or whatever it is called). It will not display nicely. Vim on my machine will automatically open the file as UTF-16LE.</p>
 
-<p><img src="https://zakuarbor.github.io/blog/assets/programming/encoding/full-half-width.png" alt="My default terminal settings is unable to display the content in Chinese properly" /></p>
+<p><img src="http://localhost:4000/blog/assets/programming/encoding/full-half-width.png" alt="My default terminal settings is unable to display the content in Chinese properly" /></p>
 
 <p>Let’s inspect the contents of the files between Half character <code class="language-plaintext highlighter-rouge">1</code> and Full Byte Character <code class="language-plaintext highlighter-rouge">１</code> in HEX:</p>
 <pre class="highlight" style="background-color: #1b1b1b; padding: .5rem; line-height: 1.25em"><font color="#D0CFCC"><b>$ </b></font>cat halfwidth-1.txt; echo &quot;&quot;; xxd halfwidth-1.txt; cat fullwidth-1.txt ; echo &quot;&quot;; xxd fullwidth-1.txt 

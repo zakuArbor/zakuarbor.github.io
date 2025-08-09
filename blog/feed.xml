@@ -1,125 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/blog/" rel="alternate" type="text/html" /><updated>2025-07-05T00:05:41-04:00</updated><id>http://localhost:4000/blog/feed.xml</id><title type="html">zakuarbor</title><subtitle>A random blog by a random human</subtitle><author><name>Ju Hong Kim</name></author><entry><title type="html">MATH2100 - Algebra [Fall + Winter]</title><link href="http://localhost:4000/blog/math2100/" rel="alternate" type="text/html" title="MATH2100 - Algebra [Fall + Winter]" /><published>2099-09-05T00:00:00-04:00</published><updated>2099-09-05T00:00:00-04:00</updated><id>http://localhost:4000/blog/math2100</id><content type="html" xml:base="http://localhost:4000/blog/math2100/"><![CDATA[<p>This is a course review of MATH2100 - Algebra taken at CarletonU in 
-the fall of 2022 and winter 2023. The lectures and tutorial were synchronous and in-person. Similarly to MATH2000, the course is split into 
-two semesters covering different topics. The fall semester goes into a rabbit hole in the topic of Linear Algebra and the winter semester does an introduction 
-to Group Theory and Rings.</p>
-
-<p><strong>TLDR:</strong></p>
-<ul>
-  <li></li>
-</ul>
-
-<p>The review is split into 2 main parts:</p>
-<ol>
-  <li><a href="#ldesc">Long Course Description</a>: In-depth talk about the course topic from how I understood it
-    <ul>
-      <li><a href="#ldesc-fall">Fall Term - Linear Algebra but in-depth</a></li>
-      <li><a href="#ldesc-winter">Winter Term - Introduction to Group Theory and Rings</a></li>
-    </ul>
-  </li>
-  <li><a href="#review">Course Review</a>: Solely focuses on the teaching style, difficulty, and anything that would be of interest</li>
-</ol>
-
-<hr />
-
-<p><strong>Professor:</strong> Paul Mezo</p>
-
-<p><strong>Course Delivery:</strong> In-person lectures with synchronous tutorials</p>
-
-<p><strong>Class Size:</strong></p>
-<ul>
-  <li>38 students (October 25 2022) <small>Test 1 Statistics</small></li>
-  <li>35 students (December 2022) <small>Mid-year Exam Statistics</small></li>
-  <li>33 students (February 21 2023) <small>Test 2 Statstics</small></li>
-  <li>30 students (March 28 2023) <small><img src="https://oirp.carleton.ca/course-inst/tables/2023w-course-inst_hpt.htm" alt="OIRP" /></small></li>
-</ul>
-
-<p><strong>Course Description (from website):</strong> Introduction to group theory: permutation groups, Lagrange’s theorem, normal subgroups, homomorphism theorems. Introduction to ring theory: ring of polynomials, integral domains, ideals, homomorphism theorems. Hermitian forms, spectral theorem for normal operators, bilinear and quadratic forms, classical groups.</p>
-
-<hr />
-
-<h2 id="course-description-long-with-commentary">Course Description (LONG) with Commentary:</h2>
-
-<h3 id="fall-term---linear-algebra-but-in-depth">Fall Term - Linear Algebra But In-Depth</h3>
-
-<p>Similarly to first year calculus (MATH1152, MATH2152), the lectures goes over a lot of proofs. As stated at the beginning, the course is split into two semesters covering two 
-distinct topics. In the Fall, it is a continuation of Linear Algebra except in much more depth and rigor and in the winter, an introduction to Group Theory and Rings is given.
-The course begins with a revisit of everything we learned in first year and it surprisingly goes in-depth. Although I did not take MATH2152, I was confident that I had a decent 
-understanding of Linear Algebra, having done very well in MATH1152 and MATH2107 (non-honors linear algebra). However, I quickly learned how wrong I was.</p>
-
-<p>The course begins as any rigorous Linear Algebra course would, going over Vector Space Properties. One cannot start a game without first understanding the rules or else players 
-would cheat unintentionally and cause chaos. This is why we should always begin defining what is a vector and what we can do with vectors.</p>
-
-<p>In Physics, a vector would some quantity that has both a size (a magnitude) and a direction. However, in Mathematics, we view a vector a bit more abstractly as a list of size n 
-where each number belongs to some field $F$. For now let’s define a vector as the following (Mathematicians, please don’t murder me over this):</p>
-
-<blockquote>
-  <p><strong>Vector:</strong> a vector $v$ of dimension $n$ over a field $\mathbb{F}$ is a n-ordered tuple in the form $\vec{v} = (v_1, v_2, \dots, v_n)$ where $v_i \in \mathbb{F}$ for $i = 1, \dots, n$</p>
-</blockquote>
-
-<p><strong>Example:</strong></p>
-<ul>
-  <li>2D Cartesian Plane over the Reals (Euclidean Plane): $\mathbb{R}^2 = \{(x, y): a, b \in\mathbb{R}\}$
-    <ul>
-      <li>e.g. (4, 2) or (1, 0)</li>
-    </ul>
-  </li>
-  <li>2D Cartesian Plane over the Complex: $\mathbb{C}^2 = \{(a, b): a, b \in \mathbb{C}\}$
-    <ul>
-      <li>e.g. (4 + 2i, 1 - i)</li>
-    </ul>
-  </li>
-</ul>
-
-<p>Now you may be confused because a vector looks exactly like a coordinate, at least for the vectors on the Euclidean plane. Certainly for any vector $v = (v_1, v_2, \dots, v_n)$, 
-there is also a point $p = (v_1, v_2, \dots, v_n)$ that have the same representation. Geometrically, they appear different in some visualizable space such as $\mathbb{R}^2$ (where 
-we usually draw the vector to be some displacement rather than a single point such as having its tail be at the the origin), 
-we will treat them as the same and say $v = p$ assuming both $v$ and $p$ belong to the same vector space (i.e. you cannot compare apples to oranges if $v$ and $p$ have different sets of rules 
-applied to them). Now is a good time to explain what a <strong>vector space</strong> is:</p>
-
-<blockquote>
-  <p><strong>Vector Space:</strong> a vector space is a set $V = \{(v_1, v_2, \dots, v_n): v_1, v_2, \dots, v_n \in F\}$ with two operations (addition and scalar multiplication) such that they respect the following properties:</p>
-  <ol>
-    <li><strong>Commutativity:</strong> $u + v = v + u$, $\forall u, v \in V$</li>
-    <li><strong>Associativity:</strong> $(u + v) + w = u + (v + w)$ and $(c_1c_2)v = c_1(c_2v)$, $\forall u, v, w \in V$ and $\forall c_1, c_2 \in F$</li>
-    <li><strong>Additive Identity:</strong> $\exists$ an element $\textbf{0}\in V$ such that $v + \textbf{0} = v$, $\forall v\in{V}$</li>
-    <li><strong>Additive Inverse:</strong> $\forall v\in V, \exists w \in V$ such that $v + w = \textbf{0}$</li>
-    <li><strong>Multiplicative Identity:</strong> $1v = v$,  $\forall v \in V$ and $1\in F$</li>
-    <li><strong>Distributive Property:</strong> $c_1(u+v) = c_1u + c_1v$ and $(c_1 + c_2)v = c_1v + c_2v$,  $\forall c_1, c_2\in F$ and $\forall u, v \in V$</li>
-  </ol>
-</blockquote>
-
-<p><strong>Example:</strong></p>
-<ul>
-  <li>$\mathbb{R}^2, \mathbb{C}^n$</li>
-  <li>$\mathbb{R}[x]$: the vectorspace with a set of polynomial with real coefficients e.g. $1+x \in \mathbb{R}[x]$</li>
-  <li>$\mathbb{C}[x]$: the complex polynomials e.g. $1+ix \in \mathbb{C}[x]$</li>
-  <li>$M_{mn}(F)$: a vector space consisting of $m \times n$ matrices with entries in F</li>
-</ul>
-
-<p>Now that we have defined a <strong>vector space</strong>, we can now redine a vector to simply be an element in the vector space.</p>
-
-<hr />
-
-<p><a name="review"></a></p>
-<h2 id="review">Review</h2>
-
-<blockquote>
-  <p><strong>Note:</strong> The content will differ depending on who teaches the course and this review has been written in 2025, 2 years after the course has been taken so my memory is a bit hazy.</p>
-</blockquote>
-
-<p>MATH2100 with Mezo has been a delightful experience. I enjoyed the way Mezo taught the course to the point I decided to take MATH3106 - Group Theory despite hating 
-group theory. As the class was small, the course was much more interactive. As MATH2100 was a two semester course (at least when I took it), it was nicely divided into two parts:
-linear algebra and group theory.</p>
-
-<p><strong>Grading Scheme:</strong></p>
-<ul>
-  <li>10% Assignments</li>
-  <li>30% Tests (x2)</li>
-  <li>30% Mid-year exam</li>
-  <li>30% Final exam</li>
-</ul>
-
-<p>The first half was enlightening and makes you humble if you thought you had a decent understanding of Linear Algebra.</p>]]></content><author><name>Ju Hong Kim</name></author><category term="university" /><category term="school" /><category term="math" /><category term="reviews" /><category term="carletonu" /><summary type="html"><![CDATA[A course review on abstract algebra course for Math honors students at CarletonU]]></summary></entry><entry><title type="html">The Issue With Default in Switch Statements with Enums</title><link href="http://localhost:4000/blog/switch-default-enum/" rel="alternate" type="text/html" title="The Issue With Default in Switch Statements with Enums" /><published>2025-07-05T00:00:00-04:00</published><updated>2025-07-05T00:00:00-04:00</updated><id>http://localhost:4000/blog/switch-default-enum</id><content type="html" xml:base="http://localhost:4000/blog/switch-default-enum/"><![CDATA[<p>Reading the coding standards at a company I recently joined revealed to me the issue with default label within the switch statement and why it’s prohibitted when its being 
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/blog/" rel="alternate" type="text/html" /><updated>2025-08-09T00:26:07-04:00</updated><id>http://localhost:4000/blog/feed.xml</id><title type="html">zakuarbor</title><subtitle>A random blog by a random human</subtitle><author><name>Ju Hong Kim</name></author><entry><title type="html">The Issue With Default in Switch Statements with Enums</title><link href="http://localhost:4000/blog/switch-default-enum/" rel="alternate" type="text/html" title="The Issue With Default in Switch Statements with Enums" /><published>2025-07-05T00:00:00-04:00</published><updated>2025-07-05T00:00:00-04:00</updated><id>http://localhost:4000/blog/switch-default-enum</id><content type="html" xml:base="http://localhost:4000/blog/switch-default-enum/"><![CDATA[<p>Reading the coding standards at a company I recently joined revealed to me the issue with default label within the switch statement and why it’s prohibitted when its being 
 used to enumerate through an <code class="language-plaintext highlighter-rouge">enum</code>. <code class="language-plaintext highlighter-rouge">default</code> label is convenient to handle any edge cases and it’s often used to handle errors. However, when working with enums, it is often 
 the case that the prpogrammer intends to handle all possible values in the enum. To catch this mishap, programmers would enable <code class="language-plaintext highlighter-rouge">-Wswitch</code> or <code class="language-plaintext highlighter-rouge">-Werror=switch</code> to their compiler.
 For instance, let’s suppose I have an enum named <strong>Suit</strong> to represent the different suits in a deck of cards.</p>
@@ -433,7 +312,7 @@ Memory fault (core dumped)
 
 <p><strong>Note 2:</strong> QNX 8.0 was released to the general public in late 2023 or early 2024 so the actual target at the time when the question was asked was running either QNX 7.0 or QNX 7.1 (I do not recall which version)</p>
 
-<p>The behavior for AMD64 (x86_64) as noted requires more fiddling to trigger a crash which came to my surprise. A slightly more detailed version will be released shortly on my <a href="https://zakuarbor.github.io/blog/small-stack/">blog</a> 
+<p>The behavior for AMD64 (x86_64) as noted requires more fiddling to trigger a crash which came to my surprise. A slightly more detailed version will be released shortly on my <a href="https://zakuarbor.codeberg.page/blog/small-stack/">blog</a> 
 which will include a very brief reason as to why AMD64 doesn’t crash if nothing extra is added like a call to <code class="language-plaintext highlighter-rouge">puts</code>.</p>
 
 </div>
@@ -500,7 +379,7 @@ to the LinkedIn Community as well which was where I learned about it.
 For those who are not familiar with QNX, QNX is a properiety realtime operating system targetted for embedded systems and is installed in over 255 million vehicles.
 QNX has a great reputation for being reliable and safe embedded system to build software on top of due to its microarchitecture and compliance to many industrial and engineering design process
 which gives customers the ability to certify their software in safety critical systems more easily. What makes QNX appealing is a discussion on another time but for me, this is a good
-opportunity to fiddle around with the system. I was <a href="https://zakuarbor.github.io/blog/carletonu-qnx-license/">previously denied a license</a> from my university who had an agreement with QNX and
+opportunity to fiddle around with the system. I was <a href="https://zakuarbor.codeberg.page/blog/carletonu-qnx-license/">previously denied a license</a> from my university who had an agreement with QNX and
 my attempts to get an educational license did not go far years ago.</p>
 
 <p><img src="../assets/micro/products/qnx/announcement-linkedin.png" alt="LinkedIn Post announcing QNX 8.0 has a non-commercial license" /></p>
@@ -529,7 +408,7 @@ does a great job summarizing the sketpicism. QNX used to have a bigger hobbyist 
 to the community. Years later, QNX source code was available for the public to read (though probably with restrictions) but later shut the source code availability after being acquired by Blackberry who does not have the
 best reputation to the developer community (hence why Blackberry Phones failed to capture the market from my understanding despite once being a market leader).</p>
 
-<p>Regardless, I have plans to create a few materials on QNX in the coming months and perhaps create a follow up to <a href="https://zakuarbor.github.io/blog/qnx-aps/">QNX Adapative Partitioning System</a> as it seemed to have gained enough
+<p>Regardless, I have plans to create a few materials on QNX in the coming months and perhaps create a follow up to <a href="https://zakuarbor.codeberg.page/blog/qnx-aps/">QNX Adapative Partitioning System</a> as it seemed to have gained enough
 has been ranked top 5 on Google search results (though I doubt it had many readers due to the population of QNX developers):</p>
 
 <p><img src="../assets/micro/products/qnx/aps-search-results.png" alt="Google Search Result Ranking for my QNX APS webpage" /></p>
@@ -564,7 +443,7 @@ email and sign their messages so that I can verify the authenticity of the messa
 
 <p>Out of curiosity, I decided to see how one would manually verify the signature of an email to ensure that the email has not been tampered with 
 and comes from the person who it claims to be. I won’t go into how digital signatures work as those details will be posted shortly after at 
-my <a href="https://zakuarbor.github.io/blog/signature-verification/">blog</a>.</p>
+my <a href="https://zakuarbor.codeberg.page/blog/signature-verification/">blog</a>.</p>
 
 <ol>
   <li>Import Alice’s public key:
@@ -679,7 +558,7 @@ gpg:               imported: 1
 </ol>
 
 <p>In practice, no one verifies the digital signatures of emails manually. Any sane individual will utilize any email client that would automate the verification process for 
-them. This was a quick preview of a <a href="https://zakuarbor.github.io/blog/signature-verification/">blog post</a> I will be writing in the next few days that will go into email signatures in more details 
+them. This was a quick preview of a <a href="https://zakuarbor.codeberg.page/blog/signature-verification/">blog post</a> I will be writing in the next few days that will go into email signatures in more details 
 with better explanations and diagrams.</p>
 
 </div>
@@ -716,7 +595,7 @@ I do believe this depends on
 the encoding used. For me, the most obvious distinction between half and full width characters is how much graphical space it consumes as 
 evident from both the image above and below:</p>
 
-<p><img src="https://zakuarbor.github.io/blog../assets/micro/programming/encoding/full-half-width.png" alt="Full and Half Width Characters encoded on UTF-8" /></p>
+<p><img src="https://zakuarbor.codeberg.page/blog../assets/micro/programming/encoding/full-half-width.png" alt="Full and Half Width Characters encoded on UTF-8" /></p>
 <p class="caption">Full and Half Width encoded on UTF-8 as seen through Vim</p>
 
 <p>While I have read and typed Korean during my younger years when I was forced to learn Korean, it never clicked to me how much space Korean 
@@ -746,7 +625,7 @@ chinese-1.md,3
 
 <p><strong>Note:</strong> Do not attempt to display UTF-16 encoded files on the terminal without changing your locale (or whatever it is called). It will not display nicely. Vim on my machine will automatically open the file as UTF-16LE.</p>
 
-<p><img src="https://zakuarbor.github.io/blog../assets/micro/programming/encoding/chinese-garbage.png" alt="My default terminal settings is unable to display the content in Chinese properly" /></p>
+<p><img src="https://zakuarbor.codeberg.page/blog../assets/micro/programming/encoding/chinese-garbage.png" alt="My default terminal settings is unable to display the content in Chinese properly" /></p>
 
 <p>Let’s inspect the contents of the files between Half character <code class="language-plaintext highlighter-rouge">1</code> and Full Byte Character <code class="language-plaintext highlighter-rouge">１</code> in HEX:</p>
 <pre class="highlight" style="background-color: #1b1b1b; padding: .5rem; line-height: 1.25em"><font color="#D0CFCC"><b>$ </b></font>cat halfwidth-1.txt; echo &quot;&quot;; xxd halfwidth-1.txt; cat fullwidth-1.txt ; echo &quot;&quot;; xxd fullwidth-1.txt 
@@ -771,7 +650,7 @@ digit <code class="language-plaintext highlighter-rouge">１</code> is represent
 <p>As expected, UTF-16 represents code points in the upper range very well where we now see <code class="language-plaintext highlighter-rouge">１</code> (full-width 1) being represented with only 2 bytes unlike the 3 that was required in UTF-8. 
 Though the same cannot be said for code points in the lower range such as our half-width digit 	<code class="language-plaintext highlighter-rouge">1</code> which now takes 2 bytes by appending <code class="language-plaintext highlighter-rouge">0x00</code> to its hex representation.</p>
 
-<p>I will be writing a more detailed look into encoding at my <a href="https://zakuarbor.github.io/blog/halfwidth-fullwidth-encoding/">blog</a> in the coming days. This is just a quick preview.</p>
+<p>I will be writing a more detailed look into encoding at my <a href="https://zakuarbor.codeberg.page/blog/halfwidth-fullwidth-encoding/">blog</a> in the coming days. This is just a quick preview.</p>
 
 </div>
 
@@ -1214,7 +1093,7 @@ IBM made a huge mistake in open sourcing the POWER architecture too late. But on
 </div>
 <p><b>Website</b><br /></p>
 <p>
-In the past year I have been very lazy as evident with my <a href="https://zakuarbor.github.io/blog/" alt="Personal Blog">lack of activity on my personal blog</a>.
+In the past year I have been very lazy as evident with my <a href="https://zakuarbor.codeberg.page/blog/" alt="Personal Blog">lack of activity on my personal blog</a>.
 I'm now trying to pick up blogging again. It's hard to believe that it's been almost an entire year since I created this neocity site, which has almost 0 updates since. 
 I've been thinking about how to use this site since I already have a blog on GitHub Pages. Honestly, I forgot this corner existed, and it’s been bothering me that I couldn’t write my random, nonsensical thoughts because my main blog wouldn’t be a suitable medium until now.
 So, I’ve decided that this corner will be a microblog where I can share random articles and thoughts. A microblog is different from a regular blog in that the content is much shorter. This space will allow me to quickly jot down something random. I hope that a collection of these random posts will evolve into a blog post or spark an idea for my final year thesis or project.
@@ -2108,7 +1987,7 @@ to the LinkedIn Community as well which was where I learned about it.
 For those who are not familiar with QNX, QNX is a properiety realtime operating system targetted for embedded systems and is installed in over 255 million vehicles.
 QNX has a great reputation for being reliable and safe embedded system to build software on top of due to its microarchitecture and compliance to many industrial and engineering design process
 which gives customers the ability to certify their software in safety critical systems more easily. What makes QNX appealing is a discussion on another time but for me, this is a good
-opportunity to fiddle around with the system. I was <a href="https://zakuarbor.github.io/blog/carletonu-qnx-license/">previously denied a license</a> from my university who had an agreement with QNX and
+opportunity to fiddle around with the system. I was <a href="http://localhost:4000/blog/carletonu-qnx-license/">previously denied a license</a> from my university who had an agreement with QNX and
 my attempts to get an educational license did not go far years ago.</p>
 
 <p><img src="../assets/products/qnx/announcement-linkedin.png" alt="LinkedIn Post announcing QNX 8.0 has a non-commercial license" /></p>
@@ -2137,7 +2016,7 @@ does a great job summarizing the sketpicism. QNX used to have a bigger hobbyist 
 to the community. Years later, QNX source code was available for the public to read (though probably with restrictions) but later shut the source code availability after being acquired bhy Blackberry who does not have the
 best reputation to the developer community (hence why Blackberry Phones failed to capture the market from my understanding despite once being a market leader).</p>
 
-<p>Regardless, I have plans to create a few materials on QNX in the coming months and perhaps create a follow up to <a href="https://zakuarbor.github.io/blog/qnx-aps/">QNX Adapative Partitioning System</a> as it seemed to have gained enou
+<p>Regardless, I have plans to create a few materials on QNX in the coming months and perhaps create a follow up to <a href="http://localhost:4000/blog/qnx-aps/">QNX Adapative Partitioning System</a> as it seemed to have gained enou
 has been ranked top 5 on Google search results (though I doubt it had many readers due to the population of QNX developers):</p>
 
 <p><img src="../assets/products/qnx/aps-search-results.png" alt="Google Search Result Ranking for my QNX APS webpage" /></p>
@@ -2434,4 +2313,165 @@ unless I am required to. This does mean I am exposing myself to the spying eyes 
   <li><strong>Import the keys:</strong> <code class="language-plaintext highlighter-rouge">gpg --import &lt;key.gpg&gt;</code></li>
   <li>Extract the signed message (this includes any attachments that is not the signature itself)</li>
   <li><strong>Verify the email:</strong> <code class="language-plaintext highlighter-rouge">gpg --verify signature.asc message.txt</code></li>
-</ol>]]></content><author><name>Ju Hong Kim</name></author><category term="programming" /><category term="pgp" /><category term="encryption" /><summary type="html"><![CDATA[A look into how to manually verify email signatures]]></summary></entry></feed>
+</ol>]]></content><author><name>Ju Hong Kim</name></author><category term="programming" /><category term="pgp" /><category term="encryption" /><summary type="html"><![CDATA[A look into how to manually verify email signatures]]></summary></entry><entry><title type="html">A Quick Look Into Half-Width and Full-Width Characters</title><link href="http://localhost:4000/blog/halfwidth-fullwidth-encoding/" rel="alternate" type="text/html" title="A Quick Look Into Half-Width and Full-Width Characters" /><published>2024-10-07T00:00:00-04:00</published><updated>2024-10-07T00:00:00-04:00</updated><id>http://localhost:4000/blog/halfwidth-fullwidth-encoding</id><content type="html" xml:base="http://localhost:4000/blog/halfwidth-fullwidth-encoding/"><![CDATA[<p>A friend of mine has been asking me a few questions about encoding for a paper he is working on. 
+While I don’t understand what his research is on, all I can understand from his research is that he is 
+working on analyzing Japanese texts and it involves understanding character encodings. 
+Character encoding is not a topic that most native-English programmers are familiar with. 
+The most that the average programmer will know is the existence of ASCII and UTF-8 encoding. 
+If we are using anything beyond the English alphabets 
+and arabic numerals (i.e. 1, 2, 3, 4, 5, 6, …) then we can utilize UTF-8, else use ASCII.</p>
+
+<p>I am sure most of us has encountered the random garabage characters such as �  or the □ (U+25A1) when trying to read documents that 
+have a mix of English and some foreign language or see random garbage displayed in our media displays like the Infotainment displays 
+when we try to listen to music from Asia.</p>
+
+<p><img src="https://users.ox.ac.uk/~martinw/dlc/images/Chapter%2004_img_1.jpg" alt="An example of Chinese not displaying correctly" /></p>
+<p class="caption">Chinese characters not displaying correctly. Extracted from <a href="https://users.ox.ac.uk/~martinw/dlc/chapter4.htm">Developing Linguistic Corpora: a Guide to Good Practice</a></p>
+
+<p>I was not aware of the existence of full-width and half-width characters till the friend asked me to briefly give an explaination on
+the differences between the two from a technical aspect. 
+For those like me who weren’t aware that the Japanese mix between 
+zenkaku (full-width) and hankaku (half-width) characters, look at the image below or visit the following webpage for more explanation: <a href="https://mailmate.jp/blog/half-width-full-width-hankaku-zenkaku-explained">https://mailmate.jp/blog/half-width-full-width-hankaku-zenkaku-explained</a></p>
+
+<p><img src="https://images.ctfassets.net/rrofptqvevic/3276rMt8nR8HEVYYAhhZvV/633c276e889c8dd101c4ea89cc07f82d/image_-_2023-07-21T105935.292.webp" alt="An image displaying the difference between full and half-width characters" /></p>
+
+<p>As you can see, half-width characters unsurprisingly takes up less space visually than the full-width characters.</p>
+
+<p><img src="http://localhost:4000/blog/assets/programming/encoding/full-half-width.png" alt="Full and Half Width Characters encoded on UTF-8" /></p>
+<p class="caption">Full and Half Width encoded on UTF-8 as seen through Vim</p>
+
+<p>While I have read and typed Korean during my younger years when I was forced to learn Korean, it never clicked to me how much space Korean
+takes up graphically. It is obvious in hindsight but it was nonetheless interesting.</p>
+
+<p>There is also an implication 
+on the amount of data half-width and full-width characters consume (though this does depend on the encoding). For Western 
+audience, we know that <a href="https://en.wikipedia.org/wiki/ASCII">ASCII</a> takes up 1 byte and can be represented as a <code class="language-plaintext highlighter-rouge">char</code> in C.</p>
+
+<h2 id="extending-ascii">Extending ASCII</h2>
+
+<p>One interesting fact about ASCII is that ASCII only maps to 128 characters (though only 95 is printable). Recall that ASCII can be 
+represented by 1 byte which makes up of 8 bits. Doing the Math, 8 bits can represent 2^8 = 256 values. This leaves us with the remaining 
+128 values unmapped to anything.</p>
+
+<p><img src="../assets/programming/encoding/ascii-table.png" alt="ASCII Table From Wikipedia" /></p>
+<p class="caption">ASCII Table. Extracted from Wikipedia</p>
+
+<p>This allows other languages and programmers to take advantage in extending ASCII to display extra characters such as accents from European 
+languages such as <code class="language-plaintext highlighter-rouge">é, è, ç, à</code> in Latin 8 and <a href="https://en.wikipedia.org/wiki/ISO/IEC_8859">ISO 8859</a> or Katakana characters in 
+<a href="https://en.wikipedia.org/wiki/JIS_X_0201">JIS C 6220</a> (JIS X 0201) in 1969. 
+Though JIS C 6220 does change a few characters so it is not exactly an extension of ASCII. Though ignoring the few differences, we can 
+see that the Katakana characters are mapped in the remaining half starting from 0xA1 to 0xDF.</p>
+
+<p><img src="../assets/programming/encoding/jis-c-6220.png" alt="JIS C 6220 chart" /></p>
+<p class="caption">JIS C 6220 which is also known as JIS X 0201. Extracted from Wikipedia</p>
+
+<p>ISO 8859 on the other hand such as Latin-8 seems to be a direct extension of ASCII where 0xA1 - 0xFF contains characters from several 
+European languages such as French, Finnish and Celtic.</p>
+
+<p><img src="../assets/programming/encoding/iso-8859.png" alt="ISO 8859-14" /></p>
+<p class="caption">ISO 8859-14 (Latin-8) Encoding. Extracted from Wikipedia</p>
+
+<h2 id="aside-utf-8-vs-utf-16">Aside: UTF-8 v.s UTF-16</h2>
+
+<p>Based on the <a href="https://mailmate.jp/blog/half-width-full-width-hankaku-zenkaku-explained">article</a> I shared, half-width characters takes up 1 byte while full-width characters takes up 2 bytes (also can be called double byte character). 
+I do believe this depends on the encoding used. Taking a look at the size and bytes encoding, we can see that number <code class="language-plaintext highlighter-rouge">1</code> in UTF-8 encoding takes 1 and 3 bytes for half-width and full-width character repsectively</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ stat -c "%n,%s" -- halfwidth-utf8.txt fullwidth-utf8.txt 
+halfwidth-utf8.txt,1
+fullwidth-utf8.txt,3
+</code></pre></div></div>
+
+<p>One confusion I had was understanding what the difference between UTF-8 and UTF-16 and the following excercise helped me understand this:</p>
+<ul>
+  <li>UTF-8 encodes each character between 1-4 bytes</li>
+  <li>UTF-16 encodes each characters between 2-4 bytes</li>
+</ul>
+
+<p>UTF-8 and UTF-16 as you can tell are variable length meaning they take up more or less bytes depending on the character being encoded. We can 
+see this by comparing the number <code class="language-plaintext highlighter-rouge">1</code> arabic numeral v.s. the Chinese character for the number 1 <code class="language-plaintext highlighter-rouge">一</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ stat -c "%n,%s" -- halfwidth-1.txt chinese-1.md 
+halfwidth-1.txt,1
+chinese-1.md,3
+</code></pre></div></div>
+
+<p>In UTF-8, <code class="language-plaintext highlighter-rouge">1</code> takes up 1 byte which is unsurprising as ASCII has great advantage in UTF-8 compared to other Asian languages such as Chinese where the character for 1 <code class="language-plaintext highlighter-rouge">一</code> consumed 3 bytes.</p>
+
+<p><strong>Note:</strong> Do not attempt to display UTF-16 encoded files on the terminal without changing your locale (or whatever it is called). It will not display nicely. Vim on my machine will automatically open the file as UTF-16LE.</p>
+
+<p><img src="http://localhost:4000/blog/assets/programming/encoding/full-half-width.png" alt="My default terminal settings is unable to display the content in Chinese properly" /></p>
+
+<p>Let’s inspect the contents of the files between Half character <code class="language-plaintext highlighter-rouge">1</code> and Full Byte Character <code class="language-plaintext highlighter-rouge">１</code> in HEX:</p>
+<pre class="highlight" style="background-color: #1b1b1b; padding: .5rem; line-height: 1.25em"><font color="#D0CFCC"><b>$ </b></font>cat halfwidth-1.txt; echo &quot;&quot;; xxd halfwidth-1.txt; cat fullwidth-1.txt ; echo &quot;&quot;; xxd fullwidth-1.txt 
+1
+00000000: <font color="#26A269"><b>31</b></font>                      <font color="#C01C28"><b>               </b></font>  <font color="#26A269"><b>1</b></font>
+１
+00000000: <font color="#C01C28"><b>efbc</b></font> <font color="#C01C28"><b>91</b></font>                   <font color="#C01C28"><b>             </b></font>  <font color="#C01C28"><b>...</b></font>
+</pre>
+
+<p>As we can see, the half-width character <code class="language-plaintext highlighter-rouge">1</code> in UTF-8 is represented as <code class="language-plaintext highlighter-rouge">0x31</code> meaning only one byte would be required. However, a full-width 
+digit <code class="language-plaintext highlighter-rouge">１</code> is represented as <code class="language-plaintext highlighter-rouge">0xEFBC91</code>. Now let’s compared this with UTF-16:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cat halfwidth-utf16.txt; echo ; xxd halfwidth-utf16.txt; cat fullwidth-utf16.txt; echo; xxd fullwidth-utf16.txt 
+1
+00000000: 0031                                     .1
+�
+00000000: ff11                                     ..
+</code></pre></div></div>
+
+<p><strong>Note:</strong> To view UTF-16 on VIM run on command mode (i.e. press <code class="language-plaintext highlighter-rouge">esc</code> to exit current mode and press <code class="language-plaintext highlighter-rouge">:</code> to enter command mode): <code class="language-plaintext highlighter-rouge">e ++enc=utf-16be fullwidth-utf16.txt</code></p>
+
+<p>As expected, UTF-16 represents code points in the upper range very well where we now see <code class="language-plaintext highlighter-rouge">１</code> (full-width 1) being represented with only 2 bytes unlike the 3 that was required in UTF-8. 
+Though the same cannot be said for code points in the lower range such as our half-width digit 	<code class="language-plaintext highlighter-rouge">1</code> which now takes 2 bytes by appending <code class="language-plaintext highlighter-rouge">0x00</code> to its hex representation.</p>
+
+<h2 id="half-width-and-full-width-in-japanese-specific-encodings">Half-Width and Full-Width in Japanese Specific Encodings</h2>
+
+<p>I had earlier mentioned about <a href="https://en.wikipedia.org/wiki/JIS_X_0201">JIS C 6220</a> (JIS X 0201) which utilized the fact that the last 128 bytes of ASCII isn’t utilized which allowed 
+the Japanese to add Katakana support. Although it’s not a direct extension as the Japanese did changed the lower 128 characters slightly to be localized to the Japanese such as replacing 
+the <code class="language-plaintext highlighter-rouge">\</code> with the Japanese Yen <code class="language-plaintext highlighter-rouge">¥</code>. Full-Width Japanese characters apparently started to appear in 1978 starting with JIS C 6226.2) where Kanji can be displayed.</p>
+
+<p>A more recent standard is the <a href="https://en.wikipedia.org/wiki/Shift_JIS">Shift-JIS</a> in 1997 and is apparently the current second mostly used encoding among <code class="language-plaintext highlighter-rouge">.jp</code> (Japananese) websites.
+Based on a <a href="https://w3techs.com/technologies/segmentation/tld-jp-/character_encoding">survey</a> on October 7 2024, Shift JIS is still used by 4.8% of <code class="language-plaintext highlighter-rouge">.jp</code> websites, 2.3 for 
+EUC-JP and the remaining going to UTF-8. As mentioned previously, it would seem to be the case for Japanese encoding such as Shift JIS, half-width characters not only have a smaller 
+width but also requires half the number of bytes to be represented. Half-Width characters do not imply less bytes to represent in general but for Shift-JIS, that would seem to 
+be the case:</p>
+
+<p><img src="../assets/programming/encoding/shift-jis-ah.png" alt="Using charset.7jp.net to view the HEX representation of ア and ｱ" /></p>
+<p class="caption">Hex Representation of ア and ｱ. Credits to <a href="http://charset.7jp.net/dump.html" alt="charset.7jp.net">charset.7jp.net</a></p>
+
+<p>As you may notice, I am using the same example from the <a href="https://mailmate.jp/blog/half-width-full-width-hankaku-zenkaku-explained">article</a> but I opted to generate my own 
+image. The blog for some reason decided to add <code class="language-plaintext highlighter-rouge">0x0D0A</code> which corresponds to <code class="language-plaintext highlighter-rouge">CRLF</code> i.e. <code class="language-plaintext highlighter-rouge">\r\n</code> making it less obvious to readers that the full-width character takes 2 Bytes 
+and the half-width chaacter only takes 1 byte. As I don’t know Japanese, but according to the article both characters have the same phonetic sound. Though I am pretty sure the 
+two are the same in written (i.e. handwriting) language. The likely reason for this behavior is that fact that it is an extension of JIS X 0201:1997, they very same encoding 
+that first introduced Katakana (though the edition differs) and encodes the double-byte characters from JIS X 0208:1997 according to <a href="https://en.wikipedia.org/wiki/Shift_JIS">wikipedia</a>.</p>
+
+<p><strong>Note:</strong> 1 byte character can also be referred as single-byte character while 2 bytes characters can be referred as double-byte characters</p>
+
+<p>Based on the above image, we can make the following observations:</p>
+<ol>
+  <li>Full-Width characters take 2 bytes in Shift-JIS</li>
+  <li>Half-Width characters take 1 byte in Shift-JIS</li>
+  <li>UTF-8 and UTF-16 do not seem very optimized to take Japanese characters taking 3 bytes and 4 bytes respectively</li>
+</ol>
+
+<p>Unsurprisingly, Shift-JIS was designed for the Japanese and therefore are more space efficient than the more international/universal versions like UTF-8. 
+According to my friend and the article, Japan still requires users to switch between full-width and half-width characters. I have no clue as to why but I have heard that Asian countries 
+such as Japan and Korea can be slow to modernize their digital infrastructures despite being technology leaders and innovators. The article suggests it is due to the bureaucracy and 
+work culture not fostering a culture to take some risks and not seeing the need to fix what isn’t broken.</p>
+
+<p>The remaining content is not relevant to the title but is a refresher of Hex</p>
+
+<h2 id="review-of-hex">Review of HEX</h2>
+
+<p>Computers work in binary which consists of only 0 or 1 (i.e. base 2). The decimal system we all use is base 10. Hexadecimal are base 16 and tend to be the favorite way to represent 
+a series of bytes due to its more compact form (or at least that’s what it seems like to me). Hexadecimal numbers have 16 values: 0-9 and A-F. In binary, a single bit can represent 
+2 values which can be expressed as 2^0. This means that 4 bits can represent 2^4 = 16 bits. This means a single hexidecimal digit can be represented using only 4 bits. Two 
+hexadecimal digit will therefore take 8 bits = 1 byte. That is why the half-character <code class="language-plaintext highlighter-rouge">ｱ</code> takes up one byte as it is <code class="language-plaintext highlighter-rouge">0xB1</code> in Shift-JIS. <code class="language-plaintext highlighter-rouge">B1</code> consists of two hexadecimal digits 
+and hence only 8 bits and therefore 1 byte. The full-width character <code class="language-plaintext highlighter-rouge">ア</code> is <code class="language-plaintext highlighter-rouge">0x8341</code> which consists of 4 hexadecimal digits and therefore 4 * 4 bits = 16 bits or 2 bytes.</p>
+
+<h2 id="good-resources">Good Resources</h2>
+<ul>
+  <li><a href="https://www.unicode.org/charts/">https://www.unicode.org/charts/</a></li>
+  <li><a href="http://charset.7jp.net/dump.html">http://charset.7jp.net/dump.html</a></li>
+  <li><a href="https://mailmate.jp/blog/half-width-full-width-hankaku-zenkaku-explained">https://mailmate.jp/blog/half-width-full-width-hankaku-zenkaku-explained</a></li>
+</ul>]]></content><author><name>Ju Hong Kim</name></author><category term="programming" /><category term="corpus" /><category term="linguistic" /><category term="utf" /><category term="encoding" /><summary type="html"><![CDATA[A small visual look into half-width and full-width characters]]></summary></entry></feed>

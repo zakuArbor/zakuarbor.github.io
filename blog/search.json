@@ -2,14 +2,6 @@
   
     {
 
-      "title"    : "MATH2100 -  Algebra [Fall + Winter]",
-      "url"      : "/blog/math2100/",
-      "category" : "university, school, math, reviews, carletonu",
-      "date"     : "September  5, 2099"
-    } ,
-  
-    {
-
       "title"    : "The Issue With Default in Switch Statements with Enums",
       "url"      : "/blog/switch-default-enum/",
       "category" : "programming, c/c++",
