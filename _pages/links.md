@@ -11,6 +11,14 @@ I'll try to avoid having a large daunting list like my [former prof](https://www
 
 ---
 
+[UTF-8 is Brilliant](https://iamvishnu.com/posts/utf8-is-brilliant-design)
+
+A nice simple blog to explain how UTF-8 works. I have briefly looked at [character encoding](https://zakuarbor.codeberg.page/blog/halfwidth-fullwidth-encoding/) previously 
+when helping a friend in Linguistics make sense of this for his paper. This is the cleanest explaination I have seen thus far. The author also has created a [playground](https://zakuarbor.codeberg.page/blog/halfwidth-fullwidth-encoding/) 
+for people to fiddle around with to visualize the format.
+
+---
+
 [CentOS Stream 10 Requiring AVX and AVX2 Support](https://lwn.net/Articles/986792/)
 
 Prior to this article, I was not explicitly aware that there were x86-64 extensions of which could cause other x86-64 software unable to run on older x86-64 chips despite being 
