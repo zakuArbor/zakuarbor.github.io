@@ -11,7 +11,7 @@ Recently at work, I've been relying on a very handy tool on GDB called `dump mem
 I first came aware of this tool from a [stackoverflow](https://stackoverflow.com/questions/16095948/gdb-dump-memory-in-specific-region-save-formatted-output-into-a-file) answer 
 that a coworker linked as each of us had a need to dump the contents of memory copied from the GPU to the host memory for our respective tickets.
 
-**Syntax:** `dump memory <filename> <starting address> <sending address>`
+**Syntax:** `dump memory <filename> <starting address> <ending address>`
 
 For instance,
 
