@@ -10,7 +10,7 @@ permalink: micro/2025/10/:title
 As title suggests, I no longer actively use Github as my personal Git hosting service. This does not mean I have abandoned Github entirely as I still visit the site and use it 
 regularly for work. 
 
-For a while, the code for this site, my [blog](https://zakuarbor.codeberg.page/), and my personal side projects have been hosted on [Codeberg](https://codeberg.org/), 
+For a while, the code for this site, my [blog](https://zakuarbor.codeberg.page/blog), and my personal side projects have been hosted on [Codeberg](https://codeberg.org/), 
 a non-profit German organization that hosts their servers in Europe. Similar to my migration from Wordpress to Github, none of my content have been deleted but rather has been 
 archived for data preservation and to prevent [link rot](https://en.wikipedia.org/wiki/Link_rot). I originally discovered and created my Codeberg account when trying to replicate 
 performance claim made by some in the [Linux French forums](https://linuxfr.org/). 
@@ -36,12 +36,13 @@ In other words, it is important to have a balance and identify which services ca
 [injust reason](https://www.nytimes.com/2025/06/20/technology/us-tech-europe-microsoft-trump-icc.html). As part of the effort, I have made an offline backup of my 
 data on Google Drive (though whether the archives contain any corruption, time will tell).
 
-I still have not identified the platform to replace but here are some ideas:
+I still have not identified the next platform to replace but here are some ideas:
  * **Authenticator** - I need cloud sync. Losing my phone on the bus nearly locked me out of all my accounts which cloud backup to my tablet saved me
     * I carry a Yubikey around with me but not every service supports this yet
+    * Perhaps Proton Auth could be an alternative. It's open source and it's not from a big American firm
 * **Office Suite** - A cloud office suite such as Google Drive are hard to give up due to its ease of sharing and collaboration tools. The most realistic path is to self-host.
     * ProtonDrive nor does [La Suite](https://lasuite.numerique.gouv.fr/), French Government Suite, have replacement for Presentation and Spreadsheet at the time of writing
-        be a decent replacement but it also does not have Presentation nor Excel at the time of writing
+    * Collabora and OnlyOffice seems to be the only alternatives
 * **Phone** - I currently use a Google Pixel 6a which has served me well till the summer when Google released an [update that reduces battery capacity](https://www.pcmag.com/news/google-pixel-6a-limit-battery-life-capacity-charging-performance-july-8)
     * I am hesitant to move to GrapheneOS since I am not sure if it supports my workplace's authentication apps
     * Fairphone 6 would be ideal but is not available in my region so for now Samsung appears to be the only practical alternative though I don't plan to replace my phone until reaches end-of-life as I have always done with my previous phones
@@ -50,3 +51,6 @@ I no longer have any cloud instances with any provider currently as I no longer 
     * OVHCloud - French cloud service whom I found out about via an [article from the Register](https://www.theregister.com/2025/08/27/ovhcloud_interview/) where Microsoft could not 
 guarantee data sovereignty. However it does not seem they have any ROCm enabled GPUs which may pose an issue if I wanted to do any ROCm related work in the future (though I guess 
 it would make more sense to use CUDA or write HIP programs)
+* **Search Engine:** Google has been great to me thus far. I know others complained its search results have gotten worse over the years but it has been far better than other search 
+engines I have used in the past such as Yahoo, DuckDuckGo, Brave Search and Ecosia. I heard Kagi is a good alternative, I should try the free version and see for myself before 
+I make any commitment.
