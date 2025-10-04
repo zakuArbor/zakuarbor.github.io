@@ -19,8 +19,8 @@ This move does not imply any hatred or dislike of Github as a platform as it has
 on Big Tech, especially those operated by large US companies. As the 2nd part of the title suggests, I have been wanting to [DeGoogle](https://en.wikipedia.org/wiki/DeGoogle) 
 and big tech in general for years. However, it has been hard to justify the move as I honestly don't have too much qualms providing data to these giants. This seems very 
 contradictory to others as I have made this argument a lot to push others to use Linux or any other open source POSIX-compliant OS (e.g. BSD). Though you should seriously 
-consider leaving Windows if you have not have done so, it's a bloated privacy-invading OS. I believe in the [Right to be forgotten](https://en.wikipedia.org/wiki/Right_to_be_forgotten) 
-and the [Right to privacy](https://en.wikipedia.org/wiki/Right_to_privacy) which Big Tech does not provide at all.
+consider leaving Windows if you have not have done so, it's a bloated privacy-invading OS. I believe in the [Right to privacy](https://en.wikipedia.org/wiki/Right_to_privacy) 
+which Big Tech does not provide at all.
 
 Due to the recent statements and actions coming from the United States, I have made the decision to start the migration to gain more independence from US tech and 
 start searching for more open alternatives. I am still a slave to Google, relying on their entire ecosystem such as Google Playstore, Google Search, Google Drive, Gmail, Maps, 
