@@ -6,8 +6,14 @@ permalink: /link
 
 <h2 id = "page-title"><img id = "pikachu-title" src = "{{site.baseurl}}/assets/gifs/pikachu-hi.webp">{{page.title}}</h2>
 
-Random links that I found interesting. I'll try to limit my commentary to a few sentences and be more organized. 
+Random links that I found interesting. I'll try to limit my commentary to a few sentences. 
 I'll try to avoid having a large daunting list like my [former prof](https://www.cs.toronto.edu/~arnold/)
+
+---
+[UTF-8, Explained Simply](https://youtu.be/vpSkBV5vydg?si=agAyCNeUCsiNIAGk)
+
+This is the best explanation I have found on UTF-8 thus far. I previously said [UTF-8 is Brilliant](https://iamvishnu.com/posts/utf8-is-brilliant-design) was the cleanest explanation I've seen on this subject, well that was shortly 
+beaten on October 2 2025. Here's an outline of the topics covered in the video: [UTF-8 Explained Simply - The Best Video on UTF-8]({{ site.baseurl }}/micro/2025/10/best-unicode-video)
 
 ---
 
@@ -64,10 +70,10 @@ to track their user's locations.
 
 **[bmpuzzle: Embed files within the padding of bitmap images](https://xiokka.neocities.org/projects/bmpuzzle/)**
 
-As the title suggests, you can exploit padding that occurs for bmp images to embed files. Quite elegant and is much more discreet that concatenating a file 
+As the title suggests, you can exploit padding that occurs for bmp images to embed files. Quite elegant and is much more discreet than concatenating a file 
 on an image or [Stegasploit](https://stegosploit.info/), a way to encode files into PNG and JPEG images by utilizing the nature of polyglot and the use of 
 some complicated iterative encoder. The reason why I like the suggested solution of embedding files onto the padding is that it's both simple and more discreet 
-as it does not increase the size of the image and does not require the need for a complex iterative encoder to encode the image. 
+as it does not increase the size of the image and does not require the need for a complex iterative encoder to encode the secret. 
 Though there are constraints to what files you can encode as you would require a very tall image if you wish to encode anything large.
 
 ---
@@ -83,8 +89,8 @@ or be migrated to Linux (or BSD). This articles highlights the difficulty of thi
 
 When working with senisitive information such as password, it is often good practice to zero out or fill the memory with garbage values when the informtion is 
 no longer needed. This helps prevent leaks of sensitive information. What is often the case, the variable holding the sensitive information is often not ever 
-reused again and therefore the compiler will often ignore this call to zero out the sensitive information. The article was an interesting read as I forgot about 
-the existence of optimization. The author provides a [multiplatform solution](https://github.com/Tarnyko/suave_code_samples/tree/master/C/C23/memset_explicit) to 
+reused again and therefore the compiler will often ignore this call to zero out the sensitive information. The article was an interesting read as I forgot the unintended 
+consequences of optimization. The author provides a [multiplatform solution](https://github.com/Tarnyko/suave_code_samples/tree/master/C/C23/memset_explicit) to 
 this problem.
 
 ---

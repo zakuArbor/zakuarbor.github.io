@@ -2,7 +2,7 @@
 layout: micro
 title:  "Binary Dump via GDB"
 date: 2025-10-02
-categories: [micro] 
+categories: [micro, gdb, hex] 
 published: true
 permalink: micro/2025/10/:title
 ---
