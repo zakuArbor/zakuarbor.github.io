@@ -20,7 +20,7 @@ beaten on October 2 2025. Here's an outline of the topics covered in the video: 
 [UTF-8 is Brilliant](https://iamvishnu.com/posts/utf8-is-brilliant-design)
 
 A nice simple blog to explain how UTF-8 works. I have briefly looked at [character encoding](https://zakuarbor.codeberg.page/blog/halfwidth-fullwidth-encoding/) previously 
-when helping a friend in Linguistics make sense of this for his paper. This is the cleanest explaination I have seen thus far. The author also has created a [playground](https://zakuarbor.codeberg.page/blog/halfwidth-fullwidth-encoding/) 
+when helping a friend in Linguistics make sense of this for his paper. This is the cleanest explaination I have seen thus far. The author also has created a [playground](https://utf8-playground.netlify.app/) 
 for people to fiddle around with to visualize the format.
 
 ---
