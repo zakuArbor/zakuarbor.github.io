@@ -47,7 +47,7 @@ I maintain a blog focusing on programming and hopefully math at [zakuarbor.codeb
 <div><img src = "pixel button for Bash" src = "{{ site.baseurl }}/assets/buttons/bash.png"></div>
 <div><img src = "pixel button for LATEX" src = "{{ site.baseurl }}/assets/buttons/latex.png"></div>
 </div><br/>
-<center><b>ANIME:</b></center>
+<center><b>ANIME: 120x60 buttons</b></center>
 <div class = "badges-120">
 <div><img src = "digimon adventures 01" src = "{{ site.baseurl }}/assets/buttons/anime-manga-ln/digimon.png"></div>
 <div><img src = "Tsubasa Chronicles" src = "{{ site.baseurl }}/assets/buttons/anime-manga-ln/tsubasa-chronicles.png"></div>
@@ -58,22 +58,39 @@ I maintain a blog focusing on programming and hopefully math at [zakuarbor.codeb
 
 </div>
 
-<center><b>MANGA:</b></center>
+<center><b>MANGA: 120x60 buttons</b></center>
 <div class = "badges-120">
 <div><img src = "cross-game" src = "{{ site.baseurl }}/assets/buttons/anime-manga-ln/cross-game.png"></div>
 <div><img src = "hidamari sketch" src = "{{ site.baseurl }}/assets/buttons/anime-manga-ln/hidamari-sketch.png"></div>
 <div><img src = "Twin Spica" src = "{{ site.baseurl }}/assets/buttons/anime-manga-ln/twin-spica.png"></div>
+<div><img src = "Pokémon Adventures" src = "{{ site.baseurl }}/assets/buttons/anime-manga-ln/pokemon-adventures.png"></div>
+<div><img src = "Frieren" src = "{{ site.baseurl }}/assets/buttons/anime-manga-ln/frieren.png"></div>
+<div><img src = "Relife" src = "{{ site.baseurl }}/assets/buttons/anime-manga-ln/relife.png"></div>
 </div>
 
-<center><b>LIGHT NOVELS:</b></center>
+<center><b>LIGHT NOVELS: 120x60 Buttons</b></center>
 <div class = "badges-120">
 <div><img src = "legend of the galactic heroes" src = "{{ site.baseurl }}/assets/buttons/anime-manga-ln/lotgh.png"></div>
 <div><img src = "Monogatari" src = "{{ site.baseurl }}/assets/buttons/anime-manga-ln/monogatari.png"></div>
 <div><img src = "5cm per second" src = "{{ site.baseurl }}/assets/buttons/anime-manga-ln/5cms.png"></div>
 <div><img src = "Vivy" src = "{{ site.baseurl }}/assets/buttons/anime-manga-ln/vivy.png"></div>
 <div><img src = "Banner of the Stars" src = "{{ site.baseurl }}/assets/buttons/anime-manga-ln/banner-stars.png"></div>
-<div><img src = "Full Metal Panic" src = "{{ site.baseurl }}/assets/buttons/anime-manga-ln/full-metal-panic.png"></div>
+<div><img src = "Chrome Shell Regios" src = "{{ site.baseurl }}/assets/buttons/anime-manga-ln/chrome-shell-regios.png"></div>
 </div>
+
+<center><b>GAMES: 120x60 Buttons</b></center>
+<div class = "badges-120">
+<div><img src = "Chocobo Racing" src = "{{ site.baseurl }}/assets/buttons/anime-manga-ln/chocobo-racing.png"></div>
+<div><img src = "Pokémon Yellow and Silver" src = "{{ site.baseurl }}/assets/buttons/anime-manga-ln/pokemon-game.png"></div>
+<div><img src = "Mana Khemia" src = "{{ site.baseurl }}/assets/buttons/anime-manga-ln/mana-khemia.png"></div>
+<div><img src = "Final Fantasy 6" src = "{{ site.baseurl }}/assets/buttons/anime-manga-ln/ff6.png"></div>
+<div><img src = "Lunar Series" src = "{{ site.baseurl }}/assets/buttons/anime-manga-ln/lunar2.png"></div>
+<div><img src = "Final Fantasy 7" src = "{{ site.baseurl }}/assets/buttons/anime-manga-ln/ff7.png"></div>
+
+</div>
+
+In hindsight, I should have made these buttons 125x125
+
 
 <hr/>
 
@@ -83,11 +100,9 @@ I maintain a blog focusing on programming and hopefully math at [zakuarbor.codeb
 <ul class>
 <li>¹Wired or digital world, whatever you prefer</li>
 <li>²Random in any context I write should not be taken as true randomness unless explicitly stated in the context</li>
-<li>I am no expert and all opinions are my own and do not represent any instiution nor employer I am associated with</li>
+<li>I am no expert and all opinions are my own and do not represent any institution nor employer I am associated with</li>
 </ul>
 
 <p class = "last-edit"><b>Last Major Edit:</b> 2024-08-18</p> 
 
----
 
-* manga: cross-game, pokemon adventures, tsubasa chronicles

@@ -14,7 +14,7 @@ Hangul, the Korean writing system, that was covered in the video.
 
 **Link to visualiser:** [https://zakuarbor.codeberg.page/unicode/hangul/](https://zakuarbor.codeberg.page/unicode/hangul/)
 
-It is fascinating how one can represent all 11,172 possible comination so elegantly. The visualiser allows one to determine the codepoint of any Korean syllabic blocks.
+It is fascinating how one can represent all 11,172 possible combination so elegantly. The visualiser allows one to determine the codepoint of any Korean syllabic blocks.
 For those unfamiliar with the language, Korean is made up of 19 consonants (자음) and 21 vowels (모음) though some sources may say there are 24 basic letters (Jamo). The number does differ depending 
 on how you count the letters but we can agree that there the language has 51 Jamo (there are 24 basic letters and from these you could form more complex consonants and vowels).
 To form a complete a syllable block (a word is made up of one or more of these blocks), there must be at least one consonant and one vowel that is attached to each other. 
