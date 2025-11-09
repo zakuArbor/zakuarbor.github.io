@@ -29,9 +29,6 @@ kernel and randomly I came across an article [How does Linux start a process](ht
 >
 > Excerpt from [How does Linux start a process](https://iq.thc.org/how-does-linux-start-a-process)
 
-The kernel will call [`search_binary_handler()`](https://elixir.bootlin.com/linux/v5.19.17/source/fs/exec.c#L1709) to determine the type the binary (executable) by iterating through all registered formats 
-which includes (not in order):
-
 ```c
 /*
  * cycle the list of binary formats handler, until one recognizes the image
@@ -53,11 +50,14 @@ static int search_binary_handler(struct linux_binprm *bprm)
 		}
 ```
 
-* ELF - `binfmt_elf`
-* Scripts (`#!`) ` - `binfmt_script`
-* Misc - `binfmt_misc`: Linux (kernel) allows one to register a custom format vy providing a magic number or a filename extension (see [Kernel Support for miscellaneous Binary Formats](https://docs.kernel.org/admin-guide/binfmt-misc.html))
+The kernel will call [`search_binary_handler()`](https://elixir.bootlin.com/linux/v5.19.17/source/fs/exec.c#L1709) to determine the type the binary (executable) by iterating through all registered formats 
+which includes (not in order):
 
-Each binary format `fmt` (`[struct linux_binfmt](https://elixir.bootlin.com/linux/v5.19.17/source/include/linux/binfmts.h#L85)` has a function `load_binary` used to load the binary. This is the function the 
+* ELF - `binfmt_elf`
+* Scripts (`#!`) - `binfmt_script`
+* Misc - `binfmt_misc`: Linux (kernel) allows one to register a custom format by providing a magic number or a filename extension (see [Kernel Support for miscellaneous Binary Formats](https://docs.kernel.org/admin-guide/binfmt-misc.html))
+
+Each binary format `fmt` ([`struct linux_binfmt`](https://elixir.bootlin.com/linux/v5.19.17/source/include/linux/binfmts.h#L85) has a function pointer `load_binary` used to load the binary. This is the function the 
 kernel uses to help identify the binary type as this function will return `-ENOEXEC` if the binary is not of its type.
 
 ```c
