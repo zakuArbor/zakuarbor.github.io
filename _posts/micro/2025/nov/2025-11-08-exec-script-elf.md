@@ -93,10 +93,10 @@ static int load_script(struct linux_binprm *bprm)
 	 * (though the buffer will have trailing NUL padding when the
 	 * file size was smaller than the buffer size).
 	 *
-     * .... truncated ....
+ 	 * .... truncated ....
 	 */
 
-    // parsing logic
+  	// parsing logic
 
 	bprm->interpreter = file;
 	return 0;
@@ -104,7 +104,9 @@ static int load_script(struct linux_binprm *bprm)
 
 ### Things to Look At Next
 * Wonder about how Linux handles ELF binaries, specifically how it handles static and shared binaries? Take a look at [How does Linux start a process](https://iq.thc.org/how-does-linux-start-a-process)
-* [fork() can fail: this is import](https://rachelbythebay.com/w/2014/08/19/fork/)
+* [fork() can fail: this is important](https://rachelbythebay.com/w/2014/08/19/fork/)
 * TODO: Investigate why a script without shebang fails on `strace ./test`
     * use `bpftrace` : `sudo bpftrace -e 'kprobe:load_script { printf("load_script called by %s\n", comm); }'`
     * find other trace events to look at to distinguish between the two cases like exec
+* **Edit (Nov 10):** Someone posted today on [Hacker News](https://news.ycombinator.com/item?id=45804870) [Today I Learned: Binfmt_misc](https://dfir.ch/posts/today_i_learned_binfmt_misc/) which goes over `binfmt_misc` from a security perspective
+    * Links to [ON BINFMT_MISC](https://benjamintoll.com/2021/12/31/on-binfmt_misc/), a tutorial on how to register a new binary format

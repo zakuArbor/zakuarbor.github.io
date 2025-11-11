@@ -37,15 +37,17 @@ In other words, it is important to have a balance and identify which services ca
 data on Google Drive (though whether the archives contain any corruption, time will tell).
 
 I still have not identified the next platform to replace but here are some ideas:
- * **Authenticator** - I need cloud sync. Losing my phone on the bus nearly locked me out of all my accounts which cloud backup to my tablet saved me
+ * ~~**Authenticator** - I need cloud sync. Losing my phone on the bus nearly locked me out of all my accounts which cloud backup to my tablet saved me~~
     * I carry a Yubikey around with me but not every service supports this yet
-    * Perhaps Proton Auth could be an alternative. It's open source and it's not from a big American firm
+    * **Edit (Nov 9):** - I have made the full transition to ProtonAuth
 * **Office Suite** - A cloud office suite such as Google Drive are hard to give up due to its ease of sharing and collaboration tools. The most realistic path is to self-host.
     * ProtonDrive nor does [La Suite](https://lasuite.numerique.gouv.fr/), French Government Suite, have replacement for Presentation and Spreadsheet at the time of writing
     * Collabora and OnlyOffice seems to be the only alternatives
 * **Phone** - I currently use a Google Pixel 6a which has served me well till the summer when Google released an [update that reduces battery capacity](https://www.pcmag.com/news/google-pixel-6a-limit-battery-life-capacity-charging-performance-july-8)
-    * I am hesitant to move to GrapheneOS since I am not sure if it supports my workplace's authentication apps
-    * Fairphone 6 would be ideal but is not available in my region so for now Samsung appears to be the only practical alternative though I don't plan to replace my phone until reaches end-of-life as I have always done with my previous phones
+    * ~~I am hesitant to move to GrapheneOS since I am not sure if it supports my workplace's authentication apps~~
+        * **Updates(Nov 9):** I no longer use my personal phone to authenticate workplace applications, security didn't like the fact I was using a third-party VPN and that I didn't install workplace monitoring services (now using Okta Desktop to authenticate to avoid installing spyware on my phone)
+    * ~~Fairphone 6 would be ideal but is not available in my region so for now Samsung appears to be the only practical alternative though I don't plan to replace my phone until reaches end-of-life as I have always done with my previous phones~~
+        * **Edit (Nov 9):** Apparently Fairphone 6 is [region-locked](https://forum.fairphone.com/t/is-fairphone-remotely-disabling-imported-fairphone-6-models-in-north-america-via-software-update/126290) and will not work in North America
 * **Cloud Provider** - At the moment, I don't maintain any cloud instances since I no longer have a need for it (I previously used DigitalOcean and free-tier Oracle cloud).
 I no longer have any cloud instances with any provider currently as I no longer have any use for them (I used Digital Oceans previously)
     * OVHCloud - French cloud service whom I found out about via an [article from the Register](https://www.theregister.com/2025/08/27/ovhcloud_interview/) where Microsoft could not 
