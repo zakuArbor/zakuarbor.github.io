@@ -60,9 +60,9 @@ An Elder Scroll t-shirt I won at one of the places I worked at. Unfortunately it
 the year the Raptors won the NBA Championship. This will probably end up as a gift or a cushion for my fragile items. On that day, I learned that Skyrim is part of Elder Scrolls. I am ignorant when it 
 comes to video games as I don't play them often.
 
-![AMD 50 annivesary sticker]({{ site.baseurl }}/assets/personal/camera/amd-50-sticker.jpg)
+![AMD 40 annivesary sticker]({{ site.baseurl }}/assets/personal/camera/amd-50-sticker.jpg)
 
-A sticker I received on AMD's 50th anniversary in Canada. It's actually the 50th anniversary of ATI's founding, a Canadian semiconductor company that specialized in developing GPUs which AMD bought. That is 
+A sticker I received on AMD's 40th anniversary in Canada. It's actually the 40th anniversary of ATI's founding, a Canadian semiconductor company that specialized in developing GPUs which AMD bought. That is 
 how AMD entered the GPU market. The Canadian office does a lot of CPU and GPU related design but I don't think most Canadians know this.
 
 ![Ericsson car roaming around]({{ site.baseurl }}/assets/personal/camera/ericsson-car.jpg)
