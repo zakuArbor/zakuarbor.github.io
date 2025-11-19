@@ -43,8 +43,7 @@ This is the game that got me into JRPG, I loved the dialogue and the storyline a
 
 My Pokémon Gameboy Color collection. Most of the games were a Highschool birthday gift from my father. I grew up with Pokémon Yellow and Silver which explains why I have two copies of them. 
 Pokémon Crystal is in Japanese so I never bothered playing it. Growing up, my Dad would periodically mail to my brother and I Japanese magazines and electronic kits. Though that never motived any of us 
-to learn Japanese. Though I think my brother did learn a bit during the pandemic but stopped when he started his Masters. My parents know a fair bit of Japanese due to the after-effects of colonialism 
-where Japanese was one of the language to learn to improve one's career prospects when my parents were young similarly to how English is in Asia.
+to learn Japanese. Though I think my brother did learn a bit during the pandemic but stopped when he started his Masters. (Not from a Japanese family to dispell any potential misunderstanding).
 
 Also featured in the photo is my Pikachu pencil holder (the one in front of my tamagotchi) and some random Maplestory tokens that I am not sure what they are for. There are also some Hanafuda cards 
 that you may have seen in [Summer Wars](https://myanimelist.net/anime/5681/Summer_Wars). I forgot how to play the game. My grandmother would often play with Hanafuda cards alone, not sure what game 
