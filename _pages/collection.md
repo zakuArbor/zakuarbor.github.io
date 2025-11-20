@@ -1,0 +1,70 @@
+---
+layout: page
+title: Collection of Tech In Anime and Manga
+permalink: /collections
+---
+
+<h2 id = "page-title"><img id = "pikachu-title" src = "{{site.baseurl}}/assets/gifs/pikachu-hi.webp">{{page.title}}</h2>
+
+Random collection of images portraying electronics or style of electronics from anime and manga that I want to share with others. Some may be electronics that no longer exists, others may be futuristic, 
+others may just be random conversations of tech in general. It's a random dump of images that is relevant to tech from manga and novels.
+
+
+The page will be updated periodically as I am starting from scratch as I no longer recall the sources of many of my other images I've stored throughout the years (many are lost anyways over time).
+Periodically, you may notice the quality of the images deteriorate over time due to storage constraints.
+
+[Computers](#computer)
+
+[Programming + Terminal](#programming)
+
+[Tapes (VHS + Cassettes)](#tapes)
+
+---
+<a name = "computer"/>
+
+## Computers
+
+**Patlabor Movie 3**
+
+![]({{site.baseurl}}/assets/collections/computers/patlabor-movie3-01.png)
+
+
+![]({{site.baseurl}}/assets/collections/computers/patlabor-movie3-02.png)
+
+
+![]({{site.baseurl}}/assets/collections/computers/patlabor-movie3-03.png)
+
+
+![]({{site.baseurl}}/assets/collections/computers/patlabor-movie3-04.png)
+
+![]({{site.baseurl}}/assets/collections/computers/patlabor-movie3-05.png)
+
+![]({{site.baseurl}}/assets/collections/computers/patlabor-movie3-01.mp4)
+
+<center>
+<video width="320" height="240" autoplay controls loop>
+  <source src="{{site.baseurl}}/assets/collections/computers/patlabor-movie3-01.webm" type="video/webm">
+Your browser does not support the video tag.
+</video>
+</center> 
+
+---
+
+<a name = "programming"/>
+
+## Programming + Terminal
+
+![]({{site.baseurl}}/assets/collections/computers/villan-hero.png)
+
+---
+
+<a name = "tapes"/>
+
+## Tapes (VHS and Cassette)
+
+![]({{site.baseurl}}/assets/collections/tapes/patlabor-movie3-01.png)
+
+![]({{site.baseurl}}/assets/collections/tapes/patlabor-movie3-02.png)
+
+![]({{site.baseurl}}/assets/collections/tapes/patlabor-movie3-03.png)
+

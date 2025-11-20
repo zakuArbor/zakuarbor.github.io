@@ -20,6 +20,8 @@ I am a Math student, software developer, and a random human who writes random th
 Being bored of work, I decided to pursue another degree which led me to my current study in Mathematics. 
 I maintain a blog focusing on programming and hopefully math at [zakuarbor.codeberg.page](https://zakuarbor.codeberg.page/blog). 
 
+[Random Anime/Manga Tech Collection](../collections)
+
 <b class = "ul-p">Random Bits</b>
 * I know no one asked but yes I am obsessed with Pikachu. 
 * Linux > Windows (this is the truth, don't deny it)

@@ -17,7 +17,9 @@ Random bits is a personal outlet to talk about random bits of things that is goi
 <a href = "link.html">LinkBlog</a> - Links to blogs or articles I found interesting<br/>
 <a href = "math.html">Math</a> - Math blogs ...<br/>
 <a href = "about.html">About</a> - For stalkers or bored humans<br/>
-<a href = "categories">Categories</a> - A list of categories of my  µblog
+<a href = "categories">Categories</a> - A list of categories of my  µblog <br/>
+<a href = "collections">Random Tech Collection</a> - a gallery of images and clips of tech featured in manga and anime
+
 
 ---
 
