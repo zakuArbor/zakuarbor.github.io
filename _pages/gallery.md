@@ -54,6 +54,8 @@ Your browser does not support the video tag.
 
 ## Programming + Terminal
 
+**I Became the Villain the Hero Is Obsessed With**
+
 ![]({{site.baseurl}}/assets/gallery/computers/villan-hero.png)
 
 ---
