@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Collection of Tech In Anime and Manga
-permalink: /collections
+title: A Gallery of Tech In Anime and Manga
+permalink: /gallery
 ---
 
 <h2 id = "page-title"><img id = "pikachu-title" src = "{{site.baseurl}}/assets/gifs/pikachu-hi.webp">{{page.title}}</h2>
@@ -26,24 +26,24 @@ Periodically, you may notice the quality of the images deteriorate over time due
 
 **Patlabor Movie 3**
 
-![]({{site.baseurl}}/assets/collections/computers/patlabor-movie3-01.png)
+![]({{site.baseurl}}/assets/gallery/computers/patlabor-movie3-01.png)
 
 
-![]({{site.baseurl}}/assets/collections/computers/patlabor-movie3-02.png)
+![]({{site.baseurl}}/assets/gallery/computers/patlabor-movie3-02.png)
 
 
-![]({{site.baseurl}}/assets/collections/computers/patlabor-movie3-03.png)
+![]({{site.baseurl}}/assets/gallery/computers/patlabor-movie3-03.png)
 
 
-![]({{site.baseurl}}/assets/collections/computers/patlabor-movie3-04.png)
+![]({{site.baseurl}}/assets/gallery/computers/patlabor-movie3-04.png)
 
-![]({{site.baseurl}}/assets/collections/computers/patlabor-movie3-05.png)
+![]({{site.baseurl}}/assets/gallery/computers/patlabor-movie3-05.png)
 
-![]({{site.baseurl}}/assets/collections/computers/patlabor-movie3-01.mp4)
+![]({{site.baseurl}}/assets/gallery/computers/patlabor-movie3-01.mp4)
 
 <center>
 <video width="320" height="240" autoplay controls loop>
-  <source src="{{site.baseurl}}/assets/collections/computers/patlabor-movie3-01.webm" type="video/webm">
+  <source src="https://codeberg.org/zakuArbor/neocities-randombits/raw/branch/main/assets/gallery/computers/patlabor-movie3-01.webm" type="video/webm">
 Your browser does not support the video tag.
 </video>
 </center> 
@@ -54,7 +54,7 @@ Your browser does not support the video tag.
 
 ## Programming + Terminal
 
-![]({{site.baseurl}}/assets/collections/computers/villan-hero.png)
+![]({{site.baseurl}}/assets/gallery/computers/villan-hero.png)
 
 ---
 
@@ -62,9 +62,9 @@ Your browser does not support the video tag.
 
 ## Tapes (VHS and Cassette)
 
-![]({{site.baseurl}}/assets/collections/tapes/patlabor-movie3-01.png)
+![]({{site.baseurl}}/assets/gallery/tapes/patlabor-movie3-01.png)
 
-![]({{site.baseurl}}/assets/collections/tapes/patlabor-movie3-02.png)
+![]({{site.baseurl}}/assets/gallery/tapes/patlabor-movie3-02.png)
 
-![]({{site.baseurl}}/assets/collections/tapes/patlabor-movie3-03.png)
+![]({{site.baseurl}}/assets/gallery/tapes/patlabor-movie3-03.png)
 
