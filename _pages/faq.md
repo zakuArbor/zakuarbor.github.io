@@ -73,7 +73,7 @@ and replaced with Youtube.
 2. What Web Browser do I use?
 
     I mainly use Firefox which I have been a fan of since I got into in Highschool. However, I have been using Brave, a privacy focused chromium 
-browser, to watch anime and attend remote classes on Zoom. For unknown reasons, Firefox on my Linux machine cannot seem to buffer videos from the anime sources I use. 
+browser, to watch anime and attend remote classes on Zoom. ~~For unknown reasons, Firefox on my Linux machine cannot seem to buffer videos from the anime sources I use.~~ (Edit: turns out to be an issue with HEVC support which I discuss [here]({{site.baseurl}}/micro/2025/11/firefox-video-decode)).
 I used to be a user of Firefox Aurora, a "nightly" build of Firefox, and Firefox Web Developer Edition.
 
 3. What Operating System do I use?
