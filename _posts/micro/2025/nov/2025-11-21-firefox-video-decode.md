@@ -32,7 +32,7 @@ However, I opted to convert my MP4 file into webm to open access to all visitors
 
 
 HEVC is a patented code which based on [Wikipedia](https://en.wikipedia.org/wiki/High_Efficiency_Video_Coding#Patent_license_terms) 
-which only waives royalties on software-only implementations (and cannot be bundled with hardware).
+only waives royalties on software-only implementations (and cannot be bundled with hardware).
 
 ![developer console indicates decoder issue]({{ site.baseurl }}/assets/micro/misc/firefox-codec-2.png)
 
