@@ -38,6 +38,13 @@ only waives royalties on software-only implementations (and cannot be bundled wi
 
 **Note:** "Prise en charge" is "Supported" and "Décodage logiciel" is "Software Decoder" in English
 
+**UPDATE:** The day I published this blog, I woke up to see an article about HVEC popping in my hackernews feed: [ HP and Dell disable HEVC support built into their laptops’ CPUs ](https://news.ycombinator.com/item?id=46002989).
+Originally I was under the impression that CPU manufacturers such as AMD and Intel would be responsible to pay those fees but according to Ars Technica, it is not known if they indeed do. [Tom's Hardware](https://www.tomshardware.com/pc-components/gpus/dell-and-hp-disable-hardware-h-265-decoding-on-select-pcs-due-to-rising-royalty-costs-companies-could-save-big-on-hevc-royalties-but-at-the-expense-of-users) 
+reveals that chipmakers (at least in the GPU side) do have to pay a license fee to implement the feature in silicon. But it also reveals that to enable hardware decoding on the device leve, OEMs must also pay the fee.
+Therefore it would seem that HP and DELL will be disabling this capability on the software side (either on the driver or fireware level) if this logic applies for CPU as well. Considering the volume of CPUs DELL and HP purchase from AMD and Intel,
+I do think it could be possible for them to also request to fuse the capability off in silicon (though unlikely). As Tom's Hardware notes, this is typically not done on the GPU so if we assume the same logic applies to CPUs, it is
+likely disabled on the software side.
+
 ---
 
 Note: Not a support on Neocities so the video is hosted on codeberg
