@@ -59,7 +59,7 @@ An Elder Scroll t-shirt I won at one of the places I worked at. Unfortunately it
 the year the Raptors won the NBA Championship. This will probably end up as a gift or a cushion for my fragile items. On that day, I learned that Skyrim is part of Elder Scrolls. I am ignorant when it 
 comes to video games as I don't play them often.
 
-![AMD 40 annivesary sticker]({{ site.baseurl }}/assets/personal/camera/amd-50-sticker.jpg)
+![AMD 40 annivesary sticker]({{ site.baseurl }}/assets/personal/camera/amd-40-sticker.jpg)
 
 A sticker I received on AMD's 40th anniversary in Canada. It's actually the 40th anniversary of ATI's founding, a Canadian semiconductor company that specialized in developing GPUs which AMD bought. That is 
 how AMD entered the GPU market. The Canadian office does a lot of CPU and GPU related design but I don't think most Canadians know this.
@@ -78,7 +78,7 @@ Continuing on the theme of companies I formerly interned at, here is QNX 8.0 run
 as it's no longer considered a city but a suburb of a larger city). It's primarily used in cars but it can be used in any safety critical devices such as in medical devices and in rockets (though I am not entirely sure 
 of how widely adopted it is within the space industry). It's one of the three widely-used Microkernels (from what I know), the other being Minix installed in every [Intel chip](https://www.cs.vu.nl/~ast/intel/) and Apple. 
 Apple has adopted some variant of [L4](https://en.wikipedia.org/wiki/L4_microkernel_family) Microkernel OS for their ARM [secure enclave](https://support.apple.com/en-ca/guide/security/sec59b0b31ff/web) 
-so my previous statement is . Seems like [SeL4](https://sel4.systems/) is used in many places as well so my statement about QNX may be false. There's also WindRiver's VxWorks. I never looked at the figures so 
+and it also appears that [SeL4](https://sel4.systems/) is used in many places as well so my statement about QNX may be false. There's also WindRiver's VxWorks. I never looked at the figures so 
 my claim about QNX being one of the 3 most-used Microkernels could be entirely false.
 
 ![robotic arm at my alma mater]({{ site.baseurl }}/assets/personal/camera/robotic-arm-uni.jpg)

@@ -12,7 +12,7 @@ Thankfully the Unknowns ressemble the English or the latin alphabet so the task 
 for children. However, in generation III, in the Hoenn region, decoding the ruins has gotten 
 much more tricker with their use of Braille.
 
-Braille is for the blind and the visual impaired and t0herefore would likely not be able to play 
+Braille is for the blind and the visual impaired and therefore would likely not be able to play 
 the game. So the task of decoding the ruins would be a great challenge.
 
 Reading the manga, Pokémon: La Grande Aventure - Rubis et Saphir, there's a single black page 

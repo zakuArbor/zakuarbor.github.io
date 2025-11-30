@@ -15,6 +15,8 @@ Periodically, you may notice the quality of the images deteriorate over time due
 
 [Computers](#computer)
 
+[Floppy, MO Disks, and Disks](#disk)
+
 [Programming + Terminal](#programming)
 
 [Tapes (VHS + Cassettes)](#tapes)
@@ -23,6 +25,10 @@ Periodically, you may notice the quality of the images deteriorate over time due
 <a name = "computer"/>
 
 ## Computers
+**Patlabor Movie 1:**
+
+![]({{site.baseurl}}/assets/gallery/computers/patlabor-movie1-startup.png)
+
 
 **Patlabor Movie 3**
 
@@ -39,14 +45,25 @@ Periodically, you may notice the quality of the images deteriorate over time due
 
 ![]({{site.baseurl}}/assets/gallery/computers/patlabor-movie3-05.png)
 
-![]({{site.baseurl}}/assets/gallery/computers/patlabor-movie3-01.mp4)
-
 <center>
 <video width="320" height="240" autoplay controls loop>
   <source src="https://codeberg.org/zakuArbor/neocities-randombits/raw/branch/main/assets/gallery/computers/patlabor-movie3-01.webm" type="video/webm">
 Your browser does not support the video tag.
 </video>
 </center> 
+
+---
+
+<a name = "disk"/>
+
+## Floppy, MO and other Discs
+
+**Patlabor Movie 1**
+![]({{site.baseurl}}/assets/gallery/computers/patlabor-movie1-modisk-1.png)
+
+![]({{site.baseurl}}/assets/gallery/computers/patlabor-movie1-modisk-2.png)
+
+
 
 ---
 
@@ -58,12 +75,19 @@ Your browser does not support the video tag.
 
 ![]({{site.baseurl}}/assets/gallery/computers/villan-hero.png)
 
+**Patlabor Movie 1**
+
+![]({{site.baseurl}}/assets/gallery/computers/patlabor-movie1-ls.png)
+
+![]({{site.baseurl}}/assets/gallery/computers/patlabor-movie1-hexdump.png)
+
 ---
 
 <a name = "tapes"/>
 
 ## Tapes (VHS and Cassette)
 
+**Patlabor Movie 3:**
 ![]({{site.baseurl}}/assets/gallery/tapes/patlabor-movie3-01.png)
 
 ![]({{site.baseurl}}/assets/gallery/tapes/patlabor-movie3-02.png)
