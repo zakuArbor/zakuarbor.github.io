@@ -114,7 +114,23 @@ or officially:
 
 The mysterious braille that the author dedicated an entire page to was simply `Parent and child battles`. Each chapter subtitle (if it exists in your edition) has a corresponding braille counterpart.
 The braille in the English and French translation has not been localised.
-I will try to update this page to answer if the Korean copy bothered to localise the braille or not once I gain access to my old copy at my parent's place.
+
+---
+
+**Update:** 2026-01-01
+
+![Pokémon Adventures/Special Chapter 239 in French and Korean]({{ site.baseurl }}/assets/anime/pokemon-adventures-ch239-fr-kr.png)
+
+<p class = "caption">Chapter 239 title page in French and Korean</p>
+
+As I suspected, the Korean translation did not bother localizing the braille.
+
+As a bonus, here are some questionable translations I found thus far:
+
+![Pokémon Adventures Chapter 233 French Mistranslation using the word today instead of aujourd'hui]({{ site.baseurl }}/assets/anime/pokemon-adventures-ch233-fr-1.png)
+![Pokémon Adventures Chapter 233 French Mistranslation using the word yourself instead of toi]({{ site.baseurl }}/assets/anime/pokemon-adventures-ch233-fr-2.png)
+
+There are more in Chapter 233 but I figured there could be some cultural context I am missing as an anglophone so I shall refrain from stating it's a mistranslation.
 
 <a name = "foot1"> 
 
