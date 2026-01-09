@@ -1,10 +1,10 @@
 ---
 layout: micro
 title:  "New Year, New Desktop"
-date: 2026-01-07
+date: 2026-01-08
 categories: [micro] 
 published: true
-permalink: micro/2025/12/:title
+permalink: micro/2026/01/:title
 ---
 
 A new year, a new computer, and a new experience, building my first desktop. It's only been a [year]({{ site.baseurl }}/micro/2024/10/framework) since I got a Framework laptop which is already sufficent 
@@ -12,7 +12,7 @@ for my current needs so there wasn't any good reason to get a new computer. Whil
 it can be used for more interesting things, compute such as numerical analysis and simulations. Not that I'm sufficiently motivated to do so myself. 
 Perhaps I'll write my final undergraduate Math paper on numerical analysis and simulations, but only time will tell.
 
-2026 is not the most idea year to build a desktop, especially due to the rising RAM costs we have been experiencing since late September:
+2026 is not the most ideal year to build a desktop, especially due to the rising RAM costs we have been experiencing since late September:
 
 
 ![RAM Price trends]({{ site.baseurl }}/assets/micro/misc/ram-price-trend.png)
