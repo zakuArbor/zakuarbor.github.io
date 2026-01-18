@@ -21,6 +21,8 @@ Periodically, you may notice the quality of the images deteriorate over time due
 
 [Tapes (VHS + Cassettes)](#tapes)
 
+[Files](#files)
+
 ---
 <a name = "computer"/>
 
@@ -94,3 +96,9 @@ Your browser does not support the video tag.
 
 ![]({{site.baseurl}}/assets/gallery/tapes/patlabor-movie3-03.png)
 
+---
+
+<a name = "files"/>
+
+**Hanging Out With a Gamer Girl:**
+<a href = "https://en.wikipedia.org/wiki/Backslash#Confusion_with_%C2%A5_and_other_characters">![]({{site.baseurl}}/assets/gallery/files/yen-program-path.png)</a>

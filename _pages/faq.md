@@ -111,7 +111,7 @@ by Nexon, the creators of Maplestory around 2010-2011.
     I played the piano for about 3 years and the trumpet for music classes for 2 years. My piano training taught me how to read notes, though 
     not fast. I played an unnamed instrument for 9 years and is probably the only instrument I can play at a decent level which frustrates me 
     because I wished I could play the piano or the guitar decently instead. As someone who has played music for 9 years, I naturally can 
-    play a few melodies on random string instruments including the guitar via fiddling and using my once great but not rusty ear. While it 
+    play a few melodies on random string instruments including the guitar via fiddling and using my once great but now rusty ear. While it 
     is unclear on when I notice I could play songs stuck in my head, I am somewhat able to play simple melodies stuck in my head very early 
     or even before I started playing music. But much of that ability has rusted away and I can barely pick up new melodies to the extent 
     of what I could do in my youth.

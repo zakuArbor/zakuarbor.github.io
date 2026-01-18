@@ -105,6 +105,6 @@ In hindsight, I should have made these buttons 125x125
 <li>I am no expert and all opinions are my own and do not represent any institution nor employer I am associated with</li>
 </ul>
 
-<p class = "last-edit"><b>Last Major Edit:</b> 2024-08-18</p> 
+<p class = "last-edit"><b>Last Major Edit:</b> 2025-11-20</p> 
 
 
