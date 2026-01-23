@@ -8,7 +8,7 @@ permalink: micro/2026/01/:title
 ---
 
 Recently, I came across my electronic copy of my degree and transcript from several years ago and remembered that it was digitally signed. I previously wrote about how to 
-[manually verify an email signature](../email-gpg-signature) 2 years ago and that got me thinking: how can I verify the signature of my degree and transcript to ensure that 
+[manually verify an email signature]({{ site.baseurl }}/micro/2024/10/email-gpg-signature) 2 years ago and that got me thinking: how can I verify the signature of my degree and transcript to ensure that 
 it has indeed come from my University and that it has not been tampered with?
 
 **Note:** When referring to digital signatures on PDFs, I am not referring to e-signature i.e. the graphical signature that contains a name for instance
