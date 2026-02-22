@@ -10,6 +10,21 @@ Random links that I found interesting. I'll try to limit my commentary to a few 
 I'll try to avoid having a large daunting list like my [former prof](https://www.cs.toronto.edu/~arnold/)
 
 ---
+
+[A free and open-source rootkit for Linux](https://lwn.net/Articles/1053099/)
+
+An interesting yet scary piece of software, an open-source rootkit, which can hide itself from being detected, at least does a decent job at it. 
+
+The scary thing about this rootkit and any decent rootkits in general is its ability to hide itself. It is designed to hide itself thanks to it's kernel-level privileges (at least in this case). 
+This is why I am against the idea of allowing kernel-level anti-cheat code to be on my system. The idea of introducing a new level/ring 
+in between userspace and kernel space or to introduce some new capabilities in userspace with controlled but limited and secured access to the kernel has been floated for years 
+(though we do have eBPF which sort of functions like this). The [2024 Crowdstrike Incident](https://en.wikipedia.org/wiki/2024_CrowdStrike-related_IT_outages) 
+for instance has compelled Microsoft to roll out a new security level to hopefully prevent this from ever occurring. Though it is not the issue of ensuring availability of the system that I am worried about, 
+its the fact that we are placing trust to a non-open source third-party to have access to the kernel. Who knows what craziness they could do even if not intentionally (i.e. supply chain attacks).
+
+[READ MORE](../micro/2026/02/singularity-rootkit)
+
+---
 [UTF-8, Explained Simply](https://youtu.be/vpSkBV5vydg?si=agAyCNeUCsiNIAGk)
 
 This is the best explanation I have found on UTF-8 thus far. I previously said [UTF-8 is Brilliant](https://iamvishnu.com/posts/utf8-is-brilliant-design) was the cleanest explanation I've seen on this subject, well that was shortly 
