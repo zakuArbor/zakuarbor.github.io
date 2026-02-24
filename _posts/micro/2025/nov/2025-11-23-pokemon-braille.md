@@ -125,12 +125,26 @@ The braille in the English and French translation has not been localised.
 
 As I suspected, the Korean translation did not bother localizing the braille.
 
-As a bonus, here are some questionable translations I found thus far:
+As a bonus, here are some ~~questionable translations I found thus far:~~ examples of mixed speech:
 
 ![Pokémon Adventures Chapter 233 French Mistranslation using the word today instead of aujourd'hui]({{ site.baseurl }}/assets/anime/pokemon-adventures-ch233-fr-1.png)
 ![Pokémon Adventures Chapter 233 French Mistranslation using the word yourself instead of toi]({{ site.baseurl }}/assets/anime/pokemon-adventures-ch233-fr-2.png)
 
-There are more in Chapter 233 but I figured there could be some cultural context I am missing as an anglophone so I shall refrain from stating it's a mistranslation.
+~~There are more in Chapter 233 but I figured there could be some cultural context I am missing as an anglophone so I shall refrain from stating it's a mistranslation.~~
+
+At the time of writing, I thought it was a potential typo or there was some cultural aspect I was missing to not understand why there were a lot of English words being mixed into Wallace (Marc)'s 
+speech. However upon starting Pokémon Diamond and Perl, another coordinator who happens to be also a gym leader employs a heavy usage of English in her speech. It was so frequent that Diamond even makes 
+a comment on it:
+
+> Diamant: J'ai bien peur qu'elle ne réussisse pas à relever le défi, en plus on comprend à moitié ce qu'elle dit
+>
+> Perle: Oh, tu ne comprends pas l'english?
+>
+> Chapter 231 (Chapter 34)
+
+It appears that Kiméra is well known for this speech pattern where she employs a mix of different European languages in the Japanese version but I cannot confirm this.
+
+**Update (2026-02-22):** Explanation why Wallace/Marc uses a lot of English words in his speech
 
 <a name = "foot1"> 
 

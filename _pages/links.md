@@ -13,14 +13,9 @@ I'll try to avoid having a large daunting list like my [former prof](https://www
 
 [A free and open-source rootkit for Linux](https://lwn.net/Articles/1053099/)
 
-An interesting yet scary piece of software, an open-source rootkit, which can hide itself from being detected, at least does a decent job at it. 
-
-The scary thing about this rootkit and any decent rootkits in general is its ability to hide itself. It is designed to hide itself thanks to it's kernel-level privileges (at least in this case). 
-This is why I am against the idea of allowing kernel-level anti-cheat code to be on my system. The idea of introducing a new level/ring 
-in between userspace and kernel space or to introduce some new capabilities in userspace with controlled but limited and secured access to the kernel has been floated for years 
-(though we do have eBPF which sort of functions like this). The [2024 Crowdstrike Incident](https://en.wikipedia.org/wiki/2024_CrowdStrike-related_IT_outages) 
-for instance has compelled Microsoft to roll out a new security level to hopefully prevent this from ever occurring. Though it is not the issue of ensuring availability of the system that I am worried about, 
-its the fact that we are placing trust to a non-open source third-party to have access to the kernel. Who knows what craziness they could do even if not intentionally (i.e. supply chain attacks).
+The article made me reflect what makes rootkits scary. This rootkit and any decent rootkits in general are designed to hide itself. In this case, it's thanks to it's kernel-level privileges 
+that it can hide itself effectively (though there's some weakness to this mentioned in the article). This is why I am against the idea of allowing kernel-level anti-cheat code to be on my system. 
+Who knows what craziness they could do even if not intentionally (i.e. supply chain attacks).
 
 [READ MORE](../micro/2026/02/singularity-rootkit)
 
@@ -134,7 +129,7 @@ I am assuming the RAM that the OS has no access to would either be the vRAM or m
 **[Why does Gnome fingerprint unlock not unlock the keyring?](https://mjg59.dreamwidth.org/68537.html)**
 
 I always wondered why I always needed to unlock the keyring (i.e. enter a password) when I log onto my laptop using my fingerprint. Now I know why. 
-The author's note on Apple probably refers to MacOS as iPhone requires a PIN Code to be entered after boot (i.e. Before First Unlock).
+The author's note on Apple probably refers to MacOS as iPhone iOS which requires a PIN Code to be entered after boot (i.e. Before First Unlock).
 
 ---
 

@@ -18,7 +18,7 @@ one of the symbols of my university, arbor, which is tree in English.
 
 I am a Math student, software developer, and a random human who writes random things. 
 Being bored of work, I decided to pursue another degree which led me to my current study in Mathematics. 
-I maintain a blog focusing on programming and hopefully math at [zakuarbor.codeberg.page](https://zakuarbor.codeberg.page/blog). 
+I maintain a blog focusing on programming and hopefully math at [zakuarbor.codeberg.page/blog](https://zakuarbor.codeberg.page/blog). 
 
 [Random Anime/Manga Tech Collection](../gallery)
 
