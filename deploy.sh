@@ -1,36 +1,34 @@
 #!/bin/bash
 
-# Configuration
-BRANCH="pages"
-TARGET_DIR="_site"
 BLUE='\033[0;34m'
 GREEN='\033[0;32m'
 RED='\033[0;31m'
 NC='\033[0m'
 
-echo -e "${BLUE}Starting deployment to $BRANCH...${NC}"
+echo -e "${BLUE}Starting Jekyll Build...${NC}"
 
-# 1. Enter the worktree
-cd "$TARGET_DIR" || { echo -e "${RED}❌ Error: $TARGET_DIR directory not found. Did you run the setup?${NC}"; exit 1; }
+jekyll build --destination _site
 
-# 2. Sync with remote first (Prevents "rejected" pushes)
-echo -e "${BLUE}Syncing $BRANCH with remote...${NC}"
-git pull origin "$BRANCH" --rebase
+if [ $? -ne 0 ]; then
+    echo -e "${RED}❌ Jekyll build failed. Check your Gemfile.${NC}"
+    exit 1
+fi
 
-# 3. Add, Commit, and Push
-echo -e "${BLUE}Committing changes...${NC}"
+cd _site || exit 1
+
+if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+    echo -e "${RED}❌ _site is not linked to Git. Run the reset commands above.${NC}"
+    exit 1
+fi
+
+echo -e "${BLUE}🔄 Syncing and Pushing...${NC}"
 git add -A
-# Using '|| true' so the script doesn't crash if there are no changes to commit
-git commit -m "Deploy: $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes to commit."
+git commit -m "Deploy: $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes."
+git push origin pages
 
-echo -e "${BLUE}Pushing to GitHub...${NC}"
-git push origin "$BRANCH"
-
-# 4. Return to main project root
 cd ..
 
-echo -e "${GREEN}✅ Deployment to GIt Page Complete!${NC}"
+echo -e "${GREEN}✅ GitHub Pages updated!${NC}"
 
 neocities push _site
 
-echo -e "${GREEN}✅ Deployment to Neocities Complete!${NC}"
