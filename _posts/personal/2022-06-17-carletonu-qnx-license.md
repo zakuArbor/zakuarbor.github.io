@@ -2,7 +2,7 @@
 layout: post
 title: CarletonU QNX License Request Policy
 description: CarletonU policy on requesting a QNX license
-categories: [other, qnx, carletonu]
+categories: [other, qnx, university, blog]
 permalink: /blog/:title
 ---
 

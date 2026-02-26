@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Going Back to School - Expectations and Hopes
-categories: [school, back-to-school]
+categories: [university, university, blog]
 permalink: /blog/:title
 ---
 

@@ -2,7 +2,7 @@
 layout: post
 title: Does Audting Courses at CarletonU Fullfill Required Course Load?
 description: Auditing courses is possible at CarletonU but does auditing course fullfill requirement for co-op and health insurance purposes?
-categories: [university, school, carletonu]
+categories: [university, university, university, blog]
 permalink: /blog/:title
 ---
 

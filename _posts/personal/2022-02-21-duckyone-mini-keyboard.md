@@ -2,7 +2,7 @@
 layout: post
 title: Ducky One 2 Mini - Replace Caps Lock as Function Key
 description: How to set caps lock as a function key for the ducky one 2 mini keyboard and how to use caps lock still
-categories: [keyboard]
+categories: [keyboard, blog]
 permalink: /blog/:title
 ---
 

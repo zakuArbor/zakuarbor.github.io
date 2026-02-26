@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "First Year of University – Entering a new Environment"
-categories: [UTM, university, school]
+categories: [university, university, university, blog]
 permalink: /blog/:title
 ---
 

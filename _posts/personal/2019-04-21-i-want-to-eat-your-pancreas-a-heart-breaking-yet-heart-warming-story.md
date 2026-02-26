@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "I Want to Eat Your pancreas: A Heart Breaking Yet Heart Warming Story"
-categories: [books, light novel, reviews]
+categories: [books, light novel, reviews, blog]
 permalink: /blog/:title
 ---
 I want to eat your pancreas is a heartwarming and breaking story of a boy and his interactions with a female classmate has a terminal pancreatic disease. 

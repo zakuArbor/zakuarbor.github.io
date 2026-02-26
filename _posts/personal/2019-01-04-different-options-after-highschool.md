@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Different Options after HighSchool
-categories: [school, career]
+categories: [university, career, blog]
 permalink: /blog/:title
 ---
 

@@ -13,7 +13,7 @@ Hopefully this will make the site less crazy.
 <div class="tags">
 {% for category in site.categories %}
     {% capture category_name %}{{ category | first }}{% endcapture %}
-    
+    {% if category_name == "blog" or category_name == "micro" %}{% continue %}{% endif %}
     <a href ="#{{ category_name | slugize }}">{{ category_name }}</a>
 {% endfor %}
 
@@ -24,6 +24,7 @@ Hopefully this will make the site less crazy.
 {% for category in site.categories %}
   <div class="archive-group">
     {% capture category_name %}{{ category | first }}{% endcapture %}
+    {% if category_name == "blog" or category_name == "micro" %}{% continue %}{% endif %}
     <div id="#{{ category_name | slugize }}"></div>
     <p></p>
 

@@ -2,7 +2,7 @@
 layout: post
 title: Testing GithubPages Repo and Directory Conflict Resolution
 description: Fiddling with Github Pages to see what happens if a repository and a directory have the same name
-categories: [utilities, pdf]
+categories: [utilities, pdf, blog]
 permalink: /blog/:title
 ---
 

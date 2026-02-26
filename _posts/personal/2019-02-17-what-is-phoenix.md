@@ -1,7 +1,7 @@
 ---
 layout: post
 title: What is Phoenix
-categories: [phoenix]
+categories: [phoenix, blog]
 permalink: /blog/:title
 ---
 

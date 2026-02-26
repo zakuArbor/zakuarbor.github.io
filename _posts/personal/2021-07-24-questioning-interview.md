@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Questions to Ask In An Interview
-categories: [interview, career]
+categories: [interview, career, blog]
 permalink: /blog/:title
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Computer Science – A long and gargled Explanation"
-categories: [computer science]
+categories: [computer science, blog]
 permalink: /blog/:title
 ---
 # Prologue:

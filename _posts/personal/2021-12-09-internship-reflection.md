@@ -2,7 +2,7 @@
 layout: post
 title: A Reflection of My Internship as a Software Build Intern
 description: A reflection of my time as an software build intern
-categories: [reflection, career]
+categories: [career, blog]
 permalink: /blog/:title
 ---
 

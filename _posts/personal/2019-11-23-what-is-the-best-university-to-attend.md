@@ -1,7 +1,7 @@
 ---
 layout: post
 title: What is the Best University to Attend
-categories: [university, school]
+categories: [university, university, blog]
 permalink: /blog/:title
 ---
 

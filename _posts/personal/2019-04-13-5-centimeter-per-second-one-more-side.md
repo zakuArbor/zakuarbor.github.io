@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "5 Centimeter Per Second: One More Side Impression"
-categories: [books, light novel, reviews]
+categories: [books, light novel, reviews, blog]
 permalink: /blog/:title
 ---
 **Note:** This blog contains spoilers of the story

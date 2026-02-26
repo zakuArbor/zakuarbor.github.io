@@ -2,7 +2,7 @@
 layout: post-math
 title: A Reflection of My First Year Back in University
 description: A reflection of my first year doing another undergrad
-categories: [reflection, university, school, carletonu]
+categories: [university, university, university, blog]
 permalink: /blog/:title
 ---
 

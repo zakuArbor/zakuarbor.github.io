@@ -2,7 +2,7 @@
 layout: post
 title: Document Feeder and PDF Utilities - How to Scan Big Documents with the help of Document Feeder and PDF Utilities
 description: Scanning multiple pages automatically through document feeder and using scripts to fix ordering
-categories: [utilities, pdf]
+categories: [utilities, pdf, blog]
 permalink: /blog/:title
 ---
 

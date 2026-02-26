@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Going Back to School - Why I Choose to Study Math and Physics
-categories: [school, back-to-school]
+categories: [university, university, blog]
 permalink: /blog/:title
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Disturbing Facts about Phoenix: Implementation Part 1"
-categories: [phoenix]
+categories: [phoenix, blog]
 permalink: /blog/:title
 ---
 

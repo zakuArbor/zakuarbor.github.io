@@ -2,7 +2,7 @@
 layout: post
 title: Splitting Files On Linux
 description: Splitting files into smaller chunks
-categories: [utilities, pdf]
+categories: [utilities, pdf, blog]
 permalink: /blog/:title
 ---
 

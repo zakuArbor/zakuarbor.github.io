@@ -2,7 +2,7 @@
 layout: post
 title: "QNX is 'Free' to Use"
 description: QNX now has a non-commercial license for hobbyists to fiddle around
-categories: [other, qnx]
+categories: [other, qnx, blog]
 permalink: /blog/:title
 ---
 

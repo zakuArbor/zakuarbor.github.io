@@ -2,7 +2,7 @@
 layout: post
 title: When Did Programming/Coding Start to Click for You?
 description: A response to a Reddit Post on when programming clicked for me
-categories: [personal, programming]
+categories: [programming, blog]
 permalink: /blog/:title
 ---
 

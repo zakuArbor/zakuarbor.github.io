@@ -1,7 +1,7 @@
 ---
 layout: post
 title: My Personal Journey in Choosing What to do After High School
-categories: [school, life, career]
+categories: [university, life, career, blog]
 permalink: /blog/:title
 ---
 
