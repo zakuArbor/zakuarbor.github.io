@@ -8,6 +8,7 @@ NC='\033[0m'
 echo -e "${BLUE}Starting Jekyll Build...${NC}"
 
 jekyll build --destination _site
+cp .domains _site
 
 if [ $? -ne 0 ]; then
     echo -e "${RED}❌ Jekyll build failed. Check your Gemfile.${NC}"
