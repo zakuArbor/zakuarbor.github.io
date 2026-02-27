@@ -32,14 +32,14 @@ from a friend studying Linguistics, I now can confirm his speculation was indeed
 
 From the ASCII table, we can see that 0x5C maps to backslash `\n`
 
-![ASCII Table](https://zakuarbor.codeberg.page/blog/assets/programming/encoding/ascii-table.png)
+![ASCII Table]({{ site.baseurl }}/assets/programming/encoding/ascii-table.png)
 
 <p class = "caption">ASCII Table. Extracted from Wikipedia</p>
 
 JIS X 0201 can be seen as an extension of ASCII where the upper unused bits were repurposed to contain [Katakana](https://en.wikipedia.org/wiki/Katakana) characters and a few other 
 things. However there are some slight differences as highlighted in yellow:
 
-![JIS X 0201 Table](https://zakuarbor.codeberg.page/blog/assets/programming/encoding/jis-c-6220.png)
+![JIS X 0201 Table]({{ site.baseurl }}/assets/programming/encoding/jis-c-6220.png)
 <p class = "caption">JIS X 0201 Table. Extracted from Wikipedia</p>
 
 As one can notice 0x5C no longer maps to baskslash `\n` anymore but rather to the Japanese Yen `¥`. This makes no difference to the compiler's perspective as from its perspective 

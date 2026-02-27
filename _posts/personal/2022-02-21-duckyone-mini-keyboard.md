@@ -6,7 +6,7 @@ categories: [keyboard, blog]
 permalink: /blog/:title
 ---
 
-![An image of my ducky one 2 mini keyboard with stencil filter]({{ site.url }}{{ site.baseurl{{ site.baseurl }}/assets/personal/ducky-keyboard.jpg)
+![An image of my ducky one 2 mini keyboard with stencil filter]({{ site.url }}{{ site.baseurl }}/assets/personal/ducky-keyboard.jpg)
 
 Last month I got interested trying out a 60% keyboard which is a keyboard that does not have a numpad, Function keys, navigation keys (i.e. page up), and arrow keys. 
 During my research, I found the Ducky One 2 Mini is one of the two best 60% keyboard for Linux users.

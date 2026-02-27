@@ -153,13 +153,11 @@ table {
 
 table tr {
   /*border-top: 1px solid #cccccc;*/
-  //background-color: white;
   margin: 0;
   padding: 0;
 }
 
 table tr:nth-child(2n) {
-//  background-color: ##333333;
 }
 
 table tr th {
@@ -167,14 +165,14 @@ table tr th {
   border: 1px solid #ccc;
   text-align: left;
   margin: 0;
-  padding: 6px 13px;
+  padding: 5px 12px;
 }
 
 table tr td {
   border: 1px solid #cccccc;
   text-align: left;
   margin: 0;
-  padding: 6px 13px;
+  padding: 5px 12px;
 }
 
 table tr th :first-child,
@@ -275,7 +273,6 @@ code {
   padding: .25rem;
   line-height: 1.25em;
 }
-
 
 blockquote {
   background-color: #313131;
@@ -400,6 +397,56 @@ footer {
     display: inline-block !important;
 }
 
+/* Container styling */
+.pagination {
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: center;
+  align-items: center;
+  gap: 8px;       
+  margin: 40px auto;
+  padding: 0 10px;
+}
+
+/* Base button styling */
+.page-link {
+  min-width: 44px;       /* Recommended minimum touch target size */
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #539bf5;        /* GitHub Blue */
+  background-color: #2d333b;
+  border: 1px solid #444c56;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  user-select: none;     /* Prevents accidental text selection on tap */
+}
+
+.page-link:hover:not(.active):not(.dots) {
+  background-color: #444c56;
+  border-color: #768390;
+}
+
+.page-link.active {
+  background-color: #316dca;
+  color: #ffffff;
+  border-color: #539bf5;
+  font-weight: 600;
+  cursor: default;
+}
+
+/* Ellipsis styling */
+.page-link.dots {
+  background: transparent;
+  border-color: transparent;
+  color: #768390;
+  cursor: default;
+  min-width: 20px; 
+}
+
 
 @media only screen and (min-width: 700px) { 
   header, footer, #wrapper {
@@ -412,6 +459,10 @@ footer {
   .multiple_img_div {
     display: block;
   } 
+}
+
+.transparent-background {
+  filter: invert(1) hue-rotate(180deg) !important;
 }
 
 @media only screen and (min-width: 850px) { 
@@ -477,7 +528,6 @@ footer {
     padding-bottom: 5px;
   }
 
-
   #content, #discuss {
     padding: .5em;
     border: 0px;
@@ -493,5 +543,24 @@ footer {
 
   .multiple_img_div {                
     display: block;
-  } 
+  }
+
+  .pagination {
+    gap: 5px; 
+  }
+
+  .page-link {
+    min-width: 38px;
+    min-height: 38px;
+    font-size: 13px;
+  }
+  .page-link:first-child,
+  .page-link:last-child {
+    font-size: 18px;     /* Make arrows larger for easy navigation */
+  }
+
+  table tr th, table tr td {
+    padding: 3px;
+  }
+
 }

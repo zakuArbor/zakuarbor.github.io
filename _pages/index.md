@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "Random Bits"
-date: 2024-10-20
+date: 2026-02-26
 permalink: /
 ---
 <!--<h2><img src = "{{site.baseurl}}/assets/gifs/pikachu-wave.gif" style = "float:left; margin-right: 1em;">Welcome to yet another random website</h2>-->
@@ -14,7 +14,8 @@ Random bits is a personal outlet to talk about random bits of things that is goi
 ### Site Map
 
 <a href = "micro.html"><span style = "letter-spacing: 1px;">µ</span>Blog</a> - Not tiny but not large as my regular blog posts<br/>
-<a href = "link.html">LinkBlog</a> - Links to blogs or articles I found interesting<br/>
+<a href = "blog.html">Blog</a> - Regular blog posts (not updated often)<br/>
+<a href = "link.html">LinkBlog</a> - Links to blogs or articles I found interesting with small commentaries<br/>
 <a href = "math.html">Math</a> - Math blogs ...<br/>
 <a href = "about.html">About</a> - For stalkers or bored humans<br/>
 <a href = "categories">Categories</a> - A list of categories of my  µblog <br/>
@@ -39,15 +40,33 @@ Random bits is a personal outlet to talk about random bits of things that is goi
 </ul>
 
 ### Latest Blog / Dernier Blog
-* [[Oct 12] Verifying Email Signature Manually](https://zakuarbor.github.io/blog/signature-verification/)
-* [[Oct 07] A Quick Look Into Half-Width and Full-Width Characters](https://zakuarbor.github.io/blog/halfwidth-fullwidth-encoding/)
-* [[June 22] Polluting the Web With a Useless 5 argument main function](https://zakuarbor.github.io/blog/useless-main/)
-* [[May 08] Splitting Files On Linux](https://zakuarbor.github.io/blog/split-files/)
-* [[Jan 14] Real Analysis 1](https://zakuarbor.github.io/blog/math3001/)
+<ul>
+{% assign i = 0 %}
+{% for post in site.posts %}
+    {% if post.categories contains 'blog'%}
+        {% assign i = i | plus: 1 %}
+        {% if i == 6 %}
+            {% break %}
+        {% endif %}
+        {% assign shorturl = post.id | split: "/" | last %}
+        <li><a href = '..{{ post.url }}'>[{{ post.date | date: "%Y-%m-%d" }}] {{ post.title }}</a></li>
+    {% endif %}
+{% endfor %}
+</ul>
 
 ### Change Log / Le Journal de Modification
 
 <div class = "update-chat">
+
+<div class = "msg">
+    <img class = "pfp" src = "{{ site.baseurl }}/assets/images/site/frigimon.png">
+    <div class = "text">
+        <div class = "date">2026-02-26</div>
+        <div class = "name">Bonhomme de Neige</div>
+        <div class = "body">Migration et fusion du blog ici</div>
+    </div>
+</div>
+
 <div class = "msg">
     <img class = "pfp" src = "{{ site.baseurl }}/assets/images/site/frigimon.png">
     <div class = "text">

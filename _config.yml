@@ -2,7 +2,28 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 baseurl: "" # the subpath of your site, e.g. /blog
 title: "RANDOM BITS" # the name of your site, e.g. ACME Corp.
 
+include: [ _pages ]
 permalink: /:year/:month/:title
-include: ['_pages']
 highlighter: rouge
 port: 4001
+
+sass:
+  sass_dir: _sass
+
+defaults:
+  - scope:
+      path: "_posts/programming"
+      type: "posts"
+    values:
+      category: "blog"
+  - scope:
+      path: "_posts/personal"
+      type: "posts"
+    values:
+      category: "blog"
+
+plugins:
+  - jekyll-paginate-v2
+
+pagination:
+  enabled: true

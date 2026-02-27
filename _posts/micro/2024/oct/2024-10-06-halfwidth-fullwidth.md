@@ -21,7 +21,7 @@ I do believe this depends on
 the encoding used. For me, the most obvious distinction between half and full width characters is how much graphical space it consumes as 
 evident from both the image above and below:
 
-![Full and Half Width Characters encoded on UTF-8](https://zakuarbor.github.io/blog/assets/programming/encoding/full-half-width.png)
+![Full and Half Width Characters encoded on UTF-8]({{ site.baseurl }}/assets/programming/encoding/full-half-width.png)
 <p class = "caption">Full and Half Width encoded on UTF-8 as seen through Vim</p>
 
 While I have read and typed Korean during my younger years when I was forced to learn Korean, it never clicked to me how much space Korean 
@@ -51,7 +51,7 @@ In UTF-8, `1` takes up 1 byte which is unsurprising as ASCII has great advantage
 
 **Note:** Do not attempt to display UTF-16 encoded files on the terminal without changing your locale (or whatever it is called). It will not display nicely. Vim on my machine will automatically open the file as UTF-16LE.
 
-![My default terminal settings is unable to display the content in Chinese properly](https://zakuarbor.github.io/blog/assets/programming/encoding/chinese-garbage.png)
+![My default terminal settings is unable to display the content in Chinese properly]({{ site.baseurl }}/assets/programming/encoding/chinese-garbage.png)
 
 Let's inspect the contents of the files between Half character `1` and Full Byte Character `１` in HEX:
 <pre class = "highlight" style = "background-color: #1b1b1b; padding: .5rem; line-height: 1.25em"><font color="#D0CFCC"><b>$ </b></font>cat halfwidth-1.txt; echo &quot;&quot;; xxd halfwidth-1.txt; cat fullwidth-1.txt ; echo &quot;&quot;; xxd fullwidth-1.txt 
