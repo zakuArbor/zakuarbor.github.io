@@ -5,6 +5,8 @@ permalink: /blog/
 
 pagination:
   enabled: true
+  index_page_before: true
+  debug: true
   collection: posts
   per_page: 5
   permalink: /page/:num/
@@ -14,13 +16,19 @@ pagination:
 ---
 
 <h1>Blogs</h1>
-<p>Random long thoughts I had over the years...</p>
+<nav class="year-shortcuts">
+  <strong>Jump to:</strong>
+  {% for year in (2019..2026) reversed %}
+    <a href="{{ site.baseurl }}/micro/archive/{{ year }}">{{ year }}</a>{% unless forloop.last %} | {% endunless %}
+  {% endfor %}
+</nav>
 
-<p>
-<a href="{{ site.baseurl }}/programming">Programming</a></br>
-<a href="{{ site.baseurl }}/math">Math</a><br/>
-<a href="{{ site.baseurl }}/personal">Misc</a>
-</p>
+<nav class="year-shortcuts">
+<strong>Jump to:</strong>
+<a href = "{{ site.baseurl }}/blog/programming/">Programming</a> | <a href = "{{ site.baseurl }}/blog/math">Math</a> | <a href ="{{ site.baseurl }}/micro/archive/misc">Misc</a>
+</nav>
+
+<p>Random long thoughts I had over the years...</p>
 
 <hr>
 
@@ -43,7 +51,7 @@ pagination:
 {% assign total = paginator.total_pages %}
 
 {% assign start_buffer = 4 %}
-{% assign start_max = 5 %}
+% assign start_max = 5 %}
 {% assign end_buffer = total | minus: 3 %}
 {% assign end_min = total | minus: 4 %}
 
@@ -56,7 +64,7 @@ pagination:
     {% assign diff = page | minus: current | abs %}
 
     {% assign show_page = false %}
-    {% if page == 1 or page == total or diff <= 2 %}
+   {% if page == 1 or page == total or diff <= 2 %}
       {% assign show_page = true %}
     {% elsif current <= start_buffer and page <= start_max %}
       {% assign show_page = true %}
@@ -68,7 +76,7 @@ pagination:
       {% if page == current %}
         <span class="page-link active">{{ page }}</span>
       {% else %}
-        {% if page == 1 %}
+       {% if page == 1 %}
           <a href="{{ '/blog/' | relative_url }}" class="page-link">1</a>
         {% else %}
           <a href="{{ '/blog/page/' | append: page | append: '/' | relative_url }}" class="page-link">{{ page }}</a>
@@ -79,7 +87,7 @@ pagination:
       {% if page > 1 and page < current and left_dots != true %}
         <span class="page-link dots">...</span>
         {% assign left_dots = true %}
-      {% elsif page > current and page < total and right_dots != true %}
+     {% elsif page > current and page < total and right_dots != true %}
         <span class="page-link dots">...</span>
         {% assign right_dots = true %}
       {% endif %}
@@ -90,3 +98,4 @@ pagination:
     <a href="{{ paginator.next_page_path | relative_url }}" class="page-link">&raquo;</a>
   {% endif %}
 </div>
+

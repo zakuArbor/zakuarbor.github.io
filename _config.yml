@@ -3,7 +3,6 @@ baseurl: "" # the subpath of your site, e.g. /blog
 title: "RANDOM BITS" # the name of your site, e.g. ACME Corp.
 
 include: [ _pages ]
-permalink: /:year/:month/:title
 highlighter: rouge
 port: 4001
 
@@ -21,6 +20,12 @@ defaults:
       type: "posts"
     values:
       category: "blog"
+  - scope:
+      path: "_posts/micro"
+      type: "posts"
+    values:
+      category: "micro"
+      permalink: /micro/:year/:month/:day/:title/
 
 plugins:
   - jekyll-paginate-v2

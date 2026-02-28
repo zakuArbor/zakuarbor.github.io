@@ -1,0 +1,12 @@
+<article class="archive-item" style="margin-bottom: 20px;">
+<h4><a href="{{ include.post.url | relative_url }}">{{ include.post.title }}</a></h4>
+<p class="date" style="font-size: 0.8em; color: #666;">{{ include.post.date | date: "%B %e, %Y" }}</p>
+<div class="excerpt">
+  {% if include.post.category == 'micro' %}
+    {{ include.post.content | strip_html | truncatewords: 50 }}
+  {% else %}
+    {{ include.post.excerpt | default: include.post.content | strip_html | truncatewords: 30 }}
+  {% endif %}
+</div>
+<hr class = "bits-hr">
+</article>
