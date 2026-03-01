@@ -39,5 +39,5 @@ cd ..
 
 echo -e "${GREEN}✅ GitHub Pages updated!${NC}"
 
-#neocities push _site
+neocities push _site
 
