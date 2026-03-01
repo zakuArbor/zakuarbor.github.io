@@ -5,14 +5,16 @@ archive_type: micro
 permalink: /micro/
 ---
 
-<h1>µBlog</h1>
+<h2 id = "page-title"><img id = "pikachu-title" src = "{{site.baseurl}}/assets/gifs/pikachu-wave.gif">µBlogs</h2>
+
+Random short thoughts or ideas I had over the years...<br>
+Despite its name, the posts are not tiny but not as large as regular blog posts.
 
 <nav class="year-shortcuts">
 <strong>Jump to:</strong>
 <a href = "{{ site.baseurl }}/micro/archive/2026">2026</a> | <a href = "{{ site.baseurl }}/micro/archive/2025">2025</a> | <a href ="{{ site.baseurl }}/micro/archive/2024">2024</a>
 </nav>
 
-<p>Random short thoughts or ideas I had over the years...</p>
 
 <hr>
 

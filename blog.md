@@ -15,20 +15,23 @@ pagination:
   category: blog
 ---
 
-<h1>Blogs</h1>
+<h2 id = "page-title"><img id = "pikachu-title" src = "{{site.baseurl}}/assets/gifs/pikachu-snoozing.webp">Blogs</h2>
+
+<p>Random long thoughts I had over the years...</p>
+<p>Topics range from programming, math, to my views of school</p>
+
 <nav class="year-shortcuts">
   <strong>Jump to:</strong>
   {% for year in (2019..2026) reversed %}
-    <a href="{{ site.baseurl }}/micro/archive/{{ year }}">{{ year }}</a>{% unless forloop.last %} | {% endunless %}
+    <a href="{{ site.baseurl }}/blog/archive/{{ year }}">{{ year }}</a>{% unless forloop.last %} | {% endunless %}
   {% endfor %}
 </nav>
 
 <nav class="year-shortcuts">
 <strong>Jump to:</strong>
-<a href = "{{ site.baseurl }}/blog/programming/">Programming</a> | <a href = "{{ site.baseurl }}/blog/math">Math</a> | <a href ="{{ site.baseurl }}/micro/archive/misc">Misc</a>
+<a href = "{{ site.baseurl }}/programming/">Programming</a> | <a href = "{{ site.baseurl }}/math">Math</a> | <a href ="{{ site.baseurl }}/misc">Misc</a>
 </nav>
 
-<p>Random long thoughts I had over the years...</p>
 
 <hr>
 
@@ -51,7 +54,7 @@ pagination:
 {% assign total = paginator.total_pages %}
 
 {% assign start_buffer = 4 %}
-% assign start_max = 5 %}
+{% assign start_max = 5 %}
 {% assign end_buffer = total | minus: 3 %}
 {% assign end_min = total | minus: 4 %}
 

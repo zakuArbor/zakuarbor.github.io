@@ -19,7 +19,7 @@ layout: page
 {% for post in posts_to_show %}
 <hr class = "bits-hr">
 <div class = "bits">
-<h1 class = "title">{{ post.title }}</h1>
+  <h1 class = "title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h1>
 <div>
 <p class = "date">{{ post.date | date: "%B %e, %Y" }}</p>
 <div class="tags">

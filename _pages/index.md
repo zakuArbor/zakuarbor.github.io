@@ -13,13 +13,21 @@ Random bits is a personal outlet to talk about random bits of things that is goi
 
 ### Site Map
 
-<a href = "micro.html"><span style = "letter-spacing: 1px;">µ</span>Blog</a> - Not tiny but not large as my regular blog posts<br/>
-<a href = "blog.html">Blog</a> - Regular blog posts (not updated often)<br/>
+<div class = "list-compact">
+<a href = "micro"><span style = "letter-spacing: 1px;">µ</span>Blog</a> - Not tiny but not large as my regular blog posts<br/>
+<a href = "blog">Blog</a> - Regular blog posts (not updated often)
+<ul class>
+<li><a href = "programming">Programming</a> - Programming Blogs</li>
+<li><a href = "programming">Math</a> - Math blogs from a person who is bad at Math ...</li>
+<li><a href = "programming">Misc</a> - Anything random or that didn't fit in the former categories</li>
+</ul>
 <a href = "link.html">LinkBlog</a> - Links to blogs or articles I found interesting with small commentaries<br/>
-<a href = "math.html">Math</a> - Math blogs ...<br/>
-<a href = "about.html">About</a> - For stalkers or bored humans<br/>
 <a href = "categories">Categories</a> - A list of categories of my  µblog <br/>
-<a href = "gallery">Anime Tech Gallery</a> - a gallery of images and clips of tech featured in manga and anime
+<a href = "gallery">Anime Tech Gallery</a> - a gallery of images and clips of tech featured in manga and anime <br/>
+<a href = "about.html">About</a> - For stalkers or bored humans<br/>
+</div>
+
+... any more
 
 ---
 
@@ -57,6 +65,15 @@ Random bits is a personal outlet to talk about random bits of things that is goi
 ### Change Log / Le Journal de Modification
 
 <div class = "update-chat">
+
+<div class = "msg">
+    <img class = "pfp" src = "{{ site.baseurl }}/assets/images/site/frigimon.png">
+    <div class = "text">
+        <div class = "date">2026-02-28</div>
+        <div class = "name">Bonhomme de Neige</div>
+        <div class = "body">Augmente le contraste général et finalise l'intégration des anciens posts ici</div>
+    </div>
+</div>
 
 <div class = "msg">
     <img class = "pfp" src = "{{ site.baseurl }}/assets/images/site/frigimon.png">

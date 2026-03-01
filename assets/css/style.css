@@ -219,7 +219,7 @@ table th {
   margin: auto;
 }
 
-.tags a {
+.tags a, .tags a:visited {
   font-size: 14.5px;
   font-weight: bold;
   padding: 2px 13px;
@@ -447,6 +447,8 @@ footer {
   min-width: 20px; 
 }
 
+.list-compact ul {
+}
 
 @media only screen and (min-width: 700px) { 
   header, footer, #wrapper {

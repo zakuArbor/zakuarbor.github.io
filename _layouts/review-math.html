@@ -1,6 +1,6 @@
 ---
 layout: default
-
+cat: "reviews"
 ---
 <div id = "content">
   <div class = "bits">
@@ -24,7 +24,23 @@ layout: default
     </div>
   </div>
     {{ content }}
+    <br/>
+    <hr>
+    <b>Note:</b> The reviews are bias and reflects my perception of the course. In addition, the information varies depending on the professor and will likely be outdated.
+    <hr>
+    <h2>For More Bias Course Reviews:</h2>
+    <ul>
+    {% for post in site.posts %}
+      {% if post.categories contains 'reviews' and post.categories contains 'university' %}
+        {% assign shorturl = post.id | split: "/" | last %}
+        <li><a href = '..{{ post.url }}'>{{ post.title }}</a></li>
+      {% endif %}
+    {% endfor %}
+</ul>
+
+
   </div>
 </div>
+
 
 {% include discuss.html %}

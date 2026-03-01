@@ -95,7 +95,7 @@ In UTF-8, `1` takes up 1 byte which is unsurprising as ASCII has great advantage
 ![My default terminal settings is unable to display the content in Chinese properly]({{ site.baseurl }}/assets/programming/encoding/full-half-width.png)
 
 Let's inspect the contents of the files between Half character `1` and Full Byte Character `１` in HEX:
-<pre class = "highlight" style = "background-color: #1b1b1b; padding: .5rem; line-height: 1.25em"><font color="#D0CFCC"><b>$ </b></font>cat halfwidth-1.txt; echo &quot;&quot;; xxd halfwidth-1.txt; cat fullwidth-1.txt ; echo &quot;&quot;; xxd fullwidth-1.txt 
+<pre class = "highlight" style = "background-color: #000; padding: .5rem; line-height: 1.25em; border: 1px solid #444c56;"><font color="#D0CFCC"><b>$ </b></font>cat halfwidth-1.txt; echo &quot;&quot;; xxd halfwidth-1.txt; cat fullwidth-1.txt ; echo &quot;&quot;; xxd fullwidth-1.txt 
 1
 00000000: <font color="#26A269"><b>31</b></font>                      <font color="#C01C28"><b>               </b></font>  <font color="#26A269"><b>1</b></font>
 １
