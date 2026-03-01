@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>2025 Blog Archive - RANDOM BITS</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/css/syntax_monokai.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="/assets/css/contrast.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/png" href="/assets/site/random-bits-favicon.png">
+    <meta name="og:title" content="Random Bits">
+    <meta name="og:image" content="">
+    <meta name="og:description"
+        content="Random bits of programming, math, and personal thoughts">
+    <meta name="keywords" content="zakuarbor, programming, math, random bits, pikachu">
+    <meta name="description" content="Random bits of programming, math, and personal thoughts">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script charset="utf-8" src="/assets/js/script.js"></script>
+<script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+     loader: {load: ['[tex]/cancel']},
+      TeX: { 
+        equationNumbers: { autoNumber: "all" },
+        packages: {'[+]': ['cancel']}
+      } 
+    }); 
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+  <header>
+    <center>
+      <h1 id = "title"><a href = "/index.html">RANDOM BITS</a><img id = "pikachu-header" src = "/assets/site/flying-pikachu.png"/></h1>
+    A random site by a random clueless human
+    </center>
+    <!--<marquee scrollamount="4">-->
+    <center>
+      <!--<img src = "/assets/gifs/pikachu-run.gif"/>--><p>Random bits of programming, math, and thoughts
+      By a clueless human</p><!-- <img src = "/assets/gifs/pikachu-run.gif"/>-->
+    </center>
+      <!--&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      <img src = "/assets/gifs/pikachu-run.gif"/>Random bits of programming, math, and thoughts
+      By a clueless human <img src = "/assets/gifs/pikachu-run.gif"/>-->
+      <!--</marquee>-->
+
+    <a href="javascript:void(0);" class="hamburger-nav" onclick="toggleMenu()"><i class="fa fa-bars"></i></a>
+    <nav id="header-nav">
+    <center>
+      <a href="/index.html">Home</a>
+      <a href="/micro/"><span style = "letter-spacing: 1px;">µ</span>Blog</a>
+      <a href="/blog/"><span style = "letter-spacing: 1px;">Blog</a>
+      <a href="/link.html">LinkBlog</a>
+      <!--<a href="/math.html">Math</a>-->
+      <a href="/about.html">About</a>
+    </center>
+    </nav>
+</header>
+
+  </head>
+  <body>
+
+    <div id = "wrapper">
+    <div id = "content">
+  
+
+
+<h1>2025 Blog Archive (2025)</h1>
+
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/blog/vtbl/">A Look Into Virtual Table via Assembly</a></h1>
+<div>
+<p class = "date">August 20, 2025</p>
+<div class="tags">
+
+<a href="/categories/#programming">programming</a>
+&nbsp;
+
+<a href="/categories/#c/c++">c/c++</a>
+&nbsp;
+
+<a href="/categories/#asm">asm</a>
+&nbsp;
+
+<a href="/categories/#blog">blog</a>
+
+
+</div>
+Polymorphism is an important feature of Object Oriented Programming whereby one can represent an object in different forms, hence the name. However, its implementation between Java and C++ which could bite you if you are not aware. This blog is going to explore the following topics: Static Dispatch The need for virtual functions Dynamic Dispatcher - Looking Into Assembly Virtual Pointers and Virtual Tables Static Dispatch Here’s a snippet of Java code that would behave differently in C++: class Shape { public void draw() { System.out.println("Shape"); } } class Triangle extends Shape { public void draw() { System.out.println("Triangle"); } }...
+<p><a href="/blog/vtbl/">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/blog/switch-default-enum/">The Issue With Default in Switch Statements with Enums</a></h1>
+<div>
+<p class = "date">July  5, 2025</p>
+<div class="tags">
+
+<a href="/categories/#programming">programming</a>
+&nbsp;
+
+<a href="/categories/#c/c++">c/c++</a>
+&nbsp;
+
+<a href="/categories/#blog">blog</a>
+
+
+</div>
+Reading the coding standards at a company I recently joined revealed to me the issue with default label within the switch statement and why it’s prohibitted when its being used to enumerate through an enum. default label is convenient to handle any edge cases and it’s often used to handle errors. However, when working with enums, it is often the case that the prpogrammer intends to handle all possible values in the enum. To catch this mishap, programmers would enable -Wswitch or -Werror=switch to their compiler. For instance, let’s suppose I have an enum named Suit to represent the different...
+<p><a href="/blog/switch-default-enum/">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/blog/this-asm/">this: the implicit parameter in OOP</a></h1>
+<div>
+<p class = "date">February 11, 2025</p>
+<div class="tags">
+
+<a href="/categories/#programming">programming</a>
+&nbsp;
+
+<a href="/categories/#asm">asm</a>
+&nbsp;
+
+<a href="/categories/#c/c++">c/c++</a>
+&nbsp;
+
+<a href="/categories/#blog">blog</a>
+
+
+</div>
+I was recently reminded that the variable this is an implicit parameter passed to all methods in OOP such as C++. We can observe this by comparing a regular function vs a method belonging to some class: #include &lt;iostream&gt; void greet() { std::cout &lt;&lt; "Hello World\n"; } class Human { public: void greet() { std::cout &lt;&lt; "Hello World\n"; } }; int main() { greet(); Human human = Human(); human.greet(); } Output: $ g++ test.C $ ./a.out Hello World Hello World Furthermore, their resulting mangled names do not indicate that the function/method takes in any arguments: $ nm a.out | grep...
+<p><a href="/blog/this-asm/">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/blog/view-vim/">view is just vim</a></h1>
+<div>
+<p class = "date">January 24, 2025</p>
+<div class="tags">
+
+<a href="/categories/#programming">programming</a>
+&nbsp;
+
+<a href="/categories/#vi">vi</a>
+&nbsp;
+
+<a href="/categories/#utilities">utilities</a>
+&nbsp;
+
+<a href="/categories/#unix">unix</a>
+&nbsp;
+
+<a href="/categories/#blog">blog</a>
+
+
+</div>
+I recently found out accidentally at work that vim and view were the same thing when I happened to be editing a file on view instead of my beloved vim editor. Note: This is a follow up post from my microblog For context, view is often used in lieu of vi when trying to open a file for read only while retaining the same shortcuts as vi. This is why it surprised me to see that I could modify a file when view was supposed to be read only. If we were to take a look at the documentation: $...
+<p><a href="/blog/view-vim/">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/blog/sign-of-char/">The Sign of Char</a></h1>
+<div>
+<p class = "date">January 20, 2025</p>
+<div class="tags">
+
+<a href="/categories/#programming">programming</a>
+&nbsp;
+
+<a href="/categories/#c/c++">c/c++</a>
+&nbsp;
+
+<a href="/categories/#arm">arm</a>
+&nbsp;
+
+<a href="/categories/#blog">blog</a>
+
+
+</div>
+Note: This is a follow up post from my microblog WARNING: I am no expert in Assembly. The last and only time I ever wrote assembly was computing the Fibbonacci Sequences 8 years ago for the MIPS architecture The following below has a value that is vague: char i = -1; The issue with the above line is that the value of i is not immediately obvious as compilers for different architectures could treat this as signed or unsigned. The signedness of a data type can be simply thought as whether or not there is a dedicated sign bit that...
+<p><a href="/blog/sign-of-char/">Read More...</a></p>
+</div>
+</div>
+
+
+
+</div>
+
+    </div>
+
+  <footer>
+  <marquee id = "buttons">
+    <a href = "index.html"><img src = "/assets/buttons/button.png"></a>
+    <a href = "index.html"><img src = "/assets/buttons/button2.png"></a>
+    <a href = 'https://neocities.org/'><img src = "/assets/buttons/neocitiesorg.gif"></a>
+    <a href = 'https://www.vim.org/'><img src = "/assets/buttons/vim.gif"></a>
+    <a href = 'https://fedoraproject.org/'><img src = "/assets/buttons/gnu-linux.gif"></a>
+    <a href = "https://fedoraproject.org/"><img src = "/assets/buttons/powered_by_fedora_alt.png"></a>
+  </marquee>
+  <small><a href = "/credits" class = "credits">Credits</a></small>
+</footer>
+
+
+  </body>
+</html>
