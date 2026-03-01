@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>Compiling and Running AARCH64 on x86-64 (amd64) - RANDOM BITS</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/css/syntax_monokai.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="/assets/css/test.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/png" href="/assets/site/random-bits-favicon.png">
+    <meta name="og:title" content="Random Bits">
+    <meta name="og:image" content="">
+    <meta name="og:description"
+        content="Random bits of programming, math, and personal thoughts">
+    <meta name="keywords" content="zakuarbor, programming, math, random bits, pikachu">
+    <meta name="description" content="Random bits of programming, math, and personal thoughts">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script charset="utf-8" src="/assets/js/script.js"></script>
+<script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+     loader: {load: ['[tex]/cancel']},
+      TeX: { 
+        equationNumbers: { autoNumber: "all" },
+        packages: {'[+]': ['cancel']}
+      } 
+    }); 
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+  <header>
+    <center>
+      <h1 id = "title"><a href = "/index.html">RANDOM BITS</a><img id = "pikachu-header" src = "/assets/site/flying-pikachu.png"/></h1>
+    A random site by a random clueless human
+    </center>
+    <!--<marquee scrollamount="4">-->
+    <center>
+      <!--<img src = "/assets/gifs/pikachu-run.gif"/>--><p>Random bits of programming, math, and thoughts
+      By a clueless human</p><!-- <img src = "/assets/gifs/pikachu-run.gif"/>-->
+    </center>
+      <!--&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      <img src = "/assets/gifs/pikachu-run.gif"/>Random bits of programming, math, and thoughts
+      By a clueless human <img src = "/assets/gifs/pikachu-run.gif"/>-->
+      <!--</marquee>-->
+
+    <a href="javascript:void(0);" class="hamburger-nav" onclick="toggleMenu()"><i class="fa fa-bars"></i></a>
+    <nav id="header-nav">
+    <center>
+      <a href="/index.html">Home</a>
+      <a href="/micro/"><span style = "letter-spacing: 1px;">µ</span>Blog</a>
+      <a href="/blog/"><span style = "letter-spacing: 1px;">Blog</a>
+      <a href="/link.html">LinkBlog</a>
+      <!--<a href="/math.html">Math</a>-->
+      <a href="/about.html">About</a>
+    </center>
+    </nav>
+</header>
+
+  </head>
+  <body>
+
+    <div id = "wrapper">
+    <div id = "content">
+<div class = "bits">
+  <h1 class = "title">Compiling and Running AARCH64 on x86-64 (amd64)</h1>
+
+  <div>
+    <p class = "date">March  7, 2025</p>
+    
+    <div class="tags">
+      
+      
+        <a href="/categories/#micro">micro</a>
+        &nbsp;
+      
+        <a href="/categories/#c/c++">c/c++</a>
+        &nbsp;
+      
+        <a href="/categories/#linux">linux</a>
+        &nbsp;
+      
+        <a href="/categories/#gcc">gcc</a>
+        
+      
+    </div>
+  </div>
+  <p>Cross-compilation targetting ARM architecture does not work out of the box in Fedora unlike what it would seem on Ubuntu based on what I am reading online. 
+Nonetheless, the unofficial packages for arm gnu gcc toolchain works like a charm unlike the official toolchain. 
+While I have not done my due diligence to figure out how to cross-compile on Fedora properly as I tried to cross-compile right before I sleep. 
+My impatience and tiredness, I did not manage to get the official toolchain from the ARM website to work 
+as it would complain about missing some libraries. I cannot recall if this was from the official ARM toolchain or from Fedora’s official package but I get 
+issues like the following:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ aarch64-linux-gnu-gcc test.c -o test -static
+test.c:1:10: erreur fatale: stdio.h : Aucun fichier ou dossier de ce nom
+    1 | #include &lt;stdio.h&gt;
+      |          ^~~~~~~~~
+compilation terminée.
+</code></pre></div></div>
+
+<p><a href="https://copr.fedorainfracloud.org/coprs/lantw44/">lantw44</a>’s build of the AArch64 and the 32-bit ARMV7 GNU toolchain worked flawlessly.</p>
+
+<p>Installing <a href="https://copr.fedorainfracloud.org/coprs/lantw44/aarch64-linux-gnu-toolchain/">AArch64 Linux GNU Toolchain</a>, one can now compile their C code for 64-bit ARMv8 
+with <code class="language-plaintext highlighter-rouge">aarch64-linux-gnu-gcc</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ aarch64-linux-gnu-gcc test.c -o test -static
+$ file test
+test: ELF 64-bit LSB executable, ARM aarch64, version 1 (GNU/Linux), statically linked, BuildID[sha1]=fc8921dfcad1a2a6aeeda3ebdff5d0c296dda865, for GNU/Linux 3.7.0, with debug_info, not stripped
+</code></pre></div></div>
+
+<p>To run the binary on your AMD64 Fedora Machine, you can simply use QEMU on user mode: <code class="language-plaintext highlighter-rouge">qemu-aarch64-static</code> for statis binaries</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ qemu-aarch64-static ./test
+char is unsigned
+</code></pre></div></div>
+
+<p>If you compiled the binary as a dynamically linked binary, then you’ll need to use <code class="language-plaintext highlighter-rouge">qemu-aarch64</code>. However, this will require more work:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ qemu-aarch64 ./test
+qemu-aarch64: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+$ qemu-aarch64 -L /usr/aarch64-linux-gnu/sys-root/ ./test
+char is unsigned
+</code></pre></div></div>
+
+<p>You will need to provide the path of aarch64 system root: <code class="language-plaintext highlighter-rouge">-L /usr/aarch64-linux-gnu/</code>. If you don’t have sysroot, you probably can just install one of the following: <code class="language-plaintext highlighter-rouge">dnf provides */ld-linux-aarch64.so.1</code>
+I probably could get the official ARM toolchain or official Fedora’s package to work if I fiddled with the compilation flags but I found <code class="language-plaintext highlighter-rouge">lantw44</code> didn’t require 
+much work to get things to work out of the box.</p>
+
+</div>
+</div>
+
+    </div>
+
+  <footer>
+  <marquee id = "buttons">
+    <a href = "index.html"><img src = "/assets/buttons/button.png"></a>
+    <a href = "index.html"><img src = "/assets/buttons/button2.png"></a>
+    <a href = 'https://neocities.org/'><img src = "/assets/buttons/neocitiesorg.gif"></a>
+    <a href = 'https://www.vim.org/'><img src = "/assets/buttons/vim.gif"></a>
+    <a href = 'https://fedoraproject.org/'><img src = "/assets/buttons/gnu-linux.gif"></a>
+    <a href = "https://fedoraproject.org/"><img src = "/assets/buttons/powered_by_fedora_alt.png"></a>
+  </marquee>
+  <small><a href = "/credits" class = "credits">Credits</a></small>
+</footer>
+
+
+  </body>
+</html>

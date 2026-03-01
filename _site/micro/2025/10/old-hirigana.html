@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>Render Archaic Hirigana - RANDOM BITS</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/css/syntax_monokai.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="/assets/css/test.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/png" href="/assets/site/random-bits-favicon.png">
+    <meta name="og:title" content="Random Bits">
+    <meta name="og:image" content="">
+    <meta name="og:description"
+        content="Random bits of programming, math, and personal thoughts">
+    <meta name="keywords" content="zakuarbor, programming, math, random bits, pikachu">
+    <meta name="description" content="Random bits of programming, math, and personal thoughts">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script charset="utf-8" src="/assets/js/script.js"></script>
+<script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+     loader: {load: ['[tex]/cancel']},
+      TeX: { 
+        equationNumbers: { autoNumber: "all" },
+        packages: {'[+]': ['cancel']}
+      } 
+    }); 
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+  <header>
+    <center>
+      <h1 id = "title"><a href = "/index.html">RANDOM BITS</a><img id = "pikachu-header" src = "/assets/site/flying-pikachu.png"/></h1>
+    A random site by a random clueless human
+    </center>
+    <!--<marquee scrollamount="4">-->
+    <center>
+      <!--<img src = "/assets/gifs/pikachu-run.gif"/>--><p>Random bits of programming, math, and thoughts
+      By a clueless human</p><!-- <img src = "/assets/gifs/pikachu-run.gif"/>-->
+    </center>
+      <!--&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      <img src = "/assets/gifs/pikachu-run.gif"/>Random bits of programming, math, and thoughts
+      By a clueless human <img src = "/assets/gifs/pikachu-run.gif"/>-->
+      <!--</marquee>-->
+
+    <a href="javascript:void(0);" class="hamburger-nav" onclick="toggleMenu()"><i class="fa fa-bars"></i></a>
+    <nav id="header-nav">
+    <center>
+      <a href="/index.html">Home</a>
+      <a href="/micro/"><span style = "letter-spacing: 1px;">µ</span>Blog</a>
+      <a href="/blog/"><span style = "letter-spacing: 1px;">Blog</a>
+      <a href="/link.html">LinkBlog</a>
+      <!--<a href="/math.html">Math</a>-->
+      <a href="/about.html">About</a>
+    </center>
+    </nav>
+</header>
+
+  </head>
+  <body>
+
+    <div id = "wrapper">
+    <div id = "content">
+<div class = "bits">
+  <h1 class = "title">Render Archaic Hirigana</h1>
+
+  <div>
+    <p class = "date">October  6, 2025</p>
+    
+    <div class="tags">
+      
+      
+        <a href="/categories/#micro">micro</a>
+        &nbsp;
+      
+        <a href="/categories/#utf">utf</a>
+        &nbsp;
+      
+        <a href="/categories/#unicode">unicode</a>
+        
+      
+    </div>
+  </div>
+  <p>What does does <a href="https://www.compart.com/en/unicode/U+1B002"><code class="language-plaintext highlighter-rouge">U+1B002</code></a> look like on your screen? <code class="language-plaintext highlighter-rouge">𛀂</code></p>
+
+<p>Did it look like some some unicode box inscribing the unicode value? That is because your system lacks the typefont to render the unicode.</p>
+
+<p>If you visit the following wikipedia page on <a href="https://ja.wikipedia.org/wiki/%E5%A4%89%E4%BD%93%E4%BB%AE%E5%90%8D">変体仮名</a>, you’ll likely notice the following:</p>
+
+<p><img src="/assets/micro/unicode/old-hirigana-bad.png" alt="Screenshot of Wikipedia inable to render archaic hirigana" width="500px" /></p>
+
+<p>Instead of:</p>
+
+<p><img src="/assets/micro/unicode/old-hirigana-good.png" alt="Screenshot of Wikipedia rendering correctly archaic hirigana" width="500px" /></p>
+
+<p>To resolve this, essentially install the true type font <code class="language-plaintext highlighter-rouge">*.ttf</code> file from <a href="https://www.babelstone.co.uk/Fonts/Han.html">BabelStone</a></p>
+
+<p>Credits to the following article as it outlines much clearly how to install the font:
+<a href="https://digitalorientalist.com/2022/10/04/a-beginners-guide-to-inputting-historical-kana-installing-a-font-for-hentaigana/">A Beginner’s Guide to Inputting Historical Kana: Installing a Font for “Hentaigana”</a>.
+I instead went through the harder route before reading this article by installing the font under <code class="language-plaintext highlighter-rouge">~/.local/share/fonts</code> and running <code class="language-plaintext highlighter-rouge">fc-cache -fv</code> to forcibly reload the font.</p>
+
+<p>Turns out you can install the GUI similarly to what the article proposes for MacOS by opening the file on Linux (double-tap) and an option to install the font will appear:</p>
+
+<p><img src="/assets/micro/unicode/linux-font-installer.png" alt="Linux Install Font via GUI" width="750px" /></p>
+
+<p>Refresh the page and you should now see <code class="language-plaintext highlighter-rouge">𛀂</code></p>
+
+<p><img src="/assets/micro/unicode/blog-render-old-hirigana-good.png" alt="What you should see if you refresh the page after installing font" /></p>
+
+<p><strong>Note:</strong> For some reason Firefox on Private-Mode is unable to render the archaic Hirigana, not sure why</p>
+
+</div>
+</div>
+
+    </div>
+
+  <footer>
+  <marquee id = "buttons">
+    <a href = "index.html"><img src = "/assets/buttons/button.png"></a>
+    <a href = "index.html"><img src = "/assets/buttons/button2.png"></a>
+    <a href = 'https://neocities.org/'><img src = "/assets/buttons/neocitiesorg.gif"></a>
+    <a href = 'https://www.vim.org/'><img src = "/assets/buttons/vim.gif"></a>
+    <a href = 'https://fedoraproject.org/'><img src = "/assets/buttons/gnu-linux.gif"></a>
+    <a href = "https://fedoraproject.org/"><img src = "/assets/buttons/powered_by_fedora_alt.png"></a>
+  </marquee>
+  <small><a href = "/credits" class = "credits">Credits</a></small>
+</footer>
+
+
+  </body>
+</html>

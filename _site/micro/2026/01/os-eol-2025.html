@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>2025 - The End of Two OS - RANDOM BITS</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/css/syntax_monokai.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="/assets/css/test.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/png" href="/assets/site/random-bits-favicon.png">
+    <meta name="og:title" content="Random Bits">
+    <meta name="og:image" content="">
+    <meta name="og:description"
+        content="Random bits of programming, math, and personal thoughts">
+    <meta name="keywords" content="zakuarbor, programming, math, random bits, pikachu">
+    <meta name="description" content="Random bits of programming, math, and personal thoughts">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script charset="utf-8" src="/assets/js/script.js"></script>
+<script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+     loader: {load: ['[tex]/cancel']},
+      TeX: { 
+        equationNumbers: { autoNumber: "all" },
+        packages: {'[+]': ['cancel']}
+      } 
+    }); 
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+  <header>
+    <center>
+      <h1 id = "title"><a href = "/index.html">RANDOM BITS</a><img id = "pikachu-header" src = "/assets/site/flying-pikachu.png"/></h1>
+    A random site by a random clueless human
+    </center>
+    <!--<marquee scrollamount="4">-->
+    <center>
+      <!--<img src = "/assets/gifs/pikachu-run.gif"/>--><p>Random bits of programming, math, and thoughts
+      By a clueless human</p><!-- <img src = "/assets/gifs/pikachu-run.gif"/>-->
+    </center>
+      <!--&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      <img src = "/assets/gifs/pikachu-run.gif"/>Random bits of programming, math, and thoughts
+      By a clueless human <img src = "/assets/gifs/pikachu-run.gif"/>-->
+      <!--</marquee>-->
+
+    <a href="javascript:void(0);" class="hamburger-nav" onclick="toggleMenu()"><i class="fa fa-bars"></i></a>
+    <nav id="header-nav">
+    <center>
+      <a href="/index.html">Home</a>
+      <a href="/micro/"><span style = "letter-spacing: 1px;">µ</span>Blog</a>
+      <a href="/blog/"><span style = "letter-spacing: 1px;">Blog</a>
+      <a href="/link.html">LinkBlog</a>
+      <!--<a href="/math.html">Math</a>-->
+      <a href="/about.html">About</a>
+    </center>
+    </nav>
+</header>
+
+  </head>
+  <body>
+
+    <div id = "wrapper">
+    <div id = "content">
+<div class = "bits">
+  <h1 class = "title">2025 - The End of Two OS</h1>
+
+  <div>
+    <p class = "date">January  9, 2026</p>
+    
+    <div class="tags">
+      
+      
+        <a href="/categories/#micro">micro</a>
+        &nbsp;
+      
+        <a href="/categories/#eol">eol</a>
+        
+      
+    </div>
+  </div>
+  <p>December 31st marked the <a href="https://www.theregister.com/2026/01/05/hpux_end_of_life/">end</a> of 
+<a href="https://en.wikipedia.org/wiki/HP-UX">HP-UX</a>. Apparently released in 1982, it was mainly used in 
+the enterprise world from what I know. I do not have much fond memories of this platform due to my 
+work compiling (building) security fixes (PSIRT - Product Security Incident Response) when I was at 
+<a href="https://www.ibm.com/support/pages/published-security-vulnerabilities-db2-linux-unix-and-windows-including-special-build-information">IBM</a> 
+many years ago, though no fault to HPUX itself. At IBM Db2, we called HPUX builds hpipf32 and hpipf64
+as evident if you were to look at the link to any HPUX Db2 security patch: <code class="language-plaintext highlighter-rouge">fixids=special_38387_DB2-hpipf64-universal_fixpack-9.7.0.11-FP011</code>.
+Though for some reason, I recalled calling it ia32 and ia64 as well for Intel Architecture 32 and 64 bits respectively. Though it’s been years 
+since I worked there so I probably am remembering specifics and other internal names incorrectly. Regardless, what was unique about HP-UX was 
+its adoption of Intanium processors, one of Intel’s 64-bit architecture (yes there’s other 64-bit architecture from Intel that exists but were 
+not released to the public). To learn more about Intanium, you can watch a <a href="https://www.youtube.com/watch?v=3oxrybkd7Mo&amp;t=538s">video from Retrobytes</a> on this.
+It would seem that its death could have been related to the <a href="https://www.techrepublic.com/article/save-the-date-itanium-will-finally-die-at-the-end-of-2025/">end of Intel’s production of the chip back in 2021</a>.
+Though it is not clear to me who pulled the plug but I assume it was Intel since they only had one major customer, HPE. Anyhow, according to a document from <a href="https://www.hpe.com/psnow/doc/4aa4-7673enw">HPE</a>, 
+HPE will still continue supporting HP-UX till December 31 2028:</p>
+
+<blockquote>
+  <p>Mature Software Product Support without Sustaining Engineering through at least 31-Dec-2028</p>
+</blockquote>
+
+<p>I guess Intanium users will have to jump ship to Linux or replace their entire cluster with another architecture eventually. A former intern of mine cannot wait for IBM to drop support for Db2 Kepler 
+and therefore Intanium but who knows when that will be.</p>
+
+<p>Windows 10 also reached <a href="https://support.microsoft.com/en-us/windows/windows-10-support-has-ended-on-october-14-2025-2ca8b313-1946-43d3-b55c-2b95b107f281">end of life</a> on October 14, 2025 though 
+one can continue getting support if they enroll in extended security support.</p>
+
+<p>The death of two OS whose users will have to pivot to Linux if they cannot upgrade their hardware (unless you are one of those users with TPM 2.0 resisting the upgrade to Windows 11 reminiscent to 
+how there are still XP and Windows 7 users in December 2025).</p>
+
+</div>
+</div>
+
+    </div>
+
+  <footer>
+  <marquee id = "buttons">
+    <a href = "index.html"><img src = "/assets/buttons/button.png"></a>
+    <a href = "index.html"><img src = "/assets/buttons/button2.png"></a>
+    <a href = 'https://neocities.org/'><img src = "/assets/buttons/neocitiesorg.gif"></a>
+    <a href = 'https://www.vim.org/'><img src = "/assets/buttons/vim.gif"></a>
+    <a href = 'https://fedoraproject.org/'><img src = "/assets/buttons/gnu-linux.gif"></a>
+    <a href = "https://fedoraproject.org/"><img src = "/assets/buttons/powered_by_fedora_alt.png"></a>
+  </marquee>
+  <small><a href = "/credits" class = "credits">Credits</a></small>
+</footer>
+
+
+  </body>
+</html>

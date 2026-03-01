@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>Firefox - MP4 Cannot be Decoded - RANDOM BITS</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/css/syntax_monokai.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="/assets/css/test.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/png" href="/assets/site/random-bits-favicon.png">
+    <meta name="og:title" content="Random Bits">
+    <meta name="og:image" content="">
+    <meta name="og:description"
+        content="Random bits of programming, math, and personal thoughts">
+    <meta name="keywords" content="zakuarbor, programming, math, random bits, pikachu">
+    <meta name="description" content="Random bits of programming, math, and personal thoughts">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script charset="utf-8" src="/assets/js/script.js"></script>
+<script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+     loader: {load: ['[tex]/cancel']},
+      TeX: { 
+        equationNumbers: { autoNumber: "all" },
+        packages: {'[+]': ['cancel']}
+      } 
+    }); 
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+  <header>
+    <center>
+      <h1 id = "title"><a href = "/index.html">RANDOM BITS</a><img id = "pikachu-header" src = "/assets/site/flying-pikachu.png"/></h1>
+    A random site by a random clueless human
+    </center>
+    <!--<marquee scrollamount="4">-->
+    <center>
+      <!--<img src = "/assets/gifs/pikachu-run.gif"/>--><p>Random bits of programming, math, and thoughts
+      By a clueless human</p><!-- <img src = "/assets/gifs/pikachu-run.gif"/>-->
+    </center>
+      <!--&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      <img src = "/assets/gifs/pikachu-run.gif"/>Random bits of programming, math, and thoughts
+      By a clueless human <img src = "/assets/gifs/pikachu-run.gif"/>-->
+      <!--</marquee>-->
+
+    <a href="javascript:void(0);" class="hamburger-nav" onclick="toggleMenu()"><i class="fa fa-bars"></i></a>
+    <nav id="header-nav">
+    <center>
+      <a href="/index.html">Home</a>
+      <a href="/micro/"><span style = "letter-spacing: 1px;">µ</span>Blog</a>
+      <a href="/blog/"><span style = "letter-spacing: 1px;">Blog</a>
+      <a href="/link.html">LinkBlog</a>
+      <!--<a href="/math.html">Math</a>-->
+      <a href="/about.html">About</a>
+    </center>
+    </nav>
+</header>
+
+  </head>
+  <body>
+
+    <div id = "wrapper">
+    <div id = "content">
+<div class = "bits">
+  <h1 class = "title">Firefox - MP4 Cannot be Decoded</h1>
+
+  <div>
+    <p class = "date">November 21, 2025</p>
+    
+    <div class="tags">
+      
+      
+        <a href="/categories/#micro">micro</a>
+        &nbsp;
+      
+        <a href="/categories/#firefox">firefox</a>
+        
+      
+    </div>
+  </div>
+  <p>One constant issue I have with Firefox is the instability of playing videos outside of Youtube. Often when watching anime online, I would often encounter issues where skipping even a second would cause the 
+video to stop playing. Hence why I have mention in my <a href="/faq">FAQ</a> that I use Brave, a privacy-focused chromium browser, to stream anime.</p>
+
+<p>While making my <a href="/gallery">gallery</a> featuring retro tech on neocities, I encountered a similar issue. Firefox was unable to loop a MP4 video I uploaded. Though Brave unsurprisingly could.</p>
+
+<p><img src="/assets/micro/misc/hvec-mp4-issue.png" alt="An example of video not rendering on Firefox" /></p>
+
+<p>The simple solution to the problem was to convert the MP4 video into webm, an open and royalty-free media format which is the image you see on the top meanwhile the video on the bottom was encoded in HEVC (H.265) via ffmpeg (not <code class="language-plaintext highlighter-rouge">ffmpeg-free</code>).
+I was under the impression that Firefox supported HEVC but it turns out there are only limited <a href="https://support.mozilla.org/en-US/kb/audio-and-video-firefox">support</a>.
+Based on the Error displayed on the video and Firefox complaining decoding error on the Web conole, I knew Firefox was missing some type of decoder to play my MP4 file.</p>
+
+<p><img src="/assets/micro/misc/firefox-decode-error.png" alt="developer console indicates decoder issue" /></p>
+
+<p>Placing <code class="language-plaintext highlighter-rouge">about:support#media</code> on the Firefox address bar reveals everything I needed to know:</p>
+
+<p><img src="/assets/micro/misc/firefox-codec.png" alt="developer console indicates decoder issue" /></p>
+
+<p>Despite having HEVC en/de-coders on my Linux system, I needed to enabled them via Firefox configuration (<code class="language-plaintext highlighter-rouge">about:config</code>):</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">media.hevc.enabled</code></li>
+  <li><code class="language-plaintext highlighter-rouge">dom.media.webcodecs.h265.enabled</code></li>
+</ul>
+
+<p>However, I opted to convert my MP4 file into webm to open access to all visitors.</p>
+
+<p>HEVC is a patented code which based on <a href="https://en.wikipedia.org/wiki/High_Efficiency_Video_Coding#Patent_license_terms">Wikipedia</a> 
+only waives royalties on software-only implementations (and cannot be bundled with hardware).</p>
+
+<p><img src="/assets/micro/misc/firefox-codec-2.png" alt="developer console indicates decoder issue" /></p>
+
+<p><strong>Note:</strong> “Prise en charge” is “Supported” and “Décodage logiciel” is “Software Decoder” in English</p>
+
+<p><strong>UPDATE:</strong> The day I published this blog, I woke up to see an article about HVEC popping in my hackernews feed: <a href="https://news.ycombinator.com/item?id=46002989"> HP and Dell disable HEVC support built into their laptops’ CPUs </a>.
+Originally I was under the impression that CPU manufacturers such as AMD and Intel would be responsible to pay those fees but according to Ars Technica, it is not known if they indeed do. <a href="https://www.tomshardware.com/pc-components/gpus/dell-and-hp-disable-hardware-h-265-decoding-on-select-pcs-due-to-rising-royalty-costs-companies-could-save-big-on-hevc-royalties-but-at-the-expense-of-users">Tom’s Hardware</a> 
+reveals that chipmakers (at least in the GPU side) do have to pay a license fee to implement the feature in silicon. But it also reveals that to enable hardware decoding on the device leve, OEMs must also pay the fee.
+Therefore it would seem that HP and DELL will be disabling this capability on the software side (either on the driver or fireware level) if this logic applies for CPU as well. Considering the volume of CPUs DELL and HP purchase from AMD and Intel,
+I do think it could be possible for them to also request to fuse the capability off in silicon (though unlikely). As Tom’s Hardware notes, this is typically not done on the GPU so if we assume the same logic applies to CPUs, it is
+likely disabled on the software side.</p>
+
+<hr />
+
+<p>Note: Not a support on Neocities so the video is hosted on codeberg</p>
+
+</div>
+</div>
+
+    </div>
+
+  <footer>
+  <marquee id = "buttons">
+    <a href = "index.html"><img src = "/assets/buttons/button.png"></a>
+    <a href = "index.html"><img src = "/assets/buttons/button2.png"></a>
+    <a href = 'https://neocities.org/'><img src = "/assets/buttons/neocitiesorg.gif"></a>
+    <a href = 'https://www.vim.org/'><img src = "/assets/buttons/vim.gif"></a>
+    <a href = 'https://fedoraproject.org/'><img src = "/assets/buttons/gnu-linux.gif"></a>
+    <a href = "https://fedoraproject.org/"><img src = "/assets/buttons/powered_by_fedora_alt.png"></a>
+  </marquee>
+  <small><a href = "/credits" class = "credits">Credits</a></small>
+</footer>
+
+
+  </body>
+</html>

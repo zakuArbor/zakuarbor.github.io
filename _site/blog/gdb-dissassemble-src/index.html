@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>GDB - Mix Source Code with Assembly - RANDOM BITS</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/css/syntax_monokai.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="/assets/css/test.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/png" href="/assets/site/random-bits-favicon.png">
+    <meta name="og:title" content="Random Bits">
+    <meta name="og:image" content="">
+    <meta name="og:description"
+        content="Random bits of programming, math, and personal thoughts">
+    <meta name="keywords" content="zakuarbor, programming, math, random bits, pikachu">
+    <meta name="description" content="Random bits of programming, math, and personal thoughts">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script charset="utf-8" src="/assets/js/script.js"></script>
+<script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+     loader: {load: ['[tex]/cancel']},
+      TeX: { 
+        equationNumbers: { autoNumber: "all" },
+        packages: {'[+]': ['cancel']}
+      } 
+    }); 
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+  <header>
+    <center>
+      <h1 id = "title"><a href = "/index.html">RANDOM BITS</a><img id = "pikachu-header" src = "/assets/site/flying-pikachu.png"/></h1>
+    A random site by a random clueless human
+    </center>
+    <!--<marquee scrollamount="4">-->
+    <center>
+      <!--<img src = "/assets/gifs/pikachu-run.gif"/>--><p>Random bits of programming, math, and thoughts
+      By a clueless human</p><!-- <img src = "/assets/gifs/pikachu-run.gif"/>-->
+    </center>
+      <!--&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      <img src = "/assets/gifs/pikachu-run.gif"/>Random bits of programming, math, and thoughts
+      By a clueless human <img src = "/assets/gifs/pikachu-run.gif"/>-->
+      <!--</marquee>-->
+
+    <a href="javascript:void(0);" class="hamburger-nav" onclick="toggleMenu()"><i class="fa fa-bars"></i></a>
+    <nav id="header-nav">
+    <center>
+      <a href="/index.html">Home</a>
+      <a href="/micro/"><span style = "letter-spacing: 1px;">µ</span>Blog</a>
+      <a href="/blog/"><span style = "letter-spacing: 1px;">Blog</a>
+      <a href="/link.html">LinkBlog</a>
+      <!--<a href="/math.html">Math</a>-->
+      <a href="/about.html">About</a>
+    </center>
+    </nav>
+</header>
+
+  </head>
+  <body>
+
+    <div id = "wrapper">
+    <div id = "content">
+<div class = "bits">
+  <h1 class = "title">GDB - Mix Source Code with Assembly</h1>
+
+  <div>
+    <p class = "date">May  9, 2022</p>
+    
+    <div class="tags">
+      
+      
+        <a href="/categories/#programming">programming</a>
+        &nbsp;
+      
+        <a href="/categories/#c/c++">c/c++</a>
+        &nbsp;
+      
+        <a href="/categories/#gdb">gdb</a>
+        &nbsp;
+      
+        <a href="/categories/#blog">blog</a>
+        
+      
+    </div>
+  </div>
+  <p>Have you ever wonder how to view the assembly code generated for the particular line of code written in C before? 
+Perhaps you have used <a href="https://godbolt.org/">Compiler Explorer</a> by Matt Godbolt to play around with the source code 
+to examine the behavior that is occuring behind the scene.</p>
+
+<details>
+<summary><b>tldr</b></summary>
+<hr />
+<ul>
+<li><code class="highlighter-rouge">disassemble /s</code> allows you to view the generated assembly code for each line of C code (i.e. annotations)</li>
+<li>Do not enable TUI if you want to mix assembly with the source code. It doesn't seem to work as it splits the assembly and source code into two separate windows</li>
+</ul>
+<hr />
+</details>
+
+<p>GDB is a debugger that I am sure many have used before but perhaps not extensively. On GDB, 
+the <code class="language-plaintext highlighter-rouge">disassemble</code> command is used to view the assembly code. While that is common knowledge 
+for anyone who has dabbled with C and C++ code for a while, one may not know that 
+GDB offers the ability to see the generated assembly code just like Compiler Explorer offers. 
+This was a neat feature I was not aware of till a coworker mentioned of the feature at a 
+team meeting which surprised a good number of us.</p>
+
+<p>If you run <code class="language-plaintext highlighter-rouge">help disassemble</code>, you will notice the following:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(gdb) help disassemble
+Disassemble a specified section of memory.
+Usage: disassemble[/m|/r|/s] START [, END]
+</code></pre></div></div>
+
+<p>One can use either the <code class="language-plaintext highlighter-rouge">/r</code> or the <code class="language-plaintext highlighter-rouge">/s</code> option to view the assembly and C source code 
+mixed together in the output.</p>
+<div class="language-armasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">(</span><span class="nl">gdb</span><span class="err">)</span> <span class="nb">disassemble</span> <span class="o">/</span><span class="nv">s</span> <span class="nv">main</span>
+<span class="nl">Dump</span> <span class="nb">of</span> <span class="nv">assembler</span> <span class="nv">code</span> <span class="nv">for</span> <span class="nv">function</span> <span class="nv">main</span><span class="err">:</span>
+<span class="nl">test2</span><span class="err">.</span><span class="nl">c</span><span class="err">:</span>
+<span class="nl">1</span>	<span class="nb">int</span> <span class="nv">main</span> <span class="o">()</span> <span class="o">{</span>
+   <span class="err">0</span><span class="nb">x0000000000401106</span> <span class="o">&lt;+</span><span class="mi">0</span><span class="o">&gt;</span><span class="err">:</span>	<span class="nv">push</span>   <span class="o">%</span><span class="nv">rbp</span>
+   <span class="err">0</span><span class="nb">x0000000000401107</span> <span class="o">&lt;+</span><span class="mi">1</span><span class="o">&gt;</span><span class="err">:</span>	<span class="nv">mov</span>    <span class="o">%</span><span class="nv">rsp</span><span class="o">,%</span><span class="nv">rbp</span>
+
+<span class="nl">2</span>	  <span class="nb">int</span> <span class="nv">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="c">;</span>
+   <span class="err">0</span><span class="nb">x000000000040110a</span> <span class="o">&lt;+</span><span class="mi">4</span><span class="o">&gt;</span><span class="err">:</span>	<span class="nv">movl</span>   <span class="err">$</span><span class="mh">0x0</span><span class="o">,-</span><span class="mh">0x4</span><span class="o">(%</span><span class="nv">rbp</span><span class="o">)</span>
+
+<span class="nl">3</span>	  <span class="nb">for</span> <span class="o">(</span><span class="nv">int</span> <span class="nv">i</span> <span class="o">=</span> <span class="mi">0</span><span class="c">; i &lt; 10; i++) {</span>
+   <span class="err">0</span><span class="nb">x0000000000401111</span> <span class="o">&lt;+</span><span class="mi">11</span><span class="o">&gt;</span><span class="err">:</span>	<span class="nv">movl</span>   <span class="err">$</span><span class="mh">0x0</span><span class="o">,-</span><span class="mh">0x8</span><span class="o">(%</span><span class="nv">rbp</span><span class="o">)</span>
+   <span class="err">0</span><span class="nb">x0000000000401118</span> <span class="o">&lt;+</span><span class="mi">18</span><span class="o">&gt;</span><span class="err">:</span>	<span class="nv">jmp</span>    <span class="mh">0x401135</span> <span class="o">&lt;</span><span class="nv">main</span><span class="o">+</span><span class="mi">47</span><span class="o">&gt;</span>
+
+<span class="nl">4</span>	    <span class="nb">int</span> <span class="nv">val</span> <span class="o">=</span> <span class="nv">i</span> <span class="o">*</span> <span class="nv">sum</span> <span class="o">+</span> <span class="nv">i</span><span class="c">;</span>
+   <span class="err">0</span><span class="nb">x000000000040111a</span> <span class="o">&lt;+</span><span class="mi">20</span><span class="o">&gt;</span><span class="err">:</span>	<span class="nv">mov</span>    <span class="o">-</span><span class="mh">0x8</span><span class="o">(%</span><span class="nv">rbp</span><span class="o">),%</span><span class="nv">eax</span>
+   <span class="err">0</span><span class="nb">x000000000040111d</span> <span class="o">&lt;+</span><span class="mi">23</span><span class="o">&gt;</span><span class="err">:</span>	<span class="nv">imul</span>   <span class="o">-</span><span class="mh">0x4</span><span class="o">(%</span><span class="nv">rbp</span><span class="o">),%</span><span class="nv">eax</span>
+   <span class="err">0</span><span class="nb">x0000000000401121</span> <span class="o">&lt;+</span><span class="mi">27</span><span class="o">&gt;</span><span class="err">:</span>	<span class="nv">mov</span>    <span class="o">%</span><span class="nv">eax</span><span class="o">,%</span><span class="nv">edx</span>
+   <span class="err">0</span><span class="nb">x0000000000401123</span> <span class="o">&lt;+</span><span class="mi">29</span><span class="o">&gt;</span><span class="err">:</span>	<span class="nv">mov</span>    <span class="o">-</span><span class="mh">0x8</span><span class="o">(%</span><span class="nv">rbp</span><span class="o">),%</span><span class="nv">eax</span>
+   <span class="err">0</span><span class="nb">x0000000000401126</span> <span class="o">&lt;+</span><span class="mi">32</span><span class="o">&gt;</span><span class="err">:</span>	<span class="nv">add</span>    <span class="o">%</span><span class="nv">edx</span><span class="o">,%</span><span class="nv">eax</span>
+   <span class="err">0</span><span class="nb">x0000000000401128</span> <span class="o">&lt;+</span><span class="mi">34</span><span class="o">&gt;</span><span class="err">:</span>	<span class="nv">mov</span>    <span class="o">%</span><span class="nv">eax</span><span class="o">,-</span><span class="mh">0xc</span><span class="o">(%</span><span class="nv">rbp</span><span class="o">)</span>
+
+<span class="nl">5</span>	    <span class="nb">sum</span> <span class="o">+=</span> <span class="nv">val</span><span class="c">;</span>
+   <span class="err">0</span><span class="nb">x000000000040112b</span> <span class="o">&lt;+</span><span class="mi">37</span><span class="o">&gt;</span><span class="err">:</span>	<span class="nv">mov</span>    <span class="o">-</span><span class="mh">0xc</span><span class="o">(%</span><span class="nv">rbp</span><span class="o">),%</span><span class="nv">eax</span>
+   <span class="err">0</span><span class="nb">x000000000040112e</span> <span class="o">&lt;+</span><span class="mi">40</span><span class="o">&gt;</span><span class="err">:</span>	<span class="nv">add</span>    <span class="o">%</span><span class="nv">eax</span><span class="o">,-</span><span class="mh">0x4</span><span class="o">(%</span><span class="nv">rbp</span><span class="o">)</span>
+
+<span class="nl">3</span>	  <span class="nb">for</span> <span class="o">(</span><span class="nv">int</span> <span class="nv">i</span> <span class="o">=</span> <span class="mi">0</span><span class="c">; i &lt; 10; i++) {</span>
+   <span class="err">0</span><span class="nb">x0000000000401131</span> <span class="o">&lt;+</span><span class="mi">43</span><span class="o">&gt;</span><span class="err">:</span>	<span class="nv">addl</span>   <span class="err">$</span><span class="mh">0x1</span><span class="o">,-</span><span class="mh">0x8</span><span class="o">(%</span><span class="nv">rbp</span><span class="o">)</span>
+   <span class="err">0</span><span class="nb">x0000000000401135</span> <span class="o">&lt;+</span><span class="mi">47</span><span class="o">&gt;</span><span class="err">:</span>	<span class="nv">cmpl</span>   <span class="err">$</span><span class="mh">0x9</span><span class="o">,-</span><span class="mh">0x8</span><span class="o">(%</span><span class="nv">rbp</span><span class="o">)</span>
+   <span class="err">0</span><span class="nb">x0000000000401139</span> <span class="o">&lt;+</span><span class="mi">51</span><span class="o">&gt;</span><span class="err">:</span>	<span class="nv">jle</span>    <span class="mh">0x40111a</span> <span class="o">&lt;</span><span class="nv">main</span><span class="o">+</span><span class="mi">20</span><span class="o">&gt;</span>
+   <span class="err">0</span><span class="nb">x000000000040113b</span> <span class="o">&lt;+</span><span class="mi">53</span><span class="o">&gt;</span><span class="err">:</span>	<span class="nv">mov</span>    <span class="err">$</span><span class="mh">0x0</span><span class="o">,%</span><span class="nv">eax</span>
+
+<span class="nl">6</span>	  <span class="err">}</span>
+<span class="nl">7</span>	<span class="err">}</span>
+   <span class="err">0</span><span class="nb">x0000000000401140</span> <span class="o">&lt;+</span><span class="mi">58</span><span class="o">&gt;</span><span class="err">:</span>	<span class="nv">pop</span>    <span class="o">%</span><span class="nv">rbp</span>
+   <span class="err">0</span><span class="nb">x0000000000401141</span> <span class="o">&lt;+</span><span class="mi">59</span><span class="o">&gt;</span><span class="err">:</span>	<span class="nv">ret</span>    
+<span class="nl">End</span> <span class="nb">of</span> <span class="nv">assembler</span> <span class="nv">dump</span><span class="mf">.</span>
+</code></pre></div></div>
+
+<p>But what is the difference between <code class="language-plaintext highlighter-rouge">/m</code> and <code class="language-plaintext highlighter-rouge">/s</code>? Well the <code class="language-plaintext highlighter-rouge">help</code> command on 
+gdb mentions that on <code class="language-plaintext highlighter-rouge">/s</code> option, the output is displayed in PC address order. 
+While <code class="language-plaintext highlighter-rouge">/m</code> option is is in source line order, regardless of any optimization that is present. 
+But the issue with <code class="language-plaintext highlighter-rouge">/m</code> option is that <code class="language-plaintext highlighter-rouge">Only the main source file
+is displayed, not those of, e.g., any inlined functions</code> and this this option 
+has not been found particularly useful in practice. So stick with using <code class="language-plaintext highlighter-rouge">/s</code> 
+option instead.</p>
+
+<h2 id="issues-with-tui">Issues With TUI</h2>
+
+<p>TUI option is great when debugging but I have found that it is not useful when 
+trying to disassemble the program. The issue with tui is that the option <code class="language-plaintext highlighter-rouge">/s</code> 
+does not appear to work and only gives me the regular output.</p>
+
+<p><img src="/assets/programming/gdb-tui-split.png" alt="GDB with TUI not showing the annotated line of C in the assembly code" /></p>
+<p class="caption">GDB with TUI does not show the annotated line of C in the assembly view</p>
+
+<p>I’ll update this blog if I do find a way though. At the time of writing, I do not know 
+how to set TUI to display the output of <code class="language-plaintext highlighter-rouge">/s</code> when executing <code class="language-plaintext highlighter-rouge">disassemble</code></p>
+
+</div>
+</div>
+
+    </div>
+
+  <footer>
+  <marquee id = "buttons">
+    <a href = "index.html"><img src = "/assets/buttons/button.png"></a>
+    <a href = "index.html"><img src = "/assets/buttons/button2.png"></a>
+    <a href = 'https://neocities.org/'><img src = "/assets/buttons/neocitiesorg.gif"></a>
+    <a href = 'https://www.vim.org/'><img src = "/assets/buttons/vim.gif"></a>
+    <a href = 'https://fedoraproject.org/'><img src = "/assets/buttons/gnu-linux.gif"></a>
+    <a href = "https://fedoraproject.org/"><img src = "/assets/buttons/powered_by_fedora_alt.png"></a>
+  </marquee>
+  <small><a href = "/credits" class = "credits">Credits</a></small>
+</footer>
+
+
+  </body>
+</html>

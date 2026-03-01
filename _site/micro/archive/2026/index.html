@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>µBlog Archive - RANDOM BITS</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/css/syntax_monokai.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="/assets/css/test.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/png" href="/assets/site/random-bits-favicon.png">
+    <meta name="og:title" content="Random Bits">
+    <meta name="og:image" content="">
+    <meta name="og:description"
+        content="Random bits of programming, math, and personal thoughts">
+    <meta name="keywords" content="zakuarbor, programming, math, random bits, pikachu">
+    <meta name="description" content="Random bits of programming, math, and personal thoughts">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script charset="utf-8" src="/assets/js/script.js"></script>
+<script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+     loader: {load: ['[tex]/cancel']},
+      TeX: { 
+        equationNumbers: { autoNumber: "all" },
+        packages: {'[+]': ['cancel']}
+      } 
+    }); 
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+  <header>
+    <center>
+      <h1 id = "title"><a href = "/index.html">RANDOM BITS</a><img id = "pikachu-header" src = "/assets/site/flying-pikachu.png"/></h1>
+    A random site by a random clueless human
+    </center>
+    <!--<marquee scrollamount="4">-->
+    <center>
+      <!--<img src = "/assets/gifs/pikachu-run.gif"/>--><p>Random bits of programming, math, and thoughts
+      By a clueless human</p><!-- <img src = "/assets/gifs/pikachu-run.gif"/>-->
+    </center>
+      <!--&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      <img src = "/assets/gifs/pikachu-run.gif"/>Random bits of programming, math, and thoughts
+      By a clueless human <img src = "/assets/gifs/pikachu-run.gif"/>-->
+      <!--</marquee>-->
+
+    <a href="javascript:void(0);" class="hamburger-nav" onclick="toggleMenu()"><i class="fa fa-bars"></i></a>
+    <nav id="header-nav">
+    <center>
+      <a href="/index.html">Home</a>
+      <a href="/micro/"><span style = "letter-spacing: 1px;">µ</span>Blog</a>
+      <a href="/blog/"><span style = "letter-spacing: 1px;">Blog</a>
+      <a href="/link.html">LinkBlog</a>
+      <!--<a href="/math.html">Math</a>-->
+      <a href="/about.html">About</a>
+    </center>
+    </nav>
+</header>
+
+  </head>
+  <body>
+
+    <div id = "wrapper">
+    <div id = "content">
+  
+
+
+<h1>µBlog Archive (2026)</h1>
+
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/micro/2026/02/site-update">Singularity Rootkit</a></h1>
+<div>
+<p class = "date">February 19, 2026</p>
+<div class="tags">
+
+<a href="/categories/#micro">micro</a>
+&nbsp;
+
+<a href="/categories/#linux">linux</a>
+&nbsp;
+
+<a href="/categories/#rootkit">rootkit</a>
+
+
+</div>
+An interesting yet scary piece of software I read about on the weekly Linux news is Singularity, an open-source rootkit, which can hide itself from being detected, at least does a decent job at it. It hides its existence by removing itself from the list of active kernel modules, and also attempts to hide attacker-controlled processes, network communication, and related files. As it has kernel-level access, it can hook and intercept syscalls that could reveal files that singularity wishes to hide from. Not totally related but this reminds me of a shared library exploit whereby the shared library intercepts the...
+<p><a href="/micro/2026/02/site-update">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/micro/2026/02/singularity-rootkit">Singularity Rootkit</a></h1>
+<div>
+<p class = "date">February 19, 2026</p>
+<div class="tags">
+
+<a href="/categories/#micro">micro</a>
+&nbsp;
+
+<a href="/categories/#linux">linux</a>
+&nbsp;
+
+<a href="/categories/#rootkit">rootkit</a>
+
+
+</div>
+An interesting yet scary piece of software I read about on the weekly Linux news is Singularity, an open-source rootkit, which can hide itself from being detected, at least does a decent job at it. It hides its existence by removing itself from the list of active kernel modules, and also attempts to hide attacker-controlled processes, network communication, and related files. As it has kernel-level access, it can hook and intercept syscalls that could reveal files that singularity wishes to hide from. Not totally related but this reminds me of a shared library exploit whereby the shared library intercepts the...
+<p><a href="/micro/2026/02/singularity-rootkit">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/micro/2026/01/diploma-signing">Digital Signatures on PDF</a></h1>
+<div>
+<p class = "date">January 17, 2026</p>
+<div class="tags">
+
+<a href="/categories/#micro">micro</a>
+&nbsp;
+
+<a href="/categories/#signing">signing</a>
+
+
+</div>
+Recently, I came across my electronic copy of my degree and transcript from several years ago and remembered that it was digitally signed. I previously wrote about how to manually verify an email signature 2 years ago and that got me thinking: how can I verify the signature of my degree and transcript to ensure that it has indeed come from my University and that it has not been tampered with? Note: When referring to digital signatures on PDFs, I am not referring to e-signature i.e. the graphical signature that contains a name for instance For this post, I won’t...
+<p><a href="/micro/2026/01/diploma-signing">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/micro/2026/01/os-eol-2025">2025 - The End of Two OS</a></h1>
+<div>
+<p class = "date">January  9, 2026</p>
+<div class="tags">
+
+<a href="/categories/#micro">micro</a>
+&nbsp;
+
+<a href="/categories/#eol">eol</a>
+
+
+</div>
+December 31st marked the end of HP-UX. Apparently released in 1982, it was mainly used in the enterprise world from what I know. I do not have much fond memories of this platform due to my work compiling (building) security fixes (PSIRT - Product Security Incident Response) when I was at IBM many years ago, though no fault to HPUX itself. At IBM Db2, we called HPUX builds hpipf32 and hpipf64 as evident if you were to look at the link to any HPUX Db2 security patch: fixids=special_38387_DB2-hpipf64-universal_fixpack-9.7.0.11-FP011. Though for some reason, I recalled calling it ia32 and ia64 as...
+<p><a href="/micro/2026/01/os-eol-2025">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/micro/2026/01/new-desktop">New Year, New Desktop</a></h1>
+<div>
+<p class = "date">January  8, 2026</p>
+<div class="tags">
+
+<a href="/categories/#micro">micro</a>
+
+
+</div>
+A new year, a new computer, and a new experience, building my first desktop. It’s only been a year since I got a Framework laptop which is already sufficent for my current needs so there wasn’t any good reason to get a new computer. While most think GPUs are only good for gaming and more recently for running your own local LLM, it can be used for more interesting things, compute such as numerical analysis and simulations. Not that I’m sufficiently motivated to do so myself. Perhaps I’ll write my final undergraduate Math paper on numerical analysis and simulations, but...
+<p><a href="/micro/2026/01/new-desktop">Read More...</a></p>
+</div>
+</div>
+
+
+
+</div>
+
+    </div>
+
+  <footer>
+  <marquee id = "buttons">
+    <a href = "index.html"><img src = "/assets/buttons/button.png"></a>
+    <a href = "index.html"><img src = "/assets/buttons/button2.png"></a>
+    <a href = 'https://neocities.org/'><img src = "/assets/buttons/neocitiesorg.gif"></a>
+    <a href = 'https://www.vim.org/'><img src = "/assets/buttons/vim.gif"></a>
+    <a href = 'https://fedoraproject.org/'><img src = "/assets/buttons/gnu-linux.gif"></a>
+    <a href = "https://fedoraproject.org/"><img src = "/assets/buttons/powered_by_fedora_alt.png"></a>
+  </marquee>
+  <small><a href = "/credits" class = "credits">Credits</a></small>
+</footer>
+
+
+  </body>
+</html>

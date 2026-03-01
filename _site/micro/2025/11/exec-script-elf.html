@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>How Linux Executes Executable Scripts - RANDOM BITS</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/css/syntax_monokai.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="/assets/css/test.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/png" href="/assets/site/random-bits-favicon.png">
+    <meta name="og:title" content="Random Bits">
+    <meta name="og:image" content="">
+    <meta name="og:description"
+        content="Random bits of programming, math, and personal thoughts">
+    <meta name="keywords" content="zakuarbor, programming, math, random bits, pikachu">
+    <meta name="description" content="Random bits of programming, math, and personal thoughts">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script charset="utf-8" src="/assets/js/script.js"></script>
+<script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+     loader: {load: ['[tex]/cancel']},
+      TeX: { 
+        equationNumbers: { autoNumber: "all" },
+        packages: {'[+]': ['cancel']}
+      } 
+    }); 
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+  <header>
+    <center>
+      <h1 id = "title"><a href = "/index.html">RANDOM BITS</a><img id = "pikachu-header" src = "/assets/site/flying-pikachu.png"/></h1>
+    A random site by a random clueless human
+    </center>
+    <!--<marquee scrollamount="4">-->
+    <center>
+      <!--<img src = "/assets/gifs/pikachu-run.gif"/>--><p>Random bits of programming, math, and thoughts
+      By a clueless human</p><!-- <img src = "/assets/gifs/pikachu-run.gif"/>-->
+    </center>
+      <!--&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      <img src = "/assets/gifs/pikachu-run.gif"/>Random bits of programming, math, and thoughts
+      By a clueless human <img src = "/assets/gifs/pikachu-run.gif"/>-->
+      <!--</marquee>-->
+
+    <a href="javascript:void(0);" class="hamburger-nav" onclick="toggleMenu()"><i class="fa fa-bars"></i></a>
+    <nav id="header-nav">
+    <center>
+      <a href="/index.html">Home</a>
+      <a href="/micro/"><span style = "letter-spacing: 1px;">µ</span>Blog</a>
+      <a href="/blog/"><span style = "letter-spacing: 1px;">Blog</a>
+      <a href="/link.html">LinkBlog</a>
+      <!--<a href="/math.html">Math</a>-->
+      <a href="/about.html">About</a>
+    </center>
+    </nav>
+</header>
+
+  </head>
+  <body>
+
+    <div id = "wrapper">
+    <div id = "content">
+<div class = "bits">
+  <h1 class = "title">How Linux Executes Executable Scripts</h1>
+
+  <div>
+    <p class = "date">November  8, 2025</p>
+    
+    <div class="tags">
+      
+      
+        <a href="/categories/#micro">micro</a>
+        &nbsp;
+      
+        <a href="/categories/#linux">linux</a>
+        &nbsp;
+      
+        <a href="/categories/#C/C++">C/C++</a>
+        
+      
+    </div>
+  </div>
+  <p>One is traditionally taught that when running an executable (a file with execute permission), the shell will <code class="language-plaintext highlighter-rouge">fork()</code> itself and have the child process replace itself using <code class="language-plaintext highlighter-rouge">execve()</code>.
+One winter a few years back, I random question popped in my head: Who determines whether a file is a script or an executable and where in the code does this logic lie in?</p>
+
+<p>Recall to invoke a script or any non-ELF executables such as Python and Bash script, one needs to specify the path to the interpreter using the shebang directive (<code class="language-plaintext highlighter-rouge">#!</code>) such as</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/usr/bin/bash</span>
+</code></pre></div></div>
+
+<p>or</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!/usr/bin/python
+</span></code></pre></div></div>
+
+<p>I was unsure whether the responsability of executing the script properly was the job of the terminal (<code class="language-plaintext highlighter-rouge">bash</code>, <code class="language-plaintext highlighter-rouge">sh</code>, <code class="language-plaintext highlighter-rouge">csh</code>, etc) or the kernel. I highly suspected it was the role of the 
+kernel and randomly I came across an article <a href="https://iq.thc.org/how-does-linux-start-a-process">How does Linux start a process</a> that answers this question. In short, when one calls <code class="language-plaintext highlighter-rouge">execve</code>,</p>
+
+<blockquote>
+  <p>From there into <a href="https://elixir.bootlin.com/linux/v5.19.17/source/fs/exec.c#L1709"><code class="language-plaintext highlighter-rouge">search_binary_handler()</code></a>  where the Kernel checks if the binary is ELF, a shebang (<code class="language-plaintext highlighter-rouge">#!</code>) or any other type registered via the binfmt-misc module.</p>
+
+  <p>Excerpt from <a href="https://iq.thc.org/how-does-linux-start-a-process">How does Linux start a process</a></p>
+</blockquote>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
+ * cycle the list of binary formats handler, until one recognizes the image
+ */</span>
+<span class="k">static</span> <span class="kt">int</span> <span class="nf">search_binary_handler</span><span class="p">(</span><span class="k">struct</span> <span class="n">linux_binprm</span> <span class="o">*</span><span class="n">bprm</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+	<span class="n">list_for_each_entry</span><span class="p">(</span><span class="n">fmt</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">formats</span><span class="p">,</span> <span class="n">lh</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//iterate through all registered binary format handlers</span>
+		<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">try_module_get</span><span class="p">(</span><span class="n">fmt</span><span class="o">-&gt;</span><span class="n">module</span><span class="p">))</span> 
+			<span class="k">continue</span><span class="p">;</span>
+
+		<span class="n">retval</span> <span class="o">=</span> <span class="n">fmt</span><span class="o">-&gt;</span><span class="n">load_binary</span><span class="p">(</span><span class="n">bprm</span><span class="p">);</span> <span class="c1">// attempt to load executable as the current format</span>
+        
+        <span class="c1">// ...</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">bprm</span><span class="o">-&gt;</span><span class="n">point_of_no_return</span> <span class="o">||</span> <span class="p">(</span><span class="n">retval</span> <span class="o">!=</span> <span class="o">-</span><span class="n">ENOEXEC</span><span class="p">))</span> <span class="p">{</span> <span class="c1">//format recognized so stop searching</span>
+			<span class="n">read_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">binfmt_lock</span><span class="p">);</span>
+			<span class="k">return</span> <span class="n">retval</span><span class="p">;</span>
+		<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The kernel will call <a href="https://elixir.bootlin.com/linux/v5.19.17/source/fs/exec.c#L1709"><code class="language-plaintext highlighter-rouge">search_binary_handler()</code></a> to determine the type the binary (executable) by iterating through all registered formats 
+which includes (not in order):</p>
+
+<ul>
+  <li>ELF - <code class="language-plaintext highlighter-rouge">binfmt_elf</code></li>
+  <li>Scripts (<code class="language-plaintext highlighter-rouge">#!</code>) - <code class="language-plaintext highlighter-rouge">binfmt_script</code></li>
+  <li>Misc - <code class="language-plaintext highlighter-rouge">binfmt_misc</code>: Linux (kernel) allows one to register a custom format by providing a magic number or a filename extension (see <a href="https://docs.kernel.org/admin-guide/binfmt-misc.html">Kernel Support for miscellaneous Binary Formats</a>)</li>
+</ul>
+
+<p>Each binary format <code class="language-plaintext highlighter-rouge">fmt</code> (<a href="https://elixir.bootlin.com/linux/v5.19.17/source/include/linux/binfmts.h#L85"><code class="language-plaintext highlighter-rouge">struct linux_binfmt</code></a> has a function pointer <code class="language-plaintext highlighter-rouge">load_binary</code> used to load the binary. This is the function the 
+kernel uses to help identify the binary type as this function will return <code class="language-plaintext highlighter-rouge">-ENOEXEC</code> if the binary is not of its type.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
+ * This structure defines the functions that are used to load the binary formats that
+ * linux accepts.
+ */</span>
+<span class="k">struct</span> <span class="n">linux_binfmt</span> <span class="p">{</span>
+	<span class="k">struct</span> <span class="n">list_head</span> <span class="n">lh</span><span class="p">;</span>
+	<span class="k">struct</span> <span class="n">module</span> <span class="o">*</span><span class="n">module</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">load_binary</span><span class="p">)(</span><span class="k">struct</span> <span class="n">linux_binprm</span> <span class="o">*</span><span class="p">);</span>
+	<span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">load_shlib</span><span class="p">)(</span><span class="k">struct</span> <span class="n">file</span> <span class="o">*</span><span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>For scripts, the loader can be found in <a href="https://elixir.bootlin.com/linux/v5.19.17/source/fs/binfmt_script.c"><code class="language-plaintext highlighter-rouge">fs/binfmt_script.c</code></a> a function <a href="https://elixir.bootlin.com/linux/v5.19.17/source/fs/binfmt_script.c"><code class="language-plaintext highlighter-rouge">load_script</code></a>:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="kt">int</span> <span class="nf">load_script</span><span class="p">(</span><span class="k">struct</span> <span class="n">linux_binprm</span> <span class="o">*</span><span class="n">bprm</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">i_name</span><span class="p">,</span> <span class="o">*</span><span class="n">i_sep</span><span class="p">,</span> <span class="o">*</span><span class="n">i_arg</span><span class="p">,</span> <span class="o">*</span><span class="n">i_end</span><span class="p">,</span> <span class="o">*</span><span class="n">buf_end</span><span class="p">;</span>
+	<span class="k">struct</span> <span class="n">file</span> <span class="o">*</span><span class="n">file</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">retval</span><span class="p">;</span>
+
+	<span class="cm">/* Not ours to exec if we don't start with "#!". */</span>
+	<span class="k">if</span> <span class="p">((</span><span class="n">bprm</span><span class="o">-&gt;</span><span class="n">buf</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="sc">'#'</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="n">bprm</span><span class="o">-&gt;</span><span class="n">buf</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="sc">'!'</span><span class="p">))</span>
+		<span class="k">return</span> <span class="o">-</span><span class="n">ENOEXEC</span><span class="p">;</span>
+
+	<span class="cm">/*
+	 * This section handles parsing the #! line into separate
+	 * interpreter path and argument strings. We must be careful
+	 * because bprm-&gt;buf is not yet guaranteed to be NUL-terminated
+	 * (though the buffer will have trailing NUL padding when the
+	 * file size was smaller than the buffer size).
+	 *
+ 	 * .... truncated ....
+	 */</span>
+
+  	<span class="c1">// parsing logic</span>
+
+	<span class="n">bprm</span><span class="o">-&gt;</span><span class="n">interpreter</span> <span class="o">=</span> <span class="n">file</span><span class="p">;</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="things-to-look-at-next">Things to Look At Next</h3>
+<ul>
+  <li>Wonder about how Linux handles ELF binaries, specifically how it handles static and shared binaries? Take a look at <a href="https://iq.thc.org/how-does-linux-start-a-process">How does Linux start a process</a></li>
+  <li><a href="https://rachelbythebay.com/w/2014/08/19/fork/">fork() can fail: this is important</a></li>
+  <li>TODO: Investigate why a script without shebang fails on <code class="language-plaintext highlighter-rouge">strace ./test</code>
+    <ul>
+      <li>use <code class="language-plaintext highlighter-rouge">bpftrace</code> : <code class="language-plaintext highlighter-rouge">sudo bpftrace -e 'kprobe:load_script { printf("load_script called by %s\n", comm); }'</code></li>
+      <li>find other trace events to look at to distinguish between the two cases like exec</li>
+    </ul>
+  </li>
+  <li><strong>Edit (Nov 10):</strong> Someone posted today on <a href="https://news.ycombinator.com/item?id=45804870">Hacker News</a> <a href="https://dfir.ch/posts/today_i_learned_binfmt_misc/">Today I Learned: Binfmt_misc</a> which goes over <code class="language-plaintext highlighter-rouge">binfmt_misc</code> from a security perspective
+    <ul>
+      <li>Links to <a href="https://benjamintoll.com/2021/12/31/on-binfmt_misc/">ON BINFMT_MISC</a>, a tutorial on how to register a new binary format</li>
+    </ul>
+  </li>
+</ul>
+
+</div>
+</div>
+
+    </div>
+
+  <footer>
+  <marquee id = "buttons">
+    <a href = "index.html"><img src = "/assets/buttons/button.png"></a>
+    <a href = "index.html"><img src = "/assets/buttons/button2.png"></a>
+    <a href = 'https://neocities.org/'><img src = "/assets/buttons/neocitiesorg.gif"></a>
+    <a href = 'https://www.vim.org/'><img src = "/assets/buttons/vim.gif"></a>
+    <a href = 'https://fedoraproject.org/'><img src = "/assets/buttons/gnu-linux.gif"></a>
+    <a href = "https://fedoraproject.org/"><img src = "/assets/buttons/powered_by_fedora_alt.png"></a>
+  </marquee>
+  <small><a href = "/credits" class = "credits">Credits</a></small>
+</footer>
+
+
+  </body>
+</html>

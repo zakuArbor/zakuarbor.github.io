@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>Random Links - RANDOM BITS</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/css/syntax_monokai.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="/assets/css/test.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/png" href="/assets/site/random-bits-favicon.png">
+    <meta name="og:title" content="Random Bits">
+    <meta name="og:image" content="">
+    <meta name="og:description"
+        content="Random bits of programming, math, and personal thoughts">
+    <meta name="keywords" content="zakuarbor, programming, math, random bits, pikachu">
+    <meta name="description" content="Random bits of programming, math, and personal thoughts">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script charset="utf-8" src="/assets/js/script.js"></script>
+<script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+     loader: {load: ['[tex]/cancel']},
+      TeX: { 
+        equationNumbers: { autoNumber: "all" },
+        packages: {'[+]': ['cancel']}
+      } 
+    }); 
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+  <header>
+    <center>
+      <h1 id = "title"><a href = "/index.html">RANDOM BITS</a><img id = "pikachu-header" src = "/assets/site/flying-pikachu.png"/></h1>
+    A random site by a random clueless human
+    </center>
+    <!--<marquee scrollamount="4">-->
+    <center>
+      <!--<img src = "/assets/gifs/pikachu-run.gif"/>--><p>Random bits of programming, math, and thoughts
+      By a clueless human</p><!-- <img src = "/assets/gifs/pikachu-run.gif"/>-->
+    </center>
+      <!--&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      <img src = "/assets/gifs/pikachu-run.gif"/>Random bits of programming, math, and thoughts
+      By a clueless human <img src = "/assets/gifs/pikachu-run.gif"/>-->
+      <!--</marquee>-->
+
+    <a href="javascript:void(0);" class="hamburger-nav" onclick="toggleMenu()"><i class="fa fa-bars"></i></a>
+    <nav id="header-nav">
+    <center>
+      <a href="/index.html">Home</a>
+      <a href="/micro/"><span style = "letter-spacing: 1px;">µ</span>Blog</a>
+      <a href="/blog/"><span style = "letter-spacing: 1px;">Blog</a>
+      <a href="/link.html">LinkBlog</a>
+      <!--<a href="/math.html">Math</a>-->
+      <a href="/about.html">About</a>
+    </center>
+    </nav>
+</header>
+
+  </head>
+  <body>
+
+    <div id = "wrapper">
+    <div id = "content">
+  <h2 id="page-title"><img id="pikachu-title" src="/assets/gifs/pikachu-hi.webp" />Random Links</h2>
+
+<p>Random links that I found interesting. I’ll try to limit my commentary to a few sentences. 
+I’ll try to avoid having a large daunting list like my <a href="https://www.cs.toronto.edu/~arnold/">former prof</a></p>
+
+<hr />
+
+<p><a href="https://lwn.net/Articles/1053099/">A free and open-source rootkit for Linux</a></p>
+
+<p>The article made me reflect what makes rootkits scary. This rootkit and any decent rootkits in general are designed to hide itself. In this case, it’s thanks to it’s kernel-level privileges 
+that it can hide itself effectively (though there’s some weakness to this mentioned in the article). This is why I am against the idea of allowing kernel-level anti-cheat code to be on my system. 
+Who knows what craziness they could do even if not intentionally (i.e. supply chain attacks).</p>
+
+<p><a href="../micro/2026/02/singularity-rootkit">READ MORE</a></p>
+
+<hr />
+<p><a href="https://youtu.be/vpSkBV5vydg?si=agAyCNeUCsiNIAGk">UTF-8, Explained Simply</a></p>
+
+<p>This is the best explanation I have found on UTF-8 thus far. I previously said <a href="https://iamvishnu.com/posts/utf8-is-brilliant-design">UTF-8 is Brilliant</a> was the cleanest explanation I’ve seen on this subject, well that was shortly 
+beaten on October 2 2025. Here’s an outline of the topics covered in the video: <a href="/micro/2025/10/best-unicode-video">UTF-8 Explained Simply - The Best Video on UTF-8</a></p>
+
+<hr />
+
+<p><a href="https://iamvishnu.com/posts/utf8-is-brilliant-design">UTF-8 is Brilliant</a></p>
+
+<p>A nice simple blog to explain how UTF-8 works. I have briefly looked at <a href="https://zakuarbor.codeberg.page/blog/halfwidth-fullwidth-encoding/">character encoding</a> previously 
+when helping a friend in Linguistics make sense of this for his paper. This is the cleanest explaination I have seen thus far. The author also has created a <a href="https://utf8-playground.netlify.app/">playground</a> 
+for people to fiddle around with to visualize the format.</p>
+
+<hr />
+
+<p><a href="https://lwn.net/Articles/986792/">CentOS Stream 10 Requiring AVX and AVX2 Support</a></p>
+
+<p>Prior to this article, I was not explicitly aware that there were x86-64 extensions of which could cause other x86-64 software unable to run on older x86-64 chips despite being 
+of the same AMD64 architecture. This has unintended consequences such as <a href="https://lists.centos.org/hyperkitty/list/devel@lists.centos.org/message/AKGZLFOZV5IDESSBJLQ3RL5JBZK2K74N/">CERN</a> 
+unable to continue its use of RHEL for industrial-control systems. For context, Stream 10 now requires AVX and AVX2 support (advanced vector extensions) which isn’t supported on older 
+chips. It is prohibitally expensive for organizations to replace thousands of chips before their expected retirements/lifespan/replacement. In hindsight, I should have known since 
+POWER and ARM continually introduce new instructions. I have no clue why this never clicked in my head.</p>
+
+<hr />
+
+<p><a href="https://lwn.net/Articles/1013776/">Lessons from open source in the Mexican government</a></p>
+
+<p>The article is interesting as it highlights the difficulty of introducing open-source to governments who are not known to be the most tech-savvy nor have the 
+interest to diversify their technological dependence to big-tech. The article has a few interesting quotes that I would like to share:</p>
+
+<blockquote>
+  <p>Another part of the project was to move away from Oracle and to PostgreSQL. That change led to various threats and intimidation from the company when it learned of the change</p>
+
+  <p>[…] all of the large proprietary software companies ““are big bullies””. He has been called into the US embassy and been threatened because Mexico was using technology that was not from the US;</p>
+
+  <p>[…] Various companies use the US government to bully other countries, but they also use license audits as a reaction to projects that move to open-source software</p>
+</blockquote>
+
+<p>The fact that companies threaten their customers comes to no surprise. While it may sound shocking initially, if one was to recall history, the pattern of big companies
+abusing their power and even involving the government at times is a consistent pattern throughout history. Although extreme, look at the Banana war or the invasion 
+of Hawaii for instance.</p>
+
+<p>This I also find unsurprising:</p>
+<blockquote>
+  <p>The team took advantage of the shift to restructure the database ““because we found that our storage provider was being a little bit naughty””, storing the data three or four times in order to charge more money.</p>
+
+  <p>[…]  When you make decisions that take money out of people’s pockets, they ““start getting really nasty””.</p>
+</blockquote>
+
+<hr />
+
+<p><strong><a href="https://nroottag.github.io/">Tracking You from a Thousand Miles Away! Turning a Bluetooth Device into an Apple AirTag Without Root Privileges</a></strong></p>
+
+<p>This is a paper that demonstrates a way to track the location of a bluetooth device such as your Linux machine utilizing Apple’s AirTag network. The irony is 
+that iPhones can be utilized to track and stalk Android devices. What makes this paper interesting is its effectiveness and how wide spread 
+its targets are as it can target Linux, Windows, and Android. 
+The paper does suggest this attack would work for Apple devices as well by exploiting known vulnerabilities. The paper’s threat model assumes the device has been 
+infected via various methods such as extending an App’s functionality to be malicious which could be utilized by advertisers, social media companies and music apps 
+to track their user’s locations.</p>
+
+<hr />
+
+<p><strong><a href="https://xiokka.neocities.org/projects/bmpuzzle/">bmpuzzle: Embed files within the padding of bitmap images</a></strong></p>
+
+<p>As the title suggests, you can exploit padding that occurs for bmp images to embed files. Quite elegant and is much more discreet than concatenating a file 
+on an image or <a href="https://stegosploit.info/">Stegasploit</a>, a way to encode files into PNG and JPEG images by utilizing the nature of polyglot and the use of 
+some complicated iterative encoder. The reason why I like the suggested solution of embedding files onto the padding is that it’s both simple and more discreet 
+as it does not increase the size of the image and does not require the need for a complex iterative encoder to encode the secret. 
+Though there are constraints to what files you can encode as you would require a very tall image if you wish to encode anything large.</p>
+
+<hr />
+
+<p><strong><a href="https://linuxfr.org/users/usawa/journaux/la-fin-de-windows-10-une-opportunite-pour-linux">La fin de Windows 10 : une opportunité pour Linux ?</a></strong></p>
+
+<p>There has been some optimistism of a great migration to Linux due to the approaching end of Windows 10 forcing millions of PCs without TPM to either be thrown out
+or be migrated to Linux (or BSD). This articles highlights the difficulty of this dream.</p>
+
+<hr />
+
+<p><strong><a href="https://linuxfr.org/users/tarnyko/journaux/c23-un-memset_explicit-qui-carbure">C23: un memset_explicit() qui carbure</a></strong></p>
+
+<p>When working with senisitive information such as password, it is often good practice to zero out or fill the memory with garbage values when the informtion is 
+no longer needed. This helps prevent leaks of sensitive information. What is often the case, the variable holding the sensitive information is often not ever 
+reused again and therefore the compiler will often ignore this call to zero out the sensitive information. The article was an interesting read as I forgot the unintended 
+consequences of optimization. The author provides a <a href="https://github.com/Tarnyko/suave_code_samples/tree/master/C/C23/memset_explicit">multiplatform solution</a> to 
+this problem.</p>
+
+<hr />
+
+<p><strong><a href="https://www.downtowndougbrown.com/2025/01/the-invalid-68030-instruction-that-accidentally-allowed-the-mac-classic-ii-to-successfully-boot-up/">The invalid 68030 instruction that accidentally allowed the Mac Classic II to successfully boot up</a></strong></p>
+
+<p>An interesting read despite only understanding the gist of it. Essentially, the writer stumbled an issue that was displaying a Sad Mac with an indication that a 
+bus error has occurred when trying out a keystroke that I guess is supposed to invoke a debugger on an emulator running Macintosh Classic II. As the title suggested, 
+it’s a dive into how he realized there was an invalid instruction in Motorola MC68030 CPU that allowed the Mac Classic II to boot up. A redditor <a href="https://www.reddit.com/r/programming/comments/1ibei57/comment/m9kkmkv/?utm_source=share&amp;utm_medium=web3x&amp;utm_name=web3xcss&amp;utm_term=1&amp;utm_content=share_button">quipped 
+that this would be a clever DRM protection</a> 
+since it’s an undocumented or invalid instruction that only allows the rom of the Classic II to only run on MC68030. This was an interesting theory/joke.</p>
+
+<hr />
+
+<p><strong><a href="https://mjg59.dreamwidth.org/70954.html">The GPU, not the TPM, is the root of hardware DRM</a></strong></p>
+
+<p>I always thought one could capture whatever is displayed on the screen and if one couldn’t, one could circumvent the protection via software including modification 
+of the Kernel. I always thought that the OS would have access to anything that it would display to your display but apparently that is not the case.</p>
+
+<blockquote>
+  <p>the decoded video material is still stored in RAM that the OS has no access to, and the GPU composites it onto the outbound video stream</p>
+</blockquote>
+
+<p>I am assuming the RAM that the OS has no access to would either be the vRAM or memory that the BIOS hid from the OS.</p>
+
+<hr />
+
+<p><strong><a href="https://mjg59.dreamwidth.org/68537.html">Why does Gnome fingerprint unlock not unlock the keyring?</a></strong></p>
+
+<p>I always wondered why I always needed to unlock the keyring (i.e. enter a password) when I log onto my laptop using my fingerprint. Now I know why. 
+The author’s note on Apple probably refers to MacOS as iPhone iOS which requires a PIN Code to be entered after boot (i.e. Before First Unlock).</p>
+
+<hr />
+
+<p><strong><a href="https://naehrdine.blogspot.com/2024/11/reverse-engineering-ios-18-inactivity.html">Reverse Engineering iOS 18 Inactivity Reboot</a></strong></p>
+
+<p>This was an interesting analysis as it contradicted the rumours that was spread by US law enforcement which I found to be a stretched claim anyways.
+For context, US law enforcements were claiming that seized iOS 18.0 iPhones were able to communicate to other iPhones (including older phones) in a secured 
+environment (with all phones being on airplane mode) to reboot causing forensics to lose valuable access since the phone won’t be in After First Unlock (AFU).
+For context, phones in AFU state have user data is decrypted, you can receieve messages and you would have access to the Wifi network.
+This means there is more attack surface which the forensic investigators can exploit once a vulnerability is identified.</p>
+
+
+</div>
+
+    </div>
+
+  <footer>
+  <marquee id = "buttons">
+    <a href = "index.html"><img src = "/assets/buttons/button.png"></a>
+    <a href = "index.html"><img src = "/assets/buttons/button2.png"></a>
+    <a href = 'https://neocities.org/'><img src = "/assets/buttons/neocitiesorg.gif"></a>
+    <a href = 'https://www.vim.org/'><img src = "/assets/buttons/vim.gif"></a>
+    <a href = 'https://fedoraproject.org/'><img src = "/assets/buttons/gnu-linux.gif"></a>
+    <a href = "https://fedoraproject.org/"><img src = "/assets/buttons/powered_by_fedora_alt.png"></a>
+  </marquee>
+  <small><a href = "/credits" class = "credits">Credits</a></small>
+</footer>
+
+
+  </body>
+</html>

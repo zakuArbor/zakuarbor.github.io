@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>An Uninteresting Glance At Strings - RANDOM BITS</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/css/syntax_monokai.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="/assets/css/test.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/png" href="/assets/site/random-bits-favicon.png">
+    <meta name="og:title" content="Random Bits">
+    <meta name="og:image" content="">
+    <meta name="og:description"
+        content="Random bits of programming, math, and personal thoughts">
+    <meta name="keywords" content="zakuarbor, programming, math, random bits, pikachu">
+    <meta name="description" content="Random bits of programming, math, and personal thoughts">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script charset="utf-8" src="/assets/js/script.js"></script>
+<script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+     loader: {load: ['[tex]/cancel']},
+      TeX: { 
+        equationNumbers: { autoNumber: "all" },
+        packages: {'[+]': ['cancel']}
+      } 
+    }); 
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+  <header>
+    <center>
+      <h1 id = "title"><a href = "/index.html">RANDOM BITS</a><img id = "pikachu-header" src = "/assets/site/flying-pikachu.png"/></h1>
+    A random site by a random clueless human
+    </center>
+    <!--<marquee scrollamount="4">-->
+    <center>
+      <!--<img src = "/assets/gifs/pikachu-run.gif"/>--><p>Random bits of programming, math, and thoughts
+      By a clueless human</p><!-- <img src = "/assets/gifs/pikachu-run.gif"/>-->
+    </center>
+      <!--&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      <img src = "/assets/gifs/pikachu-run.gif"/>Random bits of programming, math, and thoughts
+      By a clueless human <img src = "/assets/gifs/pikachu-run.gif"/>-->
+      <!--</marquee>-->
+
+    <a href="javascript:void(0);" class="hamburger-nav" onclick="toggleMenu()"><i class="fa fa-bars"></i></a>
+    <nav id="header-nav">
+    <center>
+      <a href="/index.html">Home</a>
+      <a href="/micro/"><span style = "letter-spacing: 1px;">µ</span>Blog</a>
+      <a href="/blog/"><span style = "letter-spacing: 1px;">Blog</a>
+      <a href="/link.html">LinkBlog</a>
+      <!--<a href="/math.html">Math</a>-->
+      <a href="/about.html">About</a>
+    </center>
+    </nav>
+</header>
+
+  </head>
+  <body>
+
+    <div id = "wrapper">
+    <div id = "content">
+<div class = "bits">
+  <h1 class = "title">An Uninteresting Glance At Strings</h1>
+
+  <div>
+    <p class = "date">July 27, 2023</p>
+    
+    <div class="tags">
+      
+      
+        <a href="/categories/#programming">programming</a>
+        &nbsp;
+      
+        <a href="/categories/#c/c++">c/c++</a>
+        &nbsp;
+      
+        <a href="/categories/#blog">blog</a>
+        
+      
+    </div>
+  </div>
+  <p>An uninteresting post about looking at the generated assembly code of a simple program that just stores a string. I got bored at work and decided to randomly look at strings. 
+Nothing interesting about this post, I just wanted to write something quick to kill time.</p>
+
+<p>Strings in C as one may know are just an array of characters that is null terminated. Strings can also be represented as string literals stored in the data section of the program usually. 
+I thought I could see something interesting with how strings are stored in ELF format but my quick glance at the ELF and the generated assembly was of no interest (I am a noob at how to inspect ELF 
+so I probably missed something interesting).</p>
+
+<p><strong>Warning:</strong> Nothing interesting was found. Just a random post written by a sleep deprived student who is bored.</p>
+
+<h2 id="a-look-at-string-literals">A Look At String Literals</h2>
+
+<p>Let’s look at how string literals are stored in the program:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">str</span> <span class="o">=</span> <span class="s">"some string"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>As expected, we can see that the string literal is indeed stored in the read only data section:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>readelf <span class="nt">-x</span> .rodata a.out 
+
+Hex dump of section <span class="s1">'.rodata'</span>:
+  0x00402000 01000200 00000000 00000000 00000000 ................
+  0x00402010 736f6d65 20737472 696e6700          some string.
+</code></pre></div></div>
+
+<p>The assembly code of interest is:</p>
+<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">.LC0:</span>
+	<span class="nf">.string</span>	<span class="err">"</span><span class="nv">some</span> <span class="nv">string</span><span class="err">"</span>
+    <span class="c1">;omitted</span>
+<span class="nl">main:</span>
+<span class="nl">.LFB0:</span>
+    <span class="c1">;omitted</span>
+	<span class="nf">movq</span>	<span class="kc">$</span><span class="nv">.LC0</span><span class="p">,</span> <span class="o">-</span><span class="mi">8</span><span class="p">(</span><span class="o">%</span><span class="nb">rbp</span><span class="p">)</span>
+    <span class="c1">;omitted</span>
+</code></pre></div></div>
+
+<p>As one can see, the program literally copies the string literal into the stack. Nothing interesting.</p>
+
+<h2 id="a-look-at-strings-in-an-array">A Look At Strings in an Array</h2>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> <span class="n">str</span><span class="p">[]</span> <span class="o">=</span> <span class="s">"some string"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>As the string literal “some string” is being stored in an array, we don’t expect the literal to be stored in the read only data section:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>readelf <span class="nt">-x</span> .rodata a.out 
+
+Hex dump of section <span class="s1">'.rodata'</span>:
+  0x00402000 01000200 00000000 00000000 00000000 ................
+</code></pre></div></div>
+
+<p>But what about if we add a <code class="language-plaintext highlighter-rouge">const</code> qualifier? How will the compiler behave?</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">const</span> <span class="kt">char</span> <span class="n">str</span><span class="p">[]</span> <span class="o">=</span> <span class="s">"some string"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Well nothing changes. I would have thought the compiler would have tried to take advantage of the <code class="language-plaintext highlighter-rouge">const</code> qualifier but it didn’t.
+The example I have used may have been too simple to be of any interest. I know the paper <a href="https://www.cs.dartmouth.edu/~sergey/cs258/ABI/UlrichDrepper-How-To-Write-Shared-Libraries.pdf">How to Write Shared Libraries</a> 
+offers some interesting suggestion on how to optimize code with const. But I am not trying to replicate their examples.</p>
+
+<p>Let’s view the assembly code (edited to show only code that is of interest):</p>
+<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kc">$</span> <span class="nf">gcc</span> <span class="o">-</span><span class="nv">c</span> <span class="o">-</span><span class="nv">S</span> <span class="nv">test.c</span> <span class="o">-</span><span class="nv">o</span> <span class="o">-</span> 
+<span class="cp">%omitted
+</span><span class="nl">.LFB0:</span>
+<span class="cp">    %omitted
+</span>	<span class="nf">movabsq</span>	<span class="kc">$</span><span class="mi">8247343400600039283</span><span class="p">,</span> <span class="o">%</span><span class="nb">rax</span>
+	<span class="nf">movq</span>	<span class="o">%</span><span class="nb">rax</span><span class="p">,</span> <span class="o">-</span><span class="mi">12</span><span class="p">(</span><span class="o">%</span><span class="nb">rbp</span><span class="p">)</span>
+	<span class="nf">movl</span>	<span class="kc">$</span><span class="mi">6778473</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">(</span><span class="o">%</span><span class="nb">rbp</span><span class="p">)</span>
+<span class="cp">    %omitted
+</span></code></pre></div></div>
+
+<p>As one can see, the string is represented by some number <code class="language-plaintext highlighter-rouge">8247343400600039283</code> which is <code class="language-plaintext highlighter-rouge">72747320656D6F73</code> in hex which represents our string (but backwards).
+As the string is long, two instructions were required to push the string into the stack (i.e. “some str” is pushed into the stack and then “ing”).</p>
+
+<p>So another idea would be to see if the compiler would do something if I was to repreatedly make use of substrings. Turns out it does not, at least not in my example 
+which is very simple. All it does is push the string represented as integers into the stack repeatedly:</p>
+<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">movabsq</span>	<span class="kc">$</span><span class="mi">8247343400600039283</span><span class="p">,</span> <span class="o">%</span><span class="nb">rax</span>
+	<span class="nf">movq</span>	<span class="o">%</span><span class="nb">rax</span><span class="p">,</span> <span class="o">-</span><span class="mi">12</span><span class="p">(</span><span class="o">%</span><span class="nb">rbp</span><span class="p">)</span>
+	<span class="nf">movl</span>	<span class="kc">$</span><span class="mi">6778473</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">(</span><span class="o">%</span><span class="nb">rbp</span><span class="p">)</span>
+	<span class="nf">movl</span>	<span class="kc">$</span><span class="mi">1701670771</span><span class="p">,</span> <span class="o">-</span><span class="mi">17</span><span class="p">(</span><span class="o">%</span><span class="nb">rbp</span><span class="p">)</span>
+	<span class="nf">movb</span>	<span class="kc">$</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">13</span><span class="p">(</span><span class="o">%</span><span class="nb">rbp</span><span class="p">)</span>
+	<span class="nf">movl</span>	<span class="kc">$</span><span class="mi">7171955</span><span class="p">,</span> <span class="o">-</span><span class="mi">21</span><span class="p">(</span><span class="o">%</span><span class="nb">rbp</span><span class="p">)</span>
+	<span class="nf">movw</span>	<span class="kc">$</span><span class="mi">28531</span><span class="p">,</span> <span class="o">-</span><span class="mi">24</span><span class="p">(</span><span class="o">%</span><span class="nb">rbp</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>If you made it this far, you must be as bored as I am. As the title suggest, there isn’t anything interesting about this post.</p>
+
+
+</div>
+</div>
+
+    </div>
+
+  <footer>
+  <marquee id = "buttons">
+    <a href = "index.html"><img src = "/assets/buttons/button.png"></a>
+    <a href = "index.html"><img src = "/assets/buttons/button2.png"></a>
+    <a href = 'https://neocities.org/'><img src = "/assets/buttons/neocitiesorg.gif"></a>
+    <a href = 'https://www.vim.org/'><img src = "/assets/buttons/vim.gif"></a>
+    <a href = 'https://fedoraproject.org/'><img src = "/assets/buttons/gnu-linux.gif"></a>
+    <a href = "https://fedoraproject.org/"><img src = "/assets/buttons/powered_by_fedora_alt.png"></a>
+  </marquee>
+  <small><a href = "/credits" class = "credits">Credits</a></small>
+</footer>
+
+
+  </body>
+</html>

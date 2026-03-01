@@ -12,13 +12,12 @@ permalink: /about.html
 
 Random Bits is not a name I go by fyi. Any other sites and social media using this name is not me. Over the span of my digital life, I have 
 gone through various names but these days I go by zakuarbor. [zakuarbor](https://codeberg.org/zakuArbor) is the name of my ~~Github~~ Codeberg account and 
-therefore also my [blog](https://zakuarbor.codeberg.page/blog). Like many names in the digital world, this name was chosen arbitrary, within a 
+therefore also my ~~blog~~ (now named Random Bits). Like many names in the digital world, this name was chosen arbitrary, within a 
 few minutes before the creation of my account back in 2016. It stems from my favorite Grunt from the Universe of Gundam, the Zaku, and 
 one of the symbols of my university, arbor, which is tree in English.
 
-I am a Math student, software developer, and a random human who writes random things. 
+I am a Math student, software developer, and a random human who writes random things on the internet. 
 Being bored of work, I decided to pursue another degree which led me to my current study in Mathematics. 
-I maintain a blog focusing on programming and hopefully math at [zakuarbor.codeberg.page/blog](https://zakuarbor.codeberg.page/blog). 
 
 [Random Anime/Manga Tech Collection](../gallery)
 
@@ -107,6 +106,10 @@ For general [non-fiction booka recommendations]({{ site.baseurl }}/books)
 <li>²Random in any context I write should not be taken as true randomness unless explicitly stated in the context</li>
 <li>I am no expert and all opinions are my own and do not represent any institution nor employer I am associated with</li>
 </ul>
+
+**Disclaimer:** Any opinions expressed in the blog are my own and do not reflect any of my previous, current, nor potential employers and are not affliated with any organizations I may be involved whether directly or indirectly.
+
+**Disclaimer 2:** I do not claim to be an expert in any subject. The blog serves more of a personal space to kill time and to write random things based on my knowledge at the time of writing and are likely to be of questionable quality.
 
 <p class = "last-edit"><b>Last Major Edit:</b> 2025-11-20</p> 
 

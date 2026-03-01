@@ -17,7 +17,7 @@ Random bits is a personal outlet to talk about random bits of things that is goi
 <a href = "micro"><span style = "letter-spacing: 1px;">µ</span>Blog</a> - Not tiny but not large as my regular blog posts<br/>
 <a href = "blog">Blog</a> - Regular blog posts (not updated often)
 <ul class>
-<li><a href = "programming">Programming</a> - Programming Blogs</li>
+<li><a href = "programming">Programming</a> - where I ramble various topics in Computer Science and Programming that I find to be interesting</li>
 <li><a href = "programming">Math</a> - Math blogs from a person who is bad at Math ...</li>
 <li><a href = "programming">Misc</a> - Anything random or that didn't fit in the former categories</li>
 </ul>

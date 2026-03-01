@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>Verifying Email Signature Manually - RANDOM BITS</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/css/syntax_monokai.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="/assets/css/test.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/png" href="/assets/site/random-bits-favicon.png">
+    <meta name="og:title" content="Random Bits">
+    <meta name="og:image" content="">
+    <meta name="og:description"
+        content="Random bits of programming, math, and personal thoughts">
+    <meta name="keywords" content="zakuarbor, programming, math, random bits, pikachu">
+    <meta name="description" content="Random bits of programming, math, and personal thoughts">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script charset="utf-8" src="/assets/js/script.js"></script>
+<script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+     loader: {load: ['[tex]/cancel']},
+      TeX: { 
+        equationNumbers: { autoNumber: "all" },
+        packages: {'[+]': ['cancel']}
+      } 
+    }); 
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+  <header>
+    <center>
+      <h1 id = "title"><a href = "/index.html">RANDOM BITS</a><img id = "pikachu-header" src = "/assets/site/flying-pikachu.png"/></h1>
+    A random site by a random clueless human
+    </center>
+    <!--<marquee scrollamount="4">-->
+    <center>
+      <!--<img src = "/assets/gifs/pikachu-run.gif"/>--><p>Random bits of programming, math, and thoughts
+      By a clueless human</p><!-- <img src = "/assets/gifs/pikachu-run.gif"/>-->
+    </center>
+      <!--&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      <img src = "/assets/gifs/pikachu-run.gif"/>Random bits of programming, math, and thoughts
+      By a clueless human <img src = "/assets/gifs/pikachu-run.gif"/>-->
+      <!--</marquee>-->
+
+    <a href="javascript:void(0);" class="hamburger-nav" onclick="toggleMenu()"><i class="fa fa-bars"></i></a>
+    <nav id="header-nav">
+    <center>
+      <a href="/index.html">Home</a>
+      <a href="/micro/"><span style = "letter-spacing: 1px;">µ</span>Blog</a>
+      <a href="/blog/"><span style = "letter-spacing: 1px;">Blog</a>
+      <a href="/link.html">LinkBlog</a>
+      <!--<a href="/math.html">Math</a>-->
+      <a href="/about.html">About</a>
+    </center>
+    </nav>
+</header>
+
+  </head>
+  <body>
+
+    <div id = "wrapper">
+    <div id = "content">
+<div class = "bits">
+  <h1 class = "title">Verifying Email Signature Manually</h1>
+
+  <div>
+    <p class = "date">October 12, 2024</p>
+    
+    <div class="tags">
+      
+      
+        <a href="/categories/#programming">programming</a>
+        &nbsp;
+      
+        <a href="/categories/#pgp">pgp</a>
+        &nbsp;
+      
+        <a href="/categories/#encryption">encryption</a>
+        &nbsp;
+      
+        <a href="/categories/#blog">blog</a>
+        
+      
+    </div>
+  </div>
+  <p>I noticed that the neocities community love using protonmail and some even share their public key to enable full encryption communication. 
+What makes protonmail special is the focus on privacy and security. All emails sent between Proton Mail users are end to end encrypted meaning not even Proton can have 
+access to the messages. However, when communicating outside of Proton ecosystem to non-Proton Mail users like those with Gmail and Outlook, communication between the two 
+are not encrypted end to end by default. This does not mean the encryption utilized by Gmail and Outlook are inadequate. The vast majority of emails are encrypted in transit 
+using TLS encryption, the very same encryption you use to enter your password to your bank or entering your credit card to buy something online for instance.</p>
+
+<p><strong>Aside:</strong> If you are curious about protonmail’s encryption scheme: <a href="https://proton.me/support/proton-mail-encryption-explained">https://proton.me/support/proton-mail-encryption-explained</a></p>
+
+<h2 id="what-is-the-purpose-of-a-digital-signature">What is the Purpose of a Digital Signature</h2>
+
+<p>Depending on your sense of security, TLS encryption may not be sufficient. There are a few issues with just relying on TLS encryption:</p>
+<ol>
+  <li><strong>Loss of Privacy:</strong> Companies like Google and Microsoft have access to your data. Depending on their policies, your emails could be used for training purposes, released to 
+government authorities, or be leaked due to a security breach</li>
+  <li><strong>Potential For Data to be Compromised:</strong> Even if you trust your company to respect your privacy, it does not mean the company has good security practices and could be attacked by 
+a state sponsor. With data not potentially be encrypted at rest and encrypted properly, your data could be leaked to malicious actors</li>
+</ol>
+
+<p>Since communication outside of ProtonMail is not end-to-end encryption, if one wants to maintain the security level of their communication, they would need to require both parties to 
+send emails encrypted with each other’s public key. Therefore, it is not uncommon to see people on the internet share their public key for others to communicate with them.</p>
+
+<p>Personally, I am fine with using Gmail and Outlook for all my email communication but nonetheless, I thought it would be interesting to see how one would manually verify the signature 
+of an email. One other use case of public key cryptography is signing. Encryption refers to obfuscating the original message to ensure confidentiality (to the best of one’s knowledge). 
+Digital signing does not ensure confidentiality but <strong>authenticity</strong>. In other words, digital signing is a process to verify that the email has not been tampered with and comes from 
+the person whom they claim to be. With man in the middle attacks, it is possible for an attacker to intercept and modify the original message. Here are some purposes (and potential 
+uses) of digital signatures:</p>
+
+<ol>
+  <li><strong>Authenticity:</strong> A verification that you are indeed talking to the person whom you think you are talking to
+    <ul>
+      <li>this assumes that the private key of the other party is kept secret and secured and you are given the public key somehow in a <strong>secured and trusted</strong> way</li>
+    </ul>
+  </li>
+  <li><strong>Integrity:</strong> The ability to detect if the message has been tampered with (similar to a tamper tape/seal on very sensitive envelopes or products)</li>
+  <li><strong>Attestation</strong> I really should be careful what I mean by “attestation”. I am referring to the sender attesting that they indeed are the one who is communicating with them for 
+legal purposes. Similar to how we sign documents to attest that we agreed to the accuracy of the documents and agreement to the terms outlined in the contract, digital signatures 
+can be also used for similar purposes. A better word for this process is notarization.</li>
+</ol>
+
+<p>While authenticity and “attestation” (from my definition) sound similar, but there is a key difference between the two. Authenticity is for the receiver to verify they are indeed 
+talking to the person they believe to be in contact with. “Attestation” is a way to legally bind the user to a contract. Therefore, if a digital signature is ever used for the purpose 
+of entering a contract, one should ensure they use separate keys for signing and encryption. When you communicate with others using public key encryption, you are obviously not 
+signing every message as if it was a legal contract. This is something I probably need to remember myself as I delve more into security.</p>
+
+<p>One interesting aspect about digital signatures is protecting software from supply chain attacks. If you ever download a software from a big open source project like Fedora, they would 
+often provide you either a hash or a signature. A hash can be used to verify that the file has not been tampered. However, this does not provide authenticity. Authenticity can only be 
+obtained through the usage of digital signature. If an attacker manages to infilterate a server, they could potentially replace the file and its associated hash with their own 
+malicious file. The client will not be able to protect themselves from this supply chain attack as both the file and the hash posted on the project’s website has been compromised. 
+With digital signature, one can verify the authenticity of the file and have assurance the file has not been tampered with. However, this does require one to already have the public 
+key beforehand as the attacker could already have compromised server that shares the project’s public key.</p>
+
+<p><img src="/assets/programming/security/github-gpg.png" alt="An example of GPG used to sign commits" /></p>
+<p class="caption">Commits can be signed ON Git. Github has a feature to mark the commit or tag as verified if the commit was both signed and verified by Github.</p>
+
+<p>I mentioned that digital signatures can provide authenticity, but this is not entirely true. This is true if you have obtained the public key from a trusted source such as from the 
+entity you are communicating with. This is where digital certificates can help.</p>
+
+<p>Anyhow, that was enough rambling, time to go into the details of how to verify email signatures.</p>
+
+<h2 id="how-to-verify-a-digital-signature">How to Verify a Digital Signature</h2>
+
+<p>Digital signatures work by having the sender (Alice) <strong>sign</strong> the message with their private key. With this, the receiver (Bob) can use the sender’s (Alice’s) public key to verify 
+the message. From my understanding, the signature is often appendded to the email message so that the receiver can easily obtained the signature when they receive the email. This 
+could differ when using digital signatures for different purposes such as downloading a software from the publisher’s site. Wikipedia has a good diagram to visualize this process:</p>
+
+<p><img class="transparent-background" alt="An image from Wikipedia to illustrate how digital signatures work" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Private_key_signing.svg/220px-Private_key_signing.svg.png" /></p>
+<p class="caption">A diagram illustrating how the process of signing and verifying a digital signature works. Extracted from Wikipedia</p>
+
+<p>I will not go into how to sign an email as my focus is on how to verify an email signature. More specifically, I will be using ProtonMail to automatically sign my email and send the email 
+to my Gmail account.</p>
+
+<h3 id="step-1-obtain-the-public-key">Step 1: Obtain the Public Key</h3>
+
+<p>There are a few methods to obtain a public key such as from the organization’s website or attached to the website. This is likely the most vulnerable step in the entire process 
+as an attacker could upload their own public key to a vulnerable website or masquerade as the person you expect to be communicating with such as having an email that resembles 
+closely with a trusted identity or is spoofed to appear legitimate as seen with <a href="https://www.avanan.com/blog/how-outlook-unwittingly-helps-hackers">Outlook in 2021</a>. Protonmail 
+offers an option to send a public key to those outside of Protonmail ecosystem automatically. While this method isn’t flawed (I ain’t a cybersecurity expert) per se, this does 
+make me think twice about the validity of the public key that has been sent to me as using a compromised key could make this entire verification process go wrong. However, to 
+initiate communication that is encrypted end to end, this is a necessary step. While I do not have a clear picture on certificates, certificates probably could alleviate this 
+issue by having a trusted third party called the certificate authority to verify the identity of the sender.</p>
+
+<div class="multiple_img_div">
+<img src="/assets/programming/security/email-gpg.png" class="img_33" />
+<img src="/assets/programming/security/fedora-gpg.png" class="img_60" />
+</div>
+<p class="caption"><b>Left:</b> Alice sending an email to Bob with her publickey and signature. <b>Right:</b> Instructions to verify Fedora ISO</p>
+
+<h3 id="step-2-import-alicessenders-public-key">Step 2: Import (Alice’s/Sender’s) Public Key</h3>
+
+<p>Once Alice’s (i.e. the sender) public key has been obtained, the key needs to be imported to the public keyring. I do not understand why the keys always have to be imported 
+rather than just being specified to be honest. Perhaps it’s because I am using the public key as an armoured ASCII <code class="language-plaintext highlighter-rouge">asc</code> rather than the GNU Privacy Guard <code class="language-plaintext highlighter-rouge">gpg</code> public keyring file. Though 
+I am not going to bother verifying this.</p>
+
+<p><strong>To import a public key:</strong> <code class="language-plaintext highlighter-rouge">gpg --import &lt;key.gpg&gt;</code></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ gpg --import publickey-alice@proton.me.asc 
+gpg: key &lt;redacted&gt;: public key "alice@proton.me &lt;alice@proton.me&gt;" imported
+gpg: Total number processed: 1
+gpg:               imported: 1 
+</code></pre></div></div>
+
+<p>We can verify the import with: <code class="language-plaintext highlighter-rouge">gpg --list-public-keys &lt;uid&gt;</code></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ gpg --list-public-keys alice@proton.me
+pub   ed25519 2024-01-10 [SC]
+      &lt;redacted fingerprints&gt;
+uid           [ unknown] alice@proton.me &lt;alice@proton.me&gt;
+sub   &lt;redacted&gt; 2024-01-10 [E]
+</code></pre></div></div>
+
+<h3 id="step-3-download-the-email-message">Step 3: Download the Email Message</h3>
+
+<p>This step does vary depending on your email client but on Gmail, one can simply download the email by clicking on the kebab menu (the three dots or ellipses) found on the right 
+side of the email as shown below:</p>
+
+<p><img src="/assets/programming/misc/gmail-menu-expanded.png" alt="Gmail Expanded Menu to Downloads the email" /></p>
+
+<p>This will download the email in the electronic mail format <code class="language-plaintext highlighter-rouge">.eml</code> which is <strong>not</strong> the signed email. <code class="language-plaintext highlighter-rouge">.eml</code> files have a lot of extra information that is packaged over the 
+signed email. We will need to extract the content that has been signed to verify the message.</p>
+
+<h3 id="step-3-extract-the-content-containing-the-signed-email">Step 3: Extract the Content Containing the Signed Email</h3>
+
+<p>The content of the email that needs to be extracted is the data that has been signed by Alice’s public key to create the signature. The file will look something like the following:</p>
+
+<p><img src="/assets/programming/security/email-no-attachment.png" alt="An image of an edited eml file that does not contain attachments aside from the signature" /></p>
+<p class="caption">An edited email file that does not contain attachments aside from the signature</p>
+
+<h3 id="step-4-extract-signed-message">Step 4: Extract Signed Message</h3>
+
+<p>As mentioned in the previous step, we need to remove all the extra data in the email file that isn’t part of the signed message. You should make a backup of the email file because 
+this is easy to mess up if you do not know what you are doing like the author had:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cp 'GPG KEY no publickey attachments.eml' 'GPG KEY no publickey attachments.eml.bak'
+$ ls 'GPG KEY no publickey attachments.eml'*
+'GPG KEY no publickey attachments.eml'  'GPG KEY no publickey attachments.eml.bak
+</code></pre></div></div>
+
+<p>The content of the message <b><u>starts after</u></b> you see the following header (the hash will differ):</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------AAAAAAAAAAAA
+</code></pre></div></div>
+
+<p>where <code class="language-plaintext highlighter-rouge">--------AAAAAAAAAAAA</code> is our boundary as clear denoted earlier in the file.</p>
+
+<p>This means the very <strong>first line</strong> of the signed file is:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Content-Type: multipart/mixed;boundary=---------------------BBBBBBBBBBBB
+</code></pre></div></div>
+
+<p>The contents of the signed message is enclosed within the boundary which is (does not include the boundary) as shown below (<strong>remove trailing newlines</strong>):</p>
+
+<p><img src="/assets/programming/security/email-signed-msg.png" alt="An illustration of what is part of the signed message" /></p>
+<p class="caption">The contents of the signed message</p>
+
+<p>One thing I notice is that the hash on the first line of the signed message is also the last line in the signed message. For instance, in our example that would be:
+<code class="language-plaintext highlighter-rouge">BBBBBBBBBBBB</code>. Therefore our file should also end with this hash.</p>
+
+<p>For instance, if our message looked along the lines of:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MIME-Version: 1.0
+ Content-Type: multipart/signed; protocol="application/pgp-signature"; micalg=pgp-sha512; boundary="------3141887d7abcdefgbe09e18825fd164103abcdefgf8c40b59382649cd69b31415"; charset=utf-8
+
+ This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+ --------3141887d7abcdefgbe09e18825fd164103abcdefgf8c40b59382649cd69b31415
+ Content-Type: multipart/mixed;boundary=---------------------ff35159c3ebf11234dd954191b3141592
+
+ ...
+
+ -----------------------ff35159c3ebf11234dd954191b3141592
+ Content-Type: application/pgp-keys; filename="publickey - alice@proton.me - &lt;redacted&gt;.asc"; name="publickey-alice@proton.me.asc"
+ Content-Transfer-Encoding: base64
+ Content-Disposition: attachment; filename="publickey-alice@proton.me.asc"; name="publickey - alice@proton.me - &lt;redacted&gt;.asc"
+
+ ABCDEF0x4ZjZkeGxSL0xUABCDEFmltotlUR0ABCDEFWaABCDEFE9PQP9ABCDEFAABCDEFtLUVORCBABCED
+ ABCDEFEABCDEFFWSBCTE9DSy0tLABCDE==
+ -----------------------ff35159c3ebf11234dd954191b3141592--
+
+ --------3141887d7abcdefgbe09e18825fd164103abcdefgf8c40b59382649cd69b31415
+</code></pre></div></div>
+
+<p>Then the signed message would be:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Content-Type: multipart/mixed;boundary=---------------------ff35159c3ebf11234dd954191b3141592
+
+ ...
+
+ -----------------------ff35159c3ebf11234dd954191b3141592
+
+ ...
+
+ -----------------------ff35159c3ebf11234dd954191b3141592
+ Content-Type: application/pgp-keys; filename="publickey - alice@proton.me - &lt;redacted&gt;.asc"; name="publickey-alice@proton.me.asc"
+ Content-Transfer-Encoding: base64
+ Content-Disposition: attachment; filename="publickey-alice@proton.me.asc"; name="publickey - alice@proton.me - &lt;redacted&gt;.asc"
+
+ ABCDEF0x4ZjZkeGxSL0xUABCDEFmltotlUR0ABCDEFWaABCDEFE9PQP9ABCDEFAABCDEFtLUVORCBABCED
+ ABCDEFEABCDEFFWSBCTE9DSy0tLABCDE==
+ -----------------------ff35159c3ebf11234dd954191b3141592--
+</code></pre></div></div>
+
+<h3 id="step-5-verify-the-email-signature">Step 5: Verify the Email Signature</h3>
+
+<p><strong>Verify the signature:</strong> <code class="language-plaintext highlighter-rouge">gpg --verify signature.asc message.txt</code></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ gpg --verify signature.asc message.txt 
+ gpg: Signature made Mon 07 Oct 2024 11:29:48 PM EDT
+ gpg:                using EDDSA key &lt;redacted&gt;
+ gpg: Good signature from "alice@proton.me &lt;alice@proton.me&gt;" [unknown]
+ gpg: WARNING: This key is not certified with a trusted signature!
+ gpg:          There is no indication that the signature belongs to the owner.
+ Primary key fingerprint: &lt;redacted&gt;
+</code></pre></div></div>
+
+<p>While the signature has been verified: <code class="language-plaintext highlighter-rouge">Good signature</code>, we do see a warning about the key not being certified.</p>
+
+<h3 id="optional-step-6-validate-imported-public-key">(Optional) Step 6: Validate Imported Public Key</h3>
+
+<p>Upon reading <a href="https://www.gnupg.org/gph/en/manual/x56.html">gnupg manual</a>, there are instructions to verify the imported public key by checking if the key’s fingerprint matches the 
+key you are expecting from Alice (the sender). This does involve Alice letting Bob know about it’s key’s fingerprint somehow whether that be in email, text, voice call or in some paper 
+delivered to Bob. Let’s pretend the fingerprint of Alice’s public key was transmitted to you through a trusted source is:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>768B 218A CCD7 AA34 9830  52D8 9BD4 1A08 9D98 BC02
+</code></pre></div></div>
+
+<p>We can verify whether the public key really came from Alice by verifying the public key’s fingerpint and see if it matches:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ gpg --edit-key alice@proton.me
+...
+gpg&gt; fpr
+pub   ed25519/[redacted] 2024-01-10 alice@proton.me &lt;alice@proton.me&gt;
+ Primary key fingerprint: <font color="#C01C28"><b>768B 218A CCD7 AA34 9830  52D8 9BD4 1A08 9D98 BC02</b></font>
+</code></pre></div></div>
+
+<p>To validate Alice’s public key (<strong>proceed with caution</strong>), we must sign the key with our own private key:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gpg&gt; sign
+
+pub  ed25519/[redacted]
+     created: 2024-01-10  expires: never       usage: SC  
+     trust: unknown       validity: unknown
+ Primary key fingerprint: 768B 218A CCD7 AA34 9830  52D8 9BD4 1A08 9D98 BC02
+
+     alice@proton.me &lt;alice@proton.me&gt;
+
+Are you sure that you want to sign this key with your
+key "Bob &lt;bob@gmail.com&gt;" ([redacted])
+
+Really sign? (y/N) yes
+
+gpg&gt; quit
+Save changes? (y/N) y
+</code></pre></div></div>
+
+<p>However, this is not suffice to change the validity. On <a href="https://serverfault.com/questions/569911/how-to-verify-an-imported-gpg-key">serverfault</a>, Baker does a good job explaining that TRUST != VALIDITY. 
+I am guessing due to the differences in the default settings on <code class="language-plaintext highlighter-rouge">gpg</code>, I need to set my <code class="language-plaintext highlighter-rouge">trust</code> level to 5 <code class="language-plaintext highlighter-rouge">ultimate</code> to remove this warning:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gpg&gt; trust
+pub  ed25519/[redacted]
+     created: 2024-01-10  expires: never       usage: SC  
+     trust: unknown       validity: unknown
+sub  cv25519/[redacted]
+     created: 2024-01-10 expires: never       usage: E   
+[ unknown] (1). alice@proton.me &lt;alice@proton.me&gt;
+
+Please decide how far you trust this user to correctly verify other users' keys
+(by looking at passports, checking fingerprints from different sources, etc.)
+
+  1 = I don't know or won't say
+  2 = I do NOT trust
+  3 = I trust marginally
+  4 = I trust fully
+  5 = I trust ultimately
+  m = back to the main menu
+
+Your decision? 5
+
+...
+
+Please note that the shown key validity is not necessarily correct
+unless you restart the program.
+</code></pre></div></div>
+
+<p>Now if we take a look at the verification, we no longer see the warnings.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ gpg --verify signature.asc message.txt
+gpg: Signature made Mon 07 Oct 2024 11:29:48 PM EDT
+gpg:                using EDDSA key &lt;redacted&gt;
+gpg: Good signature from "alice@proton.me &lt;alice@proton.me&gt;" [ultimate]
+</code></pre></div></div>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>In practice, no one verifies the digital signatures of emails manually. Any sane individual will utilize any email client that would automate the verification process for them. 
+As most individuals are not aware of digital signing and email encryption, I’ll probably not set up my email client for work, school, and personal email to automatically verify, sign, and encrypt emails 
+unless I am required to. This does mean I am exposing myself to the spying eyes of my email providers and be suspectible to man in the middle attacks and have my personal information potentially leaked.</p>
+
+<p>To summarize the steps:</p>
+<ol>
+  <li><strong>Import the keys:</strong> <code class="language-plaintext highlighter-rouge">gpg --import &lt;key.gpg&gt;</code></li>
+  <li>Extract the signed message (this includes any attachments that is not the signature itself)</li>
+  <li><strong>Verify the email:</strong> <code class="language-plaintext highlighter-rouge">gpg --verify signature.asc message.txt</code></li>
+</ol>
+
+</div>
+</div>
+
+    </div>
+
+  <footer>
+  <marquee id = "buttons">
+    <a href = "index.html"><img src = "/assets/buttons/button.png"></a>
+    <a href = "index.html"><img src = "/assets/buttons/button2.png"></a>
+    <a href = 'https://neocities.org/'><img src = "/assets/buttons/neocitiesorg.gif"></a>
+    <a href = 'https://www.vim.org/'><img src = "/assets/buttons/vim.gif"></a>
+    <a href = 'https://fedoraproject.org/'><img src = "/assets/buttons/gnu-linux.gif"></a>
+    <a href = "https://fedoraproject.org/"><img src = "/assets/buttons/powered_by_fedora_alt.png"></a>
+  </marquee>
+  <small><a href = "/credits" class = "credits">Credits</a></small>
+</footer>
+
+
+  </body>
+</html>
