@@ -38,7 +38,9 @@ layout: default
 {% else %}
 {% assign postsByYear = posts_to_show | group_by_exp: "post", "post.date | date: '%Y'" %}
 {% for year in postsByYear %}
-  <h2 id="year-{{ year.name }}">{{ year.name }}</h2>
+  <hr>
+  <h1 id="year-{{ year.name }}">{{ year.name }}</h1>
+  <hr>
   <div class="archive-list">
     {% for post in year.items %}
       {% include archive-item.html post=post %}
