@@ -94,7 +94,7 @@ In hindsight, I should have made these buttons 125x125
 
 <hr/>
 
-For general [non-fiction booka recommendations]({{ site.baseurl }}/books)
+For general [non-fiction books recommendations]({{ site.baseurl }}/books)
 
 <hr/>
 

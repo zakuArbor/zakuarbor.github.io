@@ -34,4 +34,4 @@ Despite its name, the posts are not tiny but not as large as regular blog posts.
   <hr class = "bits-hr">
 {% endfor %}
 
-[Go to µBlog Archives]({{ site.baseurl }}/micro/archive)
+<center><h2><a href = "{{ site.baseurl }}/micro/archive">Go to µBlog Archives</a></h2></center>
