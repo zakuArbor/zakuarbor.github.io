@@ -15,6 +15,10 @@ Random bits is a personal outlet to talk about random bits of things that is goi
 
 <div class = "list-compact">
 <a href = "micro"><span style = "letter-spacing: 1px;">µ</span>Blog</a> - Not tiny but not large as my regular blog posts<br/>
+<ul class>
+<li><a href = "micro/archive"><span style = "letter-spacing: 1px;">µ</span>Blog Archives</a> - Complete list of microblogs over the years</li>
+</ul>
+
 <a href = "blog">Blog</a> - Regular blog posts (not updated often)
 <ul class>
 <li><a href = "programming">Programming</a> - where I ramble various topics in Computer Science and Programming that I find to be interesting</li>
@@ -27,7 +31,7 @@ Random bits is a personal outlet to talk about random bits of things that is goi
 <a href = "about.html">About</a> - For stalkers or bored humans<br/>
 </div>
 
-... any more
+... and more for you to discover (totally not because I am lazy)
 
 ---
 
