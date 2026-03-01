@@ -11,8 +11,9 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
     <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
-    <link href="/assets/css/micro.css" rel="stylesheet" type="text/css" media="all">
     <link href="/assets/css/syntax_monokai.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="/assets/css/contrast.css" rel="stylesheet" type="text/css" media="all">
     <link rel="icon" type="image/png" href="/assets/site/random-bits-favicon.png">
     <meta name="og:title" content="Random Bits">
     <meta name="og:image" content="">
@@ -22,8 +23,15 @@
     <meta name="description" content="Random bits of programming, math, and personal thoughts">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script charset="utf-8" src="/assets/js/script.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
-
+<script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+     loader: {load: ['[tex]/cancel']},
+      TeX: { 
+        equationNumbers: { autoNumber: "all" },
+        packages: {'[+]': ['cancel']}
+      } 
+    }); 
+</script>
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({
     tex2jax: {
@@ -32,26 +40,31 @@
     }
   });
   </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
   <header>
     <center>
       <h1 id = "title"><a href = "/index.html">RANDOM BITS</a><img id = "pikachu-header" src = "/assets/site/flying-pikachu.png"/></h1>
     A random site by a random clueless human
     </center>
-    <marquee scrollamount="4">
+    <!--<marquee scrollamount="4">-->
+    <center>
+      <!--<img src = "/assets/gifs/pikachu-run.gif"/>--><p>Random bits of programming, math, and thoughts
+      By a clueless human</p><!-- <img src = "/assets/gifs/pikachu-run.gif"/>-->
+    </center>
+      <!--&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
       <img src = "/assets/gifs/pikachu-run.gif"/>Random bits of programming, math, and thoughts
-      By a clueless human <img src = "/assets/gifs/pikachu-run.gif"/>
-      &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-      <img src = "/assets/gifs/pikachu-run.gif"/>Random bits of programming, math, and thoughts
-      By a clueless human <img src = "/assets/gifs/pikachu-run.gif"/>
-    </marquee>
+      By a clueless human <img src = "/assets/gifs/pikachu-run.gif"/>-->
+      <!--</marquee>-->
 
     <a href="javascript:void(0);" class="hamburger-nav" onclick="toggleMenu()"><i class="fa fa-bars"></i></a>
     <nav id="header-nav">
     <center>
       <a href="/index.html">Home</a>
-      <a href="/micro.html"><span style = "letter-spacing: 1px;">µ</span>Blog</a>
+      <a href="/micro/"><span style = "letter-spacing: 1px;">µ</span>Blog</a>
+      <a href="/blog/"><span style = "letter-spacing: 1px;">Blog</a>
       <a href="/link.html">LinkBlog</a>
-      <a href="/math.html">Math</a>
+      <!--<a href="/math.html">Math</a>-->
       <a href="/about.html">About</a>
     </center>
     </nav>
@@ -71,12 +84,21 @@ Random bits is a personal outlet to talk about random bits of things that is goi
 
 <h3 id="site-map">Site Map</h3>
 
-<p><a href="micro.html"><span style="letter-spacing: 1px;">µ</span>Blog</a> - Not tiny but not large as my regular blog posts<br />
-<a href="link.html">LinkBlog</a> - Links to blogs or articles I found interesting<br />
-<a href="math.html">Math</a> - Math blogs …<br />
-<a href="about.html">About</a> - For stalkers or bored humans<br />
+<div class="list-compact">
+<a href="micro"><span style="letter-spacing: 1px;">µ</span>Blog</a> - Not tiny but not large as my regular blog posts<br />
+<a href="blog">Blog</a> - Regular blog posts (not updated often)
+<ul class="">
+<li><a href="programming">Programming</a> - where I ramble various topics in Computer Science and Programming that I find to be interesting</li>
+<li><a href="programming">Math</a> - Math blogs from a person who is bad at Math ...</li>
+<li><a href="programming">Misc</a> - Anything random or that didn't fit in the former categories</li>
+</ul>
+<a href="link.html">LinkBlog</a> - Links to blogs or articles I found interesting with small commentaries<br />
 <a href="categories">Categories</a> - A list of categories of my  µblog <br />
-<a href="gallery">Anime Tech Gallery</a> - a gallery of images and clips of tech featured in manga and anime</p>
+<a href="gallery">Anime Tech Gallery</a> - a gallery of images and clips of tech featured in manga and anime <br />
+<a href="about.html">About</a> - For stalkers or bored humans<br />
+</div>
+
+<p>… any more</p>
 
 <hr />
 
@@ -88,7 +110,16 @@ Random bits is a personal outlet to talk about random bits of things that is goi
         
         
         
+        <li><a href="../micro/2026/02/site-update">[2026-02-28] Site Update</a></li>
+    
+
+    
+        
+        
+        
         <li><a href="../micro/2026/02/singularity-rootkit">[2026-02-19] Singularity Rootkit</a></li>
+    
+
     
 
     
@@ -115,8 +146,112 @@ Random bits is a personal outlet to talk about random bits of things that is goi
     
         
         
+            
+</ul>
+
+<h3 id="latest-blog--dernier-blog">Latest Blog / Dernier Blog</h3>
+<ul>
+
+
+    
+
+    
+
+    
         
-        <li><a href="../micro/2025/12/crlf-png">[2025-12-11] The Unintended Consequence of Replacing CRLF (\r\n) to LF (\n) on PNG Images</a></li>
+        
+        
+        <li><a href="../blog/when-it-click-programming">[2026-01-31] When Did Programming/Coding Start to Click for You?</a></li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        
+        
+        
+        <li><a href="../blog/vtbl/">[2025-08-20] A Look Into Virtual Table via Assembly</a></li>
+    
+
+    
+
+    
+
+    
+        
+        
+        
+        <li><a href="../blog/switch-default-enum/">[2025-07-05] The Issue With Default in Switch Statements with Enums</a></li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        
+        
+        
+        <li><a href="../blog/this-asm/">[2025-02-11] this: the implicit parameter in OOP</a></li>
+    
+
+    
+
+    
+
+    
+        
+        
+        
+        <li><a href="../blog/view-vim/">[2025-01-24] view is just vim</a></li>
+    
+
+    
+
     
 
     
@@ -125,18 +260,28 @@ Random bits is a personal outlet to talk about random bits of things that is goi
             
 </ul>
 
-<h3 id="latest-blog--dernier-blog">Latest Blog / Dernier Blog</h3>
-<ul>
-  <li><a href="https://zakuarbor.github.io/blog/signature-verification/">[Oct 12] Verifying Email Signature Manually</a></li>
-  <li><a href="https://zakuarbor.github.io/blog/halfwidth-fullwidth-encoding/">[Oct 07] A Quick Look Into Half-Width and Full-Width Characters</a></li>
-  <li><a href="https://zakuarbor.github.io/blog/useless-main/">[June 22] Polluting the Web With a Useless 5 argument main function</a></li>
-  <li><a href="https://zakuarbor.github.io/blog/split-files/">[May 08] Splitting Files On Linux</a></li>
-  <li><a href="https://zakuarbor.github.io/blog/math3001/">[Jan 14] Real Analysis 1</a></li>
-</ul>
-
 <h3 id="change-log--le-journal-de-modification">Change Log / Le Journal de Modification</h3>
 
 <div class="update-chat">
+
+<div class="msg">
+    <img class="pfp" src="/assets/images/site/frigimon.png" />
+    <div class="text">
+        <div class="date">2026-02-28</div>
+        <div class="name">Bonhomme de Neige</div>
+        <div class="body">Augmente le contraste général et finalise l'intégration des anciens posts ici</div>
+    </div>
+</div>
+
+<div class="msg">
+    <img class="pfp" src="/assets/images/site/frigimon.png" />
+    <div class="text">
+        <div class="date">2026-02-26</div>
+        <div class="name">Bonhomme de Neige</div>
+        <div class="body">Migration et fusion du blog ici</div>
+    </div>
+</div>
+
 <div class="msg">
     <img class="pfp" src="/assets/images/site/frigimon.png" />
     <div class="text">
@@ -208,7 +353,7 @@ Random bits is a personal outlet to talk about random bits of things that is goi
 </div>
 </div>
 
-<p><b>Last Major Edit:</b> 2024-10-20</p>
+<p><b>Last Major Edit:</b> 2026-02-26</p>
 
 </div>
 

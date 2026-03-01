@@ -16,6 +16,14 @@ fi
 
 cd _site || exit 1
 
+dir=`pwd`
+echo -e "pwd: ${dir}"
+
+echo -e "${BLUE}Creating .domains ...${NC}"
+
+echo "randombits.ca" > .domains
+echo "www.randombits.ca" >> .domains
+
 if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
     echo -e "${RED}❌ _site is not linked to Git. Run the reset commands above.${NC}"
     exit 1
@@ -23,6 +31,7 @@ fi
 
 echo -e "${BLUE}🔄 Syncing and Pushing...${NC}"
 git add -A
+git add .domains
 git commit -m "Deploy: $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes."
 git push origin pages
 
@@ -30,5 +39,5 @@ cd ..
 
 echo -e "${GREEN}✅ GitHub Pages updated!${NC}"
 
-neocities push _site
+#neocities push _site
 

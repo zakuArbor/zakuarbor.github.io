@@ -11,8 +11,9 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
     <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
-    <link href="/assets/css/micro.css" rel="stylesheet" type="text/css" media="all">
     <link href="/assets/css/syntax_monokai.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="/assets/css/contrast.css" rel="stylesheet" type="text/css" media="all">
     <link rel="icon" type="image/png" href="/assets/site/random-bits-favicon.png">
     <meta name="og:title" content="Random Bits">
     <meta name="og:image" content="">
@@ -22,8 +23,15 @@
     <meta name="description" content="Random bits of programming, math, and personal thoughts">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script charset="utf-8" src="/assets/js/script.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
-
+<script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+     loader: {load: ['[tex]/cancel']},
+      TeX: { 
+        equationNumbers: { autoNumber: "all" },
+        packages: {'[+]': ['cancel']}
+      } 
+    }); 
+</script>
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({
     tex2jax: {
@@ -32,26 +40,31 @@
     }
   });
   </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
   <header>
     <center>
       <h1 id = "title"><a href = "/index.html">RANDOM BITS</a><img id = "pikachu-header" src = "/assets/site/flying-pikachu.png"/></h1>
     A random site by a random clueless human
     </center>
-    <marquee scrollamount="4">
+    <!--<marquee scrollamount="4">-->
+    <center>
+      <!--<img src = "/assets/gifs/pikachu-run.gif"/>--><p>Random bits of programming, math, and thoughts
+      By a clueless human</p><!-- <img src = "/assets/gifs/pikachu-run.gif"/>-->
+    </center>
+      <!--&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
       <img src = "/assets/gifs/pikachu-run.gif"/>Random bits of programming, math, and thoughts
-      By a clueless human <img src = "/assets/gifs/pikachu-run.gif"/>
-      &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-      <img src = "/assets/gifs/pikachu-run.gif"/>Random bits of programming, math, and thoughts
-      By a clueless human <img src = "/assets/gifs/pikachu-run.gif"/>
-    </marquee>
+      By a clueless human <img src = "/assets/gifs/pikachu-run.gif"/>-->
+      <!--</marquee>-->
 
     <a href="javascript:void(0);" class="hamburger-nav" onclick="toggleMenu()"><i class="fa fa-bars"></i></a>
     <nav id="header-nav">
     <center>
       <a href="/index.html">Home</a>
-      <a href="/micro.html"><span style = "letter-spacing: 1px;">µ</span>Blog</a>
+      <a href="/micro/"><span style = "letter-spacing: 1px;">µ</span>Blog</a>
+      <a href="/blog/"><span style = "letter-spacing: 1px;">Blog</a>
       <a href="/link.html">LinkBlog</a>
-      <a href="/math.html">Math</a>
+      <!--<a href="/math.html">Math</a>-->
       <a href="/about.html">About</a>
     </center>
     </nav>
@@ -84,6 +97,9 @@
         &nbsp;
       
         <a href="/categories/#carletonu">carletonu</a>
+        &nbsp;
+      
+        <a href="/categories/#blog">blog</a>
         
       
     </div>
@@ -652,8 +668,329 @@ called the $l^p$ norms or also referred as the p-norms:</p>
 
 <p>While I did plan MATH3001 to be my final analysis course, I ended up making too many promises to take Real 2 in the winter term if I achieved a decent grade … and my grade was exactly on the bare minimum grade. Whelp, time to head into 2024 with a lot of head banging trying to comprehend what additional things real analysis has to offer. Hopefully this time it would be my last analysis course (I’ll try to avoid making conditional promises to take measure theory or functional analysis).</p>
 
+    <br/>
+    <hr>
+    <b>Note:</b> The reviews are bias and reflects my perception of the course. In addition, the information varies depending on the professor and will likely be outdated.
+    <hr>
+    <h2>For More Bias Course Reviews:</h2>
+    <ul>
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+        <li><a href = '../blog/math3001'>MATH3001 - Real Analysis 1</a></li>
+      
+    
+      
+        
+        <li><a href = '../blog/math1800'>MATH1800 - Introduction to Mathematical Reasoning</a></li>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+        <li><a href = '../blog/math2000'>MATH2000 -  Multivariable Calculus and Fundamentals of Analysis [Fall+Winter]</a></li>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+        <li><a href = '../blog/phys1004'>PHYS1004 - A Review on Introductory Electromagnetism and Wave Motion</a></li>
+      
+    
+      
+        
+        <li><a href = '../blog/math2107'>MATH2107 - Linear Algebra II</a></li>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+        <li><a href = '../blog/math2052'>MATH2052 - Calculus and Introductory Analysis II</a></li>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+        <li><a href = '../blog/phys1001'>PHYS1001 - A Review on Foundations of Physics 1</a></li>
+      
+    
+      
+        
+        <li><a href = '../blog/math1152'>MATH1152 - Introductory Algebra 1</a></li>
+      
+    
+      
+        
+        <li><a href = '../blog/math1052'>MATH1052 - Calculus and Introductory Analysis 1</a></li>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+        <li><a href = '../blog/bias-utm-cs-course-review'>Bias UTM CS Course Review</a></li>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+</ul>
+
+
   </div>
 </div>
+
 
 <div id = "discuss">
 <script src="https://giscus.app/client.js"
