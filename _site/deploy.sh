@@ -16,10 +16,13 @@ fi
 
 cd _site || exit 1
 
+dir=`pwd`
+echo -e "pwd: ${dir}"
+
 echo -e "${BLUE}Creating .domains ...${NC}"
 
 echo "randombits.ca" > .domains
-echo "www.randombits.ca" > .domains
+echo "www.randombits.ca" >> .domains
 
 if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
     echo -e "${RED}❌ _site is not linked to Git. Run the reset commands above.${NC}"
