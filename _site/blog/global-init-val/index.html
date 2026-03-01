@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>The Value of An Uninitialized Global Variable - RANDOM BITS</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/css/syntax_monokai.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="/assets/css/contrast.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/png" href="/assets/site/random-bits-favicon.png">
+    <meta name="og:title" content="Random Bits">
+    <meta name="og:image" content="">
+    <meta name="og:description"
+        content="Random bits of programming, math, and personal thoughts">
+    <meta name="keywords" content="zakuarbor, programming, math, random bits, pikachu">
+    <meta name="description" content="Random bits of programming, math, and personal thoughts">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script charset="utf-8" src="/assets/js/script.js"></script>
+<script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+     loader: {load: ['[tex]/cancel']},
+      TeX: { 
+        equationNumbers: { autoNumber: "all" },
+        packages: {'[+]': ['cancel']}
+      } 
+    }); 
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+  <header>
+    <center>
+      <h1 id = "title"><a href = "/index.html">RANDOM BITS</a><img id = "pikachu-header" src = "/assets/site/flying-pikachu.png"/></h1>
+    A random site by a random clueless human
+    </center>
+    <!--<marquee scrollamount="4">-->
+    <center>
+      <!--<img src = "/assets/gifs/pikachu-run.gif"/>--><p>Random bits of programming, math, and thoughts
+      By a clueless human</p><!-- <img src = "/assets/gifs/pikachu-run.gif"/>-->
+    </center>
+      <!--&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      <img src = "/assets/gifs/pikachu-run.gif"/>Random bits of programming, math, and thoughts
+      By a clueless human <img src = "/assets/gifs/pikachu-run.gif"/>-->
+      <!--</marquee>-->
+
+    <a href="javascript:void(0);" class="hamburger-nav" onclick="toggleMenu()"><i class="fa fa-bars"></i></a>
+    <nav id="header-nav">
+    <center>
+      <a href="/index.html">Home</a>
+      <a href="/micro/"><span style = "letter-spacing: 1px;">µ</span>Blog</a>
+      <a href="/blog/"><span style = "letter-spacing: 1px;">Blog</a>
+      <a href="/link.html">LinkBlog</a>
+      <!--<a href="/math.html">Math</a>-->
+      <a href="/about.html">About</a>
+    </center>
+    </nav>
+</header>
+
+  </head>
+  <body>
+
+    <div id = "wrapper">
+    <div id = "content">
+<div class = "bits">
+  <h1 class = "title">The Value of An Uninitialized Global Variable</h1>
+
+  <div>
+    <p class = "date">November  6, 2021</p>
+    
+    <div class="tags">
+      
+      
+        <a href="/categories/#programming">programming</a>
+        &nbsp;
+      
+        <a href="/categories/#c/c++">c/c++</a>
+        &nbsp;
+      
+        <a href="/categories/#blog">blog</a>
+        
+      
+    </div>
+  </div>
+  <p>Recently I started to read <a href="https://www.amazon.ca/C-Under-Hood-2nd/dp/B09B74P6C4/ref=sr_1_2?crid=TY3XFU11UZH9&amp;keywords=c+and+c%2B%2B+under+the+hood&amp;qid=1636227232&amp;sprefix=c+and+c%2B%2B+under+the+hoo%2Caps%2C125&amp;sr=8-2">C &amp; C++ Under the Hood</a>. As the 
+name implies, the book explores deeper in what goes on in the assembly level 
+using LCC machine language (a simple machine language for educational purposes). 
+One of the fact the author points out is that global variables are initialized to 0.
+While this should have been common knowledge, I was shocked because I always thought 
+the behavior of an uninitialized variable is garbage (i.e. behavior is undefined and hence
+can be anything). To my defense, I actively avoid writing code that involves a global 
+variable for various reasons (though mainly it was due to my Highschool teacher telling me
+to never use global variables).</p>
+
+<p>For the uninitiated, a global variable is a variable defined outside of any 
+functions but can be accessed anywhere in the file. This makes it hard to track 
+which function modified the value of the global varialbe (especially when you 
+start to share this variable to other files). Hence why I avoid the use of global 
+variables. In the book, it defines a global variable <code class="language-plaintext highlighter-rouge">int x;</code> defined using a 
+<code class="language-plaintext highlighter-rouge">.word</code> directive (i.e. <code class="language-plaintext highlighter-rouge">.word 0</code> where <code class="language-plaintext highlighter-rouge">.word</code> tells the assembler to convert 0 
+into a 4 byte/16bits binary).</p>
+
+<p>The reason for all uninitialized global variables having the value of 0 is because 
+it does not require any extra commands to do so. Unlike local variables, global 
+variables do <strong>NOT</strong> live in the stack. To initialized a local variable, there 
+needs to be at minimum two commands (one to set a register to 0 and the other to push 
+the register with the value of 0 into the stack.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">x:</span> <span class="nf">.word</span> <span class="mi">0</span> <span class="c1">; a global variable (i.e. int x)</span>
+
+<span class="nf">.main</span>
+<span class="nf">...</span> <span class="c1">; some stuff</span>
+<span class="c1">;set a local variable to 0 (i.e. int y = 0)</span>
+<span class="nf">mov</span> <span class="nv">r0</span><span class="p">,</span> <span class="mi">0</span> <span class="c1">; move the value 0 into register 0</span>
+<span class="nf">push</span> <span class="nv">r0</span>   <span class="c1">; push the value of register 0 into the stack</span>
+</code></pre></div></div>
+
+<p>To see this using x86 assembly generated using gcc:</p>
+<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">x:</span>
+        <span class="nf">.zero</span>   <span class="mi">4</span> <span class="c1">; the global variable</span>
+<span class="nl">main:</span>
+        <span class="nf">...</span> <span class="c1">; some stuff</span>
+        <span class="nf">movl</span>    <span class="kc">$</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">(</span><span class="o">%</span><span class="nb">rbp</span><span class="p">)</span> <span class="c1">; setting local variable y to 0</span>
+</code></pre></div></div>
+
+<p>Now you may be wondering, how come it took only one instruction to set the 
+local variable to 0? I am not familiar with assembly but from what I can see, 
+it’s effectively doing the same thing as what lcc assembly does but LCC is 
+just being more explicit. Instead of using some intermeditary register to 
+temporary store the value 0, x86 directly modifies the stack. Though I do 
+wonder how does the program know an item has been added to the stack because 
+the intruction corresponds to one binary instruction. Perhaps it is a comination 
+of the code being too simple to have the need to use the stack pointer and can 
+easily use the symbol table to keep track of the local variables during 
+assembly stage (I know I should be studying more).</p>
+
+<hr />
+
+<p>Anyhow, what really intrigued me about this exploration was the fact that 
+the output of my local uninitalized variable was always 0 which broke the 
+logic in my head. While I could not find an explanation for this behavior, 
+the C language standards does not restrict compiler developers from setting 
+the uninitialized variables to 0. However, there is zero indication that 
+the generated assembly code sets the local variable to 0. In fact, the 
+generated assembly code for the following C code simply ignores the 
+variable declaration (though it does generate a <code class="language-plaintext highlighter-rouge">.local</code> directive that gets 
+incremented each time you declare a variable):</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">y</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">main:</span>
+    <span class="nf">...</span> <span class="c1">; does stuff</span>
+    <span class="nf">.loc</span> <span class="mi">1</span> <span class="mi">3</span> <span class="mi">1</span>
+</code></pre></div></div>
+
+<p>v.s.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>                                                                    
+  <span class="kt">int</span> <span class="n">y</span><span class="p">;</span>    
+  <span class="kt">int</span> <span class="n">z</span><span class="p">;</span>                                                                    
+<span class="p">}</span>                                                                               
+</code></pre></div></div>
+
+<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">main:</span>                                                                           
+    <span class="nf">...</span> <span class="c1">; does stuff                                                            </span>
+    <span class="nf">.loc</span> <span class="mi">1</span> <span class="mi">4</span> <span class="mi">1</span>                                                                  
+</code></pre></div></div>
+
+<p>So why does the local variables have the value of 0 when it should be garbage? 
+I believe it has to do with the fact that a bunch of bytes from the base 
+pointer are set to 0. Why that is, I have no clue but on my machine, that is 
+what I am observing on my machine when I inspect the memory using gdb. Not sure 
+if it’s coincidence or the OS does something to it. But as one person mentioned 
+before on StackOverflow, do not question the reason for an undefined behavior.</p>
+
+<p>Though it would be interesting to investigate this further if I ever get bored 
+and have tons of time. Perhaps run a test to map the memory and output for at 
+least 1000 times just to check if it’s pure coincidence along with testing this 
+behavior on a raspberry pi and windows machine to see if I can replicate this 
+behavior on another architecture and OS. If it’s not pure coincidence then, 
+perhaps there is a behavior in Linux I do not know about (which I obviously 
+do have since I have little knowledge in systems programming). Perhaps I should 
+also observe if this behavior can be replicated if I call a function and observe 
+what assembly instructions are generated before the call to the function to see 
+if it’s setting a bunch of bytes to 0. Though this would be a useless exploration 
+to do.</p>
+
+
+</div>
+</div>
+
+    </div>
+
+  <footer>
+  <marquee id = "buttons">
+    <a href = "index.html"><img src = "/assets/buttons/button.png"></a>
+    <a href = "index.html"><img src = "/assets/buttons/button2.png"></a>
+    <a href = 'https://neocities.org/'><img src = "/assets/buttons/neocitiesorg.gif"></a>
+    <a href = 'https://www.vim.org/'><img src = "/assets/buttons/vim.gif"></a>
+    <a href = 'https://fedoraproject.org/'><img src = "/assets/buttons/gnu-linux.gif"></a>
+    <a href = "https://fedoraproject.org/"><img src = "/assets/buttons/powered_by_fedora_alt.png"></a>
+  </marquee>
+  <small><a href = "/credits" class = "credits">Credits</a></small>
+</footer>
+
+
+  <button onclick="toTop()" id="top_btn" title="Go to top">Top</button>
+  </body>
+</html>

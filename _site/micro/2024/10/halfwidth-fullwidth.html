@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>[Preview] Half-Width and Full-Width Characters - RANDOM BITS</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/css/syntax_monokai.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="/assets/css/contrast.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/png" href="/assets/site/random-bits-favicon.png">
+    <meta name="og:title" content="Random Bits">
+    <meta name="og:image" content="">
+    <meta name="og:description"
+        content="Random bits of programming, math, and personal thoughts">
+    <meta name="keywords" content="zakuarbor, programming, math, random bits, pikachu">
+    <meta name="description" content="Random bits of programming, math, and personal thoughts">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script charset="utf-8" src="/assets/js/script.js"></script>
+<script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+     loader: {load: ['[tex]/cancel']},
+      TeX: { 
+        equationNumbers: { autoNumber: "all" },
+        packages: {'[+]': ['cancel']}
+      } 
+    }); 
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+  <header>
+    <center>
+      <h1 id = "title"><a href = "/index.html">RANDOM BITS</a><img id = "pikachu-header" src = "/assets/site/flying-pikachu.png"/></h1>
+    A random site by a random clueless human
+    </center>
+    <!--<marquee scrollamount="4">-->
+    <center>
+      <!--<img src = "/assets/gifs/pikachu-run.gif"/>--><p>Random bits of programming, math, and thoughts
+      By a clueless human</p><!-- <img src = "/assets/gifs/pikachu-run.gif"/>-->
+    </center>
+      <!--&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      <img src = "/assets/gifs/pikachu-run.gif"/>Random bits of programming, math, and thoughts
+      By a clueless human <img src = "/assets/gifs/pikachu-run.gif"/>-->
+      <!--</marquee>-->
+
+    <a href="javascript:void(0);" class="hamburger-nav" onclick="toggleMenu()"><i class="fa fa-bars"></i></a>
+    <nav id="header-nav">
+    <center>
+      <a href="/index.html">Home</a>
+      <a href="/micro/"><span style = "letter-spacing: 1px;">µ</span>Blog</a>
+      <a href="/blog/"><span style = "letter-spacing: 1px;">Blog</a>
+      <a href="/link.html">LinkBlog</a>
+      <!--<a href="/math.html">Math</a>-->
+      <a href="/about.html">About</a>
+    </center>
+    </nav>
+</header>
+
+  </head>
+  <body>
+
+    <div id = "wrapper">
+    <div id = "content">
+<div class = "bits">
+  <h1 class = "title">[Preview] Half-Width and Full-Width Characters</h1>
+
+  <div>
+    <p class = "date">October  6, 2024</p>
+    
+    <div class="tags">
+      
+      
+        <a href="/categories/#micro">micro</a>
+        &nbsp;
+      
+        <a href="/categories/#encoding">encoding</a>
+        
+      
+    </div>
+  </div>
+  <p>Those of us who live and speak English will probably never think about how characters are encoded which is how characters such as the 
+very letters you see in the screen are represented by being given some number like 65 for ‘A’ in ASCII which takes 1 byte to be represented 
+such as a <code class="language-plaintext highlighter-rouge">char</code> in C.</p>
+
+<p>I was not aware of the existence of full-width and half-width characters till the friend asked me to briefly explain the highlevel 
+information about the difference in representing the characters. For those like me who weren’t aware that the Japanese mix between 
+zenkaku (full-width) and hankaku (half-width) characters, look at the image below or visit this webpage: <a href="https://mailmate.jp/blog/half-width-full-width-hankaku-zenkaku-explained">https://mailmate.jp/blog/half-width-full-width-hankaku-zenkaku-explained</a></p>
+
+<p><img src="https://images.ctfassets.net/rrofptqvevic/3276rMt8nR8HEVYYAhhZvV/633c276e889c8dd101c4ea89cc07f82d/image_-_2023-07-21T105935.292.webp" alt="An image displaying the difference between full and half-width characters" /></p>
+
+<p>Based on the article I shared, half-width characters takes up 1 byte while full-width characters takes up 2 bytes (also can be called double byte character). 
+I do believe this depends on 
+the encoding used. For me, the most obvious distinction between half and full width characters is how much graphical space it consumes as 
+evident from both the image above and below:</p>
+
+<p><img src="/assets/programming/encoding/full-half-width.png" alt="Full and Half Width Characters encoded on UTF-8" /></p>
+<p class="caption">Full and Half Width encoded on UTF-8 as seen through Vim</p>
+
+<p>While I have read and typed Korean during my younger years when I was forced to learn Korean, it never clicked to me how much space Korean 
+takes up graphically. It is obvious in hindsight but it was nonetheless interesting. Taking a look at the size and bytes encoding, we can 
+see that number <code class="language-plaintext highlighter-rouge">1</code> in UTF-8 encoding takes 1 and 3 bytes for half-width and full-width character repsectively</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ stat -c "%n,%s" -- halfwidth-utf8.txt fullwidth-utf8.txt 
+halfwidth-utf8.txt,1
+fullwidth-utf8.txt,3
+</code></pre></div></div>
+
+<p>One confusion I had was understanding what the difference between UTF-8 and UTF-16 and the following excercise helped me understand this:</p>
+<ul>
+  <li>UTF-8 encodes each character between 1-4 bytes</li>
+  <li>UTF-16 encodes each characters between 2-4 bytes</li>
+</ul>
+
+<p>UTF-8 and UTF-16 as you can tell are variable length meaning they take up more or less bytes depending on the character being encoded. We can 
+see this by comparing the number <code class="language-plaintext highlighter-rouge">1</code> arabic numeral v.s. <code class="language-plaintext highlighter-rouge">一</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ stat -c "%n,%s" -- halfwidth-1.txt chinese-1.md 
+halfwidth-1.txt,1
+chinese-1.md,3
+</code></pre></div></div>
+
+<p>In UTF-8, <code class="language-plaintext highlighter-rouge">1</code> takes up 1 byte which is unsurprising as ASCII has great advantage in UTF-8 compared to other Asian languages.</p>
+
+<p><strong>Note:</strong> Do not attempt to display UTF-16 encoded files on the terminal without changing your locale (or whatever it is called). It will not display nicely. Vim on my machine will automatically open the file as UTF-16LE.</p>
+
+<p><img src="/assets/programming/encoding/chinese-garbage.png" alt="My default terminal settings is unable to display the content in Chinese properly" /></p>
+
+<p>Let’s inspect the contents of the files between Half character <code class="language-plaintext highlighter-rouge">1</code> and Full Byte Character <code class="language-plaintext highlighter-rouge">１</code> in HEX:</p>
+<pre class="highlight" style="background-color: #1b1b1b; padding: .5rem; line-height: 1.25em"><font color="#D0CFCC"><b>$ </b></font>cat halfwidth-1.txt; echo &quot;&quot;; xxd halfwidth-1.txt; cat fullwidth-1.txt ; echo &quot;&quot;; xxd fullwidth-1.txt 
+1
+00000000: <font color="#26A269"><b>31</b></font>                      <font color="#C01C28"><b>               </b></font>  <font color="#26A269"><b>1</b></font>
+１
+00000000: <font color="#C01C28"><b>efbc</b></font> <font color="#C01C28"><b>91</b></font>                   <font color="#C01C28"><b>             </b></font>  <font color="#C01C28"><b>...</b></font>
+</pre>
+
+<p>As we can see, the half-width character <code class="language-plaintext highlighter-rouge">1</code> in UTF-8 is represented as <code class="language-plaintext highlighter-rouge">0x31</code> meaning only one byte would be required. However, a full-width 
+digit <code class="language-plaintext highlighter-rouge">１</code> is represented as <code class="language-plaintext highlighter-rouge">0xEFBC91</code>. Now let’s compared this with UTF-16:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cat halfwidth-utf16.txt; echo ; xxd halfwidth-utf16.txt; cat fullwidth-utf16.txt; echo; xxd fullwidth-utf16.txt 
+1
+00000000: 0031                                     .1
+�
+00000000: ff11                                     ..
+</code></pre></div></div>
+
+<p><strong>Note:</strong> To view UTF-16 on VIM run on command mode (i.e. press <code class="language-plaintext highlighter-rouge">esc</code> to exit current mode and press <code class="language-plaintext highlighter-rouge">:</code> to enter command mode): <code class="language-plaintext highlighter-rouge">e ++enc=utf-16be fullwidth-utf16.txt</code></p>
+
+<p>As expected, UTF-16 represents code points in the upper range very well where we now see <code class="language-plaintext highlighter-rouge">１</code> (full-width 1) being represented with only 2 bytes unlike the 3 that was required in UTF-8. 
+Though the same cannot be said for code points in the lower range such as our half-width digit 	<code class="language-plaintext highlighter-rouge">1</code> which now takes 2 bytes by appending <code class="language-plaintext highlighter-rouge">0x00</code> to its hex representation.</p>
+
+<p>I will be writing a more detailed look into encoding at my <a href="https://zakuarbor.github.io/blog/halfwidth-fullwidth-encoding/">blog</a> in the coming days. This is just a quick preview.</p>
+
+</div>
+</div>
+
+    </div>
+
+  <footer>
+  <marquee id = "buttons">
+    <a href = "index.html"><img src = "/assets/buttons/button.png"></a>
+    <a href = "index.html"><img src = "/assets/buttons/button2.png"></a>
+    <a href = 'https://neocities.org/'><img src = "/assets/buttons/neocitiesorg.gif"></a>
+    <a href = 'https://www.vim.org/'><img src = "/assets/buttons/vim.gif"></a>
+    <a href = 'https://fedoraproject.org/'><img src = "/assets/buttons/gnu-linux.gif"></a>
+    <a href = "https://fedoraproject.org/"><img src = "/assets/buttons/powered_by_fedora_alt.png"></a>
+  </marquee>
+  <small><a href = "/credits" class = "credits">Credits</a></small>
+</footer>
+
+
+  <button onclick="toTop()" id="top_btn" title="Go to top">Top</button>
+  </body>
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>Another Look at CONST in C - RANDOM BITS</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/css/syntax_monokai.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="/assets/css/contrast.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/png" href="/assets/site/random-bits-favicon.png">
+    <meta name="og:title" content="Random Bits">
+    <meta name="og:image" content="">
+    <meta name="og:description"
+        content="Random bits of programming, math, and personal thoughts">
+    <meta name="keywords" content="zakuarbor, programming, math, random bits, pikachu">
+    <meta name="description" content="Random bits of programming, math, and personal thoughts">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script charset="utf-8" src="/assets/js/script.js"></script>
+<script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+     loader: {load: ['[tex]/cancel']},
+      TeX: { 
+        equationNumbers: { autoNumber: "all" },
+        packages: {'[+]': ['cancel']}
+      } 
+    }); 
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+  <header>
+    <center>
+      <h1 id = "title"><a href = "/index.html">RANDOM BITS</a><img id = "pikachu-header" src = "/assets/site/flying-pikachu.png"/></h1>
+    A random site by a random clueless human
+    </center>
+    <!--<marquee scrollamount="4">-->
+    <center>
+      <!--<img src = "/assets/gifs/pikachu-run.gif"/>--><p>Random bits of programming, math, and thoughts
+      By a clueless human</p><!-- <img src = "/assets/gifs/pikachu-run.gif"/>-->
+    </center>
+      <!--&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      <img src = "/assets/gifs/pikachu-run.gif"/>Random bits of programming, math, and thoughts
+      By a clueless human <img src = "/assets/gifs/pikachu-run.gif"/>-->
+      <!--</marquee>-->
+
+    <a href="javascript:void(0);" class="hamburger-nav" onclick="toggleMenu()"><i class="fa fa-bars"></i></a>
+    <nav id="header-nav">
+    <center>
+      <a href="/index.html">Home</a>
+      <a href="/micro/"><span style = "letter-spacing: 1px;">µ</span>Blog</a>
+      <a href="/blog/"><span style = "letter-spacing: 1px;">Blog</a>
+      <a href="/link.html">LinkBlog</a>
+      <!--<a href="/math.html">Math</a>-->
+      <a href="/about.html">About</a>
+    </center>
+    </nav>
+</header>
+
+  </head>
+  <body>
+
+    <div id = "wrapper">
+    <div id = "content">
+<div class = "bits">
+  <h1 class = "title">Another Look at CONST in C</h1>
+
+  <div>
+    <p class = "date">October  4, 2020</p>
+    
+    <div class="tags">
+      
+      
+        <a href="/categories/#programming">programming</a>
+        &nbsp;
+      
+        <a href="/categories/#c/c++">c/c++</a>
+        &nbsp;
+      
+        <a href="/categories/#blog">blog</a>
+        
+      
+    </div>
+  </div>
+  <p>Recently, I’ve been learning embedded programming from <a href="https://www.udemy.com/course/microcontroller-embedded-c-programming/">udemy</a> and there was a section dedicated <code class="language-plaintext highlighter-rouge">const</code>.
+The section was interesting because despite programming in C a lot during my duration of my undergrad, I have never taken a look at <code class="language-plaintext highlighter-rouge">const</code> in much detail. I am sure there is more to <code class="language-plaintext highlighter-rouge">const</code> than
+what the course provides but I still learned a lot from this section itself.</p>
+
+<p><code class="language-plaintext highlighter-rouge">const</code> is a type qualifier that is often used in C and C++ programming, especially appearing in the standard libraries frequently. An example is the function definition of <code class="language-plaintext highlighter-rouge">strlen</code>:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>       <span class="kt">size_t</span> <span class="nf">strlen</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">s</span><span class="p">);</span>
+</code></pre></div></div>
+<p>The main purpose of <code class="language-plaintext highlighter-rouge">const</code> keyword is to document to programmers and compilers that the object cannot be mutated after initialization. A type qualifier is simply just giving additional information 
+about the object to both the programmer and the compiler. Compilers can parse <code class="language-plaintext highlighter-rouge">const</code> to perform various optimization and it <strong>may</strong> place the object to ROM (Read Only Memory) since modifications are 
+not supposed to be possible anyways. However, do not bet on your <code class="language-plaintext highlighter-rouge">const</code> objects to be stored in ROM (I believe it’s usually just stored on the stack anyways unless it’s scope is <code class="language-plaintext highlighter-rouge">global</code>).</p>
+
+<p>Let’s look at a simple example of <code class="language-plaintext highlighter-rouge">const</code> before I delve into what I learned from the course:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">const</span> <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+</code></pre></div></div>
+<p><strong>Example 1:</strong> Illegal assignment to a <code class="language-plaintext highlighter-rouge">const int</code></p>
+
+<p>If we were to compile the code above, we would get the following error:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test.c: In function ‘main’:
+test.c:6:4: error: assignment of read-only variable ‘x’
+  x = 20;
+    ^
+</code></pre></div></div>
+<p>As expected, the compiler would stop the programmer from changing the value of <code class="language-plaintext highlighter-rouge">x</code> since its qualified as a <code class="language-plaintext highlighter-rouge">const</code>. So far, everything I said should be familiar to any C programmer. But please bear with 
+a bit longer.</p>
+
+<p>How do we declare a variable to be a <code class="language-plaintext highlighter-rouge">const</code>?
+In the example above you would assume that the proper way is to declare the qualifier before the type, but it doesn’t matter where you place <code class="language-plaintext highlighter-rouge">const</code> in this example. 
+<code class="language-plaintext highlighter-rouge">const int x = 10;</code> can also be written as <code class="language-plaintext highlighter-rouge">int const x = 10;</code>
+It’s all a matter of preference on how you read the line. For instance, <code class="language-plaintext highlighter-rouge">const int x = 10;</code> can be read as “x is a type int that is a const” and the latter can be read as “x is a const of type int”.</p>
+
+<p>What about pointers? How does <code class="language-plaintext highlighter-rouge">const</code> work with pointers? Let’s see an example using the definition of <code class="language-plaintext highlighter-rouge">strlen</code>. <code class="language-plaintext highlighter-rouge">const char *s</code> means that the function will not modify the string you pass into the 
+function. Let’s take a look at a simple implementation of <code class="language-plaintext highlighter-rouge">strlen</code> I made up on the spot:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">size_t</span> <span class="nf">strlen</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">size_t</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(;</span><span class="o">*</span><span class="n">s</span><span class="p">;</span> <span class="o">++</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">size</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">size</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p><strong>Example 2:</strong> A simple implementation of <code class="language-plaintext highlighter-rouge">strlen</code></p>
+
+<p>As you can see from this implementation, you can modify locally the value of <code class="language-plaintext highlighter-rouge">str</code> to traverse through the string. This implementation does not stop you from incrementing the pointer of the string you 
+pass into the function as long as you don’t modify the contents of what <code class="language-plaintext highlighter-rouge">str</code> is pointing to. We can see this with another example, where we point <code class="language-plaintext highlighter-rouge">const char *s</code> to a totally different area in memory than the one we passed into the function.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="kt">int</span> <span class="nf">puts_f</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">char</span> <span class="o">*</span><span class="n">s2</span> <span class="o">=</span> <span class="s">"baka"</span><span class="p">;</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">s2</span><span class="p">;</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"%s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="kt">char</span> <span class="n">s</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+        <span class="n">strncpy</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="s">"zaku"</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+        <span class="n">s</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="sc">'\0'</span><span class="p">;</span>
+        <span class="n">puts_f</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p><strong>Example 3:</strong> Changing the value of a pointer of the declaration <code class="language-plaintext highlighter-rouge">const char *</code></p>
+
+<p>The output of example 3 would be <code class="language-plaintext highlighter-rouge">baka</code> instead of the string, <code class="language-plaintext highlighter-rouge">zaku</code>, which we passed into the function <code class="language-plaintext highlighter-rouge">puts_f</code>. This example is another illustration how <code class="language-plaintext highlighter-rouge">const char *s</code> only qualifies <code class="language-plaintext highlighter-rouge">char</code> to be non-mutable but not the pointer <code class="language-plaintext highlighter-rouge">s</code> itself.</p>
+
+<p><strong>However,</strong> this does not mean a function with the argument <code class="language-plaintext highlighter-rouge">const char *s</code> cannot modify the string you are pointing to. As I said <code class="language-plaintext highlighter-rouge">const</code> qualifier is just for documentation purpose and your compiler 
+will try to prevent any modification. You can explicitly remove the <code class="language-plaintext highlighter-rouge">const</code> qualifier when you assign its value to another pointer. With the new pointer, you can modify the original string as seen in example 4:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span>
+<span class="kt">size_t</span> <span class="nf">strlen_f</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">str</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">size_t</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="kt">char</span> <span class="o">*</span><span class="n">s</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span> <span class="n">str</span><span class="p">;</span>
+        <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="sc">'h'</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(;</span><span class="o">*</span><span class="n">str</span><span class="p">;</span> <span class="o">++</span><span class="n">str</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">size</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">size</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kt">char</span> <span class="n">s</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+        <span class="n">strncpy</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="s">"zaku"</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+        <span class="n">s</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="sc">'\0'</span><span class="p">;</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"the length of %s is "</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">strlen_f</span><span class="p">(</span><span class="n">s</span><span class="p">));</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"string after calling strlen_f: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>  
+</code></pre></div></div>
+<p><strong>Example 4:</strong> Modifying the string passed into the function as <code class="language-plaintext highlighter-rouge">const char *</code></p>
+
+<p>The above code is an example of being able to mutate the string you passed into a function as <code class="language-plaintext highlighter-rouge">const char *str</code> as seen with the output below:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>the length of zaku is 4
+string after calling strlen_f: haku
+</code></pre></div></div>
+
+<h2 id="so-what-happens-if-we-swap-the-order-of-the-const">So what happens if we swap the order of the const?</h2>
+<p>As I said in my example with <code class="language-plaintext highlighter-rouge">const int x</code>, that the order of the qualifier does not matter. However, when dealing with pointers, it can get a bit confusing. Like before where <code class="language-plaintext highlighter-rouge">const int x</code> and <code class="language-plaintext highlighter-rouge">int const x</code> are the same, <code class="language-plaintext highlighter-rouge">const char *s</code> and <code class="language-plaintext highlighter-rouge">char const *s</code> are equivalent. But the following statements below mean very different things.</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">const</span> <span class="kt">int</span> <span class="o">*</span><span class="n">s</span><span class="p">;</span>
+<span class="kt">int</span> <span class="o">*</span><span class="k">const</span> <span class="n">s</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="o">*</span><span class="k">const</span> <span class="n">s</span><span class="p">;</span>
+</code></pre></div></div>
+<p>We’ve already seen in our example 4 that <code class="language-plaintext highlighter-rouge">const char *s</code> does not allow the pointer <code class="language-plaintext highlighter-rouge">s</code> make any modifications but does not stop any other pointers from modifying whatever <code class="language-plaintext highlighter-rouge">s</code> is 
+pointing to. We also learned from example 3 that <code class="language-plaintext highlighter-rouge">s</code> can point to different areas of memory as long as it does not attempt to mutate the values of the memory it points to. The same applies to any other
+data type such as <code class="language-plaintext highlighter-rouge">const int *s</code>. We will be exploring the behaviors of <code class="language-plaintext highlighter-rouge">const</code> using the data type <code class="language-plaintext highlighter-rouge">int</code> instead of <code class="language-plaintext highlighter-rouge">char</code> for simplicity sakes but the logic is the same.</p>
+
+<p>So what is the difference between <code class="language-plaintext highlighter-rouge">int const *s</code> and <code class="language-plaintext highlighter-rouge">int *const s</code>? When reading a variable declaration, you can read the statement from right to left. For instance, <code class="language-plaintext highlighter-rouge">int const *s</code> can be read as
+s is a pointer to a <code class="language-plaintext highlighter-rouge">const</code> of type <code class="language-plaintext highlighter-rouge">int</code>. Similarly, we can read <code class="language-plaintext highlighter-rouge">int *const s</code> as s is a <code class="language-plaintext highlighter-rouge">const</code> pointer to a <code class="language-plaintext highlighter-rouge">int</code>. See the difference?</p>
+
+<p>The major difference is the placement of <code class="language-plaintext highlighter-rouge">const</code> between the pointer <code class="language-plaintext highlighter-rouge">*</code> (it’s only a pointer symbol during variable declaration. Anywhere else, it’s a dereference operator. Weird isn’t it). The first
+ declaration means s is pointing to some <code class="language-plaintext highlighter-rouge">int</code> that is non-mutable. The latter refers that the pointer <code class="language-plaintext highlighter-rouge">s</code> is non-mutable but the value in memory is still mutable. I’ll present two examples to make
+ this clear.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="o">*</span><span class="k">const</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="kt">int</span> <span class="o">*</span><span class="n">s2</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">s2</span><span class="p">;</span>
+</code></pre></div></div>
+<p><strong>Example 5:</strong> Attempt to make an illegal assignment of <code class="language-plaintext highlighter-rouge">int *const s</code> to another pointer:</p>
+
+<p>If we were to compile this, we would get the following error:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test3.c: In function ‘main’:
+test3.c:7:4: error: assignment of read-only variable ‘s’
+  s = s2;
+    ^
+</code></pre></div></div>
+
+<p>In example 3, we saw that we could change the address where <code class="language-plaintext highlighter-rouge">s</code> points to. So why can we no longer do that when we change the declaration of <code class="language-plaintext highlighter-rouge">s</code> to <code class="language-plaintext highlighter-rouge">int *const s</code>? As I said before, <code class="language-plaintext highlighter-rouge">s</code> is no longer
+a pointer pointing to somewhere that is “write-protected”. With the new declaration, the address where <code class="language-plaintext highlighter-rouge">s</code> points to is “write-protected” while the data is not as seen below:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="o">*</span><span class="k">const</span> <span class="n">s</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+<span class="o">*</span><span class="n">s</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"before modification: %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="o">*</span><span class="n">s</span><span class="p">);</span>
+<span class="o">*</span><span class="n">s</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"after modification: %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="o">*</span><span class="n">s</span><span class="p">);</span>
+</code></pre></div></div>
+<p><strong>Example 6:</strong> Changing the value pointed by <code class="language-plaintext highlighter-rouge">int *const</code>:</p>
+
+<p><strong>Output:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>before modification: 1
+after modification: 2
+</code></pre></div></div>
+
+<p>Example 6 illustrates that modifications are allowed to variables declared as <code class="language-plaintext highlighter-rouge">int *const</code> as long as the pointer is not changed. Looking at all these examples I have provided so far, you should be able
+to know the behavior of the declaration: <code class="language-plaintext highlighter-rouge">const int *const s</code></p>
+
+<p>Following the behavior of <code class="language-plaintext highlighter-rouge">const int *s</code> and <code class="language-plaintext highlighter-rouge">int *const s</code>, <code class="language-plaintext highlighter-rouge">const int *const s</code> means that both the pointer and the memory it is pointing to is non-mutable. So we cannot make any modification of 
+any kind to <code class="language-plaintext highlighter-rouge">s</code>.</p>
+
+<h1 id="summary">Summary</h1>
+<ul>
+  <li>the order where you place <code class="language-plaintext highlighter-rouge">const</code> matters when dealing with pointers</li>
+  <li><code class="language-plaintext highlighter-rouge">const int *x</code> - x is a pointer to a <code class="language-plaintext highlighter-rouge">const</code> int</li>
+  <li><code class="language-plaintext highlighter-rouge">int *const x</code> - x is a <code class="language-plaintext highlighter-rouge">const</code> pointer to an int</li>
+  <li><code class="language-plaintext highlighter-rouge">const int *const x</code> - x is a <code class="language-plaintext highlighter-rouge">const</code> pointer to a <code class="language-plaintext highlighter-rouge">const</code> int</li>
+  <li>Compiler will try to prevent writes to a <code class="language-plaintext highlighter-rouge">const</code> but there are ways to forgo the protection</li>
+  <li><code class="language-plaintext highlighter-rouge">const</code> serves mainly for documentation purposes to the developers and the compiler</li>
+  <li>compiler can try to use the additional information for optimization</li>
+</ul>
+
+</div>
+</div>
+
+    </div>
+
+  <footer>
+  <marquee id = "buttons">
+    <a href = "index.html"><img src = "/assets/buttons/button.png"></a>
+    <a href = "index.html"><img src = "/assets/buttons/button2.png"></a>
+    <a href = 'https://neocities.org/'><img src = "/assets/buttons/neocitiesorg.gif"></a>
+    <a href = 'https://www.vim.org/'><img src = "/assets/buttons/vim.gif"></a>
+    <a href = 'https://fedoraproject.org/'><img src = "/assets/buttons/gnu-linux.gif"></a>
+    <a href = "https://fedoraproject.org/"><img src = "/assets/buttons/powered_by_fedora_alt.png"></a>
+  </marquee>
+  <small><a href = "/credits" class = "credits">Credits</a></small>
+</footer>
+
+
+  <button onclick="toTop()" id="top_btn" title="Go to top">Top</button>
+  </body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>Another Look at scanf - scanset - RANDOM BITS</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/css/syntax_monokai.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="/assets/css/contrast.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/png" href="/assets/site/random-bits-favicon.png">
+    <meta name="og:title" content="Random Bits">
+    <meta name="og:image" content="">
+    <meta name="og:description"
+        content="Random bits of programming, math, and personal thoughts">
+    <meta name="keywords" content="zakuarbor, programming, math, random bits, pikachu">
+    <meta name="description" content="Random bits of programming, math, and personal thoughts">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script charset="utf-8" src="/assets/js/script.js"></script>
+<script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+     loader: {load: ['[tex]/cancel']},
+      TeX: { 
+        equationNumbers: { autoNumber: "all" },
+        packages: {'[+]': ['cancel']}
+      } 
+    }); 
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+  <header>
+    <center>
+      <h1 id = "title"><a href = "/index.html">RANDOM BITS</a><img id = "pikachu-header" src = "/assets/site/flying-pikachu.png"/></h1>
+    A random site by a random clueless human
+    </center>
+    <!--<marquee scrollamount="4">-->
+    <center>
+      <!--<img src = "/assets/gifs/pikachu-run.gif"/>--><p>Random bits of programming, math, and thoughts
+      By a clueless human</p><!-- <img src = "/assets/gifs/pikachu-run.gif"/>-->
+    </center>
+      <!--&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      <img src = "/assets/gifs/pikachu-run.gif"/>Random bits of programming, math, and thoughts
+      By a clueless human <img src = "/assets/gifs/pikachu-run.gif"/>-->
+      <!--</marquee>-->
+
+    <a href="javascript:void(0);" class="hamburger-nav" onclick="toggleMenu()"><i class="fa fa-bars"></i></a>
+    <nav id="header-nav">
+    <center>
+      <a href="/index.html">Home</a>
+      <a href="/micro/"><span style = "letter-spacing: 1px;">µ</span>Blog</a>
+      <a href="/blog/"><span style = "letter-spacing: 1px;">Blog</a>
+      <a href="/link.html">LinkBlog</a>
+      <!--<a href="/math.html">Math</a>-->
+      <a href="/about.html">About</a>
+    </center>
+    </nav>
+</header>
+
+  </head>
+  <body>
+
+    <div id = "wrapper">
+    <div id = "content">
+<div class = "bits">
+  <h1 class = "title">Another Look at scanf - scanset</h1>
+
+  <div>
+    <p class = "date">October 15, 2020</p>
+    
+    <div class="tags">
+      
+      
+        <a href="/categories/#programming">programming</a>
+        &nbsp;
+      
+        <a href="/categories/#c/c++">c/c++</a>
+        &nbsp;
+      
+        <a href="/categories/#scanf">scanf</a>
+        &nbsp;
+      
+        <a href="/categories/#blog">blog</a>
+        
+      
+    </div>
+  </div>
+  <p>It came to my attention from an embedded course on <a href="https://www.udemy.com/course/microcontroller-embedded-c-programming/">udemy</a> the existence of <strong>scanset</strong> in <code class="language-plaintext highlighter-rouge">scanf</code></p>
+
+<p>As most of you would know, <code class="language-plaintext highlighter-rouge">scanf</code> and its variants are functions that scans from the input according to some format you specify such as <code class="language-plaintext highlighter-rouge">%d</code> for an integer or <code class="language-plaintext highlighter-rouge">%c</code> for a char. However, did you know that <code class="language-plaintext highlighter-rouge">scanf</code> has the flexibility to whitelist or blacklist characters? This can be done by specifying a <strong>scanset</strong> in the format string. Based on the name <strong>scanset</strong> itself, it implies that <strong>scanset</strong> is a set of characters you provide for <code class="language-plaintext highlighter-rouge">scanf</code> to scan for. To be specific, <strong>scanset</strong> is a specifier where you can specify a character or a set of characters to either accept or reject. To specify a <strong>scanset</strong>, you encase the set of characters inside square brackets. 
+<strong>Note:</strong> the set is case sensitive</p>
+
+<p>It may be hard to understand without an example, so here’s an example of a using <code class="language-plaintext highlighter-rouge">scanf</code> to only accept the character <code class="language-plaintext highlighter-rouge">a</code> only:</p>
+
+<p><code class="language-plaintext highlighter-rouge">scanf("%[a]", buffer);</code></p>
+
+<p>If you wish to stop reading the input upon reading some character in a set, you can specify your scanset with <code class="language-plaintext highlighter-rouge">^</code>. For instance, you can have <code class="language-plaintext highlighter-rouge">scanf</code> stop reading after the first occurrence of a period (<code class="language-plaintext highlighter-rouge">.</code>) to extract the first sentence of an input with the following call:</p>
+
+<p><code class="language-plaintext highlighter-rouge">scanf(%[^.], buffer);</code></p>
+
+<h2 id="benefits">Benefits</h2>
+<p>To put it simply, this saves you the trouble of writing code to process from the input the desired string you wish to look at. To extract information from a string not delimited by whitespace such as CSV, you would have to look through <code class="language-plaintext highlighter-rouge">strtok</code>. However, with <strong>scanset</strong>, you can extract the data from a CSV with one scanf call. For instance, let’s say we want to parse a CSV with the format <code class="language-plaintext highlighter-rouge">first_name, last_name, age</code>. The code to scan a CSV would look something like this:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">scanf</span><span class="p">(</span><span class="s">"%[^,],%[^,],%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">fname</span><span class="p">,</span> <span class="n">lname</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">age</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>See how convenient that was. Just one line of code is needed to parse a line of data from a CSV file. All we need to do is add a loop and we parse the entire csv file:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span><span class="p">(</span><span class="n">scanf</span><span class="p">(</span><span class="s">"%[^,],%[^,],%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">fname</span><span class="p">,</span> <span class="n">lname</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">age</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"========================</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"First Name: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">fname</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Last Name : %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">lname</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"age       : %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">age</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p><strong>output:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ./a.out &lt; data.csv 
+========================
+First Name: John
+Last Name : Smith
+age       : 20
+========================
+First Name: Mary
+Last Name : Lee
+age       : 21
+========================
+First Name: Marco
+Last Name : Polo
+age       : 19
+</code></pre></div></div>
+
+<p>Similarly to character class in Regex, you can specify ranges as well. For instance, <code class="language-plaintext highlighter-rouge">%[A-Z]</code> matches uppercase characters only, while <code class="language-plaintext highlighter-rouge">%[0-5]</code> matches a string with digits that fall within the range 0-5 (inclusive).</p>
+
+<p>Anyhow, that was all I wanted to share for today. I just thought it was neat that <code class="language-plaintext highlighter-rouge">scanf</code> can do more than what I initially thought.</p>
+
+</div>
+</div>
+
+    </div>
+
+  <footer>
+  <marquee id = "buttons">
+    <a href = "index.html"><img src = "/assets/buttons/button.png"></a>
+    <a href = "index.html"><img src = "/assets/buttons/button2.png"></a>
+    <a href = 'https://neocities.org/'><img src = "/assets/buttons/neocitiesorg.gif"></a>
+    <a href = 'https://www.vim.org/'><img src = "/assets/buttons/vim.gif"></a>
+    <a href = 'https://fedoraproject.org/'><img src = "/assets/buttons/gnu-linux.gif"></a>
+    <a href = "https://fedoraproject.org/"><img src = "/assets/buttons/powered_by_fedora_alt.png"></a>
+  </marquee>
+  <small><a href = "/credits" class = "credits">Credits</a></small>
+</footer>
+
+
+  <button onclick="toTop()" id="top_btn" title="Go to top">Top</button>
+  </body>
+</html>

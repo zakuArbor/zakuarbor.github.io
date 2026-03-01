@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>2020 Blog Archive - RANDOM BITS</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/css/syntax_monokai.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="/assets/css/contrast.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/png" href="/assets/site/random-bits-favicon.png">
+    <meta name="og:title" content="Random Bits">
+    <meta name="og:image" content="">
+    <meta name="og:description"
+        content="Random bits of programming, math, and personal thoughts">
+    <meta name="keywords" content="zakuarbor, programming, math, random bits, pikachu">
+    <meta name="description" content="Random bits of programming, math, and personal thoughts">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script charset="utf-8" src="/assets/js/script.js"></script>
+<script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+     loader: {load: ['[tex]/cancel']},
+      TeX: { 
+        equationNumbers: { autoNumber: "all" },
+        packages: {'[+]': ['cancel']}
+      } 
+    }); 
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+  <header>
+    <center>
+      <h1 id = "title"><a href = "/index.html">RANDOM BITS</a><img id = "pikachu-header" src = "/assets/site/flying-pikachu.png"/></h1>
+    A random site by a random clueless human
+    </center>
+    <!--<marquee scrollamount="4">-->
+    <center>
+      <!--<img src = "/assets/gifs/pikachu-run.gif"/>--><p>Random bits of programming, math, and thoughts
+      By a clueless human</p><!-- <img src = "/assets/gifs/pikachu-run.gif"/>-->
+    </center>
+      <!--&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      <img src = "/assets/gifs/pikachu-run.gif"/>Random bits of programming, math, and thoughts
+      By a clueless human <img src = "/assets/gifs/pikachu-run.gif"/>-->
+      <!--</marquee>-->
+
+    <a href="javascript:void(0);" class="hamburger-nav" onclick="toggleMenu()"><i class="fa fa-bars"></i></a>
+    <nav id="header-nav">
+    <center>
+      <a href="/index.html">Home</a>
+      <a href="/micro/"><span style = "letter-spacing: 1px;">µ</span>Blog</a>
+      <a href="/blog/"><span style = "letter-spacing: 1px;">Blog</a>
+      <a href="/link.html">LinkBlog</a>
+      <!--<a href="/math.html">Math</a>-->
+      <a href="/about.html">About</a>
+    </center>
+    </nav>
+</header>
+
+  </head>
+  <body>
+
+    <div id = "wrapper">
+    <div id = "content">
+  
+
+
+<h1>2020 Blog Archive (2020)</h1>
+
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/blog/ldd-to-debug-expr/">Debugging expr with ldd</a></h1>
+<div>
+<p class = "date">December 31, 2020</p>
+<div class="tags">
+
+<a href="/categories/#programming">programming</a>
+&nbsp;
+
+<a href="/categories/#c/c++">c/c++</a>
+&nbsp;
+
+<a href="/categories/#linker">linker</a>
+&nbsp;
+
+<a href="/categories/#blog">blog</a>
+
+
+</div>
+TOC 1. expr failing to perform simple multiplication 2. Investigating expr 3. Looking at the libraries used by expr expr Failing to Perform Simple Multiplication At work, I have been doing some investigation as to why a build of low priority stopped passing sanity testing. During my investigation, I was plugging in some numbers to expr, a unix tool that can evaluate basic expressions such as adding and subtracting numbers, to calculate some values in the program setting. However, I encountered a strange behavior where the math was not making sense. To illustrate, look at the figure below: $ expr...
+<p><a href="/blog/ldd-to-debug-expr/">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/blog/dangers-of-improper-macro-naming/">Dangers of Improper Macro Naming</a></h1>
+<div>
+<p class = "date">November  1, 2020</p>
+<div class="tags">
+
+<a href="/categories/#programming">programming</a>
+&nbsp;
+
+<a href="/categories/#c/c++">c/c++</a>
+&nbsp;
+
+<a href="/categories/#blog">blog</a>
+
+
+</div>
+TOC 1. A random promotion 2. Expected unqualified-id before string constant Error 2.1. Verifying the Error is not Environment Related 3. The Dangers of MACROS A random promotion For the past 2 days, I’ve been spending most of my day working on a Virtual Machine translator to translate VM intermediate language to assembly for the Hack 16 Bit Computer. Hack is a 16-bit computer designed by Noam Nisan and Shimon Schocken from Nand2Tetris II course offered on Coursera. It’s an amazing course and I highly recommend anyone interested in understanding how your computer works from very a very low level...
+<p><a href="/blog/dangers-of-improper-macro-naming/">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/blog/double-pointers/">A look at Double Pointers</a></h1>
+<div>
+<p class = "date">October 25, 2020</p>
+<div class="tags">
+
+<a href="/categories/#programming">programming</a>
+&nbsp;
+
+<a href="/categories/#c/c++">c/c++</a>
+&nbsp;
+
+<a href="/categories/#blog">blog</a>
+
+
+</div>
+I was randomly browsing r/CarletonU community on Reddit since it’s one of the schools I may attend next Fall. A particular post interested me due to the title: For anyone in Computer Science. As a recent graduate in Computer Science (undergrad), this post caught my attention. This blog post is inspired by my response on reddit about double pointers. Today I want to discuss with you two use cases for double pointers: making modifications to a pointer in a function and in 2d arrays. TOC 1. What is a double pointer 1.1. Representing Double Pointer in Memory 2. When Should...
+<p><a href="/blog/double-pointers/">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/blog/scanset/">Another Look at scanf - scanset</a></h1>
+<div>
+<p class = "date">October 15, 2020</p>
+<div class="tags">
+
+<a href="/categories/#programming">programming</a>
+&nbsp;
+
+<a href="/categories/#c/c++">c/c++</a>
+&nbsp;
+
+<a href="/categories/#scanf">scanf</a>
+&nbsp;
+
+<a href="/categories/#blog">blog</a>
+
+
+</div>
+It came to my attention from an embedded course on udemy the existence of scanset in scanf As most of you would know, scanf and its variants are functions that scans from the input according to some format you specify such as %d for an integer or %c for a char. However, did you know that scanf has the flexibility to whitelist or blacklist characters? This can be done by specifying a scanset in the format string. Based on the name scanset itself, it implies that scanset is a set of characters you provide for scanf to scan for. To...
+<p><a href="/blog/scanset/">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/blog/c-const/">Another Look at CONST in C</a></h1>
+<div>
+<p class = "date">October  4, 2020</p>
+<div class="tags">
+
+<a href="/categories/#programming">programming</a>
+&nbsp;
+
+<a href="/categories/#c/c++">c/c++</a>
+&nbsp;
+
+<a href="/categories/#blog">blog</a>
+
+
+</div>
+Recently, I’ve been learning embedded programming from udemy and there was a section dedicated const. The section was interesting because despite programming in C a lot during my duration of my undergrad, I have never taken a look at const in much detail. I am sure there is more to const than what the course provides but I still learned a lot from this section itself. const is a type qualifier that is often used in C and C++ programming, especially appearing in the standard libraries frequently. An example is the function definition of strlen: size_t strlen(const char *s); The...
+<p><a href="/blog/c-const/">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/blog/a-look-at-input-buffer-using-scanf/">A look at Input Buffer and scanf</a></h1>
+<div>
+<p class = "date">September 25, 2020</p>
+<div class="tags">
+
+<a href="/categories/#programming">programming</a>
+&nbsp;
+
+<a href="/categories/#c/c++">c/c++</a>
+&nbsp;
+
+<a href="/categories/#scanf">scanf</a>
+&nbsp;
+
+<a href="/categories/#blog">blog</a>
+
+
+</div>
+Today I learned something new that should have been obvious but it was something I never took time to think about. In Linux, we have three standard streams: stdin, stdout, and stderr. If you are familiar with programming in C, you should know that stdin is the input channel that handles data from an input device such as your keyboard. scanf is a function that scans input according to format (definition from SCANF(3) - Linux Programmer's Manual). But how does scanf actually scan the input? Today I was reviewing some lectures from a Udemy Embedded C Programming course and there...
+<p><a href="/blog/a-look-at-input-buffer-using-scanf/">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/blog/random-thoughts-about-tee/">Random thought about Tee</a></h1>
+<div>
+<p class = "date">September 22, 2020</p>
+<div class="tags">
+
+<a href="/categories/#programming">programming</a>
+&nbsp;
+
+<a href="/categories/#unix">unix</a>
+&nbsp;
+
+<a href="/categories/#blog">blog</a>
+
+
+</div>
+In the latter half of June (when I flee from my parent’s home to Mississauga for 2 months so that I can study and read all I want without being bothered), I decided to read Intermediate Perl: Beyond The Basics of Learning Perl. For those of you who are not familiar with the book, it’s the sequel to the “Llama book” (Learning Perl), a classic book on Perl. The cover of Intermediate Perl. Following the tradition of O'Reilly books, the animal feature in the cover is the Llama There was a section where it mentioned about tee, a UNIX command-line...
+<p><a href="/blog/random-thoughts-about-tee/">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/blog/github-app-limitation-not-all-refs-are-readable-error/">Github App Limitation - not all refs are readable</a></h1>
+<div>
+<p class = "date">September 18, 2020</p>
+<div class="tags">
+
+<a href="/categories/#programming">programming</a>
+&nbsp;
+
+<a href="/categories/#github">github</a>
+&nbsp;
+
+<a href="/categories/#blog">blog</a>
+
+
+</div>
+Introduction Recently I have been reading up and working on creating a Github App for work to automate some process to create a pull request that contains code changes from various branches. For those of you who are not familiar with Github Apps, a Github App is an app you can install or create to automate your workflow such as giving feedback on issues or pull requests if they don’t meet the guidelines or are missing information. The entire Github marketplace is dedicated to selling apps and actions to automate workflows. Github Apps can be created using a framework called...
+<p><a href="/blog/github-app-limitation-not-all-refs-are-readable-error/">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/blog/github-apps-on-ghe-your-private-key-is-not-correct/">Github Apps on GHE: Your Private Key is not Correct</a></h1>
+<div>
+<p class = "date">September 17, 2020</p>
+<div class="tags">
+
+<a href="/categories/#programming">programming</a>
+&nbsp;
+
+<a href="/categories/#github">github</a>
+&nbsp;
+
+<a href="/categories/#blog">blog</a>
+
+
+</div>
+If you are working on a Github App on an Enterprise Edition and encounter an error such as Your Private Key is not Correct, it may not be anything wrong with your private key at all. You just need to set GHE_HOST variable to resolve the issue. While working on my first Github App at work, I originally made a skeleton Github App on my personal Github account that simply just logged whenever someone edited an issue. I ported this skeleton code to my work account which is hosted on the enterprise version of Github. However, to my surprise the...
+<p><a href="/blog/github-apps-on-ghe-your-private-key-is-not-correct/">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/blog/bias-utm-cs-course-review">Bias UTM CS Course Review</a></h1>
+<div>
+<p class = "date">July  3, 2020</p>
+<div class="tags">
+
+<a href="/categories/#university">university</a>
+&nbsp;
+
+<a href="/categories/#computer science">computer science</a>
+&nbsp;
+
+<a href="/categories/#reviews">reviews</a>
+&nbsp;
+
+<a href="/categories/#blog">blog</a>
+
+
+</div>
+DISCLAIMER: The following content is a biased review based on my own experience and does not reflect the overall experience of others. Please excuse my poor writing, it’s still a skill that I am working on. This review is subjected to changes as I continue to reflect on my time at UTM. DISCLAIMER 2: This blog post is OUTDATED, many things have likely changed since when you are reading this webpage INTRODUCTION Now that I am finished with University (unless somehow I fail my electives), I thought I would briefly review all the Computer Science (CS) courses I have taken...
+<p><a href="/blog/bias-utm-cs-course-review">Read More...</a></p>
+</div>
+</div>
+
+
+
+</div>
+
+    </div>
+
+  <footer>
+  <marquee id = "buttons">
+    <a href = "index.html"><img src = "/assets/buttons/button.png"></a>
+    <a href = "index.html"><img src = "/assets/buttons/button2.png"></a>
+    <a href = 'https://neocities.org/'><img src = "/assets/buttons/neocitiesorg.gif"></a>
+    <a href = 'https://www.vim.org/'><img src = "/assets/buttons/vim.gif"></a>
+    <a href = 'https://fedoraproject.org/'><img src = "/assets/buttons/gnu-linux.gif"></a>
+    <a href = "https://fedoraproject.org/"><img src = "/assets/buttons/powered_by_fedora_alt.png"></a>
+  </marquee>
+  <small><a href = "/credits" class = "credits">Credits</a></small>
+</footer>
+
+
+  <button onclick="toTop()" id="top_btn" title="Go to top">Top</button>
+  </body>
+</html>

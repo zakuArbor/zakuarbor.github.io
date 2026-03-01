@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>A Quick and Flawed Look Into Spatial Locality and TLB - RANDOM BITS</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/css/syntax_monokai.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="/assets/css/contrast.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/png" href="/assets/site/random-bits-favicon.png">
+    <meta name="og:title" content="Random Bits">
+    <meta name="og:image" content="">
+    <meta name="og:description"
+        content="Random bits of programming, math, and personal thoughts">
+    <meta name="keywords" content="zakuarbor, programming, math, random bits, pikachu">
+    <meta name="description" content="Random bits of programming, math, and personal thoughts">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script charset="utf-8" src="/assets/js/script.js"></script>
+<script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+     loader: {load: ['[tex]/cancel']},
+      TeX: { 
+        equationNumbers: { autoNumber: "all" },
+        packages: {'[+]': ['cancel']}
+      } 
+    }); 
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+  <header>
+    <center>
+      <h1 id = "title"><a href = "/index.html">RANDOM BITS</a><img id = "pikachu-header" src = "/assets/site/flying-pikachu.png"/></h1>
+    A random site by a random clueless human
+    </center>
+    <!--<marquee scrollamount="4">-->
+    <center>
+      <!--<img src = "/assets/gifs/pikachu-run.gif"/>--><p>Random bits of programming, math, and thoughts
+      By a clueless human</p><!-- <img src = "/assets/gifs/pikachu-run.gif"/>-->
+    </center>
+      <!--&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      <img src = "/assets/gifs/pikachu-run.gif"/>Random bits of programming, math, and thoughts
+      By a clueless human <img src = "/assets/gifs/pikachu-run.gif"/>-->
+      <!--</marquee>-->
+
+    <a href="javascript:void(0);" class="hamburger-nav" onclick="toggleMenu()"><i class="fa fa-bars"></i></a>
+    <nav id="header-nav">
+    <center>
+      <a href="/index.html">Home</a>
+      <a href="/micro/"><span style = "letter-spacing: 1px;">µ</span>Blog</a>
+      <a href="/blog/"><span style = "letter-spacing: 1px;">Blog</a>
+      <a href="/link.html">LinkBlog</a>
+      <!--<a href="/math.html">Math</a>-->
+      <a href="/about.html">About</a>
+    </center>
+    </nav>
+</header>
+
+  </head>
+  <body>
+
+    <div id = "wrapper">
+    <div id = "content">
+<div class = "bits">
+  <h1 class = "title">A Quick and Flawed Look Into Spatial Locality and TLB</h1>
+
+  <div>
+    <p class = "date">May 27, 2024</p>
+    
+    <div class="tags">
+      
+      
+        <a href="/categories/#programming">programming</a>
+        &nbsp;
+      
+        <a href="/categories/#c/c++">c/c++</a>
+        &nbsp;
+      
+        <a href="/categories/#blog">blog</a>
+        
+      
+    </div>
+  </div>
+  <p><strong>WARNING:</strong> I am inexperienced and not knowledgeable of computer architecture. Although noted below, I will be making a claim for a simplistic 
+computer architecture that is not easily reproducible. The blog does <strong>not</strong> have data to back up my claim. I probably will regret publishing 
+this post. We shall see how long it stays up. In the meantime, feel free to give corrections and criticism by opening a github issue.</p>
+
+<p>I got bored so skimmed through the first few sections of Ulrich’s paper <a href="https://akkadia.org/drepper/cpumemory.pdf">What Every Programmer Should Know About Memory</a>, a 
+gigantic paper about computer memory that I only took a small glimpse over the years. What ignited this post was the following:</p>
+
+<blockquote>
+  <p>It is therefore good for performance and scalability if the memory needed by the
+page table trees is as small as possible. The ideal case
+for this is to place the used memory close together in the
+virtual address space; the actual physical addresses used
+do not matter
+– <a href="https://akkadia.org/drepper/cpumemory.pdf">What Every Programmer Should Know About Memory</a></p>
+</blockquote>
+
+<p><strong>Notice 1:</strong> I am still very new in the subject of system performance and computer architecture so please do raise a Github Issue if there is 
+anything plainly wrong about my findings.</p>
+
+<p>If you have taken a course in operating system or had an opportunity to work with memory at a low level, you will know that although two 
+virtual address may be close virtually, they could be mapped to very different physical pages where the data is actually stored. Hence, 
+my confusion. I was initially confused as to how programmers can exploit spatial locality if the data could be stored in different physical pages. 
+While I do not know the full picture, I do have some ideas after spending a bit of time reading resources online such as <a href="https://pages.cs.wisc.edu/~remzi/OSTEP/">OSTEP</a>, a free operating system textbook, 
+and recalling what I Have learned in the past. There are a few things I will be exploring:</p>
+
+<ol>
+  <li>My interpretation of the quote from <a href="https://akkadia.org/drepper/cpumemory.pdf">What Every Programmer Should Know About Memory</a></li>
+  <li>The relationship with TLB, CPU cache, and cacheline</li>
+  <li>The expected growth of TLB misses vs cache miss</li>
+</ol>
+
+<h2 id="1-physical-and-virtual-pages">1. Physical and Virtual Pages</h2>
+
+<p>As one may already be aware, memory is partitioned into fixed size pages. Although you could configure to have some pages to be large from 
+my memory, let’s ignore this case. There are various reasons to split memory into pages and this is analogous to how we split files into 
+fixed blocks. One reason is to avoid external fragmentation so that we can ensure not memory is wasted (though we could have internal 
+fragmentation). Modern OS utilizes multi-level page tables which allows us to address more memory while saving space as linear page tables 
+requires a lot of space (and each process requires its own page table). To give the illusion of memory being contiguous, the virtual pages 
+are contiguous but in reality map to very different and perhaps fragmented physical pages (i.e. not contiguous at all). However, there is 
+two traits that the virtual and physical pages share in common:</p>
+
+<ol>
+  <li>The size of the virtual and physical pages have the same size</li>
+  <li>Since both virtual and physical pages have the same size, the offset of the memory being addressed are the same</li>
+</ol>
+
+<p>We can also verify this on our own system:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ grep -i pagesize /proc/self/smaps | sort | uniq
+KernelPageSize:        4 kB
+MMUPageSize:           4 kB
+</code></pre></div></div>
+
+<p>We see that both the virtual and physical pages are 4kB which is typical in most 64-bit systems. Recall that the purpose of the MMU is 
+to translate virtual addresses to physical addresses and page tables store page table entries (PTE) which contains metadata about the 
+page such as if the page is in memory, if it’s writable and etc. Virtual addresses can be broken into segments that represents the indices 
+of the different levels of the page table and the offset within the page. For instance, a page table could look like the following:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>+--------------- VPN -----------------+
+|                                     |
+V                                     V
+63         47     38     29     20     11        0
++---------+------+------+------+------+-----------+
+| UNUSED  |  L4  |  L3  |  L2  |  L1  | offset    |
++---------+------+------+------+------+-----------+
+          |9 bits|9 bits|9 bits|9 bits| 12 bits
+</code></pre></div></div>
+
+<p>Once the PTE is found through the page walk, one could compute the physical address by:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(PTE.PFN &lt;&lt; shift) + offset = (Address of Physical Page) + offset
+</code></pre></div></div>
+
+<p>Although I am not sure if this calculation is correct, for the intent of what I want to discuss, this math shall be suffice. What I want 
+to highlight is that we need to know two things:</p>
+
+<ol>
+  <li>the physical frame number (PFN)</li>
+  <li>the offset</li>
+</ol>
+
+<p>For simplicity, we could view the physical address translation as:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>physical address = pagetable[VPN] * page_size + offset
+</code></pre></div></div>
+
+<p><small><b>Note:</b> I want to stress that the math may not be entirely correct and is a simiplified view</small></p>
+
+<p><strong>Conclusion:</strong> My interpretation of the quote: <code class="language-plaintext highlighter-rouge">the actual physical addresses used do not matter</code> doesn’t downplay the importance of spatial 
+locality in physical memory but rather to refer that the fact that we will see a performance increase during the address translation phase. 
+I totally misread the quote and thought the author was referring that spatial locality didn’t matter. A common theme I have is misreading and 
+misinterpreting what I read … something I need to work on more. Though I could be wrong so feel free to report an error in my thinking on 
+<code class="language-plaintext highlighter-rouge">Report a Bug</code> link below the tags associated with the post.</p>
+
+<h2 id="2-tlb-cpu-cache-and-cacheline">2. TLB, CPU Cache, and Cacheline</h2>
+
+<p>TLB (Translation Lookaside Buffer) is a cache that the MMU (memory management unit) uses to avoid performing a page walk. TLB only contains 
+the PTE and not the page itself. Parts of the page could be cached into the CPU cache. When retrieving data from the main memory, the fetch 
+request does not only grab the data itself but a line of data referred as a cacheline. On a 64-bit CPU, 64 bytes of data are retrieved for each 
+fetch requests and stored into cache.</p>
+
+<p><small><b>Note:</b> I recently learned there are a few different levels of TLB and TLB could be also split into memory and instruction just 
+like CPU caches</small></p>
+
+<p>Let’s suppose we want to fetch an element in an array such as an integer <code class="language-plaintext highlighter-rouge">arr[0]</code>. The CPU will also grab 15 other integers 
+(assuming an integer is 4 Bytes and our CPU is 64-bit) due to how the CPU fetches data from the main memory. When the CPU wants to fetch some 
+data from main memory, it’ll grab a chunk of data called a cache line into the CPU cache to reduce the number of times the CPU needs to access 
+the main memory because accessing data from main memory is EXPENSIVE. So if <code class="language-plaintext highlighter-rouge">arr[0]</code> was not in cache, we will have a cache miss and therefore, 
+the CPU will need to fetch <code class="language-plaintext highlighter-rouge">arr[0]</code> from main memory (or worse, it’ll fetch the data from storage like the harddrive to memory and then to cache). 
+It’ll also bring along <code class="language-plaintext highlighter-rouge">arr[1], arr[2], ..., arr[15]</code> along with it so that if we ever need to access any of the first 16 elements of the array, 
+we don’t ever need to travel to the main memory which is far from the CPU as it will already be in our cache which requires very little CPU 
+cycles to retrieve the data. From my understanding, CPU designers noticed that neighboring data are more likely to be access such as via a loop. 
+We call this type of access as spatial locality.</p>
+
+<p><small>Note: while in theory, 16 integers should be retrievable from one request (should be 8 bytes at a time in 8 bursts to service the 
+request in general), I am not knowledgeable if there are some caveats such as alignment issues and other factors. As I did not study engineering 
+(in fact I am studying Mathematics which is far from this subject), my knowledge of hardware is limited</small></p>
+
+<p>But you may be confused as I was about how the TLB and cache relate to each other. Recall TLB stores PTEs and cache stores data from the page. 
+We first need to translate the virtual address into physical before we proceed to fetch the data. If the PTE is already in TLB, then there is 
+no need to do a page table walk, but we may still need to fetch the data if it’s not in the CPU cache. The PTE can be used to retrieve the data 
+from the main memory if the data is not already in cache. The diagram below does a good job to capture this relation:</p>
+
+<p><img alt="An image illustrating in a high level of how data is retrieved making use of both the TLB and CPU cache" src="http://www.cs.iit.edu/~cs561/cs351/VM/TLB.bmp" /></p>
+
+<p class="caption">A high-level illustration of how data is retrieved which makes use of both the TLB and CPU cache when possible. Adapted from <a href="http://www.cs.iit.edu/~cs561/cs351/VM/TLB.html">here</a></p>
+
+<p>Another good flowchart of how TLB works can be found on <a href="https://en.wikipedia.org/wiki/Translation_lookaside_buffer">Wikipedia</a> as well:</p>
+
+<p><img alt="Flowchart[5] shows the working of a translation lookaside buffer. For simplicity, the page-fault routine is not mentioned." src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Steps_In_a_Translation_Lookaside_Buffer.png" /></p>
+
+<h2 id="spatial-locality-in-respect-with-tlb-and-cache">Spatial Locality In Respect With TLB and Cache</h2>
+
+<p>Temporal locality refers to the behavior that if a piece of data is accessed, it is likely to be accessed repeatedly within a short timeframe. 
+I think it is clear how TLB and cache gives computers a huge boost in performance. If we repeatedly access the same variable, 
+its PTE would have an extremely high likelihood to be in the TLB so no address translations are required (meaning no pagewalk), 
+and the value of the variable would have a high chance to be in cache and thus avoid requesting the data from the main memory. Both the PTE 
+and cache saves a lot of CPU cycles and provides a noticeable increase in performance that programmers can exploit.</p>
+
+<h3 id="2a-spatial-locality-and-tlb">2a. Spatial Locality and TLB</h3>
+
+<p>So how does TLB benefit from spatial locality? Recall the quote that motivated this entire blog post stated that it is desirable for 
+the memory needed by the page table to be placed close together in the VIRTUAL address space and disregards the location of the physical 
+address. The reason for the disregard of the physical address has to do with the fact that the TLB caches the PTE and not the page 
+itself. If data are close to each other such as the next element in the array, it is likely that the virtual address of the next element 
+in the array to reside in the same virtual page and therefore has the same PTE. Meaning if two pieces of data reside in the same virtual page, 
+then the only thing that differs is the offset and thus we can use the cached PTE from the TLB. 
+A TLB hit allows us to avoid the page walk and thus avoid the overhead. Now let’s suppose we are accessing a ton of element in the array.</p>
+
+<p><strong>Speculation Without Any Evidence:</strong> In theory, as our page table is 4kB, then a single virtual page <strong>could</strong> (in our simplistic model) 
+contain up to 1024 integers (4096/4 = 1024) but we know in reality it does not. 
+Though this claim assumes we are running on a single core CPU as each core probably has their own TLB.</p>
+
+<p>This would mean that when accessing 1024 integers stored sequentially, we will have 1024 TLB hits in a perfect world. This is an example 
+of how TLB benefits from spatial locality.</p>
+
+<ol>
+  <li>arr[0]: TLB Miss because we never accessed the array</li>
+  <li>arr[1]: TLB hit because the page is big enough to be within the same page</li>
+  <li>arr[2]: TLB hit because the page is big enough to be within the same page
+…</li>
+  <li>arr[1024] or somewhere near there: TLB miss</li>
+</ol>
+
+<p><strong>Note:</strong> I should really get a old single-core CPU to test this claim. I have no evidence for this claim at all.</p>
+
+<h3 id="2b-spatial-locality-and-cpu-cache">2b. Spatial Locality and CPU Cache</h3>
+
+<p>Recall that when when we have a cache miss, we will be required to travel to the distant land called the main memory (let’s assume that the page 
+is present in the main memory). What we bring back from our travel is not the single desired piece of data (an integer in our example), but 
+rather 64 bytes of data into the cache (this is a simplification). We can tell how big our cacheline is for the CPU on my system:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ getconf LEVEL1_DCACHE_LINESIZE
+64
+</code></pre></div></div>
+
+<p>This from my understanding should be placed into L1d cache. As mentioned earlier, in a perfect world, this would retrieve 16 integers into 
+our cache. Therefore we can avoid travelling to the main memory when we access the first 16 integers in the array as the data should be 
+stored into L1, L2, or L3 cache if we access them within a short time frame.</p>
+
+<h2 id="3-expected-growth-between-tlb-and-cache-miss-when-iterating-through-an-array-sequentially">3. Expected Growth between TLB and Cache Miss When Iterating Through an Array Sequentially</h2>
+
+<p>Recall that in a perfect world, we should expect a TLB miss after the first 1024 elements and a cache miss after 16 integers. This means 
+that we should see an extremely small amount of TLB miss but a large amount of cache miss. In other words, we should expect to see more TLB Hits 
+compared to cache hits when accessing an array of elements.</p>
+
+<h3 id="possible-methodology">Possible Methodology</h3>
+
+<p><strong>Note:</strong> This is a proposed idea to test my idea but I have not done the experiment myself. I did try a bit on my modern laptop and I found it 
+both hard to collect the right data and make any interpretation of the data I collected. This post was a random thought I had but has not 
+evidence to back up my claim.</p>
+
+<p>The following program will return the sum of the array accessed sequentially:</p>
+
+<p><strong>file:</strong> <code class="language-plaintext highlighter-rouge">seq_sum.c</code></p>
+
+<p><strong>Code:</strong></p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;time.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">"spatial_const.h"</span><span class="cp">
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kt">long</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="o">*</span><span class="n">arr</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="o">*</span><span class="n">size</span><span class="p">);</span>
+  <span class="kt">int</span> <span class="o">*</span><span class="n">trash</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="o">*</span><span class="n">size</span><span class="p">);</span>
+
+  <span class="n">setup</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">trash</span><span class="p">);</span>
+
+  <span class="c1">//hopefully the cache is now cold with garbage data</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">sum</span> <span class="o">+=</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="n">sum</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>where the size is determined by a global value <code class="language-plaintext highlighter-rouge">size</code> stored in the headerfile. <code class="language-plaintext highlighter-rouge">setup</code> just populates the array and tries to make the 
+cache to be cold by populating the cache hopefully with random values:</p>
+
+<p><strong>file:</strong> <code class="language-plaintext highlighter-rouge">spatial_const.h</code></p>
+
+<p><strong>code:</strong></p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#ifndef SPATIAL_CONST_H
+#define SPATIAL_CONST_H
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;time.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span>
+<span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">1ULL</span><span class="o">&lt;&lt;</span><span class="mi">20</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">setup</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">arr</span><span class="p">,</span> <span class="kt">int</span> <span class="o">*</span><span class="n">trash</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">srand</span><span class="p">(</span><span class="n">time</span><span class="p">(</span><span class="nb">NULL</span><span class="p">));</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">rand</span><span class="p">()</span> <span class="o">%</span> <span class="n">size</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">//attempt to make cache cold with garbage data</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">trash</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">rand</span><span class="p">()</span> <span class="o">%</span> <span class="n">size</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cp">#endif
+</span></code></pre></div></div>
+
+<p>On my system, these are the available cores (though I wouldn’t want to use my multi-core system for this experiment):</p>
+
+<p><strong>CPU:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ lscpu | grep -E "L[123].*cache"
+L1d cache:                            128 KiB (4 instances)
+L1i cache:                            128 KiB (4 instances)
+L2 cache:                             1 MiB (4 instances)
+L3 cache:                             6 MiB (1 instance)
+</code></pre></div></div>
+
+<p>The array has $2^20$ elements meaning it takes up 4GB which is way larger than what the cache can hold. Therefore, populating another 
+random 4GB array should make the cache cold.</p>
+
+<p>Based on my fiddling and some brief readings around the internet, I learned that it is very difficult to instrument your code properly 
+with the proper metrics. As I do not have much background knowledge with this topic, if I was going to perform the experiment, I would 
+be making assumptions and try to explain my findings that could be very flawed.</p>
+
+<p>If I wasn’t lazy, we would be looking at the number of TLB data misses and L1 cache misses using <code class="language-plaintext highlighter-rouge">perf</code> with the following flags:</p>
+
+<ul>
+  <li><strong>dtlb_store_misses.stlb_hit:</strong> Stores that miss the DTLB and hit the STLB</li>
+  <li>dTLB-load-misses</li>
+  <li><strong>dtlb_load_misses.miss_causes_a_walk:</strong> Load misses in all DTLB levels that cause page walks</li>
+  <li>L1-dcache-load-misses</li>
+  <li>l1d.replacement</li>
+</ul>
+
+<p>We will have two programs: <strong>seq_base</strong> and <strong>seq_sum</strong> whose only difference is that the <strong>seq_base</strong> does not sum any numbers</p>
+
+<p>As my CPU does not support <code class="language-plaintext highlighter-rouge">L1-dcache-store-misses</code>, I will be ignoring this counter entirely. The purpose of the base program is to get a 
+baseline of the counters that we can compare once we try to take the sum of the desired array.</p>
+
+
+</div>
+</div>
+
+    </div>
+
+  <footer>
+  <marquee id = "buttons">
+    <a href = "index.html"><img src = "/assets/buttons/button.png"></a>
+    <a href = "index.html"><img src = "/assets/buttons/button2.png"></a>
+    <a href = 'https://neocities.org/'><img src = "/assets/buttons/neocitiesorg.gif"></a>
+    <a href = 'https://www.vim.org/'><img src = "/assets/buttons/vim.gif"></a>
+    <a href = 'https://fedoraproject.org/'><img src = "/assets/buttons/gnu-linux.gif"></a>
+    <a href = "https://fedoraproject.org/"><img src = "/assets/buttons/powered_by_fedora_alt.png"></a>
+  </marquee>
+  <small><a href = "/credits" class = "credits">Credits</a></small>
+</footer>
+
+
+  <button onclick="toTop()" id="top_btn" title="Go to top">Top</button>
+  </body>
+</html>
