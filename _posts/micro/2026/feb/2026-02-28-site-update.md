@@ -15,3 +15,25 @@ As returning visitors may have noticed, the site has changed for better or worse
 * UI Changes: With the help of AI (I am bad at colors), I increased the contrast and outlined links to be more obvious. Lately, I've been enabling limited contrast mode at home and at work as I find it 
 easier to navigate so I did the same on this website.
 
+As to why I made these changes, it's not for a good reason ... I am just procrastinating from preparing for my language exam ... Ironic how I signed up for the exam in hopes I would study more 
+seriously but alas I just procrastinate by doing other things. Anyhow, it's a nice edition to the site.
+
+Below are some examples of the visual UI changes on the site:
+
+**Before:** 
+![Image of the homepage before UI changes]({{ site.baseurl }}/assets/micro/misc/site-before-ui.png)
+
+**Now:** 
+
+![Image of homepage after adding contrast]({{ site.baseurl }}/assets/micro/misc/site-after-ui.png)
+
+**Before:** 
+
+![Image of the website before UI changes]({{ site.baseurl }}/assets/micro/misc/site-before-ui-3.png)
+
+**Now:**
+
+![Image of homepage after adding contrast]({{ site.baseurl }}/assets/micro/misc/site-after-ui-3.png)
+
+
+

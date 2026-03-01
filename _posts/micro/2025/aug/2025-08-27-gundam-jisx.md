@@ -27,7 +27,7 @@ as gralamin alluded:
 
 > I'm not sure what is up with the yen n. Maybe at the time \ was mapped to yen on japanese machines, in which case this would be a new line. 
 
-After spending hours reading up on [character encoding](https://zakuarbor.codeberg.page/blog/halfwidth-fullwidth-encoding/) due to a request 
+After spending hours reading up on [character encoding]({{ site.baseurl }}/blog/halfwidth-fullwidth-encoding/) due to a request 
 from a friend studying Linguistics, I now can confirm his speculation was indeed correct.
 
 From the ASCII table, we can see that 0x5C maps to backslash `\n`
