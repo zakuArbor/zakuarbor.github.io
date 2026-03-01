@@ -33,11 +33,11 @@ echo -e "${BLUE}🔄 Syncing and Pushing...${NC}"
 git add -A
 git add .domains
 git commit -m "Deploy: $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes."
-git push origin pages
+git push -f origin pages
 
 cd ..
 
 echo -e "${GREEN}✅ GitHub Pages updated!${NC}"
 
-neocities push _site
+#neocities push _site
 
