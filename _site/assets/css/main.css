@@ -509,6 +509,7 @@ table th {
 
 .tags a:hover {
   text-decoration: underline;
+  text-decoration-thickness: 3px;
 }
 
 .bits .title {
@@ -743,7 +744,6 @@ source: https://www.w3schools.com/howto/howto_js_scroll_to_top.asp
 */
 #top_btn {
   display: none;
-  /* Hidden by default */
   position: fixed;
   /* Fixed/sticky position */
   bottom: 20px;
@@ -752,7 +752,7 @@ source: https://www.w3schools.com/howto/howto_js_scroll_to_top.asp
   /* Place the button 30px from the right */
   z-index: 99;
   /* Make sure it does not overlap */
-  border: none;
+  border: 2px solid #aaa;
   /* Remove borders */
   outline: none;
   /* Remove outline */
@@ -771,8 +771,7 @@ source: https://www.w3schools.com/howto/howto_js_scroll_to_top.asp
 }
 
 #top_btn:hover {
-  background-color: #555;
-  /* Add a dark-grey background on hover */
+  border: 2.25px solid white;
 }
 
 @media only screen and (min-width: 850px) {
