@@ -19,7 +19,7 @@ Despite its name, the posts are not tiny but not as large as regular blog posts.
 <hr>
 
 {% assign micro_posts = site.posts | where: "category", "micro" %}
-{% for post in micro_posts limit: 5 %}
+{% for post in micro_posts limit: 10 %}
   <div class="bits">
     <h1 class="title">
       <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
