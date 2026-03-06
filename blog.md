@@ -8,7 +8,7 @@ pagination:
   index_page_before: true
   debug: true
   collection: posts
-  per_page: 5
+  per_page: 10
   permalink: /page/:num/
   sort_field: date
   sort_reverse: true

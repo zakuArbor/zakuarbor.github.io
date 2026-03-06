@@ -504,6 +504,22 @@ source: https://www.w3schools.com/howto/howto_js_scroll_to_top.asp
   border: 2.25px solid white;
 }
 
+details {
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  padding: 0.5em 0.5em 0;
+}
+
+summary {
+  font-weight: bold;
+  margin: -0.5em -0.5em 0;
+  padding: 0.5em;
+}
+
+details[open] {
+  padding: 0.5em;
+}
+
 @media only screen and (min-width: 850px) { 
   header, footer, #wrapper {
     padding-left: 10%;

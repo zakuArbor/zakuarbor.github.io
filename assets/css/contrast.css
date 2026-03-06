@@ -41,9 +41,14 @@ a:hover {
 }
 
 code, pre code {
+  font-family: monospace;
   background-color: #000000;
   border: 1px solid #444c56;
-  color: #aff5b4;
+  color: #98d9a4;
+}
+
+p code, li code {
+  font-size: 1.15em;
 }
 
 a code {
@@ -90,3 +95,5 @@ blockquote p:last-child {
   font-size: 0.95em;
   color: #8b949e;
 }
+
+/***********/
