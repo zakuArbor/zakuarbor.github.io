@@ -52,7 +52,7 @@ body {
 }
 
 .highlight .nb {
-  color: #f6aa11;
+  color: #8be9fd; /*f6aa11*/
 }
 
 .highlight .cm {
@@ -200,7 +200,9 @@ body {
 }
 
 .highlight .nf, .highlight .fm {
-  color: #a6e22e;
+  color: #8f9d6a;
+  letter-spacing: 0.5px;
+  font-weight: 500;
 }
 
 .highlight .vc {
@@ -209,13 +211,13 @@ body {
 }
 
 .highlight .nn {
-  color: #ffffff;
+  color: #d1d5db; /* #fff */
   background-color: #272822;
 }
 
 .highlight .nl {
   color: #ffffff;
-  background-color: #1b1b1b;
+  background-color: #000000;
 }
 
 .highlight .ni {
@@ -239,8 +241,8 @@ body {
 }
 
 .highlight .nv, .highlight .vm {
-  color: #ffffff;
-  background-color: #1b1b1b;
+  color: #8be9fd; /*#ffffff;*/
+  background-color: #000;
 }
 
 .highlight .w {
@@ -254,7 +256,7 @@ body {
 }
 
 .highlight .n, .highlight .py, .highlight .nx {
-  color: #ffffff;
+  color: #d1d5db; /*#fff*/
   background-color: #000000;
 }
 
@@ -267,7 +269,9 @@ body {
 }
 
 .highlight .k, .highlight .kv {
-  color: #f92672;
+  color: #e06c75;
+  font-weight: 500;
+  letter-spacing: 0.2px;
 }
 
 .highlight .kn {
@@ -279,7 +283,9 @@ body {
 }
 
 .highlight .o {
-  color: #f92672;
+  color: #ff8b92;
+  font-weight: 500;
+  text-shadow: 0 0 2px rgba(255, 139, 146, 0.3);
 }
 
 /* CSS is how you can add style to your website, such as colors, fonts, and positioning of your
@@ -374,6 +380,7 @@ nav {
 a, a:visited {
   color: #00ace6;
   text-decoration: none;
+  display: inline-block;
 }
 
 a:hover {
@@ -509,6 +516,7 @@ table th {
 
 .tags a:hover {
   text-decoration: underline;
+  text-decoration-thickness: 3px;
 }
 
 .bits .title {
@@ -735,6 +743,63 @@ footer {
 }
 .transparent-background {
   filter: invert(1) hue-rotate(180deg) !important;
+}
+
+/*
+Code for button to go top top
+source: https://www.w3schools.com/howto/howto_js_scroll_to_top.asp
+*/
+#top_btn {
+  display: none;
+  position: fixed;
+  /* Fixed/sticky position */
+  bottom: 20px;
+  /* Place the button at the bottom of the page */
+  right: 30px;
+  /* Place the button 30px from the right */
+  z-index: 99;
+  /* Make sure it does not overlap */
+  border: 2px solid #aaa;
+  /* Remove borders */
+  outline: none;
+  /* Remove outline */
+  background-color: #555;
+  /* Set a background color */
+  color: white;
+  /* Text color */
+  cursor: pointer;
+  /* Add a mouse pointer on hover */
+  padding: 15px;
+  /* Some padding */
+  border-radius: 10px;
+  /* Rounded corners */
+  font-size: 18px;
+  /* Increase font size */
+}
+
+#top_btn:hover {
+  border: 2.25px solid white;
+}
+
+details {
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  padding: 0.5em 0.5em 0;
+}
+
+summary {
+  font-weight: bold;
+  margin: -0.5em -0.5em 0;
+  padding: 0.5em;
+}
+
+details[open] {
+  padding: 0.5em;
+}
+
+.button {
+  margin: 0 !important;
+  filter: none !important;
 }
 
 @media only screen and (min-width: 850px) {
