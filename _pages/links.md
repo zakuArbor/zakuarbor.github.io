@@ -80,11 +80,15 @@ to track their user's locations.
 
 **[bmpuzzle: Embed files within the padding of bitmap images](https://xiokka.neocities.org/projects/bmpuzzle/)**
 
+
 As the title suggests, you can exploit padding that occurs for bmp images to embed files. Quite elegant and is much more discreet than concatenating a file 
 on an image or [Stegasploit](https://stegosploit.info/), a way to encode files into PNG and JPEG images by utilizing the nature of polyglot and the use of 
 some complicated iterative encoder. The reason why I like the suggested solution of embedding files onto the padding is that it's both simple and more discreet 
 as it does not increase the size of the image and does not require the need for a complex iterative encoder to encode the secret. 
 Though there are constraints to what files you can encode as you would require a very tall image if you wish to encode anything large.
+
+
+<a href = "https://xiokka.neocities.org/projects/bmpuzzle/"><img class = "button" src = "https://xiokka.neocities.org/buttons/my_buttons/bmpuzzle_v3.png"></a>
 
 ---
 

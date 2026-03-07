@@ -94,6 +94,7 @@ nav {
 a, a:visited {
   color: #00ace6;
   text-decoration: none;
+  display: inline-block;
 }
 
 a:hover{
@@ -518,6 +519,11 @@ summary {
 
 details[open] {
   padding: 0.5em;
+}
+
+.button {
+  margin: 0 !important;
+  filter: none !important;
 }
 
 @media only screen and (min-width: 850px) { 
