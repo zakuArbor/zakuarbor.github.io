@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>QNX - The Search for the Release Notes - RANDOM BITS</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/css/syntax_monokai.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="/assets/css/contrast.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/png" href="/assets/site/random-bits-favicon.png">
+    <meta name="og:title" content="Random Bits">
+    <meta name="og:image" content="">
+    <meta name="og:description"
+        content="Random bits of programming, math, and personal thoughts">
+    <meta name="keywords" content="zakuarbor, programming, math, random bits, pikachu">
+    <meta name="description" content="Random bits of programming, math, and personal thoughts">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script charset="utf-8" src="/assets/js/script.js"></script>
+<script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+     loader: {load: ['[tex]/cancel']},
+      TeX: { 
+        equationNumbers: { autoNumber: "all" },
+        packages: {'[+]': ['cancel']}
+      } 
+    }); 
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+  <header>
+    <center>
+      <h1 id = "title"><a href = "/index.html">RANDOM BITS</a><img id = "pikachu-header" src = "/assets/site/flying-pikachu.png"/></h1>
+    A random site by a random clueless human
+    </center>
+    <!--<marquee scrollamount="4">-->
+    <center>
+      <!--<img src = "/assets/gifs/pikachu-run.gif"/>--><p>Random bits of programming, math, and thoughts
+      By a clueless human</p><!-- <img src = "/assets/gifs/pikachu-run.gif"/>-->
+    </center>
+      <!--&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      <img src = "/assets/gifs/pikachu-run.gif"/>Random bits of programming, math, and thoughts
+      By a clueless human <img src = "/assets/gifs/pikachu-run.gif"/>-->
+      <!--</marquee>-->
+
+    <a href="javascript:void(0);" class="hamburger-nav" onclick="toggleMenu()"><i class="fa fa-bars"></i></a>
+    <nav id="header-nav">
+    <center>
+      <a href="/index.html">Home</a>
+      <a href="/micro/"><span style = "letter-spacing: 1px;">µ</span>Blog</a>
+      <a href="/blog/"><span style = "letter-spacing: 1px;">Blog</a>
+      <a href="/link.html">LinkBlog</a>
+      <!--<a href="/math.html">Math</a>-->
+      <a href="/about.html">About</a>
+    </center>
+    </nav>
+</header>
+
+  </head>
+  <body>
+
+    <div id = "wrapper">
+    <div id = "content">
+<div class = "bits">
+  <h1 class = "title">QNX - The Search for the Release Notes</h1>
+
+  <div>
+    <p class = "date">April  1, 2022</p>
+    
+    <div class="tags">
+      
+      
+        <a href="/categories/#programming">programming</a>
+        &nbsp;
+      
+        <a href="/categories/#qnx">qnx</a>
+        &nbsp;
+      
+        <a href="/categories/#blog">blog</a>
+        
+      
+    </div>
+  </div>
+  <p>Looking at QNX for the past 3 months has been enjoyable for the most part. But 
+the thing that annoys me the most is the difficulty of finding the release notes 
+for each QNX SDP. While I do have some internal access to a document that 
+links to all the QNX release notes at work, I found it annoying how it cannot 
+be easily obtained through a google search. (imagine if web search and web indexing 
+services did not exist, the internet would be unnavigatable).</p>
+
+<p>So I decided to spend about 30 minutes to see whether or not if I can find the release 
+notes for QNX 6.6, 7.0, and 7.1 using the power of Google and with some brute-forcing. Here are the links if you cannot be bother to hear 
+my ramblings on how I obtained the links:</p>
+
+<ul>
+  <li><strong>QNX 7.1 SDP:</strong> <a href="http://www.qnx.com/developers/articles/rel_6778_0.html">http://www.qnx.com/developers/articles/rel_6778_0.html</a></li>
+  <li><strong>QNX 7.0 SDP:</strong> <a href="http://www.qnx.com/developers/articles/rel_6423_0.html">http://www.qnx.com/developers/articles/rel_6423_0.html</a></li>
+  <li><strong>QNX 6.6 SDP:</strong> <a href="http://www.qnx.com/developers/articles/rel_5849_7.html">http://www.qnx.com/developers/articles/rel_5849_7.html</a></li>
+  <li><strong>BONUS - QNX 6.5 SP 1:</strong> <a href="http://www.qnx.com/developers/articles/rel_5189_48.html">http://www.qnx.com/developers/articles/rel_5189_48.html</a></li>
+</ul>
+
+<p>I also took the courtesy to ensure a snapshot of the links exist on Wayback Machine (thank goodness they exist) in case Blackberry 
+ever decides to take down the page when they decide to restructure the website (not rare that links die whenever a company gets acquired or 
+upgrade their websites).</p>
+
+<hr />
+<h2 id="finding-qnx-71-sdp-release-notes">Finding QNX 7.1 SDP Release Notes</h2>
+<hr />
+
+<p>QNX 7.1 is the latest QNX SDP so I began my search knowing this fact. As I suspected, this was very simple to find. 
+On QNX’s <a href="https://blackberry.qnx.com/en/products/foundation-software/qnx-software-development-platform">website about their SDP</a>, 
+the link is provided.</p>
+
+<p><img src="../assets/programming/qnx/qnx-sdp-webpage.png" alt="A snippet of QNX's webpage on the SDP they provide which has the link to the release notes" /></p>
+
+<p>Checking if the webpage was archived on Wayback Machine, it turns out it was not which was quite surprising. 
+<img src="../assets/programming/qnx/7-1-sdp-wayback.png" alt="A search on the wayback machine shows that the webpage has not been archived yet" /></p>
+
+<p>So I took the liberty to being the first person to archive the release notes for QNX 7.1. As you can see in the image below, Wayback Machine’s 
+server time is a few hours ahead of mine, saving the webpage on April 1 when it’s still March 31 for me in the EST timezone. 
+<img src="../assets/programming/qnx/7-1-sdp-wayback1.png" alt="Proof of being the first person to submit an archive request to wayback machine" /></p>
+
+<hr />
+<h2 id="finding-qnx-70-sdp-release-notes">Finding QNX 7.0 SDP Release Notes</h2>
+<hr />
+
+<p>This was where things got more difficult. A quick google search and browsing the top search results did not give me any positive results. 
+Therefore, I took the brute force approach whereby I modify the numbers in the link till I found the release notes for QNX 7.0 
+(i.e. change the last path in the url <code class="language-plaintext highlighter-rouge">rel_6778_0.html</code> and change it to smaller number such as <code class="language-plaintext highlighter-rouge">rel_6560_0.html</code>).</p>
+
+<p>As you can imagine, this took quite a bit of time to find the webpage. I would either hit a random release note or an error stating “the article 
+you are trying to access has expired or does not exist”. I initially thought I found the release note but it was missing a lot of information. 
+I did not notice this till I was about to publish my findings. So I spent another 20 or so minutes brute forcing till I hit gold.</p>
+
+<p><img src="../assets/programming/qnx/invalid-release-note.png" alt="A snippet of visiting an invalid release note" /></p>
+
+<hr />
+<h2 id="finding-qnx-66-sdp-release-notes">Finding QNX 6.6 SDP Release Notes</h2>
+<hr />
+
+<p>I completely gave up brute-forcing after many attempts. So I went back to googling and surfing QNX website for the documentation. 
+Unfortunately for me, I have no access to QNX 6.6 Documentation as I don’t have a QNX 6.6 License (I technically do but that is for work 
+so I cannot simply use it on my personal laptop and I wanted to find the links without any external help).</p>
+
+<p><img src="../assets/programming/qnx/6-6-license-prompt.png" alt="A snippet of visiting an invalid release note" /></p>
+
+<p>But luckily I was able to find the release notes by searching on <a href="https://forums.openqnx.com/t/topic/7899">open qnx forums</a>. 
+Unlike the release notes for 7.0 and 7.1, QNX 6.6 SDP release notes has been archived plenty of times which was a relief.</p>
+
+<p><img src="../assets/programming/qnx/6-6-wayback.png" alt="A snippet of QNX 6.6 SDP being archived plenty of times" /></p>
+
+<hr />
+<h2 id="bonus---finding-qnx-65-sp-1-release-notes">Bonus - Finding QNX 6.5 SP 1 Release Notes</h2>
+<hr />
+
+<p>During my search for QNX 6.6 Release Notes, I came across on <a href="https://forums.openqnx.com/t/topic/8040/2">open qnx forums</a> people 
+referencing QNX 6.5 SP 1 Release Notes. While I have absolutely no clue how the links are formatted, but I noticed that the link for 
+QNX 6.5 SP 1 does not follow the format I was bruteforcing (i.e. <code class="language-plaintext highlighter-rouge">rel_xxxx_0.html</code>) but <code class="language-plaintext highlighter-rouge">rel_5189_48.html</code>. Which I presume corresponds to the major and minor release. 
+This made me realize some version of the release note has been archived before which makes sense due to its age.</p>
+
+<hr />
+<h2 id="summary">Summary</h2>
+<hr />
+<p>In the event the links are down, visit Wayback Machine as the snapshot should exist for all of them. Though you may need to search for 
+them since the release note versions may be different (i.e. search <code class="language-plaintext highlighter-rouge">http://www.qnx.com/developers/articles/*</code> and filter by the major release 
+number).</p>
+<ul>
+  <li>QNX 7.1 SDP:  <a href="http://www.qnx.com/developers/articles/rel_6778_0.html">http://www.qnx.com/developers/articles/rel_6778_0.html</a></li>
+  <li>QNX 7.0 SDP:  <a href="http://www.qnx.com/developers/articles/rel_6423_0.html">http://www.qnx.com/developers/articles/rel_6423_0.html</a></li>
+  <li>QNX 6.6 SDP:  <a href="http://www.qnx.com/developers/articles/rel_5849_7.html">http://www.qnx.com/developers/articles/rel_5849_7.html</a></li>
+  <li>BONUS - QNX 6.5 SP 1:  <a href="http://www.qnx.com/developers/articles/rel_5189_48.html">http://www.qnx.com/developers/articles/rel_5189_48.html</a></li>
+</ul>
+
+<p>http://www.qnx.com/developers/articles/rel_6404_12.html</p>
+
+</div>
+</div>
+
+    </div>
+
+  <footer>
+  <marquee id = "buttons">
+    <a href = "index.html"><img src = "/assets/buttons/button.png"></a>
+    <a href = "index.html"><img src = "/assets/buttons/button2.png"></a>
+    <a href = 'https://neocities.org/'><img src = "/assets/buttons/neocitiesorg.gif"></a>
+    <a href = 'https://www.vim.org/'><img src = "/assets/buttons/vim.gif"></a>
+    <a href = 'https://fedoraproject.org/'><img src = "/assets/buttons/gnu-linux.gif"></a>
+    <a href = "https://fedoraproject.org/"><img src = "/assets/buttons/powered_by_fedora_alt.png"></a>
+  </marquee>
+  <small><a href = "/credits" class = "credits">Credits</a></small>
+</footer>
+
+
+  <button onclick="toTop()" id="top_btn" title="Go to top">Top</button>
+  </body>
+</html>

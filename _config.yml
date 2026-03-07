@@ -1,0 +1,42 @@
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "" # the subpath of your site, e.g. /blog
+title: "RANDOM BITS" # the name of your site, e.g. ACME Corp.
+
+include: [ _pages ]
+highlighter: rouge
+port: 4001
+
+sass:
+  sass_dir: _sass
+
+defaults:
+  - scope:
+      path: "_posts/programming"
+      type: "posts"
+    values:
+      category: "blog"
+      permalink: /blog/:title/
+  - scope:
+      path: "_posts/personal"
+      type: "posts"
+    values:
+      category: "blog"
+      permalink: /blog/:title/
+  - scope:
+      path: "_posts/course-reviews"
+      type: "posts"
+    values:
+      category: "blog"
+      permalink: /blog/:title/
+  - scope:
+      path: "_posts/micro"
+      type: "posts"
+    values:
+      category: "micro"
+      permalink: /micro/:year/:month/:day/:title/
+
+plugins:
+  - jekyll-paginate-v2
+
+pagination:
+  enabled: true

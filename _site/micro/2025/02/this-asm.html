@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>this: the implicit parameter in OOP - RANDOM BITS</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/css/syntax_monokai.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="/assets/css/contrast.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/png" href="/assets/site/random-bits-favicon.png">
+    <meta name="og:title" content="Random Bits">
+    <meta name="og:image" content="">
+    <meta name="og:description"
+        content="Random bits of programming, math, and personal thoughts">
+    <meta name="keywords" content="zakuarbor, programming, math, random bits, pikachu">
+    <meta name="description" content="Random bits of programming, math, and personal thoughts">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script charset="utf-8" src="/assets/js/script.js"></script>
+<script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+     loader: {load: ['[tex]/cancel']},
+      TeX: { 
+        equationNumbers: { autoNumber: "all" },
+        packages: {'[+]': ['cancel']}
+      } 
+    }); 
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+  <header>
+    <center>
+      <h1 id = "title"><a href = "/index.html">RANDOM BITS</a><img id = "pikachu-header" src = "/assets/site/flying-pikachu.png"/></h1>
+    A random site by a random clueless human
+    </center>
+    <!--<marquee scrollamount="4">-->
+    <center>
+      <!--<img src = "/assets/gifs/pikachu-run.gif"/>--><p>Random bits of programming, math, and thoughts
+      By a clueless human</p><!-- <img src = "/assets/gifs/pikachu-run.gif"/>-->
+    </center>
+      <!--&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      <img src = "/assets/gifs/pikachu-run.gif"/>Random bits of programming, math, and thoughts
+      By a clueless human <img src = "/assets/gifs/pikachu-run.gif"/>-->
+      <!--</marquee>-->
+
+    <a href="javascript:void(0);" class="hamburger-nav" onclick="toggleMenu()"><i class="fa fa-bars"></i></a>
+    <nav id="header-nav">
+    <center>
+      <a href="/index.html">Home</a>
+      <a href="/micro/"><span style = "letter-spacing: 1px;">µ</span>Blog</a>
+      <a href="/blog/"><span style = "letter-spacing: 1px;">Blog</a>
+      <a href="/link.html">LinkBlog</a>
+      <!--<a href="/math.html">Math</a>-->
+      <a href="/about.html">About</a>
+    </center>
+    </nav>
+</header>
+
+  </head>
+  <body>
+
+    <div id = "wrapper">
+    <div id = "content">
+<div class = "bits">
+  <h1 class = "title">this: the implicit parameter in OOP</h1>
+
+  <div>
+    <p class = "date">February 11, 2025</p>
+    
+    <div class="tags">
+      
+      
+        <a href="/categories/#micro">micro</a>
+        &nbsp;
+      
+        <a href="/categories/#c/c++">c/c++</a>
+        &nbsp;
+      
+        <a href="/categories/#asm">asm</a>
+        
+      
+    </div>
+  </div>
+  <p>I was recently reminded that the variable <code class="language-plaintext highlighter-rouge">this</code> is an implicit parameter passed to all methods in OOP such as C++. We can observe this by comparing a regular function vs a method 
+belonging to some class:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span>
+<span class="kt">void</span> <span class="nf">greet</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Hello World</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Human</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="kt">void</span> <span class="n">greet</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Hello World</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">greet</span><span class="p">();</span>
+    <span class="n">Human</span> <span class="n">human</span> <span class="o">=</span> <span class="n">Human</span><span class="p">();</span>
+    <span class="n">human</span><span class="p">.</span><span class="n">greet</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Output:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ g++ test.C
+$ ./a.out 
+Hello World
+Hello World
+</code></pre></div></div>
+
+<p>Both may output the same thing but under the hood is where the differences shines. Note: I’ll be only showing the code of interest.</p>
+
+<p>For <code class="language-plaintext highlighter-rouge">greet</code>:</p>
+<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">Dump</span> <span class="nv">of</span> <span class="nv">assembler</span> <span class="nv">code</span> <span class="nv">for</span> <span class="nv">function</span> <span class="nv">_Z5greetv</span><span class="p">:</span>
+   <span class="err">0</span><span class="nf">x0000000000401126</span> <span class="o">&lt;+</span><span class="mi">0</span><span class="o">&gt;</span><span class="p">:</span>	<span class="nv">push</span>   <span class="o">%</span><span class="nb">rbp</span>
+   <span class="err">0</span><span class="nf">x0000000000401127</span> <span class="o">&lt;+</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">:</span>	<span class="nv">mov</span>    <span class="o">%</span><span class="nb">rsp</span><span class="p">,</span><span class="o">%</span><span class="nb">rbp</span>
+   <span class="err">0</span><span class="nf">x000000000040112a</span> <span class="o">&lt;+</span><span class="mi">4</span><span class="o">&gt;</span><span class="p">:</span>	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0x402280</span><span class="p">,</span><span class="o">%</span><span class="nb">esi</span>
+</code></pre></div></div>
+
+<p>For <code class="language-plaintext highlighter-rouge">Human::greet</code>:</p>
+<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">Dump</span> <span class="nv">of</span> <span class="nv">assembler</span> <span class="nv">code</span> <span class="nv">for</span> <span class="nv">function</span> <span class="nv">_ZN5Human5greetEv</span><span class="p">:</span>
+   <span class="err">0</span><span class="nf">x000000000040115c</span> <span class="o">&lt;+</span><span class="mi">0</span><span class="o">&gt;</span><span class="p">:</span>     <span class="nv">push</span>   <span class="o">%</span><span class="nb">rbp</span>
+   <span class="err">0</span><span class="nf">x000000000040115d</span> <span class="o">&lt;+</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">:</span>     <span class="nv">mov</span>    <span class="o">%</span><span class="nb">rsp</span><span class="p">,</span><span class="o">%</span><span class="nb">rbp</span>
+   <span class="err">0</span><span class="nf">x0000000000401160</span> <span class="o">&lt;+</span><span class="mi">4</span><span class="o">&gt;</span><span class="p">:</span>     <span class="nv">sub</span>    <span class="kc">$</span><span class="mh">0x10</span><span class="p">,</span><span class="o">%</span><span class="nb">rsp</span>
+   <span class="err">0</span><span class="nf">x0000000000401164</span> <span class="o">&lt;+</span><span class="mi">8</span><span class="o">&gt;</span><span class="p">:</span>     <span class="nv">mov</span>    <span class="o">%</span><span class="nb">rdi</span><span class="p">,</span><span class="o">-</span><span class="mh">0x8</span><span class="p">(</span><span class="o">%</span><span class="nb">rbp</span><span class="p">)</span>
+   <span class="err">0</span><span class="nf">x0000000000401168</span> <span class="o">&lt;+</span><span class="mi">12</span><span class="o">&gt;</span><span class="p">:</span>	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0x402280</span><span class="p">,</span><span class="o">%</span><span class="nb">esi</span>
+</code></pre></div></div>
+
+<p>For <code class="language-plaintext highlighter-rouge">greet</code> (<code class="language-plaintext highlighter-rouge">_Z5greetv</code>), we can immediately tell that the function takes in no arguments both by the mangled name (i.e. mangled name ends with <code class="language-plaintext highlighter-rouge">v</code> to indicate its parameter is <code class="language-plaintext highlighter-rouge">void</code>) 
+and from the disassembled code. However, the same cannot be said for <code class="language-plaintext highlighter-rouge">Human::greet</code>. The mangled name <code class="language-plaintext highlighter-rouge">_ZN5Human5greetEv</code> does suggest that the method does not take in any parameter 
+and hence the suffix <code class="language-plaintext highlighter-rouge">v</code> for <code class="language-plaintext highlighter-rouge">void</code>. But observe the following line in <code class="language-plaintext highlighter-rouge">&lt;+8&gt;</code>:</p>
+<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">mov</span>    <span class="o">%</span><span class="nb">rdi</span><span class="p">,</span><span class="o">-</span><span class="mh">0x8</span><span class="p">(</span><span class="o">%</span><span class="nb">rbp</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">This</code> is our implicit argument, <code class="language-plaintext highlighter-rouge">this</code>, which contains the address of the object itself. We can observe this via gdb:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(gdb) p &amp;human
+$2 = (Human *) 0x7fffffffdc4f
+...
+(gdb) i r rdi
+rdi            0x7fffffffdc4f      140737488346191
+</code></pre></div></div>
+
+<p>Notice our <code class="language-plaintext highlighter-rouge">rdi</code> register contains the same address as our object <code class="language-plaintext highlighter-rouge">human</code>: <code class="language-plaintext highlighter-rouge">0x7fffffffdc4f</code>.</p>
+
+<!--
+We can also replicate this in `arm` where `w0` or `x0` will be set with the address of 
+our object `human`:
+```nasm
+(gdb) disassemble /s Human::greet
+...
+<+32>:	add	x0, sp, #0x10
+<+36>:	bl	0x100c1170 <_ZN5Human5greetEv>
+...
+(gdb) p &human
+$1 = (Human *) 0x81c60
+...
+Dump of assembler code for function _ZN5Human5greetEv:
+test.C:
+9	    void greet() {
+   0x00000000100c1170 <+0>:	stp	x29, x30, [sp, #-32]!
+   0x00000000100c1174 <+4>:	mov	x29, sp
+   0x00000000100c1178 <+8>:	str	x0, [sp, #24]
+...
+Dump of assembler code for function _ZN5Human5greetEv:
+test.C:
+9	    void greet() {
+   0x00000000100c1170 <+0>:	stp	x29, x30, [sp, #-32]!
+   0x00000000100c1174 <+4>:	mov	x29, sp
+   0x00000000100c1178 <+8>:	str	x0, [sp, #24]
+
+(gdb) i r x0                     
+x0             0x81c60             531552
+10	        std::cout << "Hello World\n";
+=> 0x00000000100c117c <+12>:	adrp	x0, 0x100c1000 <__do_global_dtors_aux+64>
+```
+
+**Note:** ARM is running QNX because I was too lazy to reimage my Raspberry Pi for this demo
+-->
+<!--
+_Z begins mangled symbols
+or nested names (including both namespaces and classes), this is followed by N
+E is to indicate an end of the scope
+wikipedia::article::format becomes:
+
+_ZN9wikipedia7article6formatE
+
+
+-->
+
+</div>
+</div>
+
+    </div>
+
+  <footer>
+  <marquee id = "buttons">
+    <a href = "index.html"><img src = "/assets/buttons/button.png"></a>
+    <a href = "index.html"><img src = "/assets/buttons/button2.png"></a>
+    <a href = 'https://neocities.org/'><img src = "/assets/buttons/neocitiesorg.gif"></a>
+    <a href = 'https://www.vim.org/'><img src = "/assets/buttons/vim.gif"></a>
+    <a href = 'https://fedoraproject.org/'><img src = "/assets/buttons/gnu-linux.gif"></a>
+    <a href = "https://fedoraproject.org/"><img src = "/assets/buttons/powered_by_fedora_alt.png"></a>
+  </marquee>
+  <small><a href = "/credits" class = "credits">Credits</a></small>
+</footer>
+
+
+  <button onclick="toTop()" id="top_btn" title="Go to top">Top</button>
+  </body>
+</html>

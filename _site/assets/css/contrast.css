@@ -1,0 +1,92 @@
+body {
+  background-color: #0d1117;
+  color: #b0b8c1;          
+  line-height: 1.6;       
+}
+
+header {
+  background-color: #161b22;
+  border-bottom: 3px solid #30363d;
+/*  color: #f088ff; */
+}
+
+nav a {
+  border: 1px solid;
+}
+
+a, a:visited {
+  color: #58a6ff;
+}
+
+a:hover {
+  text-decoration-thickness: 3px;
+}
+
+#content {
+  background-color: #161b22;
+/*  border: 2px solid #d370d0; */
+  box-shadow: 6px 6px 0px #010409;
+  padding: 2.5em;
+}
+
+.update-chat {
+  background-color: #010409; 
+  border: 1px solid #30363d;
+}
+
+.update-chat .msg {
+  background-color: #1c1d36; 
+  border-left: 4px solid #d370d0;
+  margin-bottom: 10px;
+}
+
+code, pre code {
+  background-color: #000000;
+  border: 1px solid #444c56;
+  color: #aff5b4;
+}
+
+a code {
+  color: #58a6ff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+a:hover code {
+  text-decoration-thickness: 3px;
+}
+
+.page-link {
+  background-color: #21262d;
+  border: 1px solid #444c56;
+  color: #58a6ff;
+}
+
+.page-link.active {
+  background-color: #388bfd;
+  color: #ffffff;
+  border-color: #58a6ff;
+}
+
+blockquote {
+  background-color: #1c1d36;
+  border-left: 4px solid #58a6ff;
+  border-radius: 0 8px 8px 0;   
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;            
+  line-height: 1.6em;
+  color: #d1d5db;             
+}
+
+blockquote a {
+  color: #79c0ff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+blockquote p:last-child {
+  margin-bottom: 0;
+  font-style: italic;
+  font-size: 0.95em;
+  color: #8b949e;
+}
