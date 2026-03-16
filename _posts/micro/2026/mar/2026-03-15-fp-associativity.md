@@ -44,10 +44,10 @@ $$
 $$ 
 
 is what I would expect but this does not appear to be the case as seen in the last digit:
-```bash
- forward:1.5397677311665408
-backward:1.5397677311665405
-```
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> forward:1.539767731166540<b style="color:red">8</b>
+backward:1.539767731166540<b style="color:red">5</b>
+</code></pre></div></div>
 
 Now one might question which direction is correct or at least more accurate. The most accurate way for this particular example, the basel problem, is to add the numbers in the opposite (backwards) direction 
 due to how starting with a large number like 1 will dominate the subsequent additions and hence lose accuracy as the hardware will round off the smaller terms and eventually deviate from the true 
