@@ -4,7 +4,7 @@ title:  "The Bit Size of the Resulting Matrix"
 date: 2025-03-07
 categories: [micro, c/c++]
 published: true
-permalink: micro/2025/02/:title
+permalink: micro/2025/03/:title
 ---
 
 Recently I have started reading [Performance Analysis and Tuning](https://github.com/dendibakh/perf-book), and a passage made me ponder more time than I would 
@@ -34,6 +34,6 @@ c_{ij} = \sum_{k=1}^{64} a_{ik}b_{kj} \text{, for i,j = 1, ..., 16}
 $$
 
 If we were to add the largest possible product 64 times, then it would be 64 * 65025 = 4 161 600 which far exceeds the maximum range that an unsigned 16-bit integer 
-can represent ($1111\ 1111\ 1111\ 1111_2 = 65\ 536$). Therefore each entry in the resulting matrix must be represented by at least 22 bits to taken into account of the 
+can represent ($1111\ 1111\ 1111\ 1111_2 = 65\ 535$). Therefore each entry in the resulting matrix must be represented by at least 22 bits to taken into account of the 
 largest possible entry from the product between the two 8-bit matrices. However, as we prefer to have sizes that naturally aligns with a power of 2, 32 bits would be 
 the amount of bits required to store the product between 8-bit matrices of the shape 16x64 and 64x16.

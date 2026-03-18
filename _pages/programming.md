@@ -38,7 +38,7 @@ A random blog discussing various topics in Computer Science and Programming that
 
 * [An Overview of Build and DevOps from A Semi-Outside Perspective]({{ site.baseurl }}/blog/build-team/)
 * [Software Portability]({{ site.baseurl }}/blog/software-ports/)
-* [Bias UTM CS Course Review]({{ site.baseurl }}/course/bias-utm-cs-course-review/)
+* [Bias UTM CS Course Review]({{ site.baseurl }}/blog/bias-utm-cs-course-review/)
 * [Computer Science – A Long and Gargled Explanation]({{ site.baseurl }}/blog/computer-science-a-long-and-gargled-explanation/)
 * [A Quick Look Into Half-Width and Full-Width Characters]({{ site.baseurl }}/blog/halfwidth-fullwidth-encoding/)
 * [Verifying Email Signature Manually]({{ site.baseurl }}/blog/signature-verification/)
