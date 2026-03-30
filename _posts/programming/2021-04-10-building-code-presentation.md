@@ -7,4 +7,4 @@ Although still under progress, I have been dabbling with [reveal.js](https://rev
 
 I've been writing a blog in preparation for an educational session I plan on holding for the team and the new interns on the various stages a compiler takes from taking a source code to an executable.
 
-<center><iframe src = "/bl{{ site.baseurl }}/assets/presentations/build-process/index.html" title = "Build Process - Slides" style = "width: 100% !important; height: 75vh !important"></iframe></center>
+<center><iframe src = "{{ site.baseurl }}/assets/presentations/build-process/index.html" title = "Build Process - Slides" style = "width: 100% !important; height: 75vh !important"></iframe></center>
