@@ -345,7 +345,7 @@ The formal definition of limits of a sequence is a mouthful but we can informall
 
 It is important that you understand this definition conceptually because this is one of many types of proofs you will see in this course. At the same time, do not panic if you struggle to use this 
 formal definitions to prove a limit because the definition of limits for sequences is quite similar with the limits of a function and what it means for a function to be continuous and even 
-uniform continuous. While there are nuances between sequences, functions, and uniform continuity, the core idea is the same: for any $\epsilon > 0$, everything eventually stays within an $\epsilon$-window
+uniformly continuous. While there are nuances between sequences, functions, and uniform continuity, the core idea is the same: for any $\epsilon > 0$, everything eventually stays within an $\epsilon$-window
 of the limit. Once you master the proofs to one of the 3 or more limit definitions covered in the course, you'll master all of them.
 
 <object type="image/svg+xml" data="/assets/math-physics/seq_limit_epsilon_n.svg" width="100%"></object>
@@ -924,7 +924,147 @@ Suppose we restrict the domain of some function to some closed interval $I$, the
 Furthermore, we can also make the claim that the max and min values of the bounded continuous function can be obtained.
 Unsurprisingly, since the interval is closed, it is obvious that we can obtain the max and min.
 
-> **Bounded Functions:** let $f$ be a real-valued continuous function defined on the CLOSED interval $[a, b]$. Then $f$ is BOUNDED on $[a, b]$. Furethermore, $f$ assumes its max and min values on $[a, b]$.
+> **Bounded Functions:** let $f$ be a real-valued continuous function defined on the CLOSED interval $[a, b]$. Then $f$ is BOUNDED on $[a, b]$. Furthermore, $f$ assumes its max and min values on $[a, b]$.
+
+This result is absolutely not surprising at all. If we remove the criteria that the function is **closed** then:
+
+![a graph of x^2 where x is restricted to (-2,2)]({{ site.baseurl }}/assets/math-physics/graphs/x^2-open.png)
+<p class = "caption">A graph $x^2$ where $x\in(-2,2)$.</p>
+
+In the above graph $x^2$ restricted in the open interval $(-2, 2)$  does not obtains its max since $x = 2 \notin (-2, 2)$.
+
+Thus one can convince themself that for a continuous and bounded function $f$ to obtain its max and min values, it must be restricted on a closed interval. Note that if there was no bounds, the curve $x^2$ 
+only has a minimum at $x = 0$.
+
+Below is an example of the consequence of a curve $x^2$ with a jump at $x = 0$ not obtaining its min despite being closed between $[-2, 2]$ since the curve is not continuous:
+
+![a graph of x^2 where x is restricted to [-2,2] with a jump at x = 0]({{ site.baseurl }}/assets/math-physics/graphs/x^2-not-continuous.png)
+<p class = "caption">A graph $x^2$ where $x\in[-2,2]$ with a jump at $x = 0$</p>
+
+Though if you are a die-hard theoretical Mathematician, feel free to attempt the proof yourself if you are not sufficiently satisfied with the conclusion.
+
+The next theorem builds on top of the previous theorem on continuous bounded functions. Suppose we are mapping the temperature throughout the day. If in the morning it was $10^\circ C$ and $20^\circ C$ in 
+the afternoon then we can say for certainty that there was some point between the morning and the afternoon where it reached $17^\circ C$. Temperatures don't magically jump, it increases progressively 
+(I dropped out of physics so I could be wrong).
+
+<small>For American readers, please switch to Celsius</small>
+
+> **Intermediate Value Theorem (IVT):** let $f$ be a continuous and real-valued function on a closed interval $[a, b]$. Suppose that $y$ lies between $f(a)$ and $f(b)$. Then there exists at least one 
+$x\in(a, b)$ such that $f(x) = y$.
+
+<object type="image/svg+xml" data="/assets/math-physics/graphs/ivt.svg" width="80%"></object>
+<p class = "caption">A temperature curve showing how between the morning and the afternoon, we can guarantee that there is some time between the two where the temperature is at $17^\circ C$</p>
+
+---
+
+## Uniform Continuity
+
+Previously, our definition of continuity of a function was local in scope, in other words, we could argue that a function was continuous **at a particular point**. In doing so,
+we discovered that our $\delta$ depended on both $\epsilon$ window we were trying to satisfy and the specific point we were arguing continuity at. A different point might require a 
+completely different $\delta$ for the same $\epsilon$ window. Hence why when we were trying to show $f(x) = 3x^3 - 2x^2 + x + 1$ was continuous on $\mathbb{R}$, we choose our $\delta$ to be 
+$\min\{\frac{\epsilon}{9|a|^2 + 13|a| + 6}, 1\}$ where it depended on both the $\epsilon$ and the point $a$. Thus we had infinitely many number of $\delta$ values to apply to show the polynomial 
+function was continuous on $\mathbb{R}$. This is what uniform continuity tries to solve by having $\delta$ only depend on $\epsilon$ and hence have a global scope. Though not all 
+functions are uniformly continuous so it is important some properties of uniform continuity. But first, let's go through the formal definition of uniform continuity:
+
+> **Uniformly Continuity on S:** let $f$ be a real-valued function on a set $S$. We say $f$ is **UNIFORM CONTINUOUS** on $S$ if $\forall \epsilon > 0, \exists \delta > 0$ such that $(x, y\in S$ and 
+$\|x - y\| \lt \delta)\implies \|f(x) - f(y)\| \lt \epsilon$
+>
+> **i.e.** $\delta$ depends only on $\epsilon$ and $x, y$ are abitrary points that are extremely close to each other in the set
+
+Since uniform continuity is not dependent on any single point in the graph but rather requires a single $\delta$ to work for **all** pairs of points $x, y$ close to each other simultaneously, 
+it is a global property. Any two points that are close in the domain are guaranteed to map to points that are close in the range, regardless of where they sit on the curve.
+
+It should come to no surprise that if $f$ is uniformly continuous on a set $S$ then $f$ is continuous on $S$ since being uniformly continuous is a much stricter definition than continuity.
+However, the inverse is not true.
+
+> $f$ is uniformly continuous on a set $S \implies$ $f$ is continuous on $S$
+>
+> i.e. uniform continuous $\implies $ continuous
+>
+> **Note:** continuity $\bcancel{\implies}$ uniform continuity
+
+We previously saw that if a function $f$ is continuous on a closed interval, it is bounded and attains it max and min. Furthermore, we also discovered the ability to infer the existence of 
+an event occuring if it lies between two different other events via the intermediate value theorem. What could we say about uniform continuity?
+
+> **Theorem (Bounded Continuous Functions implication on Uniform Continuity):** If $f$ is continuous on a closed interval $[a, b]$, then $f$ is uniformly continuous on $[a, b]$
+
+Thus we can say the following:
+
+> $f$ is continuous on a closed interval $[a, b] \iff f$ is uniform continuous on $[a, b]$
+
+What additional conclusion could we make on uniform continuity? Well we discussed how if $f$ is uniformly continuous on an interval $S$, then $f$ is continuous as well on the same interval. 
+So if we take a subset $U\subseteq S$, we can also make the same claim that $f$ is also uniformly continuous on $U$, and thus $f$ is continuous on the subinterval. 
+
+Let's look at the function $\frac{1}{x}$ and see at what intervals is it uniformly continuous and where it is not to understand better what uniformly continuous is and is not.
+
+**Example:** Prove that $\frac{1}{x}$ is uniformly continuous on $[b, \infty)$ where $b > 0$
+
+**Rough work:** Let $\epsilon > 0$ and we want to find $\delta \gt 0$ such that $\forall x,y,\in [b, \infty)$ with $\|x - y\| \lt \delta$, we have $\|\frac{1}{x} - \frac{1}{y}\| \lt \epsilon$
+
+$$
+\begin{align*}
+|\frac{1}{x} - \frac{1}{y}| &= |\frac{y - x}{xy}| \\
+&= \frac{|x - y|}{xy}, \quad x,y \gt 0
+&= \frac{|x - y|}{xy} \lt \frac{\delta}{xy}
+\end{align*}
+$$
+
+Recall that for $f$ to be uniformly continuous on $[b, \infty)$, $\delta$ cannot depend on any points $x, y$. But we could utilise what we know about $x, y$ to achieve this:
+
+Recall that $x,y\in[b, \infty) \iff x \ge b, y \ge b \iff \frac{1}{x} \le \frac{1}{b}, \frac{1}{y} \le \frac{1}{b}$
+
+Thus we now have the following:
+
+$$
+\begin{align*}
+|\frac{1}{x} - \frac{1}{y}| &\lt \frac{\delta}{xy} \\
+&\lt \frac{\delta}{b^2} \stackrel{\text{want}}{\leq} \epsilon
+\end{align*}
+$$
+
+So take $\delta = \epsilon b^2$.
+
+Notice that we've only shown that $f$ is continuous for provided that the domain is greater than 0 in a **closed** interval. Before we analyse what would happen if we changed the 
+interval from closed to open for the function $\frac{1}{x}$, we'll first need to revisit our favorite sequence, the cauchy sequence:
+
+> **Theorem (Uniform Continuity Impact on Cauchy Sequence):** Let $f$ be a uniformly continuous function on S. If $(S_n)$ is a cauchy sequence in $S$, then $(f(s_n))$ is also a cauchy sequence
+>
+> **Practical Use:** The contrapositive is often evoked to disprove a given function is uniformly continuous by finding a cauchy sequence $(s_n)$ such that $(f(s_n))$ is not cauchy (and hence diverges)
+
+**Example:** Show that $f(x) = \frac{1}{x}$ is not uniformly continuous on $(0, \infty)$
+
+The goal is to use the contrapositive of the theorem presented above by crafting a cauchy sequence such that $f(s_n)$ is not cauchy.
+
+Let $(s_n) = (\frac{1}{n})_{n\in\mathbb{N}}$. $(s_n)$ is cauchy since it converges to $0\notin (0, \infty)$. This will be important to note. To disprove uniformly continuitity, we deliberately 
+chose a cauchy sequence that converges to the problematic region near 0 wher ethe slope of $\frac{1}{x}$ becomes arbitrarily large.
+
+Then $(s_n)$ is a cauchy sequence in $(0, \infty)$ but $f(s_n) = \frac{1}{s_n} = \frac{1}{\frac{1}{n}} = n$ which is not cauchy. 
+Hence by the theorem presented above, $f$ is not uniformly continuous on $(0, \infty)$
+
+> **Heuristic on Disproving Uniform Continuity:** if a function's "slope" gets arbitrarily large on $S$ like $\frac{1}{x}$ near 0, then it won't be uniformly continuous there i
+> as there does not exist a single $\delta$ that can accommodte the increasingly steep behavior across the entire domain
+
+---
+
+## Limits of a Function
+
+Thus far we have talked a lot about limits in this course from sequences, partials sums, and with functions to define continuity. We will now talk about limits of a function in more details, 
+particularly as it approaches $\pm\infty$.
+
+Recall that the standard definition of limits $\lim\limits_{x\to a} f(x) = L$ means $\forall \epsilon > 0, \exists \delta \gt 0$ such that $0 \le \|x - a\| \lt \delta \implies \|f(x) - L\| \lt \epsilon$
+One may recall that taking the limit of a function to a point $a$ is equivalent as approaching the limit from the left and the right of the point $a$:
+
+$\lim\limits_{x\to a} f(x) = L \implies \lim\limits_{x\to a^-} f(x) = \lim\limits_{x\to a^+} f(x) = L$
+
+Formally,
+
+> **One Sided Limit Definition:** let $L\in\mathbb{R}$, let $f$ be a function and let $a$ be a limit of some sequence in $dom(f)$ consisting of terms largers than the point $a$.
+>
+> Then $\lim_{x\to a+} f(x) = L$ means $\forall \epsilon \gt 0, \exists \delta \gt 0$ such that $(x\in dom(f)$ and $a \lt x \lt a + \delta) \implies \|f(x) - L\| \lt \epsilon$
+>
+> i.e. the limit of a function of $f$ at a point $a$ approaching from the right side is $L$
+
+The definition to the left-handed side
 
 ### Credits:
 * MATH1052 Notes from Charles Starling
