@@ -1064,7 +1064,34 @@ Formally,
 >
 > i.e. the limit of a function of $f$ at a point $a$ approaching from the right side is $L$
 
-The definition to the left-handed side
+The definition for approaching from the left is left as an exercice to the reader.
+
+![A graph of 1/x]({{ site.baseurl }}/assets/math-physics/graphs/rational-func.png){: width="500px"}
+<p class = "caption">The curve of $\frac{1}{x}$</p>
+
+Let's revisit the function $\frac{1}{x}$, it has a vertical asymptote at $x = 0$ whereby the curve blows up to $\pm \infty$ from the left and the right side of the vertical asymptote:
+
+$$
+\begin{align*}
+\lim\limits_{x\to 0^+} f(x) = \infty \\
+\lim\limits_{x\to 0^-}f(x) = -\infty
+\end{align*}
+$$
+
+The formal one-sided limit definition presented earlier is insufficient to express limits that converges to $\pm \infty$ (i.e. diverge) since $\infty\notin\mathbb{R}$ (i.e. $\mathbb{R}$ contains an 
+infinitely many finite numbers but $\pm\infty$ is not a concrete finite number). Thus we now need a new definition for these limits converging to $\pm\infty$:
+
+> $\lim\limits_{x\to a^+} f(x) = \infty$ means ($\forall M \gt 0, \exists \delta \gt 0$ such that $a \lt x \lt a + \delta \implies f(x) \gt M$)
+
+> $\lim\limits_{x\to a^-} f(x) = \infty$ means ($\forall M \gt 0, \exists \delta \gt 0$ such that $a - \delta \lt x \lt a \implies f(x) \gt M$)
+
+> $\lim\limits_{x\to a^+} f(x) = \infty$ means ($\forall M \gt 0, \exists \delta \gt 0$ such that $0 \lt \|x - a\| \lt \delta \implies f(x) \gt M$)
+
+The precise definition for approaching to $-\infty$ is left as exercice (though it'll be shown in an example shortly). 
+Essentially what the definition states is that regardless of how large $f(x)$ gets, there will be another value larger than it. 
+Sort of reminds me of the two archmidean properties. Let's use these precise definition to proof the behavior of $\frac{1}{x}$:
+
+**Example:** Show $\lim\limits_{x\to 0^+} f(x) = \infty$ and $\lim\limits_{x\to 0^-}f(x) = -\infty$
 
 ### Credits:
 * MATH1052 Notes from Charles Starling
