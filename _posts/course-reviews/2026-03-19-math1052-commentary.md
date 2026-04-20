@@ -6,7 +6,7 @@ categories: [university, math, carletonu]
 permalink: blog/math1052-commentary
 ---
 
-This is a commentary to an introductory course to calculus and analysis which I have a [course review](../math1052) on if you are interested. The content presented below are from the fall of 
+This is a commentary to an introductory course to calculus and analysis which I have a [course review](/blog/math1052) on if you are interested. The content presented below are from the fall of 
 2021 which may not reflect what is covered in your class today. Furthermore, the information presented will have the author's own commentary and is **NOT** and should **NOT** be a replacement to attending class. 
 The author simply wishes to review the cotent of the course mixed with their own speculations, views, and emotions as it reflects on the course 5 years later in preparation to their eventual return to 
 school after a 2 year break from Mathematics. The author is in need of a refresher of Mathematics as it has forgotten all of its Mathematical knowledge after departing from its studies to do random 
@@ -16,9 +16,13 @@ months for courses not yet covered or lacked depth as the author is in the proce
 As a side note, the commentary presented below heavily resembles Elementary Analysis: The Theory of Calculus by Kenneth A. Ross. This is on purpose as Starling heavily based on the course notes based on this 
 textbook.
 
+**edit:** The author was not expecting the amount of time and motivation required to finish this *billet* (blog post in french). Thus they have decided to write only the follow up course for completion 
+sakes but will likely not write anymore course commentaries. Sorry to anyone looking forward to reading the pedagogy of linear and abstract algebra as it also differs a lot from your regular 
+linear algebra course. I encourage anyone interested to read Linear Algebra Done Right by Axler as he does an excellent job approaching linear algebra in a rigourous manner.
+
 ---
 
-The approach to Calculus differs depending on one's program of study. However, one thing remains true throughout them all, that calculus is the study of changes. However, one may be shock in the differences 
+The approach to Calculus differs depending on one's program of study. However, one thing remains true throughout them all, that calculus is the study of changes. However, one may be shocked in the differences 
 of the content between the various discipline. There is calculus for engineers, calculus for science, calculus for business, and most important of all, Calculus for future Mathematicians. The author has 
 a more holistic view of what is covered in an introductory course to calculus as they were a former student of Computer Science in its past life, a teaching assistant to Calculus for Engineers and also 
 a student of Mathematics. Yes this does imply that the author has taken calculus twice, once at another university and another at the university it is attending of which the content will be discussed below.
@@ -36,16 +40,16 @@ add it to its long list of things to look at in the (cough cough) near future.
 > $(\forall a,b,c\in\mathbb{R})$
 > 1. a+(b+c) = (a+b)+c (ADDITIVE ASSOCIATIVITY LAW)
 > 2. a+b = b+a (ADDITIVE COMMUTATIVITY)
-> 3. $\exists 0\in\mathbb{R}$ such that a + 0 = a
+> 3. $\exists 0\in\mathbb{R}$ such that $a + 0 = a$
 > 4. $\forall a\in \mathbb{R}, \exists (-a)\in\mathbb{R}$ such that $a+(-a) = 0$
 > 5. a(bc)=(ab)c 
 > 6. $a\cdot b = b \cdot a$
-> 7. $\exists 1\in\mathbb{R}$ such that $a\cdot 1= a \forall a\in\mathbb{R}$
+> 7. $\exists 1\in\mathbb{R}$ such that $a\cdot 1= a$
 > 8. $\forall a\neq 0, \exists a^{-1}\in\mathbb{R}$ such that $a\cdot a^{-1}=1$
-> 9. $a(b+c) = a\cdot b + a\cdot c$ (Distributibity Law)
+> 9. $a(b+c) = a\cdot b + a\cdot c$ (Distributivity Law)
 
 Obviously the reals (the numbers us average joe are used to) is a field. The rationals ($\mathbb{Q}$) it turns out is also a field which may not come to a surprise but for some reason I had the inkling 
-idea back in my time as a freshmany computer science student over a decade ago (yes the author is old) that it wasn't due to a tiny condition I have forgotten.
+idea back in my time as a freshman computer science student over a decade ago (yes the author is old) that it wasn't due to a tiny condition I have forgotten.
 
 Firstly one needs to define what the natural numbers $\mathbb{N}$ are since this will be used in constructing the definition of the rationals $\mathbb{Q}$ later. Depending on your professor, one may have 
 previously learned that $0\in\mathbb{N}$ but in our definition, we will omit 0 and hence we will informally define the natural numbers as:
@@ -72,7 +76,7 @@ hardware.
 ---
 
 **Aside:** While the rationals are a field and hence we get both additive associativity and additive commutativity, you will be surprised that this is not the case in hardware. Floating point numbers 
-are weird and special attention should be taken to minimize the error. Something I learned during my 2 year haitus from my studies which you can read over [here]({{ site.baseurl }}/micro/2026/03/fp-associativity).
+are weird and special attention should be taken to minimize the error. Something I learned during my 2 year hiatus from my studies which you can read over [here]({{ site.baseurl }}/micro/2026/03/fp-associativity).
 
 ---
 
@@ -91,7 +95,7 @@ questioning your decision to study Mathematics. While others may question their 
 ![]({{ site.baseurl }}/assets/math-physics/math-ax0-attempt.png)
 <p class = "caption">My attempt to prove 1 * 0 = 0, hopefully it is correct ...</p>
 
-The next set of axioms pretain to ordering on the reals which will be helpful in proving some theorems that will follow next:
+The next set of axioms pertain to ordering on the reals which will be helpful in proving some theorems that will follow next:
 > **ORDER AXIOMS on $\mathbb{R}$:**
 > 1. Given $a,b\in\mathbb{R}$, either $a\leq b$ or $b \leq a$
 > 2. If $a\leq b$ & $b\leq a$, then $a=b$
@@ -187,7 +191,7 @@ crucial metadata/information and assumes $x>0$ (i.e. that x is positive).
 > 2. $\|ab\| = \|a\|\|b\|$
 > 3. $\|a+b\| \le \|a\| + \|b\|$ (**Triangle Inequality**)
 
-All 3 properties of the theorem are important to know but the triangle inequality stands out the most. It is one of the three distingushing axioms that defines whether or not a function $d(x,y)$ is a 
+All 3 properties of the theorem are important to know but the triangle inequality stands out the most. It is one of the three distinguishing axioms that defines whether or not a function $d(x,y)$ is a 
 metric, something taught in [MATH3001]({{ site.baseurl }}/blog/math3001/) (or in MATH2000 if you have Jaworski). The most important hint I can give about the proof of the triangle inequality is the following: 
 $-|x| \le x \le |x| \forall x\in\mathbb{R}$.
 
@@ -289,7 +293,7 @@ The $\sup S = \sqrt{2}$ but the irrational number $\sqrt{2}\notin \mathbb{Q}$ an
 
 The $\mathbb{R}$ does not have such gaps as $\mathbb{Q}\subset\mathbb{R}$ and similarly with the irrationals $\mathbb{I}\subset\mathbb{R}$. In fact $\mathbb{R} = \mathbb{Q} \cup \mathbb{I}$.
 
-As a collary, the same statement can be made about the infimum:
+As a corollary, the same statement can be made about the infimum:
 
 > **Corollary of the Completeness Axiom:** If $S\subseteq \mathbb{R}$ is bounded below, then $\inf S$ exists and $\inf S\in\mathbb{R}$
 
@@ -438,7 +442,7 @@ Therefore, we now have the following:
 
 $$
 \begin{align*}
-|s - t| = \le |s_n - s| + |s_n - t|
+|s - t| \le |s_n - s| + |s_n - t|
 \end{align*}
 $$
 
@@ -446,7 +450,7 @@ If $n>N$, both (\*) and (\*\*) are true, then for $n > N$, we now have:
 
 $$
 \begin{align*}
-|s - t| = \le |s_n - s| + |s_n - t| < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon
+|s - t| \le |s_n - s| + |s_n - t| < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon
 \end{align*}
 $$
 
@@ -542,9 +546,9 @@ Of course there is the negative infinity version of this definition and yes I kn
 does not diverge, it suffices to find one single $\epsilon$ such that the epsilon window cannot be true. It turns out that there are sequences, series and functions whose convergence is still a mystery 
 such as the flint hill series:
 
-![Stein's Gates provoking the audience that the series is obvious when it is not]({{ site.baseurl }}/assets/math-physics/steins-flint-hills.png)
+![Steins;Gate provoking the audience that the series is obvious when it is not]({{ site.baseurl }}/assets/math-physics/steins-flint-hills.png)
 
-<p class = "caption">Kirisu from Stein's Gate challenging the audience to solve a series whose convergence is not yet known by the Mathematical community. Source: <a href="https://www.reddit.com/r/Animemes/comments/90k63y/where_my_calculus_ois_at/">reddit</a></p>
+<p class = "caption">Kurisu from Steins;Gate challenging the audience to solve a series whose convergence is not yet known by the Mathematical community. Source: <a href="https://www.reddit.com/r/Animemes/comments/90k63y/where_my_calculus_ois_at/">reddit</a></p>
 
 Non-convergence does not imply a sequence has no limits. It simply means that the sequence does not converge to a single real number.
 
@@ -577,7 +581,7 @@ Now that we established the existence of infinite limits, we now have the follow
 
 > **Theorem:** Let $(s_n)$ be a sequence of positive numbers. Then $\lim\limits_{n\to\infty}s_n = \infty \iff \lim\limits_{n\to\infty}\frac{1}{s_n} = 0$
 
-Before we proceed to the next topic, it is important to note that $\pm\infty$ are real numbers and thus the limit laws that we became familiar with do not apply. In fact, we will 
+Before we proceed to the next topic, it is important to note that $\pm\infty$ are not real numbers and thus the limit laws that we became familiar with do not apply. In fact, we will 
 soon learn that we call these indeterminate forms (e.g. $\infty - \infty, \frac{\infty}{\infty}, and 0\cdot\infty$). 
 If you are fortunate enough, you will learn that not all infinities are treated equal. There are different classes of infinities and some are larger than the others.
 
@@ -617,7 +621,7 @@ It's as if there's a clustering whereby the terms are getting closer and closer 
 
 This increasing clutering of points allows us to make the following statement:
 
-> **Theorem:** A sequence is convergent $\iff$ it is a cacuhy sequence
+> **Theorem:** A sequence is convergent $\iff$ it is a cauchy sequence
 
 We now have two tools (theorems) we can use to determine whether or not a sequence converges or not without finding its limit. This implies we can use our beloved limit laws without explicitly 
 proving convergence.
@@ -673,7 +677,7 @@ In simpler terms, if the sequences of partial sum converges then the infinite su
 
 **Some Common Series:**
 
-* **Geometric Series:** $\sum\limits_{n=1}^\infty r^n = \frac{1}{1-r}$ where $\|r\| \lt 1$
+* **Geometric Series:** $\sum\limits_{n=0}^\infty r^n = \frac{1}{1-r}$ where $\|r\| \lt 1$
 * **Harmonic Series:** $\sum\frac{1}{n}$ diverges
 * **P-Series:** $\sum\frac{1}{n^p}$ converges if $p > 1$ and diverges if $p \le 1$
 
@@ -712,7 +716,7 @@ By p-series we know that $\sum \frac{1}{n^2}$ converges since $p > 1$. Thus we h
 
 $$
 \begin{align*}
-\sum\limits_{n=1}^\infty \frac{1}{n^2+1} \lt \sum\limits_{n=1}^\infty \frac{1}{n} \forall n
+\sum\limits_{n=1}^\infty \frac{1}{n^2+1} \lt \sum\limits_{n=1}^\infty \frac{1}{n^2} \forall n
 \end{align*}
 $$
 
@@ -1058,13 +1062,13 @@ $\lim\limits_{x\to a} f(x) = L \implies \lim\limits_{x\to a^-} f(x) = \lim\limit
 
 Formally,
 
-> **One Sided Limit Definition:** let $L\in\mathbb{R}$, let $f$ be a function and let $a$ be a limit of some sequence in $dom(f)$ consisting of terms largers than the point $a$.
+> **One Sided Limit Definition:** let $L\in\mathbb{R}$, let $f$ be a function and let $a$ be a limit of some sequence in $dom(f)$ consisting of terms larger than the point $a$.
 >
 > Then $\lim_{x\to a+} f(x) = L$ means $\forall \epsilon \gt 0, \exists \delta \gt 0$ such that $(x\in dom(f)$ and $a \lt x \lt a + \delta) \implies \|f(x) - L\| \lt \epsilon$
 >
 > i.e. the limit of a function of $f$ at a point $a$ approaching from the right side is $L$
 
-The definition for approaching from the left is left as an exercice to the reader.
+The definition for approaching from the left is left as an exercise to the reader.
 
 ![A graph of 1/x]({{ site.baseurl }}/assets/math-physics/graphs/rational-func.png){: width="500px"}
 <p class = "caption">The curve of $\frac{1}{x}$</p>
@@ -1085,14 +1089,407 @@ infinitely many finite numbers but $\pm\infty$ is not a concrete finite number).
 
 > $\lim\limits_{x\to a^-} f(x) = \infty$ means ($\forall M \gt 0, \exists \delta \gt 0$ such that $a - \delta \lt x \lt a \implies f(x) \gt M$)
 
-> $\lim\limits_{x\to a^+} f(x) = \infty$ means ($\forall M \gt 0, \exists \delta \gt 0$ such that $0 \lt \|x - a\| \lt \delta \implies f(x) \gt M$)
+> $\lim\limits_{x\to a} f(x) = \infty$ means ($\forall M \gt 0, \exists \delta \gt 0$ such that $0 \lt \|x - a\| \lt \delta \implies f(x) \gt M$)
 
 The precise definition for approaching to $-\infty$ is left as exercice (though it'll be shown in an example shortly). 
-Essentially what the definition states is that regardless of how large $f(x)$ gets, there will be another value larger than it. 
-Sort of reminds me of the two archmidean properties. Let's use these precise definition to proof the behavior of $\frac{1}{x}$:
+Essentially what the definition states is that regardless of how arbitrary large $M$, we can find a value $x$ within the neighborhood of $a$ (the $\delta$ window) such that $f(x)$ is larger than 
+$M$. In other words, regardless how large $M$ is, there's always going to be another value larger than it within the neighborhood.
+Sort of reminds me of the two archmidean properties. Let's use these precise definition to prove the behavior of $\frac{1}{x}$:
 
-**Example:** Show $\lim\limits_{x\to 0^+} f(x) = \infty$ and $\lim\limits_{x\to 0^-}f(x) = -\infty$
+**Example:** Show (1) $\lim\limits_{x\to 0^+} f(x) = \infty$ and (2) $\lim\limits_{x\to 0^-}f(x) = -\infty$
+
+**Rough Work for (1):** Given $M \gt 0$, we want to define a $\delta \gt 0$ such that $0 \lt x \lt 0 + \delta \implies f(x) = \frac{1}{x} \gt M$.
+Thus we want the following:
+
+$$
+\begin{align*}
+0 \lt x \lt \delta &\implies \frac{1}{x} \gt M \\
+&\implies x \lt \frac{1}{M} \\
+&\implies x \lt \delta \lt \frac{1}{M}
+\end{align*}
+$$
+
+So take $\delta = \frac{1}{M}$
+
+**Rough Work for (2):** Given $M \lt 0$, we want to define a $\delta \gt 0$ such that $0 - \delta \lt x \lt 0 \implies f(x) = \frac{1}{x} \lt M$.
+Let's recall the following:
+* $x \lt 0$ so let's define $x' \gt 0$ such that $x = -x'$
+* $M \lt 0$ so let's define $M' \gt 0$ such that $M = -M'$
+* $-\delta \lt -x' \lt 0 \implies 0 \lt \boxed{x' \lt \delta}$
+
+
+$$
+\begin{align*}
+-\delta \lt x \lt 0 &\implies \frac{1}{x} \lt M \\
+-\delta \lt -x' \lt 0 &\implies \frac{1}{-x'} \lt -M' \\
+&\implies \frac{1}{x'} \gt M' \\
+&\implies x' \gt \frac{1}{M'} \\
+&\implies \delta \gt x' \gt \frac{1}{M'}
+\end{align*}
+$$
+
+When approaching $+\infty$, we want $f(x)$ to exceed $M$ so we need $x$ to be small. But when we approach $-\infty$, we want $f(x)$ to go below $M$, so the inequalities are reversed. This 
+could explain any unease you may had when working on the proof for (2). Thus we shall take $0 \lt \delta = \frac{1}{M'} = \frac{-1}{M}$ where $M < 0$ (i.e. negative). While I try not to give a 
+complete proof as this is an accompanying material to the course and not a replacement, I think the rough work will make more sense when seeing it in proven formally:
+
+Let $M \lt 0$ and choose $0 \lt \delta = \frac{-1}{M}$. Then $0 - \delta \lt x \lt 0 \implies -\delta \lt x \implies -(-\frac{1}{M}) \lt x \implies \frac{1}{x} \lt M$ as required. 
+(i.e. we need to show that for any $M \lt 0$, for all $x$ in the neighborhood of 0 (from the left), $f(x)$ will be less than $M$). Therefore $\lim\limits_{x\to 0^-}f(x) = -\infty$.
+
+Observe how our favorite function thus far, $\frac{1}{x}$, exhibits another convergence, but this time to a finite value 0 in what appears to be another asymptote called the horizontal asymptote.
+Thus far we have discussed the precise definition of what it means to converge to a point from the left and the right as the curve approaches to a particular point in the cartesian plane 
+to either a finite value or to $\pm \infty$. Yet, we still lack the language to describe limits as $x$ approaches to $\pm \infty$. Thus here are the last missing pieces:
+
+> **Limit Definitions @ $\pm\infty$:** $\lim_{x\to\infty} f(x) = L$ where $L$ could be $\pm \infty$ or $L\in\mathbb{R}$
+> 1. If $L\in\mathbb{R}$: $\forall\epsilon \gt 0$, $\exists \alpha\in\mathbb{R}$ such that $(x \gt \alpha)\implies \|f(x)-L\|\lt\epsilon$
+> 2. If $L = \infty$: $\forall M \gt 0$, $\exists \alpha\in\mathbb{R}$ such that $(x \gt \alpha)\implies f(x)\gt M$
+> 3. If $L = -\infty$: $\forall M \lt 0$, $\exists \alpha\in\mathbb{R}$ such that $(x \gt \alpha)\implies f(x)\lt M$
+
+As usual, the precise definitions for $\lim\limits_{x\to -\infty} f(x) = L$ is left as an exercise to the readers. Suppose we have a sequence $(x_n) \to a$, would the limit 
+$\lim\limits_{x\to a} f(x) = \lim\limits_{n\to\infty} f(x_n)$? That is what the next theorem is about:
+
+> **Theorem:** Let $f$ be defined on a set $S$ and let $a$ be the limit of some sequence in $S$ (including the possibility that $a = \pm\infty$). Let $L\in\mathbb{R}$. Then:
+>
+> $\lim\limits_{x\to a}f(x) = L \iff $ for every sequence $(x_n)$ in $S$ with limit $a$ but $x_n \ne a \forall n$, we have $\lim\limits_{n\to\infty}f(x_n) = L$
+
+Let's revisit the limit laws again but for functions instead of sequences:
+
+> **LIMIT LAWS:** let $f, g$ be functions defined on a set $S$ for which $\lim\limits_{x\to a}f(x) = L, \lim\limits_{x\to a}g(x) = M$ for $L, M$:
+> 1. $\lim\limits_{x\to a}(f(x) + g(x)) = L + M$
+> 2. $\lim\limits_{x\to a} (fg)(x) = LM$
+> 3. $\lim\limits_{x\to a} (\frac{f}{g})(x) = \frac{L}{M}, \qquad M \ne 0, g\ne 0$ around $a$
+
+**Note:** the limit laws above apply for one-sided limits as well as for approaching the function to $\pm\infty$ (i.e. $a$ does not need to be a real number).
+
+The limit laws handle sums, products, and quotients. But what about more complex functions? 
+Composite functions are necessary to construct any complex functions yet we will soon discover the limit laws do not apply.
+
+> **WARNING:** Composite functions does not respect the limit laws
+
+$$
+\begin{align*}
+f(x) = 1 + x\sin(\frac{\pi}{x}), g(x) = \begin{cases}
+    4 & ,x \ne 1 \\
+    -4 & ,x = 1
+\end{cases}
+\end{align*}
+$$
+
+![A graph of 1+xsin(pi/x)]({{ site.baseurl}}/assets/math-physics/graphs/limit-composite-ex1.png)
+<p class="caption">The graph of $1+x\sin(\frac{\pi}{x})$</p>
+
+Let $x_n = \frac{2}{n}$ for $n\in\mathbb{N}$ and $\lim\limits_{n\to\infty}x_n = 0$.
+
+When n is even, $f(x_n) = 1 + x_n \sin(\frac{\pi}{x_n}) = 1 + \frac{2}{n}\sin(\frac{\pi}{\frac{2}{n}}) = 1 + \boxed{\frac{2}{n}\sin(\frac{n\pi}{2})} = 1 + \boxed{0} = 1$
+
+When n is odd, $f(x_n) = 1 + x_n \sin(\frac{\pi}{x_n}) = 1 + \frac{2}{n}\sin(\frac{\pi}{\frac{2}{n}}) = 1 + \boxed{\frac{2}{n}\sin(\frac{n\pi}{2})} = 1  + \boxed{\pm \frac{2}{n}} \ne 1$
+
+Hence the composition is:
+$$\begin{align*}
+ $g\circ f$(x_n) = g(f(x_n)) = \begin{cases}
+    g(1) & \text{$n$ is even} \\
+    g(1\pm\frac{2}{n}) & \text{$n$ is odd}
+\end{cases} = \begin{cases}
+    -4& \text{$n$ is even} \\
+    4 & \text{$n$ is odd}
+\end{cases} 
+\end{align*}
+$$
+
+As $g\circ f(x_n)$ alternates between -4 and 4, $\lim\limits_{n\to\infty}g\circ f(x_n)$ does not exist and thus neither does $\lim\limits_{n\to\infty}g\circ f(x)$
+
+So what can we conclude about the limits for a composite function then? Well there are now two conditions that need to be satisfied instead of one. For the composite function $g\circ f$:
+1. the inner function $f(x)$ converges to a value that exist in the outer function's (i.e. $g(x)$) domain (a requirement already for the composite function to exist)
+2. $g$, the outer function, is continuous on $f(x) = L$ (NEW CONDITION)
+
+> **Theorem on the Limits of Composite Functions:** let $f$ be a function defined on $S$ for which $\lim\limits_{x\to a}f(x) = L$ exists within $L\in\mathbb{R}$. Let $g$ be a function defined on 
+> $\\{f(x) \| x\in S\\} \cup \\{L\\}$ which is continuous at $L$. Then:
+> 
+> $\lim\limits_{x\to a}(g\circ f)(x) = g(L)$ (i.e. $\lim\limits_{x\to a}(g\circ f)(x) = g(\lim\limits_{x\to a}f(x)$)
+
+Here are some facts about the following functions:
+* $\lim\limits_{x\to 0} \frac{\sin(x)}{x} = 1$
+* $\lim\limits_{x\to 0} \frac{\cos(x) - 1}{x} = 0$
+
+But one may ask how did one came to this conclusion? If we were to approach this problem using what we have seen thus far, it would seem impossible. But you may recall seeing how the squeeze theorem 
+could be utilised to determine whether a difficult sequence converges by bounding it between two simpler sequences. We'll employ the same idea to determine the limits presented above by 
+bounding these difficult functions between other simpler functions and see what happens.
+
+> **Squeeze Theorem (for functions):** suppose $f(x)\leq g(x)\leq h(x) \forall x$ and $\lim\limits_{x\to a}f(x) = L = \lim\limits_{x \to a} h(x)$ then $\lim\limits_{x \to a} g(x) = L\in\mathbb{R}$
+
+**Example:** Show $\lim\limits_{x\to 0} \frac{\sin(x)}{x} = 1$
+
+For $\frac{-\pi}{2}\lt x \lt \frac{\pi}{2}$ and $x\ne 0$, we have:
+
+$$
+\cos x \leq \sin\frac{x}{x} \leq 1 \nonumber
+$$
+
+where:
+* $\lim\limits_{x\to 0} g(x) = \lim\limits_{x\to 0} \cos x = \cos(0) = 1$
+* $\lim\limits_{x\to 0} h(x) = \lim\limits_{x\to 0} 1 = 1$
+
+So by squeeze theorem, $\lim\limits_{x\to 0} \frac{\sin(x)}{x} = 1$
+
+**Note** Showing $\lim\limits_{x\to 0} \frac{\cos(x) - 1}{x} = 0$ is more involved but as a hint:
+
+$$
+\begin{align*}
+\frac{\cos (x) - 1}{x} &=  (\frac{\cos (x) - 1}{x})(\frac{\cos (x) + 1}{\cos (x) + 1}) \\
+&= \frac{\cos^2x - 1}{x(\cos x+1)} \\
+&= \frac{-\sin^2x}{x(\cos x + 1)} \\
+&= -(\frac{\sin x}{x})(\frac{\sin x}{\cos x + 1})
+\end{align*}
+$$
+
+---
+
+## DIFFERENTIATION
+
+After many weeks taking a calculus course, we finally have reached the point of learning what most think of calculus: differentiation (and integration). I am not going to delve much into 
+this subject despite being a central component of Calculus simply because it is both a review from Highschool calculus and is not distinct from a regular calculus course itself.
+
+The central theme in the course thus far has been on limits considering how many weeks have been dedicated to the study of limits and its convergence both using the precise definition and the 
+simple definition of what it means to take the limit of a function as it approaches to a finite number or to $\pm\infty$. It turns out unsurprisingly that the definition of a function being 
+differentiable at a particular point is taking the limit of a function $f$ around the point $a$. This is commonly known as determining the rate of change by observing the slope of the tangent:
+
+> **Differentiation:** Let $f$ be a function defined on an open interval containing the point $a$. We say a function $f$ is differentiable at the point $a$ (or has a derivative at $a$) if:
+> 
+> $\lim\limits_{x\to a} \frac{f(x) - f(a)}{x - a}$ exists and is finite
+
+In other words:
+
+> $f'(a) = \lim\limits_{x\to a} \frac{f(x) - f(a)}{x - a}$
+
+Setting $x = a + h$, as $x\to a$, we have $h\to 0$, giving the equivalent formulation:
+
+> $f'(a) = \lim\limits_{h\to 0} \frac{f(a+h)-f(a)}{h}$
+
+What makes calculus for Mathematic students vs. Engineering is that we do not rely on intuition of what it means to take the "instantaneous rate of change" but build this up using the precise 
+definition using the $\delta-\epsilon$ proofs to have a clear understanding of what it truly means to take the limit.
+
+Using the definition of differentiation, we can derive all sorts of derivative rules that we come to love and memorise:
+
+> **Differentiation Rules:** Let $f,g$ be differentiable at $x = a$ and let $c\in\mathbb{R}$ be a constant. Then $cf, f+g, fg,$ and $\frac{f}{g}, g(a)\ne 0$ are differentiable at $x = a$. Their derivatives are:
+> 1. $(cf)'(a) = cf'(a)$
+> 2. $(f+g)'(a) = f'(a) + g'(a)$
+> 3. $(fg)'(a) = f'(a)g(a) + f(a)g'(a)$
+> 4. $(\frac{f}{g})'(a) = \frac{f'(a)g(a) - f(a)g'(a)}{g^2(a)}, \qquad g(a)\ne 0$
+> 5. $(g\circ f)'(a) = g'(f(a))f'(a)$
+
+> **Chain Rule:** if $f$ is differentiable at $x = a$ and $g$ is differentiable at $f(a)$, then $g\circ f$ is differentiable at $a$, with $(g\circ f)'(a) = g'(f(a))f'(a)$
+
+One gripe I have with textbooks is that they often don't present the entire story of the derivatives of transcendental functions 
+such as $\sin x, \cos x, e^x$ causing many students to omit the chain rule.
+
+For instance, here are the derivatives of common transcendental functions:
+* $(\sin x)' = \cos x$
+* $(\cos x)' = -\sin x$
+* $(e^x)' = (e^x)$
+
+The derivatives above assume the argument is simply $x$. The moment you have anything more complex such as $\sin(x^2)$ or $e^{3x}$, the chain rule is mandatory. Thus when I teach students 
+the derivatives of transcendental functions, I ensure I explicitly present the chain rule in their derivatives as follows:
+* $(\sin x)' = (\cos x)x'$
+* $(\cos x)' = (-\sin x)x'$
+* $(e^x)' = (e^x)x'$
+* $(a^x)' = (a^x \ln a)x'$
+* $(\ln x)' = \frac{1}{x}$
+* $(tanx)' = (sec^2x)x'$
+
+**Note:** $(e^x)' = (\bcancel{\ln e} e^x)x' = (e^x)x'$
+
+**Example:** Take the derivative of $h(x) = e^{\sin(2x)}$
+
+$h(x) = g\circ f(x)$ where:
+* $g(x) = e^x$ and $g'(x) = (e^x)x' = e^x$
+* $f(x) = \sin(2x)$ and $f'(x) = \cos(2x)(2x)' = 2\cos(2x)$
+
+By chain rule: $h'(x) = (g\circ f)'(x) = g'(f(x))f'(x) = e^{2\sin(2x)} \cdot 2\cos(2x) = 2\cos(2x)e^{\sin(2x)}$
+
+An interesting question is whether if a function being continuous implies differentiability. The answer as it turns out is a resounding no.
+
+**Example:** Is $f(x)$ differentiable at $x = 0$?
+
+![a graph of $\|x\|$]({{site.baseurl}}/assets/math-physics/graphs/abs-x.png)
+<p class = "caption">The graph of $\|x\|$</p>
+
+To show $f$ is differentiable at $x = 0$, then we want to show $\lim\limits_{x\to 0}\frac{f(x) - f(0)}{x - 0}$ exists. Recall for the limit to exist, it's left handed and right handed limits must exist.
+
+**Right-Sided Limit:**
+
+$$
+\begin{align*}
+\lim\limits_{x\to 0^+} \frac{|x|}{x} &= \lim\limits_{x\to 0^+} \bcancel{\frac{x}{x}}, \qquad 0^+ \gt 0\\
+&= \lim\limits_{x\to 0^+} 1\\
+&= 1
+\end{align*}
+$$
+
+**Left-Sided Limit:**
+
+$$
+\begin{align*}
+\lim\limits_{x\to 0^-} \frac{|x|}{x} &= \lim\limits_{x\to 0^-} \bcancel{\frac{-x}{x}}, \qquad 0^- \lt 0 \implies |x| = -x\\
+&= \lim\limits_{x\to 0^-} -1  \\
+&= -1
+\end{align*}
+$$
+
+As $\lim\limits_{x\to 0^+} \frac{|x|}{x} \ne \lim\limits_{x\to 0^-} \frac{|x|}{x}$, $\lim\limits_{x\to 0}\frac{f(x) - f(0)}{x - 0}$ does not exist and thus is not differentiable despite being continuous.
+Thus we can only conclude from one side, that if $f$ is differentiable at $x = a$ then it is continuous but not the other way around.
+
+> **Theorem:** if $f$ is differentiable at $x = a$, then $f$ is continuous at $x = a$
+>
+> i.e. differentiable at $x = a \implies f$ is continuous at $x = a$ (but not the other way around)
+
+A good tip to determining whether a function is differentiable at a particular point is to see if there are any sharp edges like we see at $x = 0$ in the function $\|x\|$.
+
+---
+
+## Mean Value Theorem
+
+One common theme you will notice in analysis is a class of theorems that proves the existence of a phenomen but in a more vague manner. For instance, the Intermediate Value Theorem (IVT) 
+tells us that if a value $y$ lies between $f(a)$ and $f(b)$ then there exists at least one value $x$ in between $a$ and $b$ such that $f(x) = y$ (given $f$ is a continuous function). IVT does 
+not tell us precisely what the $x$ value is but rather bounds the value between two points. Another such theorem in the same spirit as IVT is the Rolle's Theorem which tells us the existence of 
+a local min or max within two points. But first let us review how to know if we obtain a min or max:
+
+> **Theorem:** Let $f$ be defined on an open interval containing $x_o$. Suppose that $f$ attains its max or minimum at $x_o$ and that $f$ is differentiable at $x = x_o$ then $f'(x_o) = 0$
+
+For a continuous and differentiable function to hit its local min or max at $x = x_o$, we must observe absolutely 0 change at that point (i.e. $f'(x_o) = 0$. We will later explore how to graph functions 
+based on its derivatives but it is important to understand that if the derivative at a particular point is not zero, then the graph is experiencing a change and thus has not hit a local min or max. 
+
+Recall that to hit a local min, we must have the derivatives $f'(x_o - \delta) \lt f'(x_o) = 0 \lt f'(x_o + \delta)$ or what I call a happy face. i.e. the signs of the derivatives changes from 
+negative to positive.
+
+![Image of x^2]({{site.baseurl}}/assets/math-physics/graphs/x-square.png)
+<p class = "caption">A graph of $x^2$</p>
+
+If I was to draw a table to visualise this change of slope it would look something along the lines of:
+
+$$
+\begin{array}{c|c}
+ & 0 & \\ \hline
+- & & + \nonumber
+\end{array}
+$$
+
+or
+
+$$- \overset{0}{|} + \nonumber$$
+
+Now here's the Rolle's theorem now that we established the fact that an extremum occurs when the slope is 0 (i.e. $f'(x_o) = 0$.
+
+> **Rolle's Theorem:** Suppose $f$ is continuous on $[a,b]$, $f$ is differentiable on $(a,b)$ and that $f(a) = f(b)$. Then there exists $c\in(a,b)$ with $f'(c) = 0$
+
+**Note:** Rolle's Theorem is actually a special case of the Mean Value Theorem presented below where $f(a) = f(b)$ where by the average rate of change is $\frac{f(b)-f(a)}{b-a} = 0$, so the 
+MVT guarantees there exists some $c$ where $f'(c) = 0$
+
+The next theorem relates to how one can draw a tangent line parallel to the tangent slope which itself does not seem impressive from face value as it states the existence of the average rate between 
+two points is equal to a instantaneous rate of change between the two points:
+
+> **Mean Value Theorem (MVT):** let $f$ be continuous on $[a, b]$ and differentiable on $(a,b)$ then there exists $x\in(a,b)$ with $f'(x) = \frac{f(b)-f(a)}{b-a}$
+
+![](http://web.archive.org/web/20260304003626if_/https://tutorial.math.lamar.edu/Classes/CalcI/MeanValueTheorem_Files/image001.png)
+<p class = "caption">Illustration of MVT extracted from <a href = "https://tutorial.math.lamar.edu/classes/calci/MeanValueTheorem.aspx">Paul's Math Notes</a></p>
+
+While seemingly inconsequential, the consequences of MVT are interesting. For instance, if $\forall x\in\mathbb{R}, f'(x) = 0$ then $f$ is a constant line. But more interestingly is when two functions 
+seemingly have the same slope (i.e. derivative):
+
+> **Collary of MVT 1:** Let $f,g$ be differentiable function on $(a,b)$ and suppose $f'=g'$ on $(a,b)$. Then $\exists c \in\mathbb{R}$ (a constant) such that $f(x) = g(x) + c \forall x$
+
+The strongest corollary of the MVT presented in the course is understanding the behavior of a function based on its slope (derivative):
+
+> **Collary of MVT 2:** Let $f$ be differentiable function on $(a,b)$:
+> 1. $f'(x) \gt 0 \forall x\in(a,b) \implies f$ is **STRICTLY** INCREASING on $(a,b)$
+> 2. $f'(x) \lt 0 \forall x\in(a,b) \implies f$ is **STRICTLY** DECREASING on $(a,b)$
+> 3. $f'(x) \geq 0 \forall x\in(a,b) \implies f$ is INCREASING on $(a,b)$
+> 4. $f'(x) \leq 0 \forall x\in(a,b) \implies f$ is DECREASING on $(a,b)$
+
+---
+
+## L'Hôpital's Rule
+
+We have finally made it to the last major topic covered in the course, the L'Hôpital rule, the one rule whose name will reveal whether or not you failed French class (i.e. H is silent in French and as 
+Canadians, we should know at least that much). Thus far in the course, we've been working with nice limits whose mathematical results won't make us scratch our heads. But suppose we have the following 
+limit:
+
+$$
+\begin{align*}
+\lim_{x\to a} \frac{f(x)}{g(x)}
+\end{align*}
+$$
+
+where $a$ can be a one-sided limit, a number or even $\pm \infty$. There are forms where $\lim_{x\to a} f(x)$ and $\lim_{x\to a} g(x)$ could be equal to either $0$ or $\pm \infty$ and would cause 
+our heads to scratch as the results are undefined. These forms are what we call indeterminate forms and there are many such as:
+
+* $\frac{0}{0}$
+* $\frac{\infty}{\infty}$
+* $0 \cdot \infty$
+* $\infty - \infty$
+* $0^0$
+* $\infty^0$
+* $1^\infty$
+
+For instance $\lim\limits_{x\to 0} \frac{\tan (x)}{x} = \frac{0}{0}$ which is undefined.
+
+While some of these forms can be manipulated to be solvable such as in the case of $0\cdot \infty$ where one could rewrite the limit in the form of $\frac{f(x)}{\frac{1}{g(x)}}$ or $0^0$ as $e^{g(x)\ln f(x)}$, 
+others requires another technique:
+
+> **L'Hôpital's Rule:** let $s$ be one of $a, a^+, a^-, +\infty, -\infty$. Suppose $f,g$ are differentiable functions for which $\lim\limits_{x\to s}\frac{f'(x)}{g'(x)} = L$ exists.
+>
+> If $\lim\limits_{x\to s} f(x) = \lim\limits_{x\to s} g(x) = 0$ or if $\lim\limits_{x\to s}\|g(x)\| = \infty$, then $\lim\limits_{x\to s} \frac{f(x)}{g(x)} = L$
+
+To clarify, while there exists indeterminate forms not in rational forms such as $\infty - \infty$, to apply L'Hôpital's Rule, one must rewrite it into rational form (for $\infty-\infty$ case, you would 
+need to multiply by it's conjugate and rationalise it).
+
+i.e. indeterminate form $\xrightarrow{\text{rewrite}} \frac{0}{0}$ or $\frac{\infty}{\infty} \xrightarrow{\text{L'Hôpital}} L$
+
+**Example:** Find $\lim_{x\to 0}\frac{\tan(x)}{x}$
+
+Recall that $\lim\limits_{x\to 0} \tan(x) = \tan(0) = 0$ so we have $\lim\limits_{x\to 0}\frac{\tan(x)}{x} = \frac{0}{0}$ form
+
+As both functions are differentiable around 0 (and $x' = 1 \ne 0$), we can apply the L'Hôpital Rule: $\lim_{x\to 0}\frac{\tan(x)}{x} = \lim_{x\to 0}\frac{(\tan(x))'}{(x)' = \lim_{x\to 0}\frac{\sec^2(x)}{1}} = 1$
+
+**Example:** $\lim_{x\to 0^+} x\ln(x) = 0\cdot \infty$
+
+Recall that $\ln(x)$ and $\frac{1}{x}$ are differentiable around $0^+$ and that $(\frac{1}{x})' = (x^{-1})' = -x^{-2} = \frac{-1}{x^2}$ is non-zero for $x\to 0^+$
+
+So we can  try L'Hôpital's rule by rewriting it as a rational function:
+
+$$
+\begin{align*}
+\lim_{x\to 0^+} x\ln(x) &= \frac{\ln(x)}{\frac{1}{x}} \to \frac{-\infty}{\infty} \text{form so use L'Hôpital's Rule}\\
+&= \frac{(\ln(x))'}{(\frac{1}{x})'}\\
+&= \lim_{x\to 0^+} \frac{\frac{1}{x}}{(\frac{-1}{x^2})} \\
+&= \lim_{x\to 0^+} -x^2\cdot\frac{1}{x} \\
+&= \lim_{x\to 0^+} -x \\
+&= 0
+\end{align*}
+$$
+
+As stated earlier, one needs to ensure to rewrite the indeterminate form into a rational form such that it is in the form: $\frac{\infty}{\infty}$ or $\frac{0}{0}$. We have seen an example of rewriting 
+$0\cdot \infty$ but let's now look at rewritting $0^0$ using the fact $e^{\ln(y)} = y, y\gt 0$:
+
+**Example:** $\lim\limits_{x\to0^+} x^x
+
+$x^x$ can be rewritten as $e^{\ln (x^x)} = e^{x\ln (x)}$
+
+Since we know $e^x$ is a continuous function, and is differentiable everywhere. Thus we have:
+
+$$
+\begin{align*}
+\lim\limits_{x\to 0^+} x^x &= \lim\limits_{x\to 0^+} e^{\ln(x^x)} \\
+&= \lim\limits_{x\to 0^+} e^{x\ln(x)} \\
+&= e^{\lim\limits_{x\to 0^+} x\ln(x)} \\
+&= e^0, \qquad\text{as shown in the previous example}\\
+&= 1
+\end{align*}
+$$
+
+---
 
 ### Credits:
 * MATH1052 Notes from Charles Starling
 * Elementary Analysis: The Theory of Calculus by Kenneth A. Ross
+
+**Note:** I refer to this page as a commentary to the course or an accompanying to the course, these are not class notes. I the author of this page will omit many details and only present the 
+materials and proofs to things I find personally noteworthy and the proofs presented may differ from those listed in the textbook or from the course notes itself.
