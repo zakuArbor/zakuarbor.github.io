@@ -318,6 +318,14 @@ nav {
   grid-row: 1;
 }
 
+#cat-nav nav {
+  display: contents;
+}
+
+#cat-nav nav a {
+  width: fit-content;
+}
+
 #pikachu-header {
   position: relative;
   top: 1em;
@@ -817,6 +825,9 @@ details[open] {
 @media only screen and (max-width: 1000px) {
   nav a {
     display: block;
+  }
+  #cat-nav nav a {
+    margin-bottom: 5px;
   }
   .hamburger-nav {
     display: block;
