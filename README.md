@@ -4,3 +4,8 @@ jekyll serve
 <font color="#268BD2"><b>0e</b></font>  <font color="#268BD2"><b>1c</b></font>  <font color="#268BD2"><b>22</b></font>  <font color="#268BD2"><b>24</b></font>  <font color="#268BD2"><b>2e</b
 
 `git worktree add _site pages` 
+
+To add mirrors:
+```
+git remote set-url --add --push origin git@github.com:zakuArbor/zakuarbor.github.io.git
+```

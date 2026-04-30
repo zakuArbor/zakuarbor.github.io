@@ -19,7 +19,6 @@ pagination:
 
 <p>Random long thoughts I had over the years...</p>
 <p>Topics range from programming, math, to my views of school</p>
-
 <nav class="year-shortcuts">
   <strong>Jump to:</strong>
   {% for year in (2019..2026) reversed %}
@@ -27,11 +26,12 @@ pagination:
   {% endfor %}
 </nav>
 
+<div id = "cat-nav">
 <nav class="year-shortcuts">
 <strong>Jump to:</strong>
-<a href = "{{ site.baseurl }}/programming/">Programming</a> | <a href = "{{ site.baseurl }}/math">Math</a> | <a href ="{{ site.baseurl }}/misc">Misc</a>
+<a href = "{{ site.baseurl }}/programming/">Programming</a> <a href = "{{ site.baseurl }}/math">Math</a>  <a href ="{{ site.baseurl }}/misc">Misc</a>
 </nav>
-
+</div>
 
 <hr>
 

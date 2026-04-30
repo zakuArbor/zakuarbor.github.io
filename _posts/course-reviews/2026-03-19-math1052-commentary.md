@@ -2,7 +2,7 @@
 layout: review-math
 title: MATH1052 - A Commentary on Calculus and Introductory Analysis 1
 description: An accompany to MATH1052 Review
-categories: [university, math, carletonu]
+categories: [university, math, carletonu, reviews]
 permalink: blog/math1052-commentary
 ---
 
@@ -594,7 +594,7 @@ Before we learn this magical spell, we first need to define what it means for a 
 
 > A sequence $(s_n)$ is said to be:
 > * **INCREASING:** if $s_n \le s_{n+1} \forall n$
-> * **DECREASING:** if $s_n$ \geq s_{n+1} \forall n$
+> * **DECREASING:** if $s_n \geq s_{n+1} \forall n$
 
 Notice that the definitions does not imply the sequence is **strictly** increase nor **strictly** decreasing via the usage of $\le$ and $ge$ in lieu of $\lt$ and $gt$ in their definition. This implies 
 a straight constant line is both always increasing and always decreasing. Weird right? 
