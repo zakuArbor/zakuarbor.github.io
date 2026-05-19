@@ -10,6 +10,7 @@ A random blog discussing various topics in Computer Science and Programming that
 ## C/C++
 
 ---
+* [ByPassing Read-Only Memory and Why mseal() is needed]({{ site.baseurl }}/blog/mseal/)
 * [GDB - Mix Source Code with Assembly]({{ site.baseurl }}/blog/gdb-dissassemble-src/)
 * [The Value of An Uninitialized Global Variable]({{ site.baseurl }}/blog/global-init-val/)
 * [Possible Linker Options to Use to Replicate xlC bloadmap Option on ld]({{ site.baseurl }}/blog/bloadmap-gcc-alt/)
@@ -31,6 +32,7 @@ A random blog discussing various topics in Computer Science and Programming that
 * [Stack Overflow: The Case of a Small Stack]({{ site.baseurl }}/blog/small-stack/)
 * [this: the implicit parameter in OOP]({{ site.baseurl }}/blog/this-asm/)
 * [A Look Into Virtual Table via Assembly]({{ site.baseurl }}/blog/vtbl/)
+* [The Issue With Default in Switch Statements with Enums]({{ site.baseurl }}/blog/switch-default-enum/)
 
 ## Highlevel Overview of Topics
 
@@ -42,6 +44,7 @@ A random blog discussing various topics in Computer Science and Programming that
 * [Computer Science – A Long and Gargled Explanation]({{ site.baseurl }}/blog/computer-science-a-long-and-gargled-explanation/)
 * [A Quick Look Into Half-Width and Full-Width Characters]({{ site.baseurl }}/blog/halfwidth-fullwidth-encoding/)
 * [Verifying Email Signature Manually]({{ site.baseurl }}/blog/signature-verification/)
+* [A Collection of Comments from my OS Reading Group]({{ site.baseurl }}/blog/os-reading-group)
 
 ## Dev Blogs
 
@@ -77,6 +80,6 @@ A random blog discussing various topics in Computer Science and Programming that
 * [Shellbang Character limit]({{ site.baseurl }}/blog/shellbang-char-limit/)
 * [How to Check if an Application is PAM-Aware]({{ site.baseurl }}/blog/pam-aware/)
 * [An Uninteresting Glance At Strings]({{ site.baseurl }}/blog/string-asm/)
-
+* [When Did Programming/Coding Start to Click for You?]({{ site.baseurl }}/blog/when-it-click-programming/)
 
 

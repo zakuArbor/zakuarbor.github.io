@@ -2,7 +2,7 @@
 layout: post
 title: A Collection of Comments from my OS Reading Group 
 description: A collection of my comments I shared with an OS Reading Group
-categories: [programming, c/c++, os]
+categories: [programming, c/c++, os, mseal, threads]
 ---
 
 There is a large online [Software Internals Book Club](https://eatonphil.com/bookclub.html) that goes through books covering typically covering topics in databases, distributed systems, and software performance.
