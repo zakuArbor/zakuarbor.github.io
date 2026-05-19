@@ -112,6 +112,22 @@
 
   <div class="bits">
     <h1 class="title">
+      <a href="/blog/mseal/">ByPassing Read-Only Memory and Why mseal() is needed</a>
+    </h1>
+    <p class="date">May 19, 2026</p>
+    
+    <div class="post-excerpt">
+      As one may be familiar, the MMU (Memory Management Unit) enforces and supports memory protection such as marking a page to be READ-ONLY (RO). But it turns out there is an API mprotect() 
+that allows us to change the access protection of the calling process’s memory pages. Thus mprotect() could be used to mark pages marked for RO as writable or executable, an undesirable behavior for 
+any critical program as attackers could utilise this weakness to write custom payloads to either gain rootshell or bypass local checks.
+
+      <p><a href="/blog/mseal/">Read More...</a></p>
+    </div>
+  </div>
+  <hr class="bits-hr">
+
+  <div class="bits">
+    <h1 class="title">
       <a href="/blog/os-reading-group/">A Collection of Comments from my OS Reading Group</a>
     </h1>
     <p class="date">May  3, 2026</p>
@@ -246,21 +262,6 @@ belonging to some class:
 main. Yet the program still continued to crash.
 
       <p><a href="/blog/small-stack/">Read More...</a></p>
-    </div>
-  </div>
-  <hr class="bits-hr">
-
-  <div class="bits">
-    <h1 class="title">
-      <a href="/blog/alias-interactive/">Utilizing Aliases and Interactive Mode to Force Users to Think Twice Before Deleting Files</a>
-    </h1>
-    <p class="date">December 29, 2024</p>
-    
-    <div class="post-excerpt">
-      I previously mentioned in my microblog that I lost my file by accidentally overwriting my file using the cp command. This got me thinking as to why this would be impossible on 
-my work laptop since I would be constantly bombarded with a prompt to confirm my intention to overwrite the file.
-
-      <p><a href="/blog/alias-interactive/">Read More...</a></p>
     </div>
   </div>
   <hr class="bits-hr">

@@ -7,7 +7,8 @@ NC='\033[0m'
 
 echo -e "${BLUE}Starting Jekyll Build...${NC}"
 
-jekyll build --destination _site
+bundle install
+bundle exec jekyll build --destination _site
 
 if [ $? -ne 0 ]; then
     echo -e "${RED}❌ Jekyll build failed. Check your Gemfile.${NC}"

@@ -83,6 +83,31 @@
 
 <hr class = "bits-hr">
 <div class = "bits">
+  <h1 class = "title"><a href="/blog/mseal/">ByPassing Read-Only Memory and Why mseal() is needed</a></h1>
+<div>
+<p class = "date">May 19, 2026</p>
+<div class="tags">
+
+<a href="/categories/#programming">programming</a>
+&nbsp;
+
+<a href="/categories/#c/c++">c/c++</a>
+&nbsp;
+
+<a href="/categories/#mseal">mseal</a>
+&nbsp;
+
+<a href="/categories/#blog">blog</a>
+
+
+</div>
+As one may be familiar, the MMU (Memory Management Unit) enforces and supports memory protection such as marking a page to be READ-ONLY (RO). But it turns out there is an API mprotect() that allows us to change the access protection of the calling process’s memory pages. Thus mprotect() could be used to mark pages marked for RO as writable or executable, an undesirable behavior for any critical program as attackers could utilise this weakness to write custom payloads to either gain rootshell or bypass local checks. To prevent tampering of permission flags of the process’s pages by sealing it,...
+<p><a href="/blog/mseal/">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
   <h1 class = "title"><a href="/blog/os-reading-group/">A Collection of Comments from my OS Reading Group</a></h1>
 <div>
 <p class = "date">May  3, 2026</p>
