@@ -8,7 +8,7 @@ permalink: blog/math1052-commentary
 
 This is a commentary to an introductory course to calculus and analysis which I have a [course review](/blog/math1052) on if you are interested. The content presented below are from the fall of 
 2021 which may not reflect what is covered in your class today. Furthermore, the information presented will have the author's own commentary and is **NOT** and should **NOT** be a replacement to attending class. 
-The author simply wishes to review the cotent of the course mixed with their own speculations, views, and emotions as it reflects on the course 5 years later in preparation to their eventual return to 
+The author simply wishes to review the content of the course mixed with their own speculations, views, and emotions as it reflects on the course 5 years later in preparation to their eventual return to 
 school after a 2 year break from Mathematics. The author is in need of a refresher of Mathematics as it has forgotten all of its Mathematical knowledge after departing from its studies to do random 
 things in life (i.e. work) and will definitely be unable to keep up in their final year of studies at the rate its going at. Expect further commentaries and course reviews/commentary to come in the following 
 months for courses not yet covered or lacked depth as the author is in the process of reviewing Mathematics while keeping up with their day job and studies in French and in parallel computing on the side.
@@ -30,7 +30,7 @@ a student of Mathematics. Yes this does imply that the author has taken calculus
 Calculus for engineers at Carleton University is very rushed but does not skimp on the knowledge and techniques required for their discipline. In this sense, the author is amazed in the speed of which the 
 freshman engineering student have to learn. While they may skimp on some minor details and omit certain topics such as taylor series, they cover two separate calculus course in just under 4 months, or 
 more accurately within 3 months since the last month is exam season. In this, I applaud those who have succeeded in the course and truly drilled the various integration and differentiation 
-techniques covered in the course. MATH1052 on the other hand will seem very foreign to even those who have taken freshman calculus as will see why soon.
+techniques covered in the course. MATH1052 on the other hand will seem very foreign to even those who have taken freshman calculus as we will see why soon.
 
 MATH1052 starts with defining all the axioms that exists in the field over the real numbers. A field essentially is a set of properties that the additive (+) and multiplicative (x) must respect 
 over some set such as the reals denoted as $\mathbb{R}$. Your average joe will take all of the axioms for granted but as aspiring Mathematicians, one must never take things for granted or at least 
