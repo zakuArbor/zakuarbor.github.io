@@ -1388,7 +1388,7 @@ two points is equal to a instantaneous rate of change between the two points:
 
 > **Mean Value Theorem (MVT):** let $f$ be continuous on $[a, b]$ and differentiable on $(a,b)$ then there exists $x\in(a,b)$ with $f'(x) = \frac{f(b)-f(a)}{b-a}$
 
-![](http://web.archive.org/web/20260304003626if_/https://tutorial.math.lamar.edu/Classes/CalcI/MeanValueTheorem_Files/image001.png)
+![](https://tutorial.math.lamar.edu/Classes/CalcI/MeanValueTheorem_Files/image001.png)
 <p class = "caption">Illustration of MVT extracted from <a href = "https://tutorial.math.lamar.edu/classes/calci/MeanValueTheorem.aspx">Paul's Math Notes</a></p>
 
 While seemingly inconsequential, the consequences of MVT are interesting. For instance, if $\forall x\in\mathbb{R}, f'(x) = 0$ then $f$ is a constant line. But more interestingly is when two functions 
@@ -1469,7 +1469,7 @@ $$
 As stated earlier, one needs to ensure to rewrite the indeterminate form into a rational form such that it is in the form: $\frac{\infty}{\infty}$ or $\frac{0}{0}$. We have seen an example of rewriting 
 $0\cdot \infty$ but let's now look at rewritting $0^0$ using the fact $e^{\ln(y)} = y, y\gt 0$:
 
-**Example:** $\lim\limits_{x\to0^+} x^x
+**Example:** $\lim\limits\_{x\to 0^+} x^x$
 
 $x^x$ can be rewritten as $e^{\ln (x^x)} = e^{x\ln (x)}$
 
