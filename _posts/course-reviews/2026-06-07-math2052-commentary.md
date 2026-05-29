@@ -601,6 +601,399 @@ $$
 
 **Trigonometric Substitution:**
 
+Consider the following integration: $\int \frac{1}{\sqrt{4-x^2}}dx$. One's first instinct may be to utilise substitution or integration by parts. However this will likely end poorly. It turns out this 
+class of problems requires trigonometric substitution. Whenever one sees the following expressions in the following form, it is best to consider trigonmetric substitution first:
+* $\sqrt{a^2-x^2}$
+* $\sqrt{a^2+x^2}$
+* $\sqrt{x^2-a^2}$
+
+The key to knowing what trig to substitute x for lies in the identities which are convienently layed out below:
+
+> **Trigonometric Substitution:**
+>
+> |form|substitution|identity used|
+> |-|-|-|
+> |$\sqrt{a^2-x^2}$|$x=a\sin\theta$|$1-\sin^2\theta = \cos^2\theta$|
+> |$\sqrt{a^2+x^2}$|$x=a\tan\theta$|$1+\tan^2\theta = \sec^2\theta$|
+> |$\sqrt{x^2-a^2}$|$x=a\sec\theta$|$\sec^2\theta-1=\tan^2\theta$|
+
+
+Let's see how this works in practice by looking at the motivating example: $\int\frac{1}{\sqrt{4-x^2}}dx$
+
+**Step 1:** Identify the form and choose a substitution
+
+The expression $\sqrt{4-x^2}$ fits the form $\sqrt{a^2-x^2}$ where $a = 2$. 
+
+By the table above, use $x = 2\sin\theta$
+
+**Step 2:** Compute the derivative and simplify the square root
+
+From $x = 2\sin\theta$:
+$$
+\begin{align*}
+x &= 2\sin\theta \\
+\frac{dx}{d\theta} &= 2\cos\theta \\
+dx &= \boxed{2\cos\theta d\theta}
+\end{align*}
+$$
+
+Simplify $\sqrt{4-x^2}$:
+
+$$
+\begin{align*}
+\sqrt{2^2-x^2} &= \sqrt{2^2 - (2\sin\theta)^2} \\
+&= \sqrt{4 - 4\sin\theta^2} \\
+&= \sqrt{4(1 - \sin\theta^2)} \\
+&= \sqrt{4}\sqrt{1 - \sin\theta^2} \\
+&= 2\sqrt{\cos^2\theta} \\
+&= 2|\cos\theta|
+\end{align*}
+$$
+
+Let's restrict $\theta \in [\frac{-\pi}{2},\frac{\pi}{2}]$ so $\cos\theta \geq 0$. Thus $\|\cos\theta\| = \cos\theta$.
+
+**Step 3:** Substitute into the integral
+
+$$
+\begin{align*}
+\int\frac{1}{\sqrt{4-x^2}}dx &= \int\frac{1}{2\cos\theta}dx \\
+&= \int \frac{1}{\bcancel{2\cos\theta}} (\bcancel{2\cos\theta} d\theta) \\
+&= \int d\theta \\
+&= \theta + C
+\end{align*}
+$$
+
+**Step 4:** Substitute $x$ back
+
+Recall that $x = 2\sin\theta$,
+
+$$
+\begin{align*}
+x &= 2\sin\theta \\
+\frac{x}{2} &= \sin\theta \\
+\theta &= \arcsin(\frac{x}{2}) + C
+\end{align*}
+$$
+
+
+Thus, $\int\frac{1}{\sqrt{1-x^2}}dx = \theta = \arcsin(\frac{x}{2})$
+
+**Check:**
+
+$$
+\begin{align*}
+(\arcsin(\frac{x}{2}))' &= \frac{1}{\sqrt{1-(\frac{x}{2})^2}}\left(\frac{x}{2}\right)' \\
+&= \frac{1}{\sqrt{1-\frac{x^2}{4}}}\left(\frac{1}{2}\right) \\
+&= \frac{1}{2\sqrt{1-\frac{x^2}{4}}} \\
+&= \frac{1}{\sqrt{4}\sqrt{1-\frac{x^2}{4}}} \\
+&= \frac{1}{\sqrt{4(1-\frac{x^2}{4}})} \\
+&= \boxed{\frac{1}{\sqrt{4-x^2}}}
+\end{align*}
+$$
+
+Hopefully, this motivating example gave you a glimpse of the power of trig substitution. There are many more interesting questions that one could solve that requires one to recall special triangles 
+and the SOH CAH TOA rule to convert trig functions in respect to $\theta$ back to $x$ but will be a story for another time. But as an exercise, derive the area of a circle of radius r, you should 
+get $\pi r^2$. 
+
+**Partial Fractions:**
+
+Another class of rational functions that can be integrated utilises a technique called partial fractions but this only works (from my memory) with rational functions whose numerator and denominators 
+are polynomials. The reason is quite simple, this technique relies on decomposing rational functions into smaller pieces.
+
+> **Decomposition:** for a rational function $\frac{p(x)}{q(x)}, it can always be decomposed into smaller pieces, each of which can be integrated
+>
+> **Example:** $\frac{1}{x^2-1} = \frac{\frac{1}{2}}{x-1} - \frac{\frac{1}{2}}{x+1}$
+
+A condition for partial fractions in general is that deg$(p(x)) \lt $deg$q(x)$. If deg$(p(x)) \geq $deg$q(x)$, use polynomimal long divisionto separate the polynomial part from the remainer:
+
+$$\frac{p(x)}{q(x)} = Q(x) + \frac{r(x)}{q(x)}\nonumber$$
+
+Then apply partial fractions to $\frac{r(x)}{q(x)}$, where now deg$(r) \lt $deg$(q)$.
+
+The form of the partial fraction decomposition depends on the type of factors in the denominator:
+
+* **Case 1:** Distinct Linear Factors
+
+  After factoring, if the denominators have distinct roots then we have each term in the form: $\frac{A}{ax+b}$
+
+* **Case 2:** Repeated Linear Roots
+  
+  After factoring, if the denominator has repeated roots (i.e. $(ax+b)^n$), then we need to create a term for each and every power up to $n$:
+
+  $$
+  \begin{align*}
+  \frac{A_1}{ax+b} + \frac{A_2}{(ax+b)^2} + \frac{A_3}{(ax+b)^3} + \cdots + \frac{A_n}{(ax+b)^n}
+  \end{align*}
+  $$
+
+* **Case 3:** Distinct Irreducible Quadratic Factors
+  
+  Not all quadratics are reducible using real numbers and thus remain in the form: $ax^2+bx+c$. Then the term will have a corresponding partial fraction term: $\frac{Ax+B}{ax^2+bx+c}$
+
+* **Case 4:** Repeated Quadratic Factors
+
+  Similar to case 2, if you notice irredicuble quadratic terms in the denominator of our rational functions, we need to build up the terms repeatedly with higher powers:
+
+  $$
+  \begin{align*}
+  \frac{A_1x+B_1}{ax^2+bx+c} + \frac{A_2x+B_2}{(ax^2+bx+c)^2} + \frac{A_3x+B_3}{(ax^2+bx+c)^3} + \cdots + \frac{A_nx+B_n}{(ax^2+bx+c)^n}
+  \end{align*}
+  $$
+
+The constant terms $A_i, B_i$ are determine using linear algebra. Let's go through a simple example:
+
+$\int \frac{1}{4x^2-1}dx$
+
+Immediately you should notice that this is in the form $a^2-b^2$ thus we can utilise what we saw in Highschool (differences in squares): $a^2-b^2 = (a+b)(a-b)$: $4x^2-1 = 4x^2 - 1^2 = (2x+1)(2x-1)$
+
+Based on our general rule, we have two distinct roots and thus each term corresponds to a linear root: $\frac{A}{ax+b}$. 
+Thus we reduced the rational function into the following parts:
+
+$$
+\begin{align*}
+\int \frac{1}{4x^2-1}dx &= \int \frac{1}{(2x+1)(2x-1)} \\
+&= \int \frac{A}{2x+1} dx + \int \frac{B}{2x-1}dx \\
+&= \int \frac{A(2x-1) + B(2x+1)}{(2x+1)(2x-1)} \\
+&= \int \frac{2x(A+B) + (B-A)}{(2x+1)(2x-1)}
+\end{align*}
+$$
+
+From here, we are left with two unknowns: $A, B$:
+
+
+The idea is to group each order as its own term such that we can solve the coefficients since the functions $\{1, x, x^2, x^3, \dots}$ are linearly independent in the vectorspace for $x\in\mathbb{R}$
+
+$$
+\begin{align*}
+1 &= 2x(A+B) + (B-A) \\
+0x + 1 &= 2x(A+B) + (B-A) 
+\end{align*}
+$$
+
+Thus we have:
+
+* 1:  $1 = B-A \implies B = 1 + A$
+* $x$: $0 = A+B$
+
+    $$
+    \begin{align*}
+    0  &= A+B\\
+    A &= -B \\
+    &= -(1+A) \\
+    A &= -1 -A \\
+    2A &= -1 \\
+    A &= \boxed{\frac{-1}{2}}
+    \end{align*}
+    $$
+
+Plugging $\boxed{A = \frac{-1}{2}}$ into $B = 1 + A$, we have $\boxed{B = \frac{1}{2}}$
+
+Or alternatively, we could try to utilise nice numbers such as 0 or the roots to the equation to cancel out some terms to retrieve $A$ and $B$ more quickly:
+
+Consider: $1 = A(2x-1) + B(2x+1)$
+
+* if $x = \frac{1}{2}$:
+  $$
+  \begin{align*}
+  1 &= A(0) + B(2)
+  B &= \frac{1}{2}
+  \end{align*}
+  $$
+* if $x = \frac{-1}{2}$:
+  $$
+  \begin{align*}
+  1 &= A(-2) + B(0)
+  A &= \frac{-1}{2}
+  \end{align*}
+  $$
+
+By choosing the roots, we remove one term at a time, isolating each constant. This is faster than expanding and comparing coefficients. Plugging in nice numbers such as $x = 0$ at times is sufficient as well.
+
+Therefore, the integral is now:
+
+$$
+\begin{align*}
+\int \frac{1}{4x^2-1}dx &= \frac{-1}{2} \int \frac{1}{(2x+1)} dx + \frac{1}{2}\int \frac{1}{2x-1}dx
+\end{align*}
+$$
+
+A much more manageable smaller pieces of integrals that can now be solved:
+
+$$
+\begin{align*}
+\int \frac{1}{4x^2-1}dx &= \frac{-1}{2} \int \frac{1}{(2x+1)} dx + \frac{1}{2}\int \frac{1}{2x-1}dx \\
+&= \left(\frac{-1}{2}\right)\left(\frac{1}{2}\right)\ln|2x+1| + \frac{1}{2}\left(\frac{1}{2}\right) \ln|2x-1| \\
+&= \frac{1}{4}\ln|2x-1| - \frac{1}{4}\ln|2x+1| \\
+&= \boxed{\frac{1}{4}\ln\left|\frac{2x-1}{2x+1}\right| + C}
+\end{align*}
+$$
+
+**Check:**
+
+$$
+\begin{align*}
+\left(\frac{1}{4}\ln|2x-1| - \frac{1}{4}\ln|2x+1|\right) + C &= \left(\frac{1}{4}\right)\left(\frac{1}{2x-1}\right)(2x-1)' - \left(\frac{1}{4}\right)\left(\frac{1}{2x+1}\right)(2x+1)' \\
+&= \frac{1}{2}\left[\frac{1}{2x-1} - \frac{1}{2x+1}\right] \\
+&= \frac{1}{2}\left[\frac{2x+1 - (2x-1)}{(2x+1)(2x-1)}\right] \\
+&= \frac{1}{2}\left[\frac{2x + 1 - 2x + 1}{(2x+1)(2x-1)}\right] \\
+&= \frac{1}{\bcancel{2}}\left[\frac{\bcancel{2}}{4x^2-1}\right] \\
+&= \boxed{\frac{1}{4x^2 - 1}}
+\end{align*}
+$$
+
+
+**Improper Integrals:**
+
+Thus far, we have studied integral of functions over closed, bounded intervals $[a,b]$. Even our integrability conditions required bounded domains. 
+But there is another class of integrals called the **IMPROPER INTEGRALS**, where either:
+
+* the domain extends to infinity OR
+* the function has a discontinuity at an end point
+
+$$
+\int_1^\infty \frac{1}{x^2}dx \nonumber
+$$
+
+![The area of a curve 1/x^2 from x >= 1]({{site.baseurl}}/assets/math-physics/courses/math2052/rational-x^2-1.png)
+<p class = "caption">The area under the curve of $\frac{1}{x^2} from $x\geq 1$</p>
+
+The remarkable result is that even though the domain is unbounded, the area is finite (equals to 1).
+
+> **Improper Integrals:** Without loss of generality, consider $[a, b)$, where $b$ is finite or $\infty$. Let $f$ be defined on $[a,b)$ and integrable on each $[a,d]$ for $a \lt d \lt b$.
+>
+> We define $\int_a^b f(x)dx = \lim\limits_{d\to b^{-}}\int_a^d f(x)dx$, provided the limit exists
+
+Consider the example: $\int_1^\infty \frac{1}{x^2}dx$:
+
+$$
+\begin{align*}
+\int_1^\infty \frac{1}{x^2}dx &= \lim\limits_{d\to\infty} \int_1^d \frac{1}{x^2}dx \\
+&= \lim\limits_{d\to\infty} \left(\frac{x^{-1}}{-1}\bigg|_1^d\right) \\
+&= \lim\limits_{d\to\infty} \left( \frac{-1}{d} - \left(-\frac{1}{1}\right) \right) \\
+&= \lim\limits_{d\to\infty} \left(1 + \frac{-1}{d}\right) \\
+&= 1
+\end{align*}
+$$
+
+Let's consider the region between $(0, 1]$. Intuitively, since the interval length is only 1 compared to $[1, \infty)$ which has infinite length, surely the area should be finite, right?
+
+Wrong! It turns out that $\int_0^1 \frac{1}{x^2}dx$ diverges (or converges to $\infty$), despite the bounded domain.
+
+As $0\notin dom(f)$, the integral is improper:
+
+$$
+\begin{align*}
+\int_0^1 \frac{1}{x^2} &= \lim\limits_{d\to 0^+} \int_d^1 \frac{1}{x^2}dx \\
+&= \lim\limits_{d\to 0^+} \left(\frac{x^{-1}}{-1}\bigg|_d^1\right) \\
+&= \lim\limits_{d\to 0^+} \left( \frac{-1}{1} - \left(-\frac{1}{d}\right) \right) \\
+&= \lim\limits_{d\to 0^+} \left(\frac{1}{d} - 1\right) \\
+&= \infty
+\end{align*}
+$$
+
+We can generalise this behavior by solving $\int_1^\infty \frac{1}{x^p}$ and $\int_0^1 \frac{1}{x^p}$.
+
+$$
+\begin{align*}
+\int_0^1 = \begin{cases} 
+      \infty & p \geq 1 \\
+      \frac{1}{1-p} & p \lt 1
+\end{cases}
+\end{align*}
+$$
+
+and
+
+$$
+\begin{align*}
+\int_1^\infty = \begin{cases}
+      \frac{1}{p-1} & p \gt 1 \\
+      \infty & p \leq 1
+\end{cases}
+\end{align*}
+$$
+
+> | Integral | p < 1 | p = 1 | p > 1 |
+> |----------|-------|-------|-------|
+> | $\int_0^1 \frac{1}{x^p} dx$ |  Converges |  Diverges |  Diverges |
+> | $\int_1^\infty \frac{1}{x^p}dx$ |  Diverges |  Diverges |  Converges |
+
+What we can conclude from the past few examples is that the size of the domain does not matter, but rather its the behaviour of the function within the interval that matters. 
+An obvious result but sometimes taken forgranted.
+
+Recall in the previous [course](../math1052-commentary), we explore the $p$-test which stated:
+
+> **P-Series:** $\sum \frac{1}{n^p}$ converges if $p \gt 1$ and diverges if $p\leq 1$
+
+$\int_1^\infty \frac{1}{x^p}dx$ and $\sum\limits_{n=1}^\infty \frac{1}{n^p}$ both diverge when $p \leq 1$. Is there a pattern between the two? Turns out yes and it's called the integral test:
+
+> **Integral Test for Infinite Series:** let $N\in\mathbb{Z}$ and suppose $f(x)$ is continuous, decreasing and non-negative on $[N, \infty]$ then $\sum\limits_{n=N}^\infty f(x)$ converges/diverges $\iff$ $\int_N^\infty f(x)dx$ converges/diverges respectively
+
+It can be difficult to determine whether an infinite series converge or diverge, so the Integral test will be a handy tool.
+
+If an integral is improper at both endpoints, one must split it up into 2 separate improper integrals and evaluate each integral separately. 
+
+> **Improper Integrals (Improper at Both Ends):** If $\int_a^b f(x)dx$ is improper at both ends, then by definition $\int_a^b f(x)dx = \int_a^c f(x)dx + \int_c^b f(x) dx$, where $c\in(a,b)$ and $f$ is defined at $c$.
+>
+> If one of the two improper integrals evaluates to $\infty$ and the other is $-\infty$, then the integral is undefined
+
+For instance, consider the following example:
+
+![Area of 1/(1+x^2)]({{site.baseurl}}/assets/math-physics/courses/math2052/rational-improper-both-endpoints.png)
+<p class = "caption">Area of $\frac{1}{1+x^2}$</p>
+
+$$
+\begin{align*}
+\int_{-\infty}^\infty \frac{1}{x^2+1}dx
+\end{align*}
+$$
+
+The two endpoints are improper and thus are broken into two pieces:
+
+1. $\int_{-\infty}^0 \frac{1}{x^2+1}dx$
+2. $\int_0^\infty \frac{1}{x^2+1}dx$
+
+**Important:** Both pieces must converge for the original integral to converge. If even one diverges, the entire integral diverges.
+
+The problem will be left as an exercise to the readers.
+
+A common mistake is to compute an improper integral that is improper at both endpoints as one:
+
+$$
+\begin{align*}
+\int_{-\infty}^\infty x dx &= \lim\limits_{d\to\infty}\int_{-d}^d xdx \\
+&= \lim\limits_{d\to\infty} \left(\frac{x^2}{2}\bigg|_{-d}^d\right) \\
+&= \lim\limits_{d\to\infty} \frac{d^2}{2} - \left(\frac{(-d)^2}{2}\right) \\
+&= 0 \quad\text{ THIS IS WRONG}
+\end{align*}
+$$
+
+By symmetry, this seems fine. But it is **invalid** because the integral is improper at both endpoints and thus must be split. We will soon see that the integral is in fact undefined:
+
+Left Piece:
+
+$$
+\begin{align*}
+\int_{-\infty}^0 x dx &= \lim\limits_{d\to\infty}\int_{-d}^0 xdx \\
+&= \lim\limits_{d\to\infty} \frac{x^2}{2}\bigg|_d^0 \\
+&= \lim\limits_{d\to\infty} \left(\frac{0^2}{2} - \frac{d^2}{2}\right) \\
+&= 0 - \infty \\
+&= -\infty
+\end{align*}
+$$
+
+Right Piece:
+
+$$
+\begin{align*}
+\int_{0}^\infty x dx &= \lim\limits_{d\to\infty}\int_{0}^\infty xdx \\
+&= \lim\limits_{d\to\infty} \frac{x^2}{2}\bigg|_0^\infty \\
+&= \lim\limits_{d\to\infty} \left(\frac{d^2}{2} - \frac{0^2}{2}\right) \\
+&= \infty \\
+\end{align*}
+$$
+
+As one diverges to $-\infty$ while the other to $\infty$, we cannot treat the two as equal opposites and thus they do not cancel each other.
 
 ---
 
