@@ -1,6 +1,6 @@
 ---
 layout: review-math
-title: MATH2052 - A Commentary on Calculus and Introductory Analysis 1
+title: MATH2052 - A Commentary on Calculus and Introductory Analysis 2
 description: An accompany to MATH2052 Review
 categories: [university, math, carletonu, reviews]
 permalink: blog/math2052-commentary
@@ -118,7 +118,7 @@ $$
 Similar idea to show $m(f, [a,b])(b-a) \leq L(f,P) \leq U(f,P)$
 
 Since $m(f,[t_{k-1},t_k]) \leq M(f, [t_{k-1}, t_k])$ (since $\inf \leq \sup$ by definition), we have $L(f,P) \leq U(f,P)$ for any single Partition P. (
-Note: it is not immediately clear whether L(f,P_1) \leq U(f.P_2)$ for **different** partitions $P_1,P_2$, a question we will address shortly.)
+Note: it is not immediately clear whether $L(f,P_1) \leq U(f.P_2)$ for **different** partitions $P_1,P_2$, a question we will address shortly.)
 
 ![Hand-written Illustration of L(f) and U(f)]({{site.baseurl}}/assets/math-physics/courses/math2052/darboux-sums-under-over.png){: width="750" }
 
@@ -204,7 +204,7 @@ One can use the following characterisation to determine if a function is integra
 As one may recall from the [previous course](../math1052-commentary): For any $\epsilon > 0$, if the difference between two values is less than every positive $\epsilon$ then the difference must be 0.
 
 $$
-\text{for any two real numbers} x, x_o, \text{ if } |x-x_o| \lt \epsilon, \forall \epsilon \gt 0 \nonumber \\
+\text{for any two real numbers } x, x_o, \text{ if } |x-x_o| \lt \epsilon, \forall \epsilon \gt 0 \nonumber \\
 \text{then }x = x_o
 $$
 
@@ -265,7 +265,7 @@ Now we have covered enough to discuss the one of the biggest theorem in calculus
 the fundamental theorem of calculus connects differentiation covered in the previous course with integration to show they are roughly inverses of each other. In addition, it also teaches us how to 
 compute the integral of a function much more efficiently (at least by hand).
 
-> **Theorem (Fundamental Theorem of Calculus 1):** if $f$ is continuous on $[a,b]$ and differentiable on $(a,b)$ and if $f'$ is integrable on $[a,b]$,
+> **Theorem 5 (Fundamental Theorem of Calculus 1):** if $f$ is continuous on $[a,b]$ and differentiable on $(a,b)$ and if $f'$ is integrable on $[a,b]$,
 > then $\underbrace{\int_a^b f'(x)dx}\_{\text{sum of infinitesimal changes}} = \underbrace{f(b)-f(a)}\_{\text{total change}}$
 
 The first part of the theorem tells us that integrating a derivative gives us the original function's change. Recall that the derivative $f'(x)$ tells us the rate of change of the function $f$ at 
@@ -301,8 +301,8 @@ $$
 
 While FTC 1 lets us compute definite integrals using antiderivatives, FTC 2 guarantees that the antiderivatives exist. 
 
-> **Theorem (Fundamental Theorem of Calculus 2):** let $f$ be integrable on $[a,b]$ and let $F(x) = \int_a^x f(t)dt$. Then $F$ is continuous on $[a,b]$. Moreover, 
-> if $f$ is continuous at $x_o\in(a,b)$ then $F$ is differentiable at $x_o$, thus $F'(x_o) = f(x_o).
+> **Theorem 6 (Fundamental Theorem of Calculus 2):** let $f$ be integrable on $[a,b]$ and let $F(x) = \int_a^x f(t)dt$. Then $F$ is continuous on $[a,b]$. Moreover, 
+> if $f$ is continuous at $x_o\in(a,b)$ then $F$ is differentiable at $x_o$, thus $F'(x_o) = f(x_o)$.
 >
 > This is a complicated way of saying the derivative undoes the integration: $\frac{d}{dx}\int f(x)dx = f(x)$
 
@@ -997,7 +997,436 @@ As one diverges to $-\infty$ while the other to $\infty$, we cannot treat the tw
 
 ---
 
-SEQUENCES AND SERIES
+<a name = "power">
+## Power Series
+
+Have you ever wondered how a calculator computes transcendentals such as $\sin x$ or $e^x$? The secret lies in **power series**, infinite sums of terms 
+that represent these functions accurately. Think of a power series as a polynomial with infinitely many terms. For instance, consider 
+$e^x$, it can be represented as the following:
+
+$$
+\begin{align*}
+e^x = 1 + x + \frac{x^2}{2} + \frac{x^3}{6} + \frac{x^4}{24} + \cdots = \sum\limits_{n=0}^\infty \frac{x^n}{n!}
+\end{align*}
+$$
+
+Evidentally, calculators must give an answer and thus cannot sum an infinite amount of terms. Therefore, it is important for us to know how many terms 
+are enough to sufficiently give us an answer that is precise to our needs. This approximation is a subject that is also explored in this course.
+
+> **Power Series:** let $(a_n)\_{n=0}^\infty$ be a sequence. The series $\sum\limits_{n=0}^\infty a_n x^n$ is called a **power series** (centered at 0) with coefficients $(a_n)^\infty_{n=0}$
+
+In the previous course, we studied series convergence:
+
+$$
+\sum_{n=0}^{\infty} a_n \nonumber
+$$
+
+And utilised tests (p-test, ratio test, comparison test, etc.) to answer whether the series converge or diverge. With power series, we face a new question:
+
+$$
+\sum_{n=0}^{\infty} a_n x^n \nonumber
+$$
+
+For which values of $x$ does this series converge? The questions and answers we seek is no longer simply whether a series converge but also to determine 
+the interval of x-values where converge occurs (called the radius of convergence). In power series, convergence is dependent on $x$, for instance:
+
+$$
+\begin{align*}
+\sum\limits_{n=0}^\infty n^n x^n
+\end{align*}
+$$
+
+By ratio test:
+
+$$
+\begin{align*}
+\lim\limits_{n\to\infty} |n^n x^n|^\frac{1}{n} = \lim_{n \to \infty} n|x| = \begin{cases}
+    \infty & x \neq 0 \\
+    0 & x = 0
+\end{cases}
+\end{align*}
+$$
+
+This power series converges only when $x = 0$. This is consistent to a fact about power series, they always converge when $x = 0$ unsurprisingly.
+
+> **Fact 1:** every power series coverges at $x = 0$ as $0^0 = 1$
+
+Consider another example: $\sum\limits_{n=0}^\infty x^n$. By geometric series where $x = r$, we have $\sum\limits\_{n=0}^\infty x^n = \sum\limits\_{n=0}^\infty \frac{1}{1-x}$ which converges when $\|x\| \lt 1$.
+
+Thus, in this example, we have the power series converge when $x \lt 1$, a larger interval compare to the previous example which converged only at one point.
+
+Now consider the last example: $e^x = \sum\limits_{n=0}^\infty \frac{x^n}{n!}$. This is a power series with $a_n = \frac{1}{n!}$. By fixing $x$ and applying the ratio test, we have the following:
+
+$$
+\begin{align*}
+\lim\limits_{n\to\infty} \bigg|\frac{\frac{1}{(n+1)!} x^{n+1}}{\frac{1}{n!} x^n}\bigg| &=  \lim\limits_{n\to\infty} \bigg| \bcancel{\left(\frac{n!x^n}{n!x^n}\right)} \frac{x}{(n+1)}\bigg|\\
+&= \lim\limits_{n\to\infty} \frac{|x|}{n+1} \\
+&= |x| \lim\limits_{n\to\infty} \frac{1}{n+1} \\
+&= 0 \lt 1
+\end{align*}
+$$
+
+So by ratio test, $\sum\limits_{n=0}^\infty \frac{x^n}{n!}$ converges and since $x$ was arbitrary, it converges $\forall x\in\mathbb{R}$
+
+The last 3 examples illustrates 3 possibilities for a power series $\sum a_nx^n$, it can either:
+1. converge only at $x = 0 \implies R = 0$
+2. converges for all $x$ in a bounded interval certered at 0
+3. converges $\forall x\in\mathbb{R} \implies R = \infty$
+
+> **Theorem 7 (Radius of Convergence):** For the power series $\sum\limits\_{n=0}^\infty a_n x^n$, let $R = \lim\limits_{n\to\infty} \bigg\| \frac{a_n}{a_{n+1}} \bigg\|$
+>
+> Then $\sum\limits\_{n=0}^\infty a_n x^n$ converges absoutely for $\|x\| \lt R$ and diverges for $\|x\| \gt R$
+>
+> where $R$ is called the **radius of convergence** of $\sum\limits\_{n=0}^\infty a_n x^n$
+
+**Note:** Endpoints to be checked separately
+
+**Example:** Find radius of convergence of $\sum\limits\_{n=1}^\infty \frac{x^n}{n}$
+
+$\sum\limits\_{n=1}^\infty \frac{x^n}{n} = \sum\limits\_{n=1}^\infty a_nx^n$, where $a_n=\frac{1}{n}$
+
+$$
+\lim\limits_{n\to\infty} \bigg|\frac{a_n}{a_{n+1}}\bigg| = \lim\limits_{n\to\infty} \bigg|\frac{\frac{1}{n}}{\frac{1}{n+1}}\bigg| = \lim\limits_{n\to\infty} \bigg|\frac{n+1}{n}\bigg| = 1 \nonumber
+$$
+
+Since this limit exists, $R = 1$. Hence, $\sum\limits\_{n=1}^\infty \frac{x^n}{n}$ converges $\forall x$ with $\|x\| \lt 1$ i.e. $\forall x\in(-1,1)$
+
+We need to check the endpoints separately since it may converge over there as well.
+
+For $x = -1$:
+
+$$
+\sum\limits_{n=1}^\infty \frac{x^n}{n} = \sum\limits_{n=1}^\infty \frac{(-1)^n}{n}\nonumber
+$$
+
+This converges by the alternating series test.
+
+For $x = 1$:
+
+$$
+\sum\limits_{n=1}^\infty \frac{x^n}{n} = \sum\limits_{n=1}^\infty \frac{1^n}{n}\nonumber
+$$
+
+Recall this is a harmonic series and thus diverges
+
+Thus, $\sum\limits\_{n=1}^\infty \frac{x^n}{n}$ converges for $x\in[1, 1)$.
+
+Note that the radius of convergence is still 1, but we call $[1,1)$ the **interval of convergence** which could be larger than your radius of convergence itself.
+
+> **Center of Power Series:** Power series can be centered at values other than 0. For a power series centered at $x = x_o$, it is represented as $\sum\limits\_{n=0}^\infty a_n(x-x_o)^n$
+>
+> The power series converges on $\|x-x_o\|\lt R$ and diverges on $\|x-x_o\| \gt R$. Again, the endpoints needs to be checked separately.
+
+**Example:** Find the interval of convergence of $\sum\limits\_{n=0}^\infty \frac{5^n}{n}(x-2)^n$
+
+1. Find the radius of convergence:
+    $a_n = \frac{5^n}{n}$ so:
+
+    $$
+    \begin{align*}
+    \lim\limits_{n\to\infty} \bigg|\frac{a_n}{a_{n+1}}\bigg| &= \lim\limits_{n\to\infty}\bigg|\frac{\frac{5^n}{n}}{\frac{5^{n+1}}{n+1}} \\
+    &= \lim\limits_{n\to\infty} \left( \frac{5^n}{n} \right)\left(\frac{n+1}{5^{n+1}}\right) \\
+    &= \frac{1}{5}\lim\limits_{n\to\infty} \frac{n+1}{n} \\
+    &= \frac{1}{5}
+    \end{align*}
+    $$
+    
+    Thus $\boxed{R = \frac{1}{5}}$ and $x\in(x_o - R, x_o + R) = (2 - \frac{1}{5}, 2 + \frac{1}{5}) = (\frac{9}{5}, \frac{11}{5})$
+    
+2. Check endpoints:
+    For $x = \frac{9}{5}$:
+
+    $$
+    \begin{align*}
+    \sum\limits_{n=1}^\infty\frac{5^n}{n}\left(\frac{9}{5} - 2\right)^n &= \sum\limits_{n=1}^\infty\frac{5^n}{n}\left(\frac{-1}{5}\right)^n \\
+    &= \sum\limits_{n=1}^\infty\frac{5^n}{n}\left(\frac{(-1)^n}{5^n}\right) \\
+    &= \sum\limits_{n=1}^\infty\frac{\bcancel{5^n}}{n}\left(\frac{(-1)^n}{\bcancel{5^n}}\right) \\
+    &= \sum\limits_{n=1}^\infty \frac{(-1)^n)}{n}
+    \end{align*}
+    $$
+
+    By the alternating test, the series converges
+
+    For $x = \frac{11}{5}$:
+
+    $$
+    \begin{align*}
+    \sum\limits_{n=1}^\infty\frac{5^n}{n}\left(\frac{11}{5} - 2\right)^n &= \sum\limits_{n=1}^\infty\frac{5^n}{n}\left(\frac{1}{5} - 2\right)^n \\
+    &= \sum\limits_{n=1}^\infty \frac{1}{n}
+    \end{align*}
+    $$
+
+    As this is a harmonic series, the series converges at $x= \frac{11}{5}$
+
+Therefore, the interval of convergence for this power series centered at $x_o = 2$ is $[\frac{9}{5}, \frac{11}{5})$
+
+As power series are a function of $x$ on its interval of convergence, a natural question in calculus is:
+* is it continuous
+* is it differentiable
+* is it integrable
+
+Power series is an accumulation over a sequence of functions, more specifically an accumulation of polynomials which we know are continuous. However, just because each function in a sequence is continuous 
+and converges to some function $f$, it does not mean the convergent function $f$ is continuous itself. Therefore, to guard this continuity property in convergent functions, we will need a different notion 
+or type of convergence, the uniform convergence. First we shall describe a type of convergence that does not guarantee continuity to the convergent function:
+
+> **Pointwise Convergence:** Let $(f_n)$ be a sequence of funtions. We say that $(f_n)$ **CONVERGES POINTWISE** to $f$ on a set $S$ if $\forall x\in S$, the sequence $f_n(x)$ converges to $f(x)$
+>
+> **Note:** Does not guarantee $f$ is continuous even if each $f_n$ is continuous
+
+That is to say:
+
+> **Pointwise Convergence:** $f_n\to f$ pointwise on $S$ if $\forall x\in S, \lim\limits_{n\to\infty} f_n(x)=f(x)$
+>
+> i.e. $\forall x\in S, \forall \epsilon \gt 0 \exists N $ such that $n \gt N \implies \|f_n(x)-f(x)\|\lt \epsilon$
+
+A counterexample to the preservation of continuity to the convergent function  presented in the textbook is the following sequence $f_n(x) = x^n$ on $[0,1]$. $f_n \to f$ pointwise on [0,1] but is not continuous as:
+
+$$
+f(x) = \begin{cases}
+    0 & x\in[0,1) \nonumber\\
+    1 & x = 1
+\end{cases}
+$$
+
+Similarly to how uniform continuity differs from regular continuity by choosing a $\delta$ not dependent on $x$, uniform convergence also tries to pick a $N$ such that it only depends on $\epsilon$ and not $x$. 
+The idea is to have the values $f_n(x)$ be ``uniformly" close to the values of $f(x)$ for all $x$:
+
+> **Uniform Convergence:** The sequence of function $(f_n)$ on $S\subseteq \mathbb{R}$ **CONVERGES UNIFORMLY** to a function $f$ on $S$ if $\forall \epsilon \gt 0, \exists N $ such that $n \gt N\implies \|f_n(x) - f(x)\|\lt \epsilon \forall x\in S$
+
+Uniform convergence is a stronger type of convergence as it applies to all $x$ and thus we have the following relation:
+
+> $(f_n)$ converges to $f$ uniformly $\implies (f_n)$ converges to $f$ pointwise
+
+This should not come to no surprise since if $(f_n)$ converges uniformly, it should converge to $f$ in a subset of $\mathbb{R}$.
+
+The contraire does not hold unexpectedly:
+
+> $(f_n)$ converges to $f$ pointwise $\bcancel{\implies} (f_n)$ converges to $f$ uniformly
+
+**Example:** $f_n(x) = x^n$ on $[0,1]$. Recall that $f_n$ converges pointwise to:
+
+$$
+f(x) = \begin{cases}
+    0 & x\in[0,1) \nonumber\\
+    1 & x = 1
+\end{cases}
+$$
+
+But does it converge uniformly as well? Spoiler it does not, the reason we motivated uniform convergence is to show the preservation of continuity which will come next.
+
+Suppose by contraction that it does. 
+
+Then take $\epsilon = \frac{1}{2}$, I can find $N$ such that 
+
+$n \gt N \implies \|f_n(x) - f(x)\| \lt \frac{1}{2} \forall x \in [0,1]$.
+
+In particular, for $n = N+ 1 \gt N$ and $\forall x\in [0,1)$, we have: 
+
+$f(x) = 0 \implies \|f_{N+1}(x) - f(x)\| = \|f_{N+1}(x)\| = x^{N+1} \lt \frac{1}{2} \forall x\in [0,1)$. 
+
+Rearranging,
+
+$$
+x^{N+1} \lt \frac{1}{2} \implies x \lt \frac{1}{2^\frac{1}{N+1}} \forall x\in [0,1) \quad (*) \nonumber\\
+$$
+
+From here, I can think of two approaches:
+
+1. **Limit Argument:** Since $x^{N+1}$ is continuous and $x^\{N+1} \lt \frac{1}{2} \forall x\in [0,1)$:
+
+    We have $1 = \lim\limits_{x\to 1^-} x^{N+1} \lt \frac{1}{2}$ which is a contradiction.
+
+2. **Explicit Construction:** We begin with the obvious fact that $1 \lt 2$ and build up to get $1 \lt 2^\frac{1}{N+1}$ and then choose an $L$ such that a contradiction arrives:
+    $$
+    \begin{align*}
+    2 \gt 1 &\implies 2^\frac{1}{N+1} \gt 1^\frac{1}{N+1} \\
+    &\implies 2^\frac{1}{N+1} \gt 1
+    \end{align*}
+    $$
+
+    By the density of $\mathbb{Q}, \exists L\in\mathbb{Q}\subset \mathbb{R}$ such that $\frac{1}{2^\frac{1}{N+1}} \lt L \lt 1$.
+
+    By choosing such an $L$ that meets this criteria, we have $L\in[0,1)$ such that $L \gt \frac{1}{2^\frac{1}{N+1}}$ but by (*) we also have $L \lt \frac{1}{2^\frac{1}{N+1}}$ which is a contradiction.
+
+Let us now show an example in how to prove something is uniform convergent:
+
+**Example:** Let $f_n(x) = \frac{1}{n}\sin(nx)$ for $x\in\mathbb{R}$. Prove that $f_n\to 0$ uniformly.
+
+Rough Work: Let $\epsilon \gt 0$ be given. Then,
+
+$$
+\begin{align*}
+|f_n(x) - f(x)| &= |\frac{1}{n}\sin(nx) - 0| \\
+&= \frac{1}{n}|\sin(nx)|\leq \frac{1}{n} \forall x \\
+\frac{1}{n} &\underset{\text{ want}}{<} \epsilon \implies n \gt \frac{1}{\epsilon}
+\end{align*}
+$$
+
+Choose $N = \frac{1}{\epsilon}$.
+
+> **Heurestic to show Uniform Convergence:** In your rough work, you want to bound the function such that it is not dependent on $x$ such as $\frac{1}{n}$
+>
+> e.g. take $N = \frac{1}{\epsilon}$ for instance where it does not depend on $x$ in a uniform convergence proof
+
+![A diagram trying to illustrate uniform convergence]({{site.baseurl}}/assets/math-physics/courses/math2052/uniform-convergence.png)
+<p class = "caption">An illustration how $f_n$ is bounded to the $\epsilon$ window and as $\epsilon$ gets smaller, the $f_n$ gets squeezed but remains in the window. i.e. Eventually as you go further down the sequence (a larger $N$), you will eventually find a function flat enough to squeeze into the window. Extracted from <a href = "https://ocw.mit.edu/courses/18-100a-real-analysis-fall-2020/mit18_100af20_basic_analysis.pdf">MIT OCW Real Analysis Notes</a></p>
+
+Now we have seen what it means for a function to converge pointwise and uniformly, let us now revisit the purpose of introducing a strongegr notion of convergence (uniform convergence):
+
+> $f_n$ is continuous $\forall n$ and $f_n \to f$ pointwise $\bcancel{\implies} f$ is continuous
+
+But
+
+> $f_n$ is continuous $\forall n$ and $f_\to f$ uniformly $\implies f $ is continuous
+
+> **Theorem (Uniform Convergence Preserving Continuity):** let $(f_n)$ be a sequence of functions on $S$ such that $f_n \to f$ converges uniformly.
+> If each $f_n$ is continuous, so is $f$
+
+If we take the contrapositive of this theorem above, we obtain another tool to disprove uniform convergence:
+
+> **Disproving Uniform Convergence via Continuity:** If $f_n \to f$ pointwise and each $f_n$ is continuous but $f(x)$ is not continuous, then this convergence is not uniform
+
+Before proceeding to the consequences of uniform convergence and the preservation of continuity, let's revisit our favorite function in this chapter: $f_n(x) = x^n$ and recall 
+that $f_n \to f$ pointwise on $[0,1]$ where,
+
+$$
+f(x) = \begin{cases}
+    0 & x\in[0,1) \nonumber\\
+    1 & x = 1
+\end{cases}
+$$
+
+This does not uniformly converge to $f$ as it was discontinuous at $x = 1$. But what about for $x\in[0,1)$?
+
+For $f_n = x^n$ on $[0,1), \lim\limits_{n\to\infty} f_n(x) = 0 \forall x$
+
+The constant function $0$ is continuous $\forall x$ but is it uniformly convergent on $[0,1)$? NO, we showed previously that it did not
+
+What about from a fixed positive number $b \lt 1$. We will make the claim that on $[0,b], f_n \to 0$ uniformly:
+
+Rough Work: Let $\epsilon \gt 0$. We want $N$ such that $n \gt N$:
+
+$$
+\begin{align*}
+|x^n - 0| \lt \epsilon \forall x\in [0,b] \\
+|x^n| = x^n \leq b^n \underset{\text{want}}{\lt} \epsilon
+\end{align*}
+$$
+
+**Note:** $b^n \lt \epsilon$ is only possible because $b \lt 1$ thus $b^n \lt 1$ (i.e. for $b\lt 1 \implies b^{N+1} \lt b^{N}$)
+
+Thus we have,
+
+$$
+\begin{align*}
+b^n \lt \epsilon &\iff n\ln b \lt \ln \epsilon \\
+&\iff n \gt \frac{\ln\epsilon}{\ln b}, \quad \text{inequality flipped because if $b\lt 1$ then $\ln b \lt 0$}
+\end{align*}
+$$
+
+Thus choose $N = \frac{\ln\epsilon}{\ln b}$
+
+In conclusion, for the examples, we have seen for $f_n(x) = x^n$, 
+
+$$
+f(x) = \begin{cases} 
+    0 & 0\leq x \lt 1 \\ 
+    1 & x = 1
+\end{cases}
+$$
+* on $[0,1], f_n \to f$ pointwise but not uniformly
+* on $[0,1), f_n \to 0$ pointwise but not uniformly
+* on $[0,b]$ for $b \lt 1, f_n \to 0$ uniformly
+
+I recall being a bit surprised by this result how fixing a point allows $f_n$ converge uniformly to $f$. But now that I think of it, if we were to start plugging in numbers as $x \to 1$, we'll notice the 
+following:
+
+* $x = 0.5: 0.5^n \to 0$ fast ($N_1 > N$)
+* $x = 0.9: 0.9^n \to 0$ slowly (i.e. $N_2 >> N_1 > N$)
+* $x = 0.99: 0.99^n \to 0$ even slower (i.e. $N_3 >>> N_2 >> N_1 > N$)
+* $x \to 1: x^n \to 0$ extremely and arbitrarily slowly  (i.e. $N_4 >>>>>>>>>>>>>> N_3 >>> N_2 >> N_1 > N$)
+
+Thus as $x\to 1$, we observe the growth to converge $f_n(x)$ to 0 get slower and slower
+
+We can now say the following:
+
+> **Theorem:** let $(t_n)$ be a sequence of continuous function on $[a,b]$ which converges uniformly to $f$.
+>
+> Then $\lim\limits_{n\to\infty} \int_a^b f_n(x)dx = \int_a^b \lim\limits_{n\to\infty} f_n(x)dx = \int_a^b f(x)dx$
+
+Previously, we saw that $f_n = x^n$ does not converge uniformly from [0,1) as the terms converges to $f$ so slowly. In [MATH1052](../math1052-commentary), we introduced cauchy sequences, a sequence that 
+converges and exhibits a behavior whereby after some $N$, the distance of any two functions in the sequence are arbitrarily so close that convergence is guaranteed.
+
+> **Cauchy Sequences:** a sequence $(s_n)$ is cauchy if $\forall \epsilon \gt 0, \exists N $ such that $m,n \gt N \implies \|a_n-a_m\| \lt \epsilon$
+
+> $(s_n)$ is cauchy $\iff (s_n)$ is convergent
+
+We want a similar result for functions because if you recalled, this entire section is dedicated to power series which are infinite series of functions (even though it may not seem like it with our 
+discussion in sequences and convergence).
+
+> **Uniformly Cauchy:** a sequence $(f_n)$ of functions on $S\subseteq \mathbb{R}$ is called **UNIFORMLY CAUCHY** if $\forall \epsilon \gt 0, \exists N$ such that $m,n \gt N \implies \|f_n(x) - f_m(x)\| \lt \epsilon \quad\forall x\in S$
+
+To tie this together with uniform convergent, we have the following result:
+
+> **Lemma:** if $f_n \to f$ uniformly then it is uniformly cauchy
+
+and
+
+> **Theorem:** Let $(f_n)$ be a uniformly cauchy sequence of functions on $S\subseteq \mathbb{R}$ then $\exists$ a function $f$ on $S$ such that $f_n\to f$ uniformly
+
+Thus far, we have talked about functions in a sequence but never tied it with power series. Let us now be equipped with what it means for a series of functions to a power series:
+
+> $\sum\limits_{k = 0}^\infty g_k(x)$ is a power series of functions if $g_k(x) = a_kx^k$
+
+For instance, the following function is a series of function but is not a power series of functions: $\sum\limits_{k=0}^\infty \frac{x^k}{1+x^k}$ because it is not in the right form.
+
+> **Uniform Convergence of Function Power Series:** let $\sum\limits_{k=0}^\infty g_k(x)$ be a series of functions on $S$ such that each $g_k$ is continuous.
+> If $\sum\limits_{k=0}^\infty g_k(x)$ is uniformly convergent to $g(x)$, then $g$ is continuous
+
+This result should not be of any surprise as we previously saw that 
+* sums of continuous functions are continuous
+* uniform convergence preserves continuity among convergent sequences of functions
+
+Let us now introduce another equivalence relation to uniformly cauchy in respect to function power series:
+
+> **Uniform Cauchy Definition for $\sum\limits_{k=0}^\infty g_k(x)$:** $\sum\limits_{k=0}^\infty g_k(x)$ is uniformly cauchy on $S$ 
+>
+> $\iff \forall \epsilon \gt 0, \exists N $ such that $m,n \gt N \implies \|\sum\limits_{k=0}^n g_k(x) - \sum\limits_{k=0}^m g_k(x)\|\lt \epsilon$
+>
+> $\iff \forall \epsilon \gt 0, \exists N $ such that $n\geq m \gt N \implies \|\sum\limits_{k=m}^n g_k(x)\| \lt \epsilon$
+
+Now that we have seen what it means for a power series to uniformly converge, we can now introduce a nice test to determine whether it converges uniformly:
+
+> **Weierstrass M-Test:** let $(M_K)$ be a sequence of non-negative numbers with $\sum\limits_{k=0}^\infty M_k \lt \infty$.
+> If $\|g_k(x)\| \leq M_k \forall x\in S$, then $\sum\limits_{k=0}^\infty g_k(x)$ converges uniformly on $S$
+
+Let us see an example of how to utilise this test to determine whether an infinite function power series converges ot a continuous function:
+
+**Example:** Show that $\sum\limits_{k=0}^\infty \frac{1}{n^2}\sin(nx)$ converges to a continuous function on $\mathbb{R}$
+
+First note that: $\|\frac{1}{n^2}\sin(nx)\| = \frac{1}{n^2}\|\sin(nx)\|\leq \frac{1}{n^2}$
+
+Let $M_n = \frac{1}{n^2}$. Then $\sum\limits_{k=0}^\infty M_n = \sum\limits_{k=0}^\infty \frac{1}{n^2} \lt \infty$ by P-series
+
+So by M-test, $\sum\limits_{k=0}^\infty \frac{1}{n^2}\sin(nx)$ converges uniformly on $\mathbb{R}$
+
+Since $g_n(x) = \frac{1}{n^2}\sin(nx)$ is continuous on $\mathbb{R} \forall n$ and converges uniformly, the limit must be continuous.
+
+> **Recall:** if $\sum\limits_{k=0}^\infty a_k$ is a series of numbers then $\sum\limits_{k=0}^\infty a_k$ converges \implies \lim\limits_{n\to\infty} a_n = 0$
+>
+> Though the opposite direction does not hold (think of $\sum \frac{1}{n}$ diverges by P-series but the limit is 0.
+
+We have an analogous version of this fact for series of functions:
+
+> if $\sum\limits_{k=0}^\infty g_k(x)$ converges uniformly on $S$ then $\lim\limits_{n\to\infty} \sup\\{\|g_n(x)\| : x\in S\\} = 0$
+
+One conseuqence of this lemma above is that we can use the contrapositive to conclude whether a function power series does not converge uniformly, which is probably a much more useful fact:
+
+> if one can show $\lim\limits_{n\to\infty} \sup\\{\|g_n(x)\| : x\in S\\} \neq 0$, then one can conclude that $\sum g_k(x)$ does not converge uniformly on $S$
+
+**Example:** Consider the power series $\sum \frac{x^n}{3^n$
+
+
 
 ---
 
