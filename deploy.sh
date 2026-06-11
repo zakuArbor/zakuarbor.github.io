@@ -35,6 +35,7 @@ git add -f .
 git add -f .domains
 git commit -m "Deploy: $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes."
 git push -f origin pages
+git push -f github pages
 
 cd ..
 

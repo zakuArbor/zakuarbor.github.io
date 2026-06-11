@@ -246,7 +246,7 @@ Let $S\subseteq \mathbb{R}$ be nonempty:
 More formally,
 
 > **SUPREMUM:** $M = \sup S$ if the following two conditions holds true:
-> * $\forall x\in S, M\ge x$ (i.e. $M$ is an upperbound of S$)
+> * $\forall x\in S, M\ge x$ (i.e. $M$ is an upperbound of $S$)
 > * If $N$ is some other upperbound of $S$, then $M\le N$ 
 
 > **INFIMUM:** $m = \inf S$ if the following two conditions holds true:

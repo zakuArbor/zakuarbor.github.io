@@ -19,6 +19,7 @@ The course is broken down into 3 main components:
 1. [Darboux Sums and Integrability](#darboux)
 2. [Integration Techniques](#int-tech)
 3. [Power Series](#power)
+4. [Taylor Series](#taylor)
 
 ---
 
@@ -1409,24 +1410,219 @@ First note that: $\|\frac{1}{n^2}\sin(nx)\| = \frac{1}{n^2}\|\sin(nx)\|\leq \fra
 Let $M_n = \frac{1}{n^2}$. Then $\sum\limits_{k=0}^\infty M_n = \sum\limits_{k=0}^\infty \frac{1}{n^2} \lt \infty$ by P-series
 
 So by M-test, $\sum\limits_{k=0}^\infty \frac{1}{n^2}\sin(nx)$ converges uniformly on $\mathbb{R}$
-
 Since $g_n(x) = \frac{1}{n^2}\sin(nx)$ is continuous on $\mathbb{R} \forall n$ and converges uniformly, the limit must be continuous.
 
-> **Recall:** if $\sum\limits_{k=0}^\infty a_k$ is a series of numbers then $\sum\limits_{k=0}^\infty a_k$ converges \implies \lim\limits_{n\to\infty} a_n = 0$
+> **Recall:** if $\sum\limits_{k=0}^\infty a_k$ is a series of numbers then $\sum\limits_{k=0}^\infty a_k$ converges $\implies \lim\limits_{n\to\infty} a_n = 0$
 >
 > Though the opposite direction does not hold (think of $\sum \frac{1}{n}$ diverges by P-series but the limit is 0.
-
 We have an analogous version of this fact for series of functions:
 
 > if $\sum\limits_{k=0}^\infty g_k(x)$ converges uniformly on $S$ then $\lim\limits_{n\to\infty} \sup\\{\|g_n(x)\| : x\in S\\} = 0$
 
-One conseuqence of this lemma above is that we can use the contrapositive to conclude whether a function power series does not converge uniformly, which is probably a much more useful fact:
+One consequence of this lemma above is that we can use the contrapositive to conclude whether a function power series does not converge uniformly, which is probably a much more useful fact:
 
 > if one can show $\lim\limits_{n\to\infty} \sup\\{\|g_n(x)\| : x\in S\\} \neq 0$, then one can conclude that $\sum g_k(x)$ does not converge uniformly on $S$
 
-**Example:** Consider the power series $\sum \frac{x^n}{3^n$
+**Example:** Consider the power series $\sum \frac{x^n}{3^n}$
 
+Before utilising our new tool to determine whether this power series converges uniformly, let's establish the convergence interval:
 
+Note that the radius of convergence is 3: $R = \lim\limits_{n\to\infty}\left\|\frac{a_n}{a_{n+1}}\right\| = \left\|\frac{\frac{1}{3^n}}{\frac{1}{3^{n+1}}}\right\| = 3$
+
+At $x = 3: \sum 1 = \infty$ and at $x = -3: \sum(-1)^n$ diverges. Thus our interval of convergence is: $I = (-3,3)$
+
+Using the new tool, we have $\sup\\{\|\frac{x^n}{3^n}\| : x\in (-3,3)\\} = 1 \forall n$ so $\lim_{x\to\infty} \sup\\{\|\frac{x^n}{3^n}\| : x\in (-3,3)\\} = 1 \neq 0$
+
+So by the lemma, we know $\sum \frac{x^n}{3^n}$ does not converge uniformly on $(-3,3)$
+
+But what if we restricted the interval to a concrete number similar to how we found $f_n(x) = x^n$ converges uniformly if we restricted $S$ from $[0,1)$ to $[0, b]$. It turns out if we restrict 
+the endpoints of our interval of convergence to be smaller and concrete, our once non-uniformly convergent sequence/power series does converge.
+
+> **Theorem:** let $\sum a_n x^n$ be a power series with a radius of convergence $R \gt 0$. If $0 \lt b \lt R$, then the power series converges uniformly on $[-b,b]$ and converges to a continuous function on 
+$(-R,R)$
+
+Let's revisit the previous example and restrict the interval to $b \lt R = 3$. For this exercise, we will avoid invoking the theorem above and show you the lengthy process to obtain the same result:
+
+Let $b\in(0,3)$ so if $x = b\implies \sum \frac{b^n}{3^n} = \sum\left(\frac{b}{3}\right)^n$ converges by gemoetric series (as $0 \lt b \lt 3$)
+
+1. To show $\sum \frac{x^n}{3^n}$ converges uniformly on $[-b,b]$, we can utilise the Weierstrass M-test: $\forall x\in [-b,b], \left\|\frac{x^n}{3^n} \right \| \leq \left\|\frac{b^n}{3^n}\right\| = \left(\frac{b}{3}\right)^n = M_n$.
+    Since $\sum M_n$ converges, by the Weierstrass M-test, $\sum\frac{x^n}{3^n}$ converges uniformly on $[-b,b]$.
+
+2. Now all that is left is to show $\sum \frac{x^n}{3^n}$ converges to a continuous function on $[-b,b]$:
+
+    Note that $\frac{x^n}{3^n}$ is continuous on $\forall n$. Thus, $\sum\frac{x^n}{3^n}$ is continuous on $[-b,b] \forall b\in[0,3)$. As $b$ is arbitrary, $\sum \frac{x^n}{3^n}$ converges to a continuous function on $(-3, 3)$.
+
+This is definitely much longer than simply invoking the theorem which gives us both uniformly convergence and convergence to a continuous function for free: Since $R = 3 \gt 0$ and $b \in (0,R)$, by the theorem above, we have $\sum \frac{x^n}{3^n}$ converges uniformly on $[-b,b]$ and converges to a continuous function on $(-3,3)$.
+
+Recall that one of the motivations of utilising power series is to represent transcendental functions such as $e^x$ as an infinite series of polynomials. What would be desirable is if we 
+could differentiate and integrate power series term by term. For instance, it would be nice if we could do the following
+
+$$
+\begin{align*}
+\left(\sum\limits_{n=0}^\infty a_nx^n\right)' &= (a_0 + a_1x + a_2x^2+\cdots)' \overset{?}{=} a_1 + 2a_2x+3a_3x^2+\cdots \overset{?}{=} \sum\limits_{n=1}^\infty na_nx^{n-1} \\
+\int \sum\limits_{n=0}^\infty a_nx^ndx &\overset{?}{=} \sum\limits_{n=0}^\infty \frac{a_nx^{n+1}}{n+1}
+\end{align*}
+$$
+
+But for these properties to work, we must ensure that the radius of convergence remains the same in these new forms:
+
+> **Lemma:** If $\sum\limits_{n=0}^\infty a_n x^n$ has a radius of convergence $R$, then so does $\sum\limits_{n=1}^\infty na_nx^{n-1}$ and $\sum\limits_{n=0}^\infty \frac{a_n}{n+1}x^{n+1}$
+
+As the radius of convergence remains the same even after taking the form of what seems like to be its differentiatiable and integrable equivalences, let us now introduce the theorem that 
+ties this together to permit us to integrate and differentiate the series term by term:
+
+> **Theorem:** Suppose $f(x) = a_nx^n$ has a radius of convergence $R \gt 0$. Then,
+> $\int_0^x f(t)dt = \sum\limits_{n=0}^\infty \frac{a_n}{n+1}x^{n+1}$ for $\|x\| \lt R$
+
+> **Theorem:** Let $f(x) = \sum_{n=1}^\infty a_nx^n$ have radius of convergence $R \gt 0$. Then $f$ is differentiable on $(-R,R)$ and 
+>
+> $f'(x) = \sum_\limits{n=1}^\infty na_nx^{n-1}$ for $\|x\| \lt R$
+>
+> **Note:** Notice that the index changes from 0 to 1 in the differentiable form. The index does not change for the integral
+
+Thus far. the previous theorem only discusses differentiablity at the open intervals $(-R, R)$ but what about at its endpoint? That is what the next theorem, Abel's Theorem, attempts to tackle. 
+We know from last year that differentiability implies continuity (i.e. to be differentiable at $x = a$, then by definition, it must also be continuous at $a$)
+
+> **Abel's Theorem:** let $f(x) = \sum a_nx^n$ have a radius of convergence $R \gt 0$, $R \lt \infty$. If $\sum a_nx^n$ converges at $x = R$, then it is continuous there. The same is true at $x = -R$.
+
+As a consequence, we have that every power series converge to a continuous function on its entire interval of convergence including at its endpoint provided it is defined and does indeed converge there.
+
+> Every power series converges to a continuous function on its entire interval of convergence (including its endpoints if defined and converges there)
+>
+> i.e. $\sum \frac{x^n}{n^2}$ has an interval of convergence (I.O.C) on $[-1,1]$ and thus is continuous on $[-1,1]$
+
+---
+
+<a name = "taylor">
+## Taylor Series
+
+Recall that one of the motivations of power series is to represent transcendental functions as an infinite series of polynomials. This is the math that allows calculators be able to compute $e^x$ for 
+instance within an acceptable error or to allow oneself to integrate a complicated expression into simple series of polynomials. However, how does one translate a function such as $e^x$ or $\sin(x)$ 
+into a series of polynomials? That is what will be explored in this section, working with taylor series which gives us a methodical way to transform a function into a power series.
+
+> **Taylor Series:** let $f$ be defined on an open interval containing $x_o$. Suppose that all order of derivatives of $f$ exist at $x_o$.
+> Then the series 
+>
+> $\sum\limits_{n=0}^\infty \frac{f^{(n)}(x_o)}{n!}\left(x-x_o\right)$ is called the taylor series for $f$ about $x_o$
+>
+> For $n\geq 1$, the remainder $R_n(x)$ is defined by:
+>
+> $R_n(x) = f(x) - \sum\limits_{k=0}^{n-1}\frac{f^{(k)}(c)}{k!}(x-c)^k$
+
+When we approximate a function $f(x)$ using a finite Taylor polynomial of degree $n$ which we call $P_n(x)$, the approximation is rarely perfect. This difference must be taken into account and thus the remainder
+
+$$
+\begin{align*}
+R_n(x) &= f(x) - \sum\limits_{k=0}^{n-1} \frac{f^{(k)}(c)}{k!}(x-c)^k \\
+f(x) &= \sum\limits_{k=0}^{n-1} \frac{f^{(k)}(c)}{k!}(x-c)^k + R_n(x)
+f(x) &= P_n(x) + R_n(x)
+\end{align*}
+$$
+
+On a note about the remainder, we also have this result:
+
+> $f(x) = \sum\limits_{k=0}^\infty \frac{f^{(n)}(x_o)}{k!}(x-x_o)^n \iff \lim\limits_{n\to\infty}R_n(x) = 0$
+
+Suppose we have a power series in the form $f(x) = \sum a_n(x-x_o)^n$. We have never discussed how to determine what $a_n$ is. In our definition of taylor series, all order of derivatives of $f$ exists at $x_o$. 
+This,
+
+$$
+\begin{align*}
+f(x) &= a_o + a_1(x-x_o) + a_2(x-x_o)^2 + a_3(x-x_o)^3 + \cdots \\
+f'(x) &= a_1 + 2a_2(x-x_o) + 3a_3(x-x_o)^2 + \cdots \\
+f''(x) &= 2a_2 + (3)(2)a_3(x-x_o) + 4(3)a_4(x-x_o)^2 + \cdots \\
+f'''(x) &= 3(2)a_3 + 4(3)(2)a_4(x-x_o) + 5(4)(3)a_5(x-x_o)^2 + \cdots
+\end{align*}
+$$
+
+Let $x = x_o$, then:
+
+$$
+\begin{align*}
+f(x_o) &= a_o &= 0!a_o \\
+f'(x_o) &= a_1 &= 1! a_1 \\
+f''(x_o) &= 2a_2 &= 2!a_2 \\
+f'''(x_o) &= 3(2)a_3 &= 3! a_3
+\end{align*}
+$$
+
+Then by induction, we have: 
+
+$$
+\begin{align*}
+f^{(n)} = n!a_n\\
+\boxed{a_n = \frac{f^{(n)}(x_o)}{n!}}
+\end{align*}
+$$
+
+> **Taylor Coefficient:** $a_n = \frac{f^{(n)}(x_o)}{n!}$
+
+Let us now go through an example to determine the taylor series of $\sin(x)$ centered at 0 (Note: This is also called a Maclaurin Series, a Taylor series centered at 0).
+
+First let's observe the orders of the derivatives of $\sin(x)$:
+
+$$
+\begin{align*}
+f(x) &= \sin(x)  & f(0) &= 0 \\
+f'(x) &= \cos(x) & f'(0) &= 1 \\
+f''(x) &= -\sin(x) & f''(0) &= 0 \\
+f^{(3)}(x) &= -\cos(x) & f^{(3)}(0) &= -1 \\
+f^{(4)}(x) &= \sin(x) & f^{(4)}(0) &= 0 \\
+\cdots
+\end{align*}
+$$
+
+So we have: 
+$$
+f^{(n)}(0) = \begin{cases}
+0 & \text{if n is even} \\
+1 & \text{if n = 4k+1} \\
+-1 & \text{if n = 4k+3}
+\end{cases}
+$$
+
+and $a_n = \frac{f^{(n)}(0)}{n!}$ so the taylor series of $\sin(x)$ around 0 is 
+
+$$
+\begin{align*}
+\sum\limits_{k=0}^\infty \frac{f^{(k)}(0)}{k!}x^k &= x - \frac{x^3}{3!} + \frac{x^5}{5!} - \frac{x^7}{7!} + \cdots \\
+&= \sum\limits_{n=0}^\infty \frac{(-1)^nx^{2n+1}}{(2n+1)!}
+\end{align*}
+$$
+
+Let's now explore the one applications of taylor series I hinted at in the beginning to better understand the power of formulating a function as a taylor series:
+
+**For Approximations:**
+
+How many terms do we need to approximate $\sqrt{e} = e^\frac{1}{2} = \sum\limits_{n=0}^\infty \frac{\left(\frac{1}{2}\right)^n}{n!}$ with an error less than $0.0001$?
+
+Recall that $e^x = \sum\limits_{k=0}^\infty \frac{x^k}{k!} = \sum\limits_{k=0}^{n-1} \frac{x^k}{k!} + R(x)$
+
+where $R_n(x) = \frac{f^{(n)}(y)}{n!}x^n = \frac{e^y}{n!}x^n$ for some $y\in(0,x)$
+
+Since we are evaluate for $e^\frac{1}{2} = e^x \implies x = \frac{1}{2}$: 
+
+$$R_n\left(\frac{1}{2}\right) = \frac{e^y}{n!}\left(\frac{1}{2}\right)^n = \frac{e^y}{2^nn!}, y\in\left(0,\frac{1}{2}\right) \nonumber$$
+
+So a crude estimate would be that $e \lt 3$ (recall $e = 2.71828\cdots$)
+
+We can bound $e^\frac{1}{2}$:
+
+$$e^y \lt e^\frac{1}{2} \lt 3^\frac{1}{2} \lt 2 \nonumber$$
+
+So we can bound the remainder:
+
+$$
+\begin{align*}|R_n\left(\frac{1}{2}\right)| \lt \frac{2}{2^nn!} = \frac{1}{n!2^{n-1}} &\overset{\text{want}}{\lt} 0.0001\\ 
+\iff 10000 &\lt n!2^{n-1}
+\end{align*}$$
+
+If we were to iterate, the first time this condition holds true is when $n = 6$ and thus the error is less than $\frac{1}{6!2^5} \approx 0.000043$
+
+While this does not give as the true error, it is nonethless cool that we can bound the error using what we know about Taylor series.
+
+There are plenty more applications of taylor series such as solving tough integrals, solving the Basel problem, and solving differential equations. 
+But that is all for this topic and my commentary on the course materials. 
 
 ---
 
