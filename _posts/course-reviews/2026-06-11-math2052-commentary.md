@@ -32,7 +32,7 @@ But one can be more formal in how the area is calculated. From elementary school
 by drawing a series of equally wide rectangles under the curve to approximate the area as seen below:
 
 <div style = "background-color: #ffe4c8; width: fit-content; margin: auto">
-<img src = "http://hyperphysics.phy-astr.gsu.edu/hbase/imgmth/iarea3.gif" alt = "Approximation of the area of a curve using increasingly narrower rectangles">
+<img src = "{{ site.baseurl }}/assets/math-physics/courses/math2052/iarea3.png" alt = "Approximation of the area of a curve using increasingly narrower rectangles">
 </div>
 <p class = "caption">Approximation of the area of a curve using increasingly narrower rectangles. Taken from <a href = "http://hyperphysics.phy-astr.gsu.edu/hbase/imgmth/iarea3.gif">HyperPhysics</a></p>
 
