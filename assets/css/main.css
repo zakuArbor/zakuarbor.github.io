@@ -810,10 +810,26 @@ details[open] {
   filter: none !important;
 }
 
-@media only screen and (min-width: 850px) {
+.MathJax_Display, .MathJax {
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+}
+
+@media only screen and (min-width: 1200px) {
   header, footer, #wrapper {
     padding-left: 10%;
     padding-right: 10%;
+  }
+}
+@media only screen and (max-width: 1200px) {
+  .MathJax {
+    font-size: 85% !important;
+  }
+}
+@media only screen and (min-width: 850px) {
+  header, footer, #wrapper {
+    padding-left: 5%;
+    padding-right: 5%;
   }
   #buttons {
     width: 50%;
@@ -823,6 +839,16 @@ details[open] {
   }
 }
 @media only screen and (max-width: 1000px) {
+  span.MathJax {
+    display: inline !important;
+  }
+  span.MathJax .math {
+    display: inline-block !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    vertical-align: middle !important;
+  }
   nav a {
     display: block;
   }
@@ -840,6 +866,10 @@ details[open] {
   }
 }
 @media only screen and (max-width: 750px) {
+  span.MathJax .math {
+    zoom: 0.8 !important;
+    display: inline !important;
+  }
   #pikachu-header {
     display: none;
   }
@@ -895,6 +925,12 @@ details[open] {
   }
   table tr th, table tr td {
     padding: 3px;
+  }
+}
+@media only screen and (max-width: 450px) {
+  span.MathJax .math {
+    zoom: 0.75 !important;
+    display: inline !important;
   }
 }
 
