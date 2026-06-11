@@ -57,8 +57,8 @@ Formally, we define a partition for a function $f$ bounded on $[a,b]$ to be:
 >
 > Put simply, it is a partition is a set of ordered numbers between $a$ and $b$.
 
-The over-estimated area is called the UPPER darboux sum and the under-estimated rectangles are called the lower darboux sum making use of the definitions of supremum and infinium encountered in the previous 
-course. As one can easily imagine, the two darboux sums take the "max" (supremum) and "min" (infinium) of the curve within each subinterval as the height of the rectangles.
+The over-estimated area is called the UPPER darboux sum and the under-estimated rectangles are called the lower darboux sum making use of the definitions of supremum and infimum encountered in the previous 
+course. As one can easily imagine, the two darboux sums take the "max" (supremum) and "min" (infimum) of the curve within each subinterval as the height of the rectangles.
 
 > For a subset $S \subseteq [a, b]$, we let:
 >
@@ -856,7 +856,7 @@ $$
 $$
 
 ![The area of a curve 1/x^2 from x >= 1]({{site.baseurl}}/assets/math-physics/courses/math2052/rational-x^2-1.png)
-<p class = "caption">The area under the curve of $\frac{1}{x^2} from $x\geq 1$</p>
+<p class = "caption">The area under the curve of $\frac{1}{x^2}$ from $x\geq 1$</p>
 
 The remarkable result is that even though the domain is unbounded, the area is finite (equals to 1).
 
@@ -928,7 +928,7 @@ Recall in the previous [course](../math1052-commentary), we explore the $p$-test
 
 $\int_1^\infty \frac{1}{x^p}dx$ and $\sum\limits_{n=1}^\infty \frac{1}{n^p}$ both diverge when $p \leq 1$. Is there a pattern between the two? Turns out yes and it's called the integral test:
 
-> **Integral Test for Infinite Series:** let $N\in\mathbb{Z}$ and suppose $f(x)$ is continuous, decreasing and non-negative on $[N, \infty]$ then $\sum\limits_{n=N}^\infty f(x)$ converges/diverges $\iff$ $\int_N^\infty f(x)dx$ converges/diverges respectively
+> **Integral Test for Infinite Series:** let $N\in\mathbb{Z}$ and suppose $f(x)$ is continuous, decreasing and non-negative on $[N, \infty]$ then $\sum\limits_{n=N}^\infty f(n)$ converges/diverges $\iff$ $\int_N^\infty f(x)dx$ converges/diverges respectively
 
 It can be difficult to determine whether an infinite series converge or diverge, so the Integral test will be a handy tool.
 
@@ -976,8 +976,8 @@ Left Piece:
 $$
 \begin{align*}
 \int_{-\infty}^0 x dx &= \lim\limits_{d\to\infty}\int_{-d}^0 xdx \\
-&= \lim\limits_{d\to\infty} \frac{x^2}{2}\bigg|_d^0 \\
-&= \lim\limits_{d\to\infty} \left(\frac{0^2}{2} - \frac{d^2}{2}\right) \\
+&= \lim\limits_{d\to\infty} \frac{x^2}{2}\bigg|_{-d}^0 \\
+&= \lim\limits_{d\to\infty} \left(\frac{0^2}{2} - \frac{(-d)^2}{2}\right) \\
 &= 0 - \infty \\
 &= -\infty
 \end{align*}
@@ -1052,7 +1052,7 @@ This power series converges only when $x = 0$. This is consistent to a fact abou
 
 > **Fact 1:** every power series coverges at $x = 0$ as $0^0 = 1$
 
-Consider another example: $\sum\limits_{n=0}^\infty x^n$. By geometric series where $x = r$, we have $\sum\limits\_{n=0}^\infty x^n = \sum\limits\_{n=0}^\infty \frac{1}{1-x}$ which converges when $\|x\| \lt 1$.
+Consider another example: $\sum\limits_{n=0}^\infty x^n$. By geometric series where $x = r$, we have $\sum\limits\_{n=0}^\infty x^n = \frac{1}{1-x}$ which converges when $\|x\| \lt 1$.
 
 Thus, in this example, we have the power series converge when $x \lt 1$, a larger interval compare to the previous example which converged only at one point.
 
@@ -1112,7 +1112,7 @@ Recall this is a harmonic series and thus diverges
 
 Thus, $\sum\limits\_{n=1}^\infty \frac{x^n}{n}$ converges for $x\in[1, 1)$.
 
-Note that the radius of convergence is still 1, but we call $[1,1)$ the **interval of convergence** which could be larger than your radius of convergence itself.
+Note that the radius of convergence is still 1, but we call $[-1,1)$ the **interval of convergence** which could be larger than your radius of convergence itself.
 
 > **Center of Power Series:** Power series can be centered at values other than 0. For a power series centered at $x = x_o$, it is represented as $\sum\limits\_{n=0}^\infty a_n(x-x_o)^n$
 >
@@ -1471,7 +1471,7 @@ But for these properties to work, we must ensure that the radius of convergence 
 As the radius of convergence remains the same even after taking the form of what seems like to be its differentiatiable and integrable equivalences, let us now introduce the theorem that 
 ties this together to permit us to integrate and differentiate the series term by term:
 
-> **Theorem:** Suppose $f(x) = a_nx^n$ has a radius of convergence $R \gt 0$. Then,
+> **Theorem:** Suppose $f(x) = \sum_{n=0}^\infty a_nx^n$ has a radius of convergence $R \gt 0$. Then,
 > $\int_0^x f(t)dt = \sum\limits_{n=0}^\infty \frac{a_n}{n+1}x^{n+1}$ for $\|x\| \lt R$
 
 > **Theorem:** Let $f(x) = \sum_{n=1}^\infty a_nx^n$ have radius of convergence $R \gt 0$. Then $f$ is differentiable on $(-R,R)$ and 
@@ -1503,7 +1503,7 @@ into a series of polynomials? That is what will be explored in this section, wor
 > **Taylor Series:** let $f$ be defined on an open interval containing $x_o$. Suppose that all order of derivatives of $f$ exist at $x_o$.
 > Then the series 
 >
-> $\sum\limits_{n=0}^\infty \frac{f^{(n)}(x_o)}{n!}\left(x-x_o\right)$ is called the taylor series for $f$ about $x_o$
+> $\sum\limits_{n=0}^\infty \frac{f^{(n)}(x_o)}{n!}\left(x-x_o\right)^n$ is called the taylor series for $f$ about $x_o$
 >
 > For $n\geq 1$, the remainder $R_n(x)$ is defined by:
 >
@@ -1514,7 +1514,7 @@ When we approximate a function $f(x)$ using a finite Taylor polynomial of degree
 $$
 \begin{align*}
 R_n(x) &= f(x) - \sum\limits_{k=0}^{n-1} \frac{f^{(k)}(c)}{k!}(x-c)^k \\
-f(x) &= \sum\limits_{k=0}^{n-1} \frac{f^{(k)}(c)}{k!}(x-c)^k + R_n(x)
+f(x) &= \sum\limits_{k=0}^{n-1} \frac{f^{(k)}(c)}{k!}(x-c)^k + R_n(x) \\
 f(x) &= P_n(x) + R_n(x)
 \end{align*}
 $$
