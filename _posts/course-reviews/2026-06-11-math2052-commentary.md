@@ -8,7 +8,7 @@ permalink: blog/math2052-commentary
 
 This is a commentary to the second introductory course to calculus and analysis which I have a [course review](/blog/math2052) on if you are interested. The content presented below are from winter 
 2022 which may not reflect what is covered in your class today. Furthermore, the information presented will have the author's own commentary and is **NOT** and should **NOT** be a replacement to attending class. 
-The author simply wishes to review the cotent of the course mixed with their own speculations, views, and emotions as it reflects on the course 5 years later in preparation to their eventual return to 
+The author simply wishes to review the content of the course mixed with their own speculations, views, and emotions as it reflects on the course 5 years later in preparation to their eventual return to 
 school after a 2 year break from Mathematics. This course is a follow up on [MATH1052](/blog/math1052) exploring integrals, different types of convergence such as point-wise and uniform convergence, and 
 ends with taylor series and its applications.
 
@@ -27,7 +27,7 @@ The course is broken down into 3 main components:
 
 ## Darboux Sums and Integrability
 
-From any regular calculus course, one would know that integration is the process of finding the area under its approximation of the area of a curve using extremelly thin and equally-sized rectangles. 
+From any regular calculus course, one would know that integration is the process of finding the area under its approximation of the area of a curve using extremely thin and equally-sized rectangles. 
 But one can be more formal in how the area is calculated. From elementary school, one learned that to calculate the area of a rectangle by multiplying the length by its width. It turns out we can expand this concept to calculate the area of any curve 
 by drawing a series of equally wide rectangles under the curve to approximate the area as seen below:
 
@@ -36,17 +36,17 @@ by drawing a series of equally wide rectangles under the curve to approximate th
 </div>
 <p class = "caption">Approximation of the area of a curve using increasingly narrower rectangles. Taken from <a href = "http://hyperphysics.phy-astr.gsu.edu/hbase/imgmth/iarea3.gif">HyperPhysics</a></p>
 
-Eventually when the width of the rectanges becomes infinitesimally thin, the sum of these infinitesimally thin rectangles gives us the true area under the curve.
+Eventually when the width of the rectangles becomes infinitesimally thin, the sum of these infinitesimally thin rectangles gives us the true area under the curve.
 
-This technique of dividing an interval of a curve with increasingly smaller subintervals resulting in thinner and thinner rectanges to approximate area is not a mere theroetical concept but something that's actually used in real life. I recall in one of my geography 
+This technique of dividing an interval of a curve with increasingly smaller subintervals resulting in thinner and thinner rectangles to approximate area is not a mere theoretical concept but something that's actually used in real life. I recall in one of my geography 
 courses, the class was sent to a nearby bridge, tasked on measuring the depth of the river at different points, repeating the measurements in smaller partitions to get an approximate area of the 
 river. 
 
 ![]({{ site.baseurl }}/assets/math-physics/riverstream_discharge.jpg)
 <p class = "caption">An image I found on google that looked familiar to what I learned in Geography to measure discharge. Source: <a href="https://www.fondriest.com/environmental-measurements/measurements/hydrological-measurements/streamflow-measurements/">Fondriest</a></p>
 
-One question that may arise is how to determined the height of these rectanges as it is clear that these rectangles don't capture the curves nicely. There are a few ways to determine the height such 
-as grabbing the function's value at the midpoint between each subinterval $[t_i, t_{i+1}]$, the way the author first encountered in its time as a student in computer science. But this choice can feel arbitrary 
+One question that may arise is how to determine the height of these rectangles as it is clear that these rectangles don't capture the curves nicely. There are a few ways to determine the height such 
+as grabbing the function's value at the midpoint between each subinterval $[t_i, t_{i+1}]$, the way the author first encountered in their time as a student in computer science. But this choice can feel arbitrary 
 with no guarantees whether the height of each subinterval under-estimates or over-estimates the true area. One elegant approach introduced in this course is to consider both cases and see if the two cases 
 can reconcile (i.e. be equal to each other) and this approach is called Darboux Sums or Darboux Integrals.
 
@@ -136,7 +136,7 @@ Similar to how a limit exists if the LHS and RHS limits exist, we say $f$ is **I
 where $f(x)$ can be seen as the height and $dx$ as the width of the rectangle approaching to 0.
 
 Showing whether a function is integrable is a lot of work and thus will be omitted. Please read Ross Analysis or search online for an example. However, what I will show and find more interesting is to 
-show a function $f$ the is **NOT** integrable. In Engineering, we are always given ''nice" functions that always have integrals but it turns out there are functions that don't have an "area". One 
+show a function $f$ this **NOT** integrable. In Engineering, we are always given ''nice" functions that always have integrals but it turns out there are functions that don't have an "area". One 
 potential example is comparing the area between two functions that appear to be the same but one has finite number of holes and the other has infinitely many holes in the graph. One is integrable 
 and the other is not.
 
@@ -162,7 +162,7 @@ $$
 Thus $U(f) \ne L(f)$ and by definition, $f$ is not integrable on $[a,b]$
 
 Any engineering student should be surprised of this result, especially on the idea that one can be asked to determine if a function is integrable or not. This is one of many examples that differentiates 
-between Math and Engineering students. Math students are expected to not take anything forgranted unless told otherwise (reality is that there are some materials that are just too complex at the moment 
+between Math and Engineering students. Math students are expected to not take anything for granted unless told otherwise (reality is that there are some materials that are just too complex at the moment 
 to learn).
 
 Previously, we saw that for any partition $P, U(f, P) \leq  U(f,[a,b])$. We previously reasoned that a finer partition does a much more accurate job in capturing the function's true behavior. Geometrically, 
@@ -284,7 +284,7 @@ $$
 \int_a^b f(x)dx = F(b) - F(a) \nonumber
 $$
 
-So if we were to swap the bounds, we would have: $- (F(a) - F(b)) = -\int_b^a f(x)dx$
+So if we were to swap the bounds, we would have: $\int_b^a f(x)dx = F(a) - F(b) = - (F(b) - F(a)) = - \int_a^b f(x)dx$
 
 > If $a \lt b$ then $\int_b^a f(x)dx = - \int_a^b f(x)dx$
 
@@ -584,7 +584,7 @@ Thus,
 
 $$
 \begin{align*}
-\int \ln(x)dx &= x\ln(x) - \int \bcancel{x}(\frac{dx}{\bcancel{x}} \\
+\int \ln(x)dx &= x\ln(x) - \int \bcancel{x}(\frac{dx}{\bcancel{x}}) \\
 &= x\ln(x) - \int dx \\
 &= \boxed{x\ln(x) - x + C}
 \end{align*}
@@ -1507,7 +1507,7 @@ into a series of polynomials? That is what will be explored in this section, wor
 >
 > For $n\geq 1$, the remainder $R_n(x)$ is defined by:
 >
-> $R_n(x) = f(x) - \sum\limits_{k=0}^{n-1}\frac{f^{(k)}(c)}{k!}(x-c)^k$
+> $R_n(x) = f(x) - \sum\limits_{k=0}^{n-1}\frac{f^{(k)}(x_o)}{k!}(x-x_o)^k$
 
 When we approximate a function $f(x)$ using a finite Taylor polynomial of degree $n$ which we call $P_n(x)$, the approximation is rarely perfect. This difference must be taken into account and thus the remainder
 
@@ -1521,7 +1521,7 @@ $$
 
 On a note about the remainder, we also have this result:
 
-> $f(x) = \sum\limits_{k=0}^\infty \frac{f^{(n)}(x_o)}{k!}(x-x_o)^n \iff \lim\limits_{n\to\infty}R_n(x) = 0$
+> $f(x) = \sum\limits_{k=0}^\infty \frac{f^{(k)}(x_o)}{k!}(x-x_o)^k \iff \lim\limits_{n\to\infty}R_n(x) = 0$
 
 Suppose we have a power series in the form $f(x) = \sum a_n(x-x_o)^n$. We have never discussed how to determine what $a_n$ is. In our definition of taylor series, all order of derivatives of $f$ exists at $x_o$. 
 This,
