@@ -17,6 +17,6 @@ Here are the following mirrors as of the time of writing (April 29 2026):
 * **Codeberg:** [zakuarbor.codeberg.page](https://zakuarbor.codeberg.page) also accessible via [randombits.ca](https://randombits.ca)
 * **Github:** [https://zakuarbor.github.io/](https://zakuarbor.github.io/)
 
-The long-term goal is to rent a VPS to "self-host" the blog (at [https://randombits.neocities.org/](https://randombits.neocities.org/)) while maintaining the others as mirrors for readers who 
+The long-term goal is to rent a VPS to "self-host" the blog (at [https://randombits.ca/](https://randombits.ca/)) while maintaining the others as mirrors for readers who 
 have their own platform preferences. Though neocities will remain my platform of choice for site discovery and community networking. Thus for the neocities community, nothing will change 
 in the short and long term outlook of the site.

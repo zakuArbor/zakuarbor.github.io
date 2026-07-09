@@ -9,3 +9,8 @@ To add mirrors:
 ```
 git remote set-url --add --push origin git@github.com:zakuArbor/zakuarbor.github.io.git
 ```
+
+To pull submodule:
+```
+git submodule update --init --recursive
+```
