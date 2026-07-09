@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multilingual Braille Translator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for the dots */
+        .braille-dot {
+            width: 4.5rem;
+            height: 4.5rem;
+            border-radius: 50%;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            border-width: 4px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.8rem;
+            color: transparent;
+            user-select: none;
+        }
+
+        /* State: Unselected (Hollow Ring) */
+        .dot-flat {
+            background-color: transparent;
+            border-color: theme('colors.gray.300');
+            transform: scale(1);
+            color: theme('colors.gray.300');
+        }
+        .dot-flat:hover {
+            border-color: theme('colors.indigo.300');
+            background-color: theme('colors.gray.50');
+        }
+
+        /* State: Selected (Filled Solid) */
+        .dot-raised {
+            background-color: theme('colors.indigo.600');
+            border-color: theme('colors.indigo.600');
+            box-shadow: 0 0 20px rgba(79, 70, 229, 0.5);
+            transform: scale(1.05);
+            color: theme('colors.indigo.200');
+        }
+
+        /* Adjustments for smaller screens */
+        @media (max-width: 640px) {
+            .braille-dot {
+                width: 3.5rem;
+                height: 3.5rem;
+                border-width: 3px;
+            }
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Active tab styling */
+        .tab-active {
+            background-color: theme('colors.indigo.600') !important;
+            color: white !important;
+            font-weight: 700;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.3s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen p-4 sm:p-8 flex flex-col items-center">
+
+    <div class="max-w-6xl w-full bg-white p-6 sm:p-8 rounded-2xl shadow-xl border border-slate-100">
+
+        <div class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-800 mb-2">
+                Multilingual Braille Writer
+            </h1>
+            <p class="text-slate-500">
+            Select dots to write. The pattern follows the visual grid (Top row, then Middle, then Bottom).<br/>
+            </p>
+        </div>
+
+        <div class="flex justify-center mb-10">
+            <div class="bg-slate-100 p-1 rounded-xl inline-flex">
+                <button id="tab-en" onclick="setLanguage('en')" class="px-6 py-2 rounded-lg text-slate-600 font-medium hover:text-indigo-600 transition duration-200">
+                    English
+                </button>
+                <button id="tab-fr" onclick="setLanguage('fr')" class="px-6 py-2 rounded-lg text-slate-600 font-medium hover:text-indigo-600 transition duration-200">
+                    French
+                </button>
+                <button id="tab-jp" onclick="setLanguage('jp')" class="px-6 py-2 rounded-lg text-slate-600 font-medium hover:text-indigo-600 transition duration-200">
+                    Japanese
+                </button>
+            </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-10">
+            
+            <div class="lg:w-1/2 flex flex-col items-center">
+                <div class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-4">Input Pad (Horizontal 0-5)</div>
+                <div id="braille-grid-container" class="bg-slate-50 p-8 rounded-2xl border-2 border-slate-100 shadow-sm w-full max-w-md flex justify-center">
+                    <div id="braille-grid" class="grid grid-cols-2 gap-x-12 gap-y-8">
+                        <div id="dot-0" class="braille-dot dot-flat" onclick="toggleDot(0)">0</div>
+                        <div id="dot-1" class="braille-dot dot-flat" onclick="toggleDot(1)">1</div>
+                        
+                        <div id="dot-2" class="braille-dot dot-flat" onclick="toggleDot(2)">2</div>
+                        <div id="dot-3" class="braille-dot dot-flat" onclick="toggleDot(3)">3</div>
+                        
+                        <div id="dot-4" class="braille-dot dot-flat" onclick="toggleDot(4)">4</div>
+                        <div id="dot-5" class="braille-dot dot-flat" onclick="toggleDot(5)">5</div>
+                    </div>
+                </div>
+                <div class="mt-4 text-slate-400 text-sm">Tap circles to toggle</div>
+            </div>
+
+            <div class="lg:w-1/2 flex flex-col gap-6">
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <div class="text-xs font-bold text-slate-400 uppercase mb-1">Binary Pattern</div>
+                        <div id="braille-pattern-display" class="text-2xl font-mono text-slate-600 tracking-widest">
+                            ...
+                        </div>
+                    </div>
+                    
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-100 flex flex-col justify-center items-center relative overflow-hidden">
+                        <div class="text-xs font-bold text-indigo-400 uppercase absolute top-3 left-4">Preview</div>
+                        
+                        <div id="preview-std" class="text-5xl font-black text-indigo-700 leading-none mt-2">?</div>
+                        
+                        <div id="preview-jp" class="hidden w-full flex justify-around items-end mt-2">
+                            <div class="text-center">
+                                <span id="preview-jp-kana" class="block text-4xl font-black text-indigo-700">?</span>
+                                <span class="text-[10px] text-indigo-400 font-bold uppercase">Kana</span>
+                            </div>
+                            <div class="text-center">
+                                <span id="preview-jp-romanji" class="block text-2xl font-bold text-indigo-500">?</span>
+                                <span class="text-[10px] text-indigo-400 font-bold uppercase">Romanji</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <button id="add-char-btn" onclick="addCharacter()" 
+                            class="col-span-2 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-lg shadow-indigo-200 transition transform active:scale-[0.98] disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed flex justify-center items-center gap-2"
+                            disabled>
+                        <span>Add Character to Text</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <button onclick="addSpace()" 
+                            class="py-3 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold rounded-xl transition active:scale-[0.98]">
+                        Space
+                    </button>
+                    <button onclick="backspace()"
+                            class="py-3 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold rounded-xl transition active:scale-[0.98]">
+                        Backspace
+                    </button>
+                    <button onclick="clearAll()"
+                            class="col-span-2 py-2 text-red-500 hover:text-red-700 font-semibold text-sm transition">
+                        Clear Everything
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <hr class="my-8 border-slate-100">
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div>
+                <h2 class="text-sm font-bold text-slate-500 uppercase mb-2 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
+                    Translated Text
+                </h2>
+                <div id="translated-sentence" class="min-h-[120px] p-5 bg-slate-50 border-2 border-slate-200 rounded-xl text-3xl text-slate-800 font-medium whitespace-pre-wrap shadow-inner"></div>
+            </div>
+
+            <div>
+                <h2 class="text-sm font-bold text-slate-400 uppercase mb-2">
+                    Romanji
+                </h2>
+                <div id="romanji-sentence" class="min-h-[120px] p-5 bg-white border-2 border-slate-100 rounded-xl text-xl text-slate-500 font-mono whitespace-pre-wrap shadow-sm"></div>
+            </div>
+            
+            <div>
+                <h2 class="text-sm font-bold text-slate-400 uppercase mb-2">
+                    Braille Output
+                </h2>
+                <div id="braille-unicode-sentence" class="min-h-[120px] p-5 bg-white border-2 border-slate-100 rounded-xl text-3xl text-slate-600 font-sans whitespace-pre-wrap shadow-sm"></div>
+            </div>
+        </div>
+
+    </div>
+<script>
+        // --- Configuration and State ---
+        
+        let dotStates = [0, 0, 0, 0, 0, 0]; 
+        
+        let currentLanguage = 'en';
+        let currentTranslation = null;
+        let sentenceHistory = []; 
+
+        // DOM Elements
+        const previewStd = document.getElementById('preview-std');
+        const previewJp = document.getElementById('preview-jp');
+        const previewJpKana = document.getElementById('preview-jp-kana');
+        const previewJpRomanji = document.getElementById('preview-jp-romanji');
+        const sentenceEl = document.getElementById('translated-sentence');
+        const romanjiEl = document.getElementById('romanji-sentence');
+        const brailleUnicodeEl = document.getElementById('braille-unicode-sentence');
+        const braillePatternEl = document.getElementById('braille-pattern-display');
+        const addCharBtn = document.getElementById('add-char-btn');
+
+        // --- Braille Maps (Visual Horizontal Format) ---
+        
+        const BRAILLE_MAP_EN = {
+            '100000': 'A', '101000': 'B', '110000': 'C', '110100': 'D', '100100': 'E',
+            '111000': 'F', '111100': 'G', '101100': 'H', '011000': 'I', '011100': 'J',
+            '100010': 'K', '101010': 'L', '110010': 'M', '110110': 'N', '100110': 'O',
+            '111010': 'P', '111110': 'Q', '101110': 'R', '011010': 'S', '011110': 'T',
+            '100011': 'U', '101011': 'V', '011101': 'W', '110011': 'X', '110111': 'Y',
+            '100111': 'Z',
+            '000000': ' ' 
+        };
+
+        const BRAILLE_MAP_FR = {
+            ...BRAILLE_MAP_EN, 
+            '101111': 'À', '111111': 'É', '011011': 'È', '111011': 'Ç', 
+            '011111': 'Ù', '101001': 'Ê', '110101': 'Ô'
+        };
+
+        // Japanese (Tenji) Codes
+        const BRAILLE_MAP_JP = {
+            // Vowels
+            '100000': { romanji: 'A', kana: 'あ' },
+            '101000': { romanji: 'I', kana: 'い' },
+            '110000': { romanji: 'U', kana: 'う' },
+            '111000': { romanji: 'E', kana: 'え' },
+            '011000': { romanji: 'O', kana: 'お' },
+            
+            // K-Row
+            '100001': { romanji: 'KA', kana: 'か' },
+            '101001': { romanji: 'KI', kana: 'き' },
+            '110001': { romanji: 'KU', kana: 'く' },
+            '111001': { romanji: 'KE', kana: 'け' },
+            '011001': { romanji: 'KO', kana: 'こ' },
+            
+            // S-Row
+            '100101': { romanji: 'SA', kana: 'さ' },
+            '101101': { romanji: 'SHI', kana: 'し' },
+            '110101': { romanji: 'SU', kana: 'す' },
+            '111101': { romanji: 'SE', kana: 'せ' },
+            '011101': { romanji: 'SO', kana: 'そ' },
+            
+            // T-Row
+            '100110': { romanji: 'TA', kana: 'た' },
+            '101110': { romanji: 'CHI', kana: 'ち' },
+            '110110': { romanji: 'TSU', kana: 'つ' },
+            '111110': { romanji: 'TE', kana: 'て' },
+            '011110': { romanji: 'TO', kana: 'と' },
+
+            // N-Row
+            '100010': { romanji: 'NA', kana: 'な' },
+            '101010': { romanji: 'NI', kana: 'に' },
+            '110010': { romanji: 'NU', kana: 'ぬ' },
+            '111010': { romanji: 'NE', kana: 'ね' },
+            '011010': { romanji: 'NO', kana: 'の' },
+
+            // H-ROW
+            '100011': { romanji: 'HA', kana: 'は' },
+            '101011': { romanji: 'HI', kana: 'ひ' },
+            '110011': { romanji: 'FU', kana: 'ふ' },
+            '111011': { romanji: 'HE', kana: 'へ' },
+            '011011': { romanji: 'HO', kana: 'ほ' },
+
+            // M-ROW
+            '100111': { romanji: 'MA', kana: 'ま' },
+            '101111': { romanji: 'MI', kana: 'み' },
+            '110111': { romanji: 'MU', kana: 'む' },
+            '111111': { romanji: 'ME', kana: 'め' },
+            '011111': { romanji: 'MO', kana: 'も' },
+
+            '000111': { romanji: 'N', kana: 'ん' },
+
+            // Y-ROW
+            '010010': { romanji: 'YA', kana: 'や' },
+            '010011': { romanji: 'YU', kana: 'ゆ' },
+            '010110': { romanji: 'YO', kana: 'よ' },
+            '010000': { romanji: '-Y-', kana: '' },
+            
+            // R-ROW
+            '100100': { romanji: 'RA', kana: 'ら' },
+            '101100': { romanji: 'RI', kana: 'り' },
+            '110100': { romanji: 'RU', kana: 'る' },
+            '111100': { romanji: 'RE', kana: 'れ' },
+            '011100': { romanji: 'RO', kana: 'ろ' },
+
+            // W-ROW
+            '000010': { romanji: 'WA', kana: 'わ' },
+            '001010': { romanji: 'WI', kana: 'ゐ' },
+            '001110': { romanji: 'WE', kana: 'ゑ' },
+            '000110': { romanji: 'WO', kana: 'を' },
+            '001001': { romanji: '-W-', kana: '' },
+
+            // --- MODIFIERS & SPECIAL CHARS ---
+            
+            // 1. Dakuten (Voicing) g, z, d, b, v
+            '000100': { romanji: '$DAKUTEN$', kana: '゛' }, 
+            
+            // 2. Handakuten (Semi-voicing) p
+            '000001': { romanji: '$HANDAKUTEN$', kana: '゜' },
+
+            // 3. Yōon (Contracted sounds) kya, sha, cha, etc.
+            '010000': { romanji: '$YOON$', kana: 'ゃ' },
+
+            // 4. Yōon + Dakuten (e.g., gya, ja, bya)
+            '010100': { romanji: '$YOON_DAK$', kana: 'ぎゃ' },
+
+            // 5. Yōon + Handakuten (e.g., pya)
+            '010001': { romanji: '$YOON_HAN$', kana: 'ぴゃ' },
+
+            // Sokuon (Small Tsu / Double Consonant)
+            '001000': { romanji: '$SOKUON$', kana: 'っ' },
+            
+            // Chōon (Long Vowel)
+            '001100': { romanji: '—', kana: 'ー' },    
+
+            '000000': ' '
+        };
+        
+        // --- Transformation Maps ---
+
+        // 1. Dakuten: Unvoiced -> Voiced
+        const DAKUTEN_MAP = {
+            'KA': { r: 'GA', k: 'が' }, 'KI': { r: 'GI', k: 'ぎ' }, 'KU': { r: 'GU', k: 'ぐ' }, 'KE': { r: 'GE', k: 'げ' }, 'KO': { r: 'GO', k: 'ご' },
+            'SA': { r: 'ZA', k: 'ざ' }, 'SHI': { r: 'JI', k: 'じ' }, 'SU': { r: 'ZU', k: 'ず' }, 'SE': { r: 'ZE', k: 'ぜ' }, 'SO': { r: 'ZO', k: 'ぞ' },
+            'TA': { r: 'DA', k: 'だ' }, 'CHI': { r: 'JI', k: 'ぢ' }, 'TSU': { r: 'ZU', k: 'づ' }, 'TE': { r: 'DE', k: 'で' }, 'TO': { r: 'DO', k: 'ど' },
+            'HA': { r: 'BA', k: 'ば' }, 'HI': { r: 'BI', k: 'び' }, 'FU': { r: 'BU', k: 'ぶ' }, 'HE': { r: 'BE', k: 'べ' }, 'HO': { r: 'BO', k: 'ぼ' },
+            'U':  { r: 'VU', k: 'ゔ' } // Special case for foreign words
+        };
+
+        // 2. Handakuten: H -> P
+        const HANDAKUTEN_MAP = {
+            'HA': { r: 'PA', k: 'ぱ' }, 'HI': { r: 'PI', k: 'ぴ' }, 'FU': { r: 'PU', k: 'ぷ' }, 'HE': { r: 'PE', k: 'ぺ' }, 'HO': { r: 'PO', k: 'ぽ' }
+        };
+
+        // 3. Yōon: Shifts vowel row to 'ya, yu, yo' (and 'sha, shu, sho', etc.)
+        // Note: In Tenji, Yoon Prefix + KA = KYA. Yoon Prefix + KU = KYU.
+        const YOON_MAP = {
+            'KA': { r: 'KYA', k: 'きゃ' }, 'KU': { r: 'KYU', k: 'きゅ' }, 'KO': { r: 'KYO', k: 'きょ' },
+            'SA': { r: 'SHA', k: 'しゃ' }, 'SU': { r: 'SHU', k: 'しゅ' }, 'SO': { r: 'SHO', k: 'しょ' },
+            'TA': { r: 'CHA', k: 'ちゃ' }, 'TSU':{ r: 'CHU', k: 'ちゅ' }, 'TO': { r: 'CHO', k: 'ちょ' },
+            'NA': { r: 'NYA', k: 'にゃ' }, 'NU': { r: 'NYU', k: 'にゅ' }, 'NO': { r: 'NYO', k: 'にょ' },
+            'HA': { r: 'HYA', k: 'ひゃ' }, 'FU': { r: 'HYU', k: 'ひゅ' }, 'HO': { r: 'HYO', k: 'ひょ' },
+            'MA': { r: 'MYA', k: 'みゃ' }, 'MU': { r: 'MYU', k: 'みゅ' }, 'MO': { r: 'MYO', k: 'みょ' },
+            'RA': { r: 'RYA', k: 'りゃ' }, 'RU': { r: 'RYU', k: 'りゅ' }, 'RO': { r: 'RYO', k: 'りょ' }
+        };
+        
+        const LANGUAGE_CONFIG = {
+            'en': { map: BRAILLE_MAP_EN, name: 'English' },
+            'fr': { map: BRAILLE_MAP_FR, name: 'French' },
+            'jp': { map: BRAILLE_MAP_JP, name: 'Japanese' }
+        };
+
+        // --- Core Functions ---
+
+        function setLanguage(lang) {
+            currentLanguage = lang;
+            
+            ['en', 'fr', 'jp'].forEach(l => {
+                const tab = document.getElementById(`tab-${l}`);
+                if (l === lang) {
+                    tab.classList.add('bg-white', 'shadow-sm', 'text-indigo-600');
+                    tab.classList.remove('text-slate-600');
+                } else {
+                    tab.classList.remove('bg-white', 'shadow-sm', 'text-indigo-600');
+                    tab.classList.add('text-slate-600');
+                }
+            });
+
+            if (lang === 'jp') {
+                previewStd.classList.add('hidden');
+                previewJp.classList.remove('hidden');
+            } else {
+                previewStd.classList.remove('hidden');
+                previewJp.classList.add('hidden');
+            }
+
+            clearGrid();
+        }
+
+        function toggleDot(index) {
+            dotStates[index] = 1 - dotStates[index]; 
+            updateUI();
+        }
+
+        function getBraillePattern() {
+            return dotStates.join('');
+        }
+        
+        function getUnicodeBraille(pattern) {
+            let code = 0x2800;
+            if (pattern[0] === '1') code += 0x1;
+            if (pattern[2] === '1') code += 0x2;
+            if (pattern[4] === '1') code += 0x4;
+            if (pattern[1] === '1') code += 0x8;
+            if (pattern[3] === '1') code += 0x10;
+            if (pattern[5] === '1') code += 0x20;
+            return String.fromCodePoint(code);
+        }
+
+        function translatePattern(pattern) {
+            const map = LANGUAGE_CONFIG[currentLanguage].map;
+            return map[pattern]; 
+        }
+
+        function updateUI() {
+            const pattern = getBraillePattern();
+            const result = translatePattern(pattern);
+            currentTranslation = result;
+            
+            let isKnownChar = false;
+
+            if (result) {
+                isKnownChar = (result !== ' '); 
+                
+                if (currentLanguage === 'jp') {
+                    if (result === ' ') {
+                        previewJpKana.textContent = '[_]';
+                        previewJpRomanji.textContent = '';
+                        isKnownChar = false; 
+                    } else {
+                        previewJpKana.textContent = result.kana;
+                        previewJpRomanji.textContent = result.romanji;
+                        isKnownChar = true;
+                    }
+                } else {
+                    if (result === ' ') {
+                         previewStd.textContent = '[_]';
+                         isKnownChar = false;
+                    } else {
+                         previewStd.textContent = result;
+                         isKnownChar = true;
+                    }
+                }
+                braillePatternEl.textContent = pattern;
+            } else {
+                previewStd.textContent = '?';
+                previewJpKana.textContent = '?';
+                previewJpRomanji.textContent = '?';
+                braillePatternEl.textContent = pattern === '000000' ? '...' : pattern;
+            }
+
+            dotStates.forEach((state, index) => {
+                const dotEl = document.getElementById(`dot-${index}`);
+                if (state === 1) {
+                    dotEl.classList.remove('dot-flat');
+                    dotEl.classList.add('dot-raised');
+                } else {
+                    dotEl.classList.remove('dot-raised');
+                    dotEl.classList.add('dot-flat');
+                }
+            });
+
+            addCharBtn.disabled = !isKnownChar;
+        }
+        
+        function addCharacter() {
+            if (!currentTranslation || currentTranslation === ' ') return;
+
+            let pattern = getBraillePattern();
+            let charObj = { display: '', romanji: '', pattern: pattern };
+
+            if (currentLanguage === 'jp') {
+                // Store raw data, logic happens in renderSentences
+                charObj.display = currentTranslation.kana;
+                charObj.romanji = currentTranslation.romanji;
+            } else {
+                charObj.display = currentTranslation;
+                charObj.romanji = currentTranslation; 
+            }
+
+            sentenceHistory.push(charObj);
+            renderSentences();
+            clearGrid();
+        }
+
+        function addSpace() {
+            sentenceHistory.push({ display: ' ', romanji: ' ', pattern: '000000' });
+            renderSentences();
+            clearGrid();
+        }
+        
+        function renderSentences() {
+            let displayArray = [];
+            let romanjiArray = [];
+            let brailleUnicodeArray = [];
+            
+            for (let i = 0; i < sentenceHistory.length; i++) {
+                let current = sentenceHistory[i];
+                
+                // Handle Japanese Modifiers
+                if (currentLanguage === 'jp' && current.romanji.startsWith('$') && i < sentenceHistory.length - 1) {
+                    let modifier = current.romanji;
+                    let next = sentenceHistory[i + 1];
+                    let nextRom = next.romanji.toUpperCase();
+                    
+                    // Logic Flags
+                    let handled = false;
+                    let resultK = '';
+                    let resultR = '';
+
+                    // 1. Dakuten (Voicing)
+                    if (modifier === '$DAKUTEN$' && DAKUTEN_MAP[nextRom]) {
+                        resultK = DAKUTEN_MAP[nextRom].k;
+                        resultR = DAKUTEN_MAP[nextRom].r;
+                        handled = true;
+                    } 
+                    // 2. Handakuten (P-sound)
+                    else if (modifier === '$HANDAKUTEN$' && HANDAKUTEN_MAP[nextRom]) {
+                        resultK = HANDAKUTEN_MAP[nextRom].k;
+                        resultR = HANDAKUTEN_MAP[nextRom].r;
+                        handled = true;
+                    }
+                    // 3. Yōon (Palatalization: Kya, Shu, etc.)
+                    else if (modifier === '$YOON$' && YOON_MAP[nextRom]) {
+                        resultK = YOON_MAP[nextRom].k;
+                        resultR = YOON_MAP[nextRom].r;
+                        handled = true;
+                    }
+                    // 4. Yōon + Dakuten (Gya, Ja, Bya)
+                    else if (modifier === '$YOON_DAK$') {
+                        // First apply Yoon
+                        if (YOON_MAP[nextRom]) {
+                            // We have an intermediate Romanji (e.g., HYA)
+                            // Now we need to Voice it (HYA -> BYA)
+                            // For simplicity, we map manually or derive.
+                            // Let's derive: Check the first char of the Yoon result and voice it.
+                            let tempR = YOON_MAP[nextRom].r; // e.g. HYA
+                            let tempK = YOON_MAP[nextRom].k; // e.g. ひゃ
+                            
+                            // Manual Overrides for Yoon+Dakuten
+                            if (tempR.startsWith('K')) { resultR = 'G' + tempR.slice(1); resultK = tempK.replace('き', 'ぎ'); } // Kya -> Gya
+                            else if (tempR.startsWith('S')) { resultR = 'J' + tempR.slice(2); resultK = tempK.replace('し', 'じ'); } // Sha -> Ja
+                            else if (tempR.startsWith('C')) { resultR = 'J' + tempR.slice(2); resultK = tempK.replace('ち', 'ぢ'); } // Cha -> Ja (Dji)
+                            else if (tempR.startsWith('H')) { resultR = 'B' + tempR.slice(1); resultK = tempK.replace('ひ', 'び'); } // Hya -> Bya
+                            else {
+                                // Fallback
+                                resultR = tempR; resultK = tempK;
+                            }
+                            handled = true;
+                        }
+                    }
+                    // 5. Yōon + Handakuten (Pya)
+                    else if (modifier === '$YOON_HAN$') {
+                         if (YOON_MAP[nextRom]) {
+                            let tempR = YOON_MAP[nextRom].r; // e.g. HYA
+                            let tempK = YOON_MAP[nextRom].k; // e.g. ひゃ
+                            
+                            // Only H-row takes Handakuten
+                            if (tempR.startsWith('H')) { 
+                                resultR = 'P' + tempR.slice(1); 
+                                resultK = tempK.replace('ひ', 'ぴ'); 
+                                handled = true;
+                            }
+                        }
+                    }
+
+                    // --- Sokuon Logic (Small Tsu) ---
+                    // In this logic, Sokuon (001000) is NOT a prefix modifier for the *character*, 
+                    // but a separate character that affects the *Romanji* of the next char.
+                    // We handle Sokuon separately below, so we skip it here.
+                    if (modifier === '$SOKUON$') {
+                        // Do nothing here, let it pass through as a normal char, 
+                        // we handle doubling in the Romanji construction phase
+                        handled = false; 
+                    }
+
+                    if (handled) {
+                        displayArray.push(resultK);
+                        romanjiArray.push(resultR);
+                        
+                        // Push BOTH patterns to braille output
+                        brailleUnicodeArray.push(getUnicodeBraille(current.pattern));
+                        brailleUnicodeArray.push(getUnicodeBraille(next.pattern));
+                        
+                        i++; // Skip next char
+                        continue;
+                    }
+                }
+
+                // --- Standard Processing (Non-modifiers or failed modifiers) ---
+                
+                // Special Romanji Sokuon Handling (Double Consonant)
+                if (current.romanji === '$SOKUON$') {
+                    displayArray.push('っ');
+                    
+                    // Peek ahead for Romanji doubling
+                    if (i < sentenceHistory.length - 1) {
+                        let next = sentenceHistory[i + 1];
+                        let nextR = next.romanji;
+                        // If next is a modifier, we might need to look further, but for simplicity:
+                        // We just double the first letter of the next resolved Romanji if possible.
+                        // Note: This is complex with the array builder. 
+                        // Simplified: Sokuon is just 'っ' in display. 
+                        // In Romanji, we usually output a placeholder or handle it in post-processing.
+                        // Let's allow it to be '-' for now, or try to look ahead.
+                         romanjiArray.push('(x2)'); // Indicator for user
+                    } else {
+                        romanjiArray.push('-');
+                    }
+                    brailleUnicodeArray.push(getUnicodeBraille(current.pattern));
+                } 
+                else if (current.romanji.startsWith('$')) {
+                    // Dangling modifier (at end of sentence or invalid pair)
+                    displayArray.push(current.display);
+                    romanjiArray.push('-');
+                    brailleUnicodeArray.push(getUnicodeBraille(current.pattern));
+                } 
+                else {
+                    // Normal Character
+                    displayArray.push(current.display);
+                    romanjiArray.push(current.romanji);
+                    brailleUnicodeArray.push(getUnicodeBraille(current.pattern));
+                }
+            }
+            
+            // Post-process Romanji for Sokuon (Simple approach)
+            let finalRomanji = romanjiArray.join('');
+            finalRomanji = finalRomanji.replace(/\(x2\)(.)/g, (match, p1) => {
+                return p1 + p1; // Doubles the next character
+            });
+
+            sentenceEl.textContent = displayArray.join('');
+            romanjiEl.textContent = finalRomanji;
+            brailleUnicodeEl.textContent = brailleUnicodeArray.join('');
+        }
+
+        function clearGrid() {
+            dotStates = [0, 0, 0, 0, 0, 0];
+            updateUI();
+        }
+
+        function backspace() {
+            if (sentenceHistory.length > 0) {
+                sentenceHistory.pop();
+                renderSentences();
+            }
+        }
+
+        function clearAll() {
+            sentenceHistory = [];
+            renderSentences();
+            clearGrid();
+        }
+
+        window.onload = () => {
+            setLanguage('en'); 
+        };
+    </script>
+</body>
+</html>

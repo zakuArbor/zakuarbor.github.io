@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UTF-8 Hangul</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="mobile.css">
+  <script src = "script.js"></script>
+</head>
+<body>
+  <div class="container-wrapper">
+    <div id = "output">
+        <a href = "" id = "unicodeLink">
+        <div id = "output-utf8">U+<span id = "output-utf8-val">AE40</span></div>
+        <div id = "output-hangul">김</div> <!-- https://www.compart.com/en/unicode/U+AE40 -->
+        <div id = "output-roman">Kim</div> <!-- https://en.wikipedia.org/wiki/Revised_Romanization_of_Korean -->
+        </a>
+    </div>
+    <div id = "calc">
+      <table>
+        <thead>
+          <th id = "init-header">initial</th>
+          <th></th>
+          <th id = "medial-header">medial</th>
+          <th></th>
+          <th id = "final-header">final</th>
+          <th></th>
+          <th id = "offset-header">offset</th>
+        </thead>
+        <tbody>
+          <td id = "init-data">(<span id = "init-val"></span>&#10005; 588)</td>
+          <td>+</td>
+          <td id = "medial-data">(<span id = "medial-val"></span>&#10005; 28)</td>
+          <td>+</td>
+          <td id = "final-data"><span id = "final-val"></span></td>
+          <td>+</td>
+          <td id = "offset-data">44032<td>
+        </tbody>
+      </table>
+    </div>
+    <div id = "unicodeDisplay">
+      <table>
+        <tr id = "codeHeader">
+          <td id = "codeDecHeader">decimal</td>
+          <td id = "codeHexHeader">hex</td>
+        </tr>
+        <tr id = "codeVal">
+          <td id = "codeDecValue"></td>
+          <td id = "codeHexValue"></td>
+        </tr>
+      </table>
+    </div>
+    <div id = "about">
+    <p>Inspired by <a href = "https://youtu.be/vpSkBV5vydg?si=pjx1rvHq0cpChQKK">UTF-8, Explained Simply</a>, the best video I have watched on UTF-8 and Unicode in general.</p>
+    <p>See my <a href = "https://randombits.neocities.org/micro/2025/10/best-unicode-video">As to why I like this video</a></p>
+
+    <h3>Resources</h3>
+    <ul>
+      <li><b><a href = "https://youtu.be/vpSkBV5vydg?si=pjx1rvHq0cpChQKK">UTF-8, Explained Simply</a>:</b> To understand how UTF-8 works and how UTF-8 works to represent Korean</li>
+      <li><b><a href = "https://en.wikipedia.org/wiki/Korean_language_and_computers">Wikipedia - Korean Language and Computers:</b> References on UTF-8</li>
+      <li><b><a href = "https://en.wikipedia.org/wiki/Revised_Romanization_of_Korean">Revised Romanization of Korean</a>:</b> To romanized Korean to Roman letters</li>
+      <li><b><a href = "https://roman.cs.pusan.ac.kr/input_eng.aspx">Korean Romainzation Convertor:</a></b> To quickly verify a few examples.</li>
+      <li><b><a href = "https://www.compart.com/en/unicode/block/U+AC00">Hangul Syllables</a>:</b> All 11,172 combination of Korean syllables</li>
+      <li><b><a href = "https://www.compart.com/en/unicode/block/U+3130">Hangul Compatibility Jamo</a>:</b> Korean consonants and vowels + extra random Korean symbols I never seen or is archaic</li>
+    </ul>
+    <h3>Notes</h3>
+    <ul>
+      <li>Romanization is not perfect. Romanization implemention is just a simple mapping.</li>
+      <li>If there are any bugs, open an <a href = "https://codeberg.org/zakuArbor/unicode/issues">Issue</a> on Codeberg</li>
+    </ul>
+    </div>
+    <div style = "display:none">
+      <div id = "characters">
+      <div class = "char-blocks" id = "initialCharacters">
+      <button class="accordion" id = "init-accord">INITIAL CONSONANTS</button>
+      <div class = "panel" id = "initPanel">
+        <ol start = "0">
+          <li value = "0">ㄱ</li>
+          <li value = "1">ㄲ</li>
+          <li value = "2">ㄴ</li>
+          <li value = "3">ㄷ</li>
+          <li value = "4">ㄸ</li>
+          <li value = "5">ㄹ</li>
+          <li value = "6">ㅁ</li>
+          <li value = "7">ㅂ</li>
+          <li value = "8">ㅃ</li>
+          <li value = "9">ㅅ</li>
+          <li value = "10">ㅆ</li>
+          <li value = "11">ㅇ</li>
+          <li value = "12">ㅈ</li>
+          <li value = "13">ㅉ</li>
+          <li value = "14">ㅊ</li>
+          <li value = "15">ㅋ</li>
+          <li value = "16">ㅌ</li>
+          <li value = "17">ㅍ</li>
+          <li value = "18">ㅎ</li>
+        </ol>
+      </div>
+      </div>
+      <div class = "char-blocks" id = "medialCharacters">
+      <button class="accordion" id = "medial-accord">MEDIAL VOWELS</button>
+      <div class = "panel" id = "medialPanel">
+        <ol start = "0">
+          <li value = "0">ㅏ</li>
+          <li value = "1">ㅐ</li>
+          <li value = "2">ㅑ</li>
+          <li value = "3">ㅒ</li>
+          <li value = "4">ㅓ</li>
+          <li value = "5">ㅔ</li>
+          <li value = "6">ㅕ</li>
+          <li value = "7">ㅖ</li>
+          <li value = "8">ㅗ</li>
+          <li value = "9">ㅘ</li>
+          <li value = "10">ㅙ</li>
+          <li value = "11">ㅚ</li>
+          <li value = "12">ㅛ</li>
+          <li value = "13">ㅜ</li>
+          <li value = "14">ㅝ</li>
+          <li value = "15">ㅞ</li>
+          <li value = "16">ㅟ</li>
+          <li value = "17">ㅠ</li>
+          <li value = "18">ㅡ</li>
+          <li value = "19">ㅢ</li>
+          <li value = "20">ㅣ</li>
+        </ol>
+      </div>
+      </div>
+       <div class = "char-blocks" id = "finalCharacters">
+        <button class="accordion" id = "final-accord">FINAL CONSONANTS</button>
+        <div class = "panel" id = "finalPanel">
+          <ol start = "0">
+            <li value = "0">⬚</li>
+            <li value = "1">ㄱ</li>
+            <li value = "2">ㄲ</li>
+            <li value = "3">ﾣ</li>
+            <li value = "4">ﾤ</li>
+            <li value = "5">ﾥ</li>
+            <li value = "6">ﾦ</li>
+            <li value = "7">ﾧ</li>
+            <li value = "8">ﾩ</li>
+            <li value = "9">ﾪ</li>
+            <li value = "10">ﾫ</li>
+            <li value = "11">ﾬ</li>
+            <li value = "12">ﾭ</li>
+            <li value = "13">ﾮ</li>
+            <li value = "14">ﾯ</li>
+            <li value = "15">ﾰ</li>
+            <li value = "16">ﾱ</li>
+            <li value = "17">ﾲ</li>
+            <li value = "18">ﾴ</li>
+            <li value = "19">ﾵ</li>
+            <li value = "20">ﾶ</li>
+            <li value = "21">ﾷ</li>
+            <li value = "22">ﾸ</li>
+            <li value = "23">ﾺ</li>
+            <li value = "24">ﾻ</li>
+            <li value = "25">ﾼ</li>
+            <li value = "26">ﾽ</li>
+            <li value = "27">ﾾ</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    </div>
+    <h3 style = "text-align: center"><a href = "index.html">GO BACK</a></h3>
+  </div>
+  <script>
+    setupAccordion();
+
+    var initVal = document.getElementById("init-val");
+    var medialVal = document.getElementById("medial-val");
+    var finalVal = document.getElementById("final-val");
+    var outputUtf8 = document.getElementById("output-utf8-val");
+    var outputHangul = document.getElementById("output-hangul");
+    var outputRoman = document.getElementById("output-roman");
+    var codeDecVal = document.getElementById("codeDecValue");
+    var codeHexVal = document.getElementById("codeHexValue");
+    var unicodeLink = document.getElementById("unicodeLink");
+
+    var prevInit = {elem: null};
+    var prevMedial = {elem: null};
+    var prevFinal = {elem: null};
+    initPanel("initPanel", initVal, prevInit, 14);
+    initPanel("medialPanel", medialVal, prevMedial, 1);
+    initPanel("finalPanel", finalVal, prevFinal, 1);
+    update();
+  </script>
+</body>
+</html>
