@@ -14,6 +14,21 @@ update_sitemap() {
   git add sitemap.xml
 }
 
+update_feed() {
+  local url=$1
+
+  cp feed.xml.bak feed.xml
+  echo -e "Updating url in feed to: ${url}"
+  sed -i 's|href="/|href="https://'"${url}"'/|g' feed.xml
+  sed -i 's|<id>/|<id>https://'"${url}"'/|g' feed.xml
+  git add feed.xml
+}
+
+update_site() {
+  update_sitemap "${1}"
+  update_feed "${1}"
+}
+
 echo -e "${BLUE}Starting Jekyll Build...${NC}"
 
 bundle install
@@ -29,8 +44,9 @@ cd _site || exit 1
 dir=`pwd`
 echo -e "pwd: ${dir}"
 
-echo -e "${BLUE}Backing up sitemap.xml ...${NC}"
+echo -e "${BLUE}Backing up sitemap.xml and feed.xml ...${NC}"
 cp sitemap.xml sitemap.xml.bak
+cp feed.xml feed.xml.bak
 echo -e "${BLUE}Creating .domains ...${NC}"
 
 echo "randombits.ca" > .domains
@@ -45,18 +61,18 @@ echo -e "${BLUE}🔄 Syncing and Pushing...${NC}"
 git add -f .
 git add -f .domains
 
-update_sitemap "randombits.ca"
+update_site "randombits.ca"
 git commit -m "Deploy: $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes."
 git push -f origin pages
 
-update_sitemap "zakuarbor.github.io"
+update_site "zakuarbor.github.io"
 git commit -m "Deploy: $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes."
 git push -f github pages
 
 
 echo -e "${GREEN}✅ GitHub Pages updated!${NC}"
 
-update_sitemap "randombits.neocities.org"
+update_site "randombits.neocities.org"
 
 cd ..
 neocities push _site
