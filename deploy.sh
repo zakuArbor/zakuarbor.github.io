@@ -47,6 +47,7 @@ git add -f .domains
 
 update_sitemap "randombits.ca"
 git commit -m "Deploy: $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes."
+exit 1
 git push -f origin pages
 
 update_sitemap "zakuarbor.github.io"
