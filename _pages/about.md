@@ -61,8 +61,8 @@ Being bored of work, I decided to pursue another degree which led me to my curre
 
 <center><b>MANGA: 120x60 buttons</b></center>
 <div class = "badges-120">
-<div><img src = "cross-game" src = "{{ site.baseurl }}/assets/buttons/anime-manga-ln/cross-game.png"></div>
-<div><img src = "hidamari sketch" src = "{{ site.baseurl }}/assets/buttons/anime-manga-ln/hidamari-sketch.png"></div>
+<div><img src = "Cross Game" src = "{{ site.baseurl }}/assets/buttons/anime-manga-ln/cross-game.png"></div>
+<div><img src = "Hidamari Sketch" src = "{{ site.baseurl }}/assets/buttons/anime-manga-ln/hidamari-sketch.png"></div>
 <div><img src = "Twin Spica" src = "{{ site.baseurl }}/assets/buttons/anime-manga-ln/twin-spica.png"></div>
 <div><img src = "Pokémon Adventures" src = "{{ site.baseurl }}/assets/buttons/anime-manga-ln/pokemon-adventures.png"></div>
 <div><img src = "Frieren" src = "{{ site.baseurl }}/assets/buttons/anime-manga-ln/frieren.png"></div>
@@ -71,7 +71,7 @@ Being bored of work, I decided to pursue another degree which led me to my curre
 
 <center><b>LIGHT NOVELS: 120x60 Buttons</b></center>
 <div class = "badges-120">
-<div><img src = "legend of the galactic heroes" src = "{{ site.baseurl }}/assets/buttons/anime-manga-ln/lotgh.png"></div>
+<div><img src = "Legend of the galactic heroes" src = "{{ site.baseurl }}/assets/buttons/anime-manga-ln/lotgh.png"></div>
 <div><img src = "Monogatari" src = "{{ site.baseurl }}/assets/buttons/anime-manga-ln/monogatari.png"></div>
 <div><img src = "5cm per second" src = "{{ site.baseurl }}/assets/buttons/anime-manga-ln/5cms.png"></div>
 <div><img src = "Vivy" src = "{{ site.baseurl }}/assets/buttons/anime-manga-ln/vivy.png"></div>

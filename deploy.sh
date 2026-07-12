@@ -5,6 +5,15 @@ GREEN='\033[0;32m'
 RED='\033[0;31m'
 NC='\033[0m'
 
+update_sitemap() {
+  local url=$1
+
+  cp sitemap.xml.bak sitemap.xml
+  echo -e "Updating url in sitemap to: ${url}"
+  sed -i "s|http://localhost:4001|https://${domain}|g" sitemap.xml
+  git add sitemap.xml
+}
+
 echo -e "${BLUE}Starting Jekyll Build...${NC}"
 
 bundle install
@@ -20,6 +29,8 @@ cd _site || exit 1
 dir=`pwd`
 echo -e "pwd: ${dir}"
 
+echo -e "${BLUE}Backing up sitemap.xml ...${NC}"
+cp sitemap.xml sitemap.xml.bak
 echo -e "${BLUE}Creating .domains ...${NC}"
 
 echo "randombits.ca" > .domains
@@ -33,13 +44,19 @@ fi
 echo -e "${BLUE}🔄 Syncing and Pushing...${NC}"
 git add -f .
 git add -f .domains
+
+update_site "randombits.ca"
 git commit -m "Deploy: $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes."
 git push -f origin pages
+
+update_site "zakuarbor.github.io/"
+git commit -m "Deploy: $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes."
 git push -f github pages
 
 cd ..
 
 echo -e "${GREEN}✅ GitHub Pages updated!${NC}"
 
+update_site "randombits.neocities.org"
 neocities push _site
 
