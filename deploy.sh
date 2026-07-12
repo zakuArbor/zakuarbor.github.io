@@ -10,7 +10,7 @@ update_sitemap() {
 
   cp sitemap.xml.bak sitemap.xml
   echo -e "Updating url in sitemap to: ${url}"
-  sed -i "s|<loc>/|https://${url}/|g" sitemap.xml
+  sed -i "s|<loc>/|<loc>https://${url}/|g" sitemap.xml
   git add sitemap.xml
 }
 
