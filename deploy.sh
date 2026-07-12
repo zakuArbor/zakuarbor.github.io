@@ -49,7 +49,7 @@ update_sitemap "randombits.ca"
 git commit -m "Deploy: $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes."
 git push -f origin pages
 
-update_sitemap "zakuarbor.github.io/"
+update_sitemap "zakuarbor.github.io"
 git commit -m "Deploy: $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes."
 git push -f github pages
 
