@@ -51,14 +51,12 @@ git commit -m "Deploy: $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes."
 
 update_sitemap "zakuarbor.github.io"
 git commit -m "Deploy: $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes."
-
-exit 1
-git push -f github pages
+#git push -f github pages
 
 cd ..
 
 echo -e "${GREEN}✅ GitHub Pages updated!${NC}"
 
 update_sitemap "randombits.neocities.org"
-neocities push _site
+#neocities push _site
 
