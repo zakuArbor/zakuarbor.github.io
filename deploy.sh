@@ -10,7 +10,7 @@ update_sitemap() {
 
   cp sitemap.xml.bak sitemap.xml
   echo -e "Updating url in sitemap to: ${url}"
-  sed -i "s|http://localhost:4001|https://${domain}|g" sitemap.xml
+  sed -i "s|<loc>/|<loc>https://${url}/|g" sitemap.xml
   git add sitemap.xml
 }
 
@@ -45,18 +45,19 @@ echo -e "${BLUE}🔄 Syncing and Pushing...${NC}"
 git add -f .
 git add -f .domains
 
-update_site "randombits.ca"
+update_sitemap "randombits.ca"
 git commit -m "Deploy: $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes."
 git push -f origin pages
 
-update_site "zakuarbor.github.io/"
+update_sitemap "zakuarbor.github.io"
 git commit -m "Deploy: $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes."
 git push -f github pages
 
-cd ..
 
 echo -e "${GREEN}✅ GitHub Pages updated!${NC}"
 
-update_site "randombits.neocities.org"
+update_sitemap "randombits.neocities.org"
+
+cd ..
 neocities push _site
 
