@@ -539,6 +539,58 @@ details[open] {
   overflow-y: hidden !important;
 }
 
+.code-block {
+  display: block;
+  width: 100%;      
+  max-width: 750px;
+  box-sizing: border-box; 
+
+  padding: 0.75rem 1rem;
+  line-height: 1.3em;
+  font-size: 0.85rem;
+
+  white-space: pre-wrap;
+  word-break: break-all;  
+  overflow-x: hidden;      
+
+  font-family: 'Courier New', Courier, monospace;
+  background-color: #000000;
+  border: 1.5px solid #00F0FF;
+  color: #2EC27E;
+  margin: 1rem auto;
+}
+
+.user-host {
+  font-size: 1rem;
+  line-height: 1.4em;
+  color: #bbb;
+}
+
+@media (max-width: 480px) {
+  .code-block {
+    font-size: 0.75rem;
+    padding: 0.5rem 0.75rem;
+  }
+  .user-host {
+    font-size: 0.9rem;
+  }
+}
+
+.color-palette {
+  display: flex;
+  gap: 8px;
+}
+
+.color-palette span {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+}
+
+/*************************************************/
+
 @media only screen and (min-width: 1200px) {
 header, footer, #wrapper {
     padding-left: 10%;

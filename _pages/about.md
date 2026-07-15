@@ -94,11 +94,45 @@ In hindsight, I should have made these buttons 125x125
 
 <hr/>
 
+### PC Build
+
+<pre class="code-block">
+<span class="user-host"><b>zaku</b>@<b>fedora</b></span>
+------------------------------------------------
+<font color="#00F0FF"><b>OS</b></font>: Fedora Linux 44 (Workstation Edition) x86_64
+<font color="#00F0FF"><b>Host</b></font>: B650M Pro RS WiFi
+<font color="#00F0FF"><b>Kernel</b></font>: Linux 7.0.13-200.fc44.x86_64
+<font color="#00F0FF"><b>Shell</b></font>: bash 5.3.9
+
+<font color="#00F0FF"><b>DE</b></font>: GNOME 50.2
+<font color="#00F0FF"><b>WM</b></font>: Mutter (Wayland)
+<font color="#00F0FF"><b>Display (GWD 15&quot;)</b></font>: 1920x1080 in 15&quot;, 60 Hz [External]
+<font color="#00F0FF"><b>Display (BenQ Corporation 24&quot;)</b></font>: 1920x1080 in 24&quot;, 60 Hz [External]
+<font color="#00F0FF"><b>CPU</b></font>: AMD Ryzen 7 9700X (16) @ 5.58 GHz
+<font color="#00F0FF"><b>GPU</b></font>: AMD Radeon RX 9070 XT (64) @ 2.52 GHz (2.63 GiB / 15.83 GiB, <font color="#2EC27E">17%</font>) [Discrete]
+
+<font color="#00F0FF"><b>Memory</b></font>: 15.38 GiB / 30.91 GiB (<font color="#2EC27E">50%</font>)
+<font color="#00F0FF"><b>Swap</b></font>: 7.91 GiB / 8.00 GiB (<font color="#ED333B">99%</font>)
+<font color="#00F0FF"><b>Disk (/)</b></font>: 285.57 GiB / 928.91 GiB (<font color="#2EC27E">31%</font>) - btrfs
+<font color="#00F0FF"><b>Locale</b></font>: fr_FR.UTF-8
+
+<div class="color-palette">
+  <span style="background-color:#241F31"></span>
+  <span style="background-color:#C01C28"></span>
+  <span style="background-color:#2EC27E"></span>
+  <span style="background-color:#F5C211"></span>
+</div>
+</pre>
+
+<hr/>
+
 For general [non-fiction books recommendations]({{ site.baseurl }}/books)
 
 <hr/>
 
 <h2><a href = "faq">Click to FAQ</a></h2>
+
+<hr/>
 
 <b class = "ul-p">Notes:</b> 
 <ul class>
@@ -111,6 +145,6 @@ For general [non-fiction books recommendations]({{ site.baseurl }}/books)
 
 **Disclaimer 2:** I do not claim to be an expert in any subject. The blog serves more of a personal space to kill time and to write random things based on my knowledge at the time of writing and are likely to be of questionable quality.
 
-<p class = "last-edit"><b>Last Major Edit:</b> 2025-11-20</p> 
+<p class = "last-edit"><b>Last Major Edit:</b> 2026-08-15</p> 
 
 
