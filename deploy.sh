@@ -69,7 +69,6 @@ update_site "zakuarbor.github.io"
 git commit -m "Deploy: $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes."
 git push -f github pages
 
-
 echo -e "${GREEN}✅ GitHub Pages updated!${NC}"
 
 update_site "randombits.neocities.org"
