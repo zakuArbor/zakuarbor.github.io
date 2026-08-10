@@ -1,3 +1,0 @@
-[submodule "unicode"]
-	path = unicode
-	url = ssh://git@codeberg.org/zakuArbor/unicode.git
