@@ -47,10 +47,10 @@ echo -e "pwd: ${dir}"
 echo -e "${BLUE}Backing up sitemap.xml and feed.xml ...${NC}"
 cp sitemap.xml sitemap.xml.bak
 cp feed.xml feed.xml.bak
-echo -e "${BLUE}Creating .domains ...${NC}"
+#echo -e "${BLUE}Creating .domains ...${NC}"
 
-echo "randombits.ca" > .domains
-echo "www.randombits.ca" >> .domains
+#echo "randombits.ca" > .domains
+#echo "www.randombits.ca" >> .domains
 
 if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
     echo -e "${RED}❌ _site is not linked to Git. Run the reset commands above.${NC}"
@@ -59,13 +59,13 @@ fi
 
 echo -e "${BLUE}🔄 Syncing and Pushing...${NC}"
 git add -f .
-git add -f .domains
+#git add -f .domains
 
 update_site "randombits.ca"
 git commit -m "Deploy: $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes."
 git push -f origin pages
 
-update_site "zakuarbor.github.io"
+update_site "randombits.ca"
 git commit -m "Deploy: $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes."
 git push -f github pages
 
