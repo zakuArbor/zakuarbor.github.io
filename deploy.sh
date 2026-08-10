@@ -58,6 +58,7 @@ if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
 fi
 
 echo -e "${BLUE}🔄 Syncing and Pushing...${NC}"
+cp ../.wranglerignore .
 git add -f .
 #git add -f .domains
 
