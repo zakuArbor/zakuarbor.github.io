@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>Gundam With Decent Portrayal of Code - RANDOM BITS</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/css/syntax_monokai.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="/assets/css/contrast.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/png" href="/assets/site/random-bits-favicon.png">
+    <meta name="og:title" content="Random Bits">
+    <meta name="og:image" content="">
+    <meta name="og:description"
+        content="Random bits of programming, math, and personal thoughts">
+    <meta name="keywords" content="zakuarbor, programming, math, random bits, pikachu">
+    <meta name="description" content="Random bits of programming, math, and personal thoughts">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script charset="utf-8" src="/assets/js/script.js"></script>
+<script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+     loader: {load: ['[tex]/cancel']},
+      TeX: { 
+        equationNumbers: { autoNumber: "all" },
+        packages: {'[+]': ['cancel']}
+      } 
+    }); 
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <!--<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>-->
+  <header>
+    <center>
+      <h1 id = "title"><a href = "/index.html">RANDOM BITS</a><img id = "pikachu-header" src = "/assets/site/flying-pikachu.png"/></h1>
+    A random site by a random clueless human
+    </center>
+    <!--<marquee scrollamount="4">-->
+    <center>
+      <!--<img src = "/assets/gifs/pikachu-run.gif"/>--><p>Random bits of programming, math, and thoughts
+      By a clueless human</p><!-- <img src = "/assets/gifs/pikachu-run.gif"/>-->
+    </center>
+      <!--&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      <img src = "/assets/gifs/pikachu-run.gif"/>Random bits of programming, math, and thoughts
+      By a clueless human <img src = "/assets/gifs/pikachu-run.gif"/>-->
+      <!--</marquee>-->
+
+    <a href="javascript:void(0);" class="hamburger-nav" onclick="toggleMenu()"><i class="fa fa-bars"></i></a>
+    <nav id="header-nav">
+    <center>
+      <a href="/index.html">Home</a>
+      <a href="/micro/"><span style = "letter-spacing: 1px;">µ</span>Blog</a>
+      <a href="/blog/"><span style = "letter-spacing: 1px;">Blog</a>
+      <a href="/link.html">LinkBlog</a>
+      <!--<a href="/math.html">Math</a>-->
+      <a href="/about.html">About</a>
+    </center>
+    </nav>
+</header>
+
+  </head>
+  <body>
+
+    <div id = "wrapper">
+    <div id = "content">
+<div class = "bits">
+  <h1 class = "title">Gundam With Decent Portrayal of Code</h1>
+
+  <div>
+    <p class = "date">August 27, 2025</p>
+    
+    <div class="tags">
+      
+      
+        <a href="/categories/#micro">micro</a>
+        
+      
+    </div>
+  </div>
+  <p>Years ago I encountered a <a href="https://www.reddit.com/r/Gundam/comments/116q77j/could_anyone_rate_her_code/">Reddit post</a> 
+asking us redditors to rate a piece of code shown in <a href="https://gundam.fandom.com/wiki/Mobile_Suit_Gundam_0083:_Stardust_Memory">Mobile Suit Gundam 0083: Stardust Memory</a>.
+This led to an interesting discussion and analysis of the code from a few redditors, particularly the analysis from gralamin who disected the code revealing a few interesting 
+aspects of the code such as the potential architecture, OS, and purpose of the code.</p>
+
+<p><img src="/assets/anime-code/gundam-0083-nina.png" alt="A scene from Gundam 0083 Stardust Memory" /></p>
+
+<p>Based on the release date of the anime along with the provided code, we can infer the following:</p>
+<ul>
+  <li>Code is written for x86-16-bit DOS based on
+    <ul>
+      <li>the use of <a href="https://en.wikipedia.org/wiki/Far_pointer">far pointers</a></li>
+      <li>reference to the DOS Command-line interpreter <a href="https://en.wikipedia.org/wiki/COMMAND.COM">COMMAND.COM</a>, the precursor of cmd.exe</li>
+    </ul>
+  </li>
+  <li>There is some IPC (Inter-process communication) going on whereby there is a parent process (named mother) and a child process
+    <ul>
+      <li>NOTE: <a href="https://en.wikipedia.org/wiki/COMMAND.COM">COMMAND.COM</a> runs programs in DOS</li>
+    </ul>
+  </li>
+  <li>DOS system was set for Japanese locale using <a href="https://en.wikipedia.org/wiki/JIS_X_0201">JIS X 0201</a> as their characterset</li>
+</ul>
+
+<p>When I initially saw the post 3 years ago, I initially thought <code class="language-plaintext highlighter-rouge">broken¥n</code> was a typo seeing how there was a few spelling mistake in the document such as <code class="language-plaintext highlighter-rouge">equall</code> and <code class="language-plaintext highlighter-rouge">memeory</code>. However,
+as gralamin alluded:</p>
+
+<blockquote>
+  <p>I’m not sure what is up with the yen n. Maybe at the time \ was mapped to yen on japanese machines, in which case this would be a new line.</p>
+</blockquote>
+
+<p>After spending hours reading up on <a href="/blog/halfwidth-fullwidth-encoding/">character encoding</a> due to a request 
+from a friend studying Linguistics, I now can confirm his speculation was indeed correct.</p>
+
+<p>From the ASCII table, we can see that 0x5C maps to backslash <code class="language-plaintext highlighter-rouge">\n</code></p>
+
+<p><img src="/assets/programming/encoding/ascii-table.png" alt="ASCII Table" /></p>
+
+<p class="caption">ASCII Table. Extracted from Wikipedia</p>
+
+<p>JIS X 0201 can be seen as an extension of ASCII where the upper unused bits were repurposed to contain <a href="https://en.wikipedia.org/wiki/Katakana">Katakana</a> characters and a few other 
+things. However there are some slight differences as highlighted in yellow:</p>
+
+<p><img src="/assets/programming/encoding/jis-c-6220.png" alt="JIS X 0201 Table" /></p>
+<p class="caption">JIS X 0201 Table. Extracted from Wikipedia</p>
+
+<p>As one can notice 0x5C no longer maps to baskslash <code class="language-plaintext highlighter-rouge">\n</code> anymore but rather to the Japanese Yen <code class="language-plaintext highlighter-rouge">¥</code>. This makes no difference to the compiler’s perspective as from its perspective 
+as <code class="language-plaintext highlighter-rouge">\</code> and <code class="language-plaintext highlighter-rouge">¥</code> has the same value. Wikipedia has a good comment about this effect:</p>
+
+<blockquote>
+  <p>The substitution of the yen symbol for backslash can make paths on DOS and Windows-based computers with Japanese support display strangely, like “C:¥Program Files¥”, for example.[14] Another similar problem is C programming language’s control characters of string literals, like printf(“Hello, world.¥n”);.</p>
+</blockquote>
+
+<p>Whether intentional or not by the artist, this rendering shows some realism in the show (let’s ignore the fact the female lead is not Japanese).</p>
+
+</div>
+</div>
+
+    </div>
+
+  <footer>
+  <marquee id = "buttons">
+    <a href = "index.html"><img src = "/assets/buttons/button.png"></a>
+    <a href = "index.html"><img src = "/assets/buttons/button2.png"></a>
+    <a href = 'https://neocities.org/'><img src = "/assets/buttons/neocitiesorg.gif"></a>
+    <a href = 'https://www.vim.org/'><img src = "/assets/buttons/vim.gif"></a>
+    <a href = 'https://fedoraproject.org/'><img src = "/assets/buttons/gnu-linux.gif"></a>
+    <a href = "https://fedoraproject.org/"><img src = "/assets/buttons/powered_by_fedora_alt.png"></a>
+  </marquee>
+  <a href = "./feed.xml" alt = "rss"><i class="fa-solid fa-rss"></i></a>
+  <small><a href = "/credits" class = "credits">Credits</a></small>
+</footer>
+
+
+  <button onclick="toTop()" id="top_btn" title="Go to top">Top</button>
+  </body>
+</html>

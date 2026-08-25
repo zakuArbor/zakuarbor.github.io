@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>Dev Blog - Symink Attack - Do not trust config files - RANDOM BITS</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/css/syntax_monokai.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="/assets/css/contrast.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/png" href="/assets/site/random-bits-favicon.png">
+    <meta name="og:title" content="Random Bits">
+    <meta name="og:image" content="">
+    <meta name="og:description"
+        content="Random bits of programming, math, and personal thoughts">
+    <meta name="keywords" content="zakuarbor, programming, math, random bits, pikachu">
+    <meta name="description" content="Random bits of programming, math, and personal thoughts">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script charset="utf-8" src="/assets/js/script.js"></script>
+<script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+     loader: {load: ['[tex]/cancel']},
+      TeX: { 
+        equationNumbers: { autoNumber: "all" },
+        packages: {'[+]': ['cancel']}
+      } 
+    }); 
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <!--<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>-->
+  <header>
+    <center>
+      <h1 id = "title"><a href = "/index.html">RANDOM BITS</a><img id = "pikachu-header" src = "/assets/site/flying-pikachu.png"/></h1>
+    A random site by a random clueless human
+    </center>
+    <!--<marquee scrollamount="4">-->
+    <center>
+      <!--<img src = "/assets/gifs/pikachu-run.gif"/>--><p>Random bits of programming, math, and thoughts
+      By a clueless human</p><!-- <img src = "/assets/gifs/pikachu-run.gif"/>-->
+    </center>
+      <!--&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      <img src = "/assets/gifs/pikachu-run.gif"/>Random bits of programming, math, and thoughts
+      By a clueless human <img src = "/assets/gifs/pikachu-run.gif"/>-->
+      <!--</marquee>-->
+
+    <a href="javascript:void(0);" class="hamburger-nav" onclick="toggleMenu()"><i class="fa fa-bars"></i></a>
+    <nav id="header-nav">
+    <center>
+      <a href="/index.html">Home</a>
+      <a href="/micro/"><span style = "letter-spacing: 1px;">µ</span>Blog</a>
+      <a href="/blog/"><span style = "letter-spacing: 1px;">Blog</a>
+      <a href="/link.html">LinkBlog</a>
+      <!--<a href="/math.html">Math</a>-->
+      <a href="/about.html">About</a>
+    </center>
+    </nav>
+</header>
+
+  </head>
+  <body>
+
+    <div id = "wrapper">
+    <div id = "content">
+<div class = "bits">
+  <h1 class = "title">Dev Blog - Symink Attack - Do not trust config files</h1>
+
+  <div>
+    <p class = "date">December 26, 2021</p>
+    
+    <div class="tags">
+      
+      
+        <a href="/categories/#dev blog">dev blog</a>
+        &nbsp;
+      
+        <a href="/categories/#programming">programming</a>
+        &nbsp;
+      
+        <a href="/categories/#c/c++">c/c++</a>
+        &nbsp;
+      
+        <a href="/categories/#blog">blog</a>
+        
+      
+    </div>
+  </div>
+  <p>Now that classes are over for the semester, I decided to resume work on a project I’ve been putting off for a while. 
+ProxyAuth is a passwordless authentication module that allows lazy people like me to access their machine without inputting their passwords. 
+It authenticates the user if their hardware authenticator (i.e. a smartphone) is close to the machine via Bluetooth connection. 
+Currently, the implementation is not convenient and there are a lot of areas that need to be worked on such as the security of the product.</p>
+
+<p>In May of 2021, I noticed there were a lot of education sessions for the incoming new hires and interns I used to work at. I took the opportunity to have 
+myself and the new interns on my team to participate in these sessions. Since I returned to the company later than when most new hires 
+start, I missed out on all of the education sessions the previous year. One of these education session was a lecture on writing secure code. 
+During the session, the speaker mentioned something along the lines of how files need to be sanitized and how programs can be vulnerable to 
+symlink attacks. A symlink attack is when an application must perform some operation (either a read or write) on a file and does not check 
+whether the file is a symbolic link or not. I have performed symbolic link attacks before in a cybersecurity course but I completely forgot 
+about its existence.</p>
+
+<p>ProxyAuth, the project I am working on for fun, does not check whether if the config file is a symbolic link meaning a malicious user could 
+set their own smartphone as a trusted device to access another user on the machine.
+A <a href="https://github.com/zakuArbor/proxyAuth/issues/47">tracker issue</a> has been opened to address this vulnerability along with other possible attacks that will be 
+discussed on this blog.</p>
+
+<hr />
+
+<h2 id="issue-1---config-directory-and-file-permissions-are-not-enforced">Issue #1 - Config Directory and File Permissions are not Enforced</h2>
+
+<hr />
+
+<p>ProxyAuth checks under the directory <code class="language-plaintext highlighter-rouge">/etc/proxy_auth/</code> to find what devices are whitelisted for each user on the machine. Under the directory 
+contains the whitelist for each user. For instance, for the user <code class="language-plaintext highlighter-rouge">zaku</code>, the file <code class="language-plaintext highlighter-rouge">/etc/proxy_auth/zaku</code> will contain all the bluetooth addresses 
+the user wishes to use to authenticate the machine. Before considering the symlink attack, a malicious user could 
+create a whitelist for another user if the directory has write permission for anyone. For instance, let’s say the malicious user has the username 
+<code class="language-plaintext highlighter-rouge">public</code> and another user on the machine has the username <code class="language-plaintext highlighter-rouge">zaku</code>. If the directory <code class="language-plaintext highlighter-rouge">/etc/proxy_auth/</code> has write permission for all users then <code class="language-plaintext highlighter-rouge">public</code> 
+could create a whitelist for the user <code class="language-plaintext highlighter-rouge">zaku</code> with their own device as seen below:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[public@localhost proxy_auth]$ whoami
+public
+[public@localhost proxy_auth]$ ls -l /etc/ | grep proxy_auth
+drwxrwxrwx. 1 root root        28 Dec 25 00:00 proxy_auth
+[public@localhost proxy_auth]$ echo 31:BA:11:CD:AF:12 &gt;&gt; zaku
+</code></pre></div></div>
+
+<p>We’ll be using a small program called <code class="language-plaintext highlighter-rouge">pam_test</code> I created for development and testing purposes. This is how the code looks like:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">username</span> <span class="o">=</span> <span class="s">"zaku"</span><span class="p">;</span>                                              
+    <span class="kt">char</span> <span class="o">*</span><span class="n">detected_dev</span><span class="p">;</span>                                                         
+                                                                                
+    <span class="k">if</span> <span class="p">(</span><span class="n">bluetooth_login</span><span class="p">(</span><span class="n">log_fp</span><span class="p">,</span> <span class="n">trusted_dir_path</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">detected_dev</span><span class="p">))</span> <span class="p">{</span>   
+       <span class="n">printf</span><span class="p">(</span><span class="s">"Welcome %s. Login via Auth Proxy.</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">username</span><span class="p">);</span>                 
+    <span class="p">}</span>                                                                           
+    <span class="k">else</span> <span class="p">{</span>                                                                      
+        <span class="n">printf</span><span class="p">(</span><span class="s">"Failed to login</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>                                                       
+    <span class="p">}</span>                                                                           
+</code></pre></div></div>
+
+<p>It’s a simple program that will either print success or a failure if the function 
+<code class="language-plaintext highlighter-rouge">bluetooth_login</code> fails to detect any bluetooth device that the user trusts. (It’s currently 
+implemented poorly and only checks whether or not a trusted device is currently paired with 
+the machine). If it is able to log in, it’ll also print <code class="language-plaintext highlighter-rouge">pika: &lt;bluetooth address</code> from some 
+function called in <code class="language-plaintext highlighter-rouge">bluetooth_login</code> for debugging purposes.</p>
+
+<p>As the malicious user <code class="language-plaintext highlighter-rouge">public</code>, let’s see if the malicious user can access as <code class="language-plaintext highlighter-rouge">zaku</code>:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[public@localhost pam]$ ./pam_test 
+pika: 31:BA:11:CD:AF:12
+Welcome zaku. Login via Auth Proxy.
+</code></pre></div></div>
+
+<p>Even if the directory had the correct permissions (i.e. only owner can write), 
+if the user’s file does not have the correct permission, the same issue will 
+still occur.</p>
+
+<hr />
+
+<h2 id="mitigation-1---check-file-permissions">Mitigation #1 - Check File Permissions</h2>
+
+<hr />
+
+<p>To resolve this issue, I am going to patch the program to check 
+whether or not the directory and file has the correct permissions. This is done 
+via the function call <code class="language-plaintext highlighter-rouge">stat</code> (should be <code class="language-plaintext highlighter-rouge">lstat</code> but more on this later).</p>
+
+<p>To utilize the function <code class="language-plaintext highlighter-rouge">stat</code> or any of its variants, you pass the file you 
+wish to inspect and the pointer to an uninitialized <code class="language-plaintext highlighter-rouge">struct stat</code>. <code class="language-plaintext highlighter-rouge">struct stat</code> is 
+a structure that contains various fields about the file such as the owner and file mode 
+and is populated by the function <code class="language-plaintext highlighter-rouge">stat</code>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">st_mode</code> field is an unsigned int (with the macro type <code class="language-plaintext highlighter-rouge">mode_t</code>) that contains bits of 
+boolean values in which you can perform binary operations to determine the type of the file 
+and the file permissions. For instance, to check whether the group has write permission to the file 
+you could perform an <code class="language-plaintext highlighter-rouge">&amp;</code> (binary and) with the macro <code class="language-plaintext highlighter-rouge">S_IWGRP</code> like so:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="n">st</span><span class="o">-&gt;</span><span class="n">st_mode</span> <span class="o">&amp;</span> <span class="n">S_IWGRP</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"Group has write permission</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>To resolve this security flaw in ProxyAuth, I’ll be checking whether the config directory 
+or config file has the correct permissions by ensuring the group and other type does not 
+have write permission to the files. In addition, I’ll be checking whether or not the owner 
+has RW (Read and Write) permission by doing some bit shifting. I could perform 
+three binary and operations to check whether or not the owner RWX permission to the file but 
+I wanted to shorten the code but still be understandable. While researching for a method, 
+I came across a <a href="https://icarus.cs.weber.edu/~dab/cs1410/textbook/2.Core/file_access.html">webpage from Weber University on File Permissions</a> and it lays out beautifully 
+how to perform the operation I wanted to perform. In Linux, there are three types of owners: owner, group, and others.
+Each type has 3 bits to store the type’s permission on the file: 1 bit for read, 1 bit for write, and 1 bit for execute. 
+For instance, 100 (binary) is 4 in decimal and means the type has read permission. I won’t go into details about how 
+permissions work but if you are curious on how permissions work on Linux, there are many excellent <a href="https://icarus.cs.weber.edu/~dab/cs1410/textbook/2.Core/file_access.html">resources online</a>.</p>
+
+<p>The document I linked explains both visually and with words how to get the permission of the owner type only so take a look at it if you are confused by my explanation. The method is to shift 
+the bits to the right by 6 and clear all the unneeded bits by performing a bitwise and operation with the decimal number 7. The first 9 bits in <code class="language-plaintext highlighter-rouge">st_mode</code> (from the right) contain the ACL (access control list), 
+3 bits for each owner type. So shifting <code class="language-plaintext highlighter-rouge">st_mode</code> by 6 bits will remove the ACL bits for the group and other type. So the first 3 bits (from the right) will be the read, write, and execute bit for the owner. However, 
+<code class="language-plaintext highlighter-rouge">st_mode</code> will still contain 7 bits of information for the file mode (i.e. the file type and attributes). To clear the bits, perform a bitwise and operation with the hexadecimal 7 (i.e. binary: 0 000 000 000 000 111) 
+to clear the unneeded bits. So you are left with the 3 bits of interest. Since I desire to check if the owner has RWX permission for directories and RW permission for the config file, 
+I check if <code class="language-plaintext highlighter-rouge">st_mode</code> after all those bit manipulation equals to 7 and 6 respectively (i.e. 110 (binary) means type has RW permission but to access a directory, the execute bit must be set as well).</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span> <span class="p">((</span><span class="n">st</span><span class="o">-&gt;</span><span class="n">st_mode</span> <span class="o">&gt;&gt;</span> <span class="mi">6</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0x7</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">7</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//owner</span>
+    <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">"Error: Owner does not have RWX permission to the directory</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>In ProxyAuth, the mitigation will be placed under a new function named <code class="language-plaintext highlighter-rouge">check_perm</code> in a new file <code class="language-plaintext highlighter-rouge">pam_sec.c</code>. I plan to place any code that deals with the security of the PAM module to be placed 
+under this file from now on. Applying the correct changes to the project (with the help of Doxygen and cscope to figure out where to write the check), we can now test whether or not the security bug has been 
+patched.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[public@localhost ~]$ ls -ld /etc/proxy_auth/
+drwxrw---x. 1 root root 36 Dec 25 21:44 /etc/proxy_auth/
+</code></pre></div></div>
+
+<p>As you can see from above, the config directory and config file have the wrong permissions. Let’s see if the program can detect the error:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[public@localhost ~]$ ./pam_test 
+checking file: /etc/proxy_auth/
+Error: Group has write permission to /etc/proxy_auth/
+</code></pre></div></div>
+
+<p>As desired, the program detected that the config directory has the wrong permission so the program terminates. I won’t bore you with the various 
+test cases and move on to the next security bug in the program.</p>
+
+<hr />
+
+<h2 id="issue-2---file-ownership">Issue #2 - File Ownership</h2>
+
+<hr />
+
+<p>Regardless if the permissions are set correctly, if the directory or file is owned by the malicious user, then the entire authentication module is useless. 
+This is mostly an error on the system admin but as good programmers, we should take this into account. Files outside the user’s home directory are usually owned by root. 
+The same will apply to the config directory. To check if the directory is owned by root is simple. Every file has a uid that identifies who the owner is and this value is numeric. In UNIX-like 
+OS, the uid of root is 0. So we can compare if the field <code class="language-plaintext highlighter-rouge">st_uid</code> of the directory is 0. But what about the config file? Should the config file be owned by root or by the user. This is where it gets 
+a bit complicated. As a system administrator, you want to limit suoder privileges but that would mean the sysadmin will have to manually write the bluetooth address of every user’s smartphone. This will be a 
+pain to do because people can switch phones anytime they want and perhaps users want to be able to use other devices as a hardware authenticator. However, that’s an issue for the future me. For now, we will restrict 
+the config file to only be editable by root. (I can see myself needing to edit the permission check of the config files in the future to restrict read access to root only once I am able to figure out how to spoof my bluetooth).</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[public@localhost ~]$ ls -l /etc/proxy_auth/zaku
+-rw-r--r--. 1 public public 18 Dec 26 01:19 /etc/proxy_auth/zaku
+[public@localhost ~]$ ./pam_test 
+start bluetooth_login
+pika: 31:BA:11:CD:AF:12
+checking file: /etc/proxy_auth/
+checking file: /etc/proxy_auth/zaku
+Welcome zaku. Login via Auth Proxy.
+</code></pre></div></div>
+
+<p>An example of how the program will behave if the config file is not owned by root even if the file permissions are set correctly.</p>
+
+<hr />
+
+<h2 id="mitigation-2---compare-st_uid-with-the-root-uid">Mitigation #2 - Compare st_uid with the root uid</h2>
+
+<hr />
+
+<p><strong>Code:</strong></p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="n">st</span><span class="o">-&gt;</span><span class="n">st_uid</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">"Error: %s is not owned by root</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">file</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Setup:</strong></p>
+
+<p>Set the config file <code class="language-plaintext highlighter-rouge">zaku</code> to be owned by the user <code class="language-plaintext highlighter-rouge">public</code>, the malicious user.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[public@localhost ~]$ ls -l /etc/proxy_auth/zaku
+-rw-r--r--. 1 public public 18 Dec 26 01:19 /etc/proxy_auth/zaku
+</code></pre></div></div>
+
+<p><strong>Result:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[public@localhost ~]$ ./pam_test                                                
+pika: 31:BA:11:CD:AF:12                                                         
+checking file: /etc/proxy_auth/                                                 
+checking file: /etc/proxy_auth/zaku                                             
+Error: /etc/proxy_auth/zaku is not owned by root   
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="issue-3---symlink-attack">Issue #3 - Symlink Attack</h2>
+
+<hr />
+
+<p>As mentioned in the beginning, the program is vulnerable to symlinks attack. Although file ownership will not resolve a symlink attack, 
+the file permission check may resolve this vulnerability. I could not figure a way to modify the link’s permission on Linux. 
+According to the response on <a href="https://askubuntu.com/questions/1151269/is-it-possible-to-change-the-permissions-for-the-symbolic-link">stackoverflow</a>, 
+symlinks do not have permissions. This is further supported by the man pages (2):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The permissions of a symbolic link are irrelevant; the ownership
+is ignored when following the link, but is checked when removal
+or renaming of the link is requested and the link is in a
+directory with the sticky bit (S_ISVTX) set.
+</code></pre></div></div>
+
+<p>However, for other distributions such as BSD, this may not be the case. In FreeBSD, the <code class="language-plaintext highlighter-rouge">-h</code> option for the command <code class="language-plaintext highlighter-rouge">chmod</code> states this in their manpages:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-h	   If	the file is a symbolic link, change the	mode of	the link it-
+	     self rather than the file that the	link points to.
+</code></pre></div></div>
+
+<p>While a permission check may be sufficent for Linux, it would appear that if one was to port the project to FreeBSD, the module could be vulnerable to 
+a symlink attack. Even though there are no plans to make a FreeBSD port for this project, it would be good to verify the file type of the config directory 
+and the config files to avoid any unexpected behaviors.</p>
+
+<p>To check whether or not the file is a link, passing <code class="language-plaintext highlighter-rouge">st_mode</code> to the macro <code class="language-plaintext highlighter-rouge">S_ISLNK</code> will return a 1 if the file is a link. This is where knowing the differences between 
+<code class="language-plaintext highlighter-rouge">stat</code> and <code class="language-plaintext highlighter-rouge">lstat</code> is important. If one was to use the function <code class="language-plaintext highlighter-rouge">stat</code> rather than <code class="language-plaintext highlighter-rouge">lstat</code>, then they’ll get the wrong result. According to man pages:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lstat() is identical to stat(), except that if path is a symbolic link, then the link itself is stat-ed, not the file that it refers to. 
+</code></pre></div></div>
+
+<p>This means that <code class="language-plaintext highlighter-rouge">stat</code> will never return a non-zero value even if the file is a link. When playing around with the patch, I found that even if I do not use <code class="language-plaintext highlighter-rouge">lstat</code>, the 
+program will always complain that the config file is not owned by root despite having both the link and the file it’s pointing to be owned by root. This can be explained 
+through the man page I posted earlier about <code class="language-plaintext highlighter-rouge">symlink</code> where it states <code class="language-plaintext highlighter-rouge">the ownership is ignored when following the link, but is checked when removal or renaming of the link is requested</code>. 
+However, this is a behavior I should not rely on. Aside from doing additional checks to ensure the config directory is a directory and the config file is a regular file, <a href="https://github.com/zakuArbor/proxyAuth/issues/47">Issue #47</a> 
+should be resolved.</p>
+
+<hr />
+
+<h2 id="conclusion">Conclusion</h2>
+
+<hr />
+
+<p>To resolve the symlink attack and from a malicious user exploiting improperly configured files used by the program, adding a permission check and file ownership is sufficent. It turns out that on Linux, symbolic link
+permissions and group ownership do not matter and are in fact not read (with the exception when one tries to remove or rename a link). But I decided to check for the file type to ensure the config files are not a symlink nor 
+be a regular file when it should be a directory and vice versa.</p>
+
+<p>This concludes my first development blog for the project ProxyAuth. Hopefully, my next dev blog would be more interesting and more concise.</p>
+
+
+</div>
+</div>
+
+    </div>
+
+  <footer>
+  <marquee id = "buttons">
+    <a href = "index.html"><img src = "/assets/buttons/button.png"></a>
+    <a href = "index.html"><img src = "/assets/buttons/button2.png"></a>
+    <a href = 'https://neocities.org/'><img src = "/assets/buttons/neocitiesorg.gif"></a>
+    <a href = 'https://www.vim.org/'><img src = "/assets/buttons/vim.gif"></a>
+    <a href = 'https://fedoraproject.org/'><img src = "/assets/buttons/gnu-linux.gif"></a>
+    <a href = "https://fedoraproject.org/"><img src = "/assets/buttons/powered_by_fedora_alt.png"></a>
+  </marquee>
+  <a href = "./feed.xml" alt = "rss"><i class="fa-solid fa-rss"></i></a>
+  <small><a href = "/credits" class = "credits">Credits</a></small>
+</footer>
+
+
+  <button onclick="toTop()" id="top_btn" title="Go to top">Top</button>
+  </body>
+</html>

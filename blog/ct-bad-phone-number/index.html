@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>ct - Bad Phone Number - RANDOM BITS</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/css/syntax_monokai.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="/assets/css/contrast.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/png" href="/assets/site/random-bits-favicon.png">
+    <meta name="og:title" content="Random Bits">
+    <meta name="og:image" content="">
+    <meta name="og:description"
+        content="Random bits of programming, math, and personal thoughts">
+    <meta name="keywords" content="zakuarbor, programming, math, random bits, pikachu">
+    <meta name="description" content="Random bits of programming, math, and personal thoughts">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script charset="utf-8" src="/assets/js/script.js"></script>
+<script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+     loader: {load: ['[tex]/cancel']},
+      TeX: { 
+        equationNumbers: { autoNumber: "all" },
+        packages: {'[+]': ['cancel']}
+      } 
+    }); 
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <!--<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>-->
+  <header>
+    <center>
+      <h1 id = "title"><a href = "/index.html">RANDOM BITS</a><img id = "pikachu-header" src = "/assets/site/flying-pikachu.png"/></h1>
+    A random site by a random clueless human
+    </center>
+    <!--<marquee scrollamount="4">-->
+    <center>
+      <!--<img src = "/assets/gifs/pikachu-run.gif"/>--><p>Random bits of programming, math, and thoughts
+      By a clueless human</p><!-- <img src = "/assets/gifs/pikachu-run.gif"/>-->
+    </center>
+      <!--&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      <img src = "/assets/gifs/pikachu-run.gif"/>Random bits of programming, math, and thoughts
+      By a clueless human <img src = "/assets/gifs/pikachu-run.gif"/>-->
+      <!--</marquee>-->
+
+    <a href="javascript:void(0);" class="hamburger-nav" onclick="toggleMenu()"><i class="fa fa-bars"></i></a>
+    <nav id="header-nav">
+    <center>
+      <a href="/index.html">Home</a>
+      <a href="/micro/"><span style = "letter-spacing: 1px;">µ</span>Blog</a>
+      <a href="/blog/"><span style = "letter-spacing: 1px;">Blog</a>
+      <a href="/link.html">LinkBlog</a>
+      <!--<a href="/math.html">Math</a>-->
+      <a href="/about.html">About</a>
+    </center>
+    </nav>
+</header>
+
+  </head>
+  <body>
+
+    <div id = "wrapper">
+    <div id = "content">
+<div class = "bits">
+  <h1 class = "title">ct - Bad Phone Number</h1>
+
+  <div>
+    <p class = "date">February 14, 2021</p>
+    
+    <div class="tags">
+      
+      
+        <a href="/categories/#programming">programming</a>
+        &nbsp;
+      
+        <a href="/categories/#blog">blog</a>
+        
+      
+    </div>
+  </div>
+  <p>During my internship at IBM a while back, I recall encountering an error on 
+some HP UNIX machine when I was trying to checkout a file using the CLI tool 
+<code class="language-plaintext highlighter-rouge">cleartool</code> for the version control system <code class="language-plaintext highlighter-rouge">Clearcase</code>.</p>
+
+<style>                                                                         
+  iframe {                                                                      
+    width: 560px;                                                               
+    height: 315px;                                                              
+  }                                                                             
+                                                                                
+  .img_50 {                                                                     
+    max-width: 50%;                                                             
+  }                                                                             
+                                                                                
+  .img_60 {                                                                     
+    max-width: 60%;                                                             
+  }                           
+  
+  .img_40 {                                                                     
+    max-width: 40%;                                                             
+  }                                                                             
+                                                                                
+  .img_33 {                                                                     
+    max-width: 30%;                                                             
+  }                                                                             
+                                                                                
+  .multiple_img_div {                                                           
+    display: inline-block;                                                      
+  }                                                                             
+  @media only screen and (max-width: 800px) {                                   
+    .img_50, .img_60, .img_40, img_33 {                                         
+      max-width: 100%;                                                          
+    }                                                                           
+                                                                                
+    .multiple_img_div {                                                         
+      display: block;                                                           
+    }                
+    
+    iframe {                                                                    
+      width: 80vw;                                                              
+      height: 45vw;                                                             
+    }                                                                           
+  }                                                                             
+                                                                                
+  @media                                                                        
+  only screen and (-webkit-min-device-pixel-ratio: 1.5),                        
+  only screen and (-o-min-device-pixel-ratio: 3/2),                             
+  only screen and (min--moz-device-pixel-ratio: 1.5),                           
+  only screen and (min-device-pixel-ratio: 1.5){                                
+                                                                                
+    html,                                                                       
+    body{                                                                       
+      width:100%;                                                               
+      overflow-x:hidden;                                                        
+    }                                                                           
+                                                                                
+  }                                                                             
+</style>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># ct co -nc foo.c</span>
+ct: bad phone number <span class="nt">--</span> foo.c
+ct: bad phone number <span class="nt">--</span> <span class="nt">-nc</span>
+ct: bad phone number <span class="nt">--</span> co
+</code></pre></div></div>
+
+<p>For context, at IBM there are some departments where we still are using a 
+centralized version control system developed by Atria Software in the 90s, 
+now owned by IBM and maintained by both IBM and HCL (though we are 
+transitioning away from Clearcase to Git. But still need to use it to 
+support and develop legacy products till our customers decide to upgrade).</p>
+
+<p><code class="language-plaintext highlighter-rouge">cleartool</code> is a CLI client to Clearcase and we often use <code class="language-plaintext highlighter-rouge">ct</code> as an alias.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">type </span>ct
+ct is an <span class="nb">alias </span><span class="k">for </span>cleartool
+</code></pre></div></div>
+
+<h1 id="sec2">Why does the error show up?</h1>
+
+<p>The error I shown above is something I found very interesting. It’s not an 
+error that many would ever see (though I could be wrong considering this post 
+on 
+<a href="https://stackoverflow.com/questions/10416063/clearcase-running-commands-from-a-script-error-bad-phone-number">stackoverflow</a> 
+was viewed over 3000 times in the past 8 years). An intern recently 
+encountered this issue a few days ago and asked me about it. 
+While I didn’t have a good answer 
+for them at the time, I knew <code class="language-plaintext highlighter-rouge">ct</code> was a Basic Network Utility (BNU) 
+command that enables remote user on a terminal to communicate to a 
+workstation via a telephone line since I encountered the same error 2 years 
+ago.</p>
+
+<p><img src="/assets/programming/ct.png" alt="Man page for ct" /></p>
+
+<p>To cut the chase, the error shows up because on some users, we did not have 
+<code class="language-plaintext highlighter-rouge">ct</code> to be an alias to <code class="language-plaintext highlighter-rouge">cleartool</code> so when we run <code class="language-plaintext highlighter-rouge">ct</code> on some machines with 
+a particular user, we get the following:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ type ct
+ct is /usr/bin/ct
+</code></pre></div></div>
+
+<p>Therefore any attempts to use it as a version control will inevitably return 
+<code class="language-plaintext highlighter-rouge">ct: bad phone number</code> since those options are not valid phone numbers.</p>
+
+<h1 id="sec3">A brief talk about ct</h1>
+
+<p>Before the age of Personal PC, the average Joe did not have access to a 
+computer. Mainframes were common in large organizations, research labs 
+and Universities where there would be terminals that are connected to the 
+mainframe. Though before UNIX and some other time sharing OS, any work done 
+on the mainframe had to be done in batches. For those who do not know what 
+mainframes are, they are just essentially very large computers with a large 
+amount of memory and processors, often used for bulk processing such as 
+commercial databases, transaction servers and applications that require 
+high resiliency and agility. Computers (mainframes) in the past  were 
+extremely large and would often require an entire room to fit all of its 
+components (interesting to see how much technology progressed to the point 
+where our smartphones are not only smaller, but also cheaper, faster, and 
+more versatile).</p>
+
+<p><img src="/assets/programming/7090.jpg" alt="IBM 7090" /></p>
+<center>
+IBM 7090 - An IBM Mainframe
+</center>
+
+<p>Since Computers were not widely available, researchers and students had to 
+connect to the mainframe to do their work via a terminal or a console. 
+Timesharing OS such as UNIX allowed 
+multiple users to use the mainframe simultaneously.</p>
+
+<center>                                                                        
+<div style="display: inline-block;" class="multiple_img_div center">       
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/TTY33ASR.jpg/220px-TTY33ASR.jpg" alt="A teleprinter to communicate with the mainframe" style="float:left;" />
+<img src="https://upload.wikimedia.org/wikipedia/commons/9/99/DEC_VT100_terminal.jpg" alt="A VT100 which from my understanding is a terminal that can communicate with a workstationstyle" style="float:right;height:188px;padding-left: 10px" />
+</div>
+<p>A teletype model 33 (left) and a VT100 terminal (right)</p>
+</center>
+
+<p>Before the internet, people would connect to networks via 
+phone lines since they already exist. It’s a dial-up connection similar 
+to dial-up internet that was common in the 90s and early 2000s. Something I 
+do not recall using as I never touched the internet till the mid-2000s (we 
+upgraded to broadband by the time I got my first shared laptop). 
+<code class="language-plaintext highlighter-rouge">ct</code> is one of the commands that 
+allows people to have remote access to the terminal such as connecting from 
+home. Though it’s quite different from what I expected. To use <code class="language-plaintext highlighter-rouge">ct</code>, both 
+the local system and the remote terminal needs to be connected to a modem. The 
+part which was surprising to me was that the user on a local system needs to 
+issue the <code class="language-plaintext highlighter-rouge">ct</code> command with the appropriate phone number to call the modem 
+attached to the remote terminal and not the other way around. There are 
+benefits to this as mentioned on the man page of AIX 7.2 which is for 
+security whereby the machine’s phone number is kept a secret and the 
+remote terminal can be monitored for any suspicious activities by the 
+machine operator (the local user who initiates the connection by calling <code class="language-plaintext highlighter-rouge">ct</code>)</p>
+
+<hr />
+
+<h1>Conclusion</h1>
+
+<p><code class="language-plaintext highlighter-rouge">ct</code> is a UNIX utility that allows a local machine gives access to a remote 
+user via a telephone line (where both the terminal and machine need to be 
+hooked to a modem). <code class="language-plaintext highlighter-rouge">ct</code> is also often used as an alias for <code class="language-plaintext highlighter-rouge">cleartool</code>, a 
+CLI client to the centralized version control system Clearcase. So confusion 
+can pop up randomly when you are trying to use <code class="language-plaintext highlighter-rouge">ct</code> for either purpose.</p>
+
+</div>
+</div>
+
+    </div>
+
+  <footer>
+  <marquee id = "buttons">
+    <a href = "index.html"><img src = "/assets/buttons/button.png"></a>
+    <a href = "index.html"><img src = "/assets/buttons/button2.png"></a>
+    <a href = 'https://neocities.org/'><img src = "/assets/buttons/neocitiesorg.gif"></a>
+    <a href = 'https://www.vim.org/'><img src = "/assets/buttons/vim.gif"></a>
+    <a href = 'https://fedoraproject.org/'><img src = "/assets/buttons/gnu-linux.gif"></a>
+    <a href = "https://fedoraproject.org/"><img src = "/assets/buttons/powered_by_fedora_alt.png"></a>
+  </marquee>
+  <a href = "./feed.xml" alt = "rss"><i class="fa-solid fa-rss"></i></a>
+  <small><a href = "/credits" class = "credits">Credits</a></small>
+</footer>
+
+
+  <button onclick="toTop()" id="top_btn" title="Go to top">Top</button>
+  </body>
+</html>

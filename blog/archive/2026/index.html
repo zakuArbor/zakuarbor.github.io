@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>2026 Blog Archive - RANDOM BITS</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/css/syntax_monokai.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="/assets/css/contrast.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/png" href="/assets/site/random-bits-favicon.png">
+    <meta name="og:title" content="Random Bits">
+    <meta name="og:image" content="">
+    <meta name="og:description"
+        content="Random bits of programming, math, and personal thoughts">
+    <meta name="keywords" content="zakuarbor, programming, math, random bits, pikachu">
+    <meta name="description" content="Random bits of programming, math, and personal thoughts">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script charset="utf-8" src="/assets/js/script.js"></script>
+<script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+     loader: {load: ['[tex]/cancel']},
+      TeX: { 
+        equationNumbers: { autoNumber: "all" },
+        packages: {'[+]': ['cancel']}
+      } 
+    }); 
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <!--<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>-->
+  <header>
+    <center>
+      <h1 id = "title"><a href = "/index.html">RANDOM BITS</a><img id = "pikachu-header" src = "/assets/site/flying-pikachu.png"/></h1>
+    A random site by a random clueless human
+    </center>
+    <!--<marquee scrollamount="4">-->
+    <center>
+      <!--<img src = "/assets/gifs/pikachu-run.gif"/>--><p>Random bits of programming, math, and thoughts
+      By a clueless human</p><!-- <img src = "/assets/gifs/pikachu-run.gif"/>-->
+    </center>
+      <!--&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      <img src = "/assets/gifs/pikachu-run.gif"/>Random bits of programming, math, and thoughts
+      By a clueless human <img src = "/assets/gifs/pikachu-run.gif"/>-->
+      <!--</marquee>-->
+
+    <a href="javascript:void(0);" class="hamburger-nav" onclick="toggleMenu()"><i class="fa fa-bars"></i></a>
+    <nav id="header-nav">
+    <center>
+      <a href="/index.html">Home</a>
+      <a href="/micro/"><span style = "letter-spacing: 1px;">µ</span>Blog</a>
+      <a href="/blog/"><span style = "letter-spacing: 1px;">Blog</a>
+      <a href="/link.html">LinkBlog</a>
+      <!--<a href="/math.html">Math</a>-->
+      <a href="/about.html">About</a>
+    </center>
+    </nav>
+</header>
+
+  </head>
+  <body>
+
+    <div id = "wrapper">
+    <div id = "content">
+  
+
+
+<h1>2026 Blog Archive (2026)</h1>
+
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/blog/math2052-commentary">MATH2052 - A Commentary on Calculus and Introductory Analysis 2</a></h1>
+<div>
+<p class = "date">June 11, 2026</p>
+<div class="tags">
+
+<a href="/categories/#university">university</a>
+&nbsp;
+
+<a href="/categories/#math">math</a>
+&nbsp;
+
+<a href="/categories/#carletonu">carletonu</a>
+&nbsp;
+
+<a href="/categories/#reviews">reviews</a>
+&nbsp;
+
+<a href="/categories/#blog">blog</a>
+
+
+</div>
+This is a commentary to the second introductory course to calculus and analysis which I have a course review on if you are interested. The content presented below are from winter 2022 which may not reflect what is covered in your class today. Furthermore, the information presented will have the author’s own commentary and is NOT and should NOT be a replacement to attending class. The author simply wishes to review the content of the course mixed with their own speculations, views, and emotions as it reflects on the course 5 years later in preparation to their eventual return to...
+<p><a href="/blog/math2052-commentary">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/blog/mseal/">ByPassing Read-Only Memory and Why mseal() is needed</a></h1>
+<div>
+<p class = "date">May 19, 2026</p>
+<div class="tags">
+
+<a href="/categories/#programming">programming</a>
+&nbsp;
+
+<a href="/categories/#c/c++">c/c++</a>
+&nbsp;
+
+<a href="/categories/#mseal">mseal</a>
+&nbsp;
+
+<a href="/categories/#blog">blog</a>
+
+
+</div>
+As one may be familiar, the MMU (Memory Management Unit) enforces and supports memory protection such as marking a page to be READ-ONLY (RO). But it turns out there is an API mprotect() that allows us to change the access protection of the calling process’s memory pages. Thus mprotect() could be used to mark pages marked for RO as writable or executable, an undesirable behavior for any critical program as attackers could utilise this weakness to write custom payloads to either gain rootshell or bypass local checks. To prevent tampering of permission flags of the process’s pages by sealing it,...
+<p><a href="/blog/mseal/">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/blog/os-reading-group/">A Collection of Comments from my OS Reading Group</a></h1>
+<div>
+<p class = "date">May  3, 2026</p>
+<div class="tags">
+
+<a href="/categories/#programming">programming</a>
+&nbsp;
+
+<a href="/categories/#c/c++">c/c++</a>
+&nbsp;
+
+<a href="/categories/#os">os</a>
+&nbsp;
+
+<a href="/categories/#mseal">mseal</a>
+&nbsp;
+
+<a href="/categories/#threads">threads</a>
+&nbsp;
+
+<a href="/categories/#blog">blog</a>
+
+
+</div>
+There is a large online Software Internals Book Club that goes through books covering typically covering topics in databases, distributed systems, and software performance. Currently it is on a pause and likely will resume by the end of the month. The book being read is OSTEP, the best and free OS textbook. The style of writing is very inviting and easy to follow unlike other traditional books. It is also well organised into 3 parts: Virtualisation, Concurrency, and Persistence. Thus far, we have covered the first 17 chapters covering topics ranging from how the OS ‘virtualises’ the CPU (aka give...
+<p><a href="/blog/os-reading-group/">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/blog/math1052-commentary">MATH1052 - A Commentary on Calculus and Introductory Analysis 1</a></h1>
+<div>
+<p class = "date">March 19, 2026</p>
+<div class="tags">
+
+<a href="/categories/#university">university</a>
+&nbsp;
+
+<a href="/categories/#math">math</a>
+&nbsp;
+
+<a href="/categories/#carletonu">carletonu</a>
+&nbsp;
+
+<a href="/categories/#reviews">reviews</a>
+&nbsp;
+
+<a href="/categories/#blog">blog</a>
+
+
+</div>
+This is a commentary to an introductory course to calculus and analysis which I have a course review on if you are interested. The content presented below are from the fall of 2021 which may not reflect what is covered in your class today. Furthermore, the information presented will have the author’s own commentary and is NOT and should NOT be a replacement to attending class. The author simply wishes to review the content of the course mixed with their own speculations, views, and emotions as it reflects on the course 5 years later in preparation to their eventual return...
+<p><a href="/blog/math1052-commentary">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/blog/when-it-click-programming">When Did Programming/Coding Start to Click for You?</a></h1>
+<div>
+<p class = "date">January 31, 2026</p>
+<div class="tags">
+
+<a href="/categories/#programming">programming</a>
+&nbsp;
+
+<a href="/categories/#blog">blog</a>
+
+
+</div>
+Months ago on a university Reddit page, a student asked when programming started to click because they are in their second year of their studies in Computer Science and feel lost. This was my response to them (with some edits to expand on certain topics): Unclear what you mean “click” but here’s my three stage answer. Sorry for its length in advance. Also this is from an old student who started most of their programming journey way before LLMs like ChatGPT even existed. In my opinion, you will experience many clicks in your career. Summary: Think Like a Programmer: The...
+<p><a href="/blog/when-it-click-programming">Read More...</a></p>
+</div>
+</div>
+
+
+
+</div>
+
+    </div>
+
+  <footer>
+  <marquee id = "buttons">
+    <a href = "index.html"><img src = "/assets/buttons/button.png"></a>
+    <a href = "index.html"><img src = "/assets/buttons/button2.png"></a>
+    <a href = 'https://neocities.org/'><img src = "/assets/buttons/neocitiesorg.gif"></a>
+    <a href = 'https://www.vim.org/'><img src = "/assets/buttons/vim.gif"></a>
+    <a href = 'https://fedoraproject.org/'><img src = "/assets/buttons/gnu-linux.gif"></a>
+    <a href = "https://fedoraproject.org/"><img src = "/assets/buttons/powered_by_fedora_alt.png"></a>
+  </marquee>
+  <a href = "./feed.xml" alt = "rss"><i class="fa-solid fa-rss"></i></a>
+  <small><a href = "/credits" class = "credits">Credits</a></small>
+</footer>
+
+
+  <button onclick="toTop()" id="top_btn" title="Go to top">Top</button>
+  </body>
+</html>

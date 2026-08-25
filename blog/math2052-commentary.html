@@ -1,0 +1,2194 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>MATH2052 - A Commentary on Calculus and Introductory Analysis 2 - RANDOM BITS</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/css/syntax_monokai.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="/assets/css/contrast.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/png" href="/assets/site/random-bits-favicon.png">
+    <meta name="og:title" content="Random Bits">
+    <meta name="og:image" content="">
+    <meta name="og:description"
+        content="Random bits of programming, math, and personal thoughts">
+    <meta name="keywords" content="zakuarbor, programming, math, random bits, pikachu">
+    <meta name="description" content="Random bits of programming, math, and personal thoughts">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script charset="utf-8" src="/assets/js/script.js"></script>
+<script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+     loader: {load: ['[tex]/cancel']},
+      TeX: { 
+        equationNumbers: { autoNumber: "all" },
+        packages: {'[+]': ['cancel']}
+      } 
+    }); 
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <!--<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>-->
+  <header>
+    <center>
+      <h1 id = "title"><a href = "/index.html">RANDOM BITS</a><img id = "pikachu-header" src = "/assets/site/flying-pikachu.png"/></h1>
+    A random site by a random clueless human
+    </center>
+    <!--<marquee scrollamount="4">-->
+    <center>
+      <!--<img src = "/assets/gifs/pikachu-run.gif"/>--><p>Random bits of programming, math, and thoughts
+      By a clueless human</p><!-- <img src = "/assets/gifs/pikachu-run.gif"/>-->
+    </center>
+      <!--&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      <img src = "/assets/gifs/pikachu-run.gif"/>Random bits of programming, math, and thoughts
+      By a clueless human <img src = "/assets/gifs/pikachu-run.gif"/>-->
+      <!--</marquee>-->
+
+    <a href="javascript:void(0);" class="hamburger-nav" onclick="toggleMenu()"><i class="fa fa-bars"></i></a>
+    <nav id="header-nav">
+    <center>
+      <a href="/index.html">Home</a>
+      <a href="/micro/"><span style = "letter-spacing: 1px;">µ</span>Blog</a>
+      <a href="/blog/"><span style = "letter-spacing: 1px;">Blog</a>
+      <a href="/link.html">LinkBlog</a>
+      <!--<a href="/math.html">Math</a>-->
+      <a href="/about.html">About</a>
+    </center>
+    </nav>
+</header>
+
+  </head>
+  <body>
+
+    <div id = "wrapper">
+    <div id = "content">
+  <div class = "bits">
+  <h1 class = "title">MATH2052 - A Commentary on Calculus and Introductory Analysis 2</h1>
+
+  <div>
+    <p class = "date">June 11, 2026</p>
+    
+    <div class="tags">
+      
+      
+        <a href="/categories/#university">university</a>
+        &nbsp;
+      
+        <a href="/categories/#math">math</a>
+        &nbsp;
+      
+        <a href="/categories/#carletonu">carletonu</a>
+        &nbsp;
+      
+        <a href="/categories/#reviews">reviews</a>
+        &nbsp;
+      
+        <a href="/categories/#blog">blog</a>
+        
+      
+    </div>
+  </div>
+    <p>This is a commentary to the second introductory course to calculus and analysis which I have a <a href="/blog/math2052">course review</a> on if you are interested. The content presented below are from winter 
+2022 which may not reflect what is covered in your class today. Furthermore, the information presented will have the author’s own commentary and is <strong>NOT</strong> and should <strong>NOT</strong> be a replacement to attending class. 
+The author simply wishes to review the content of the course mixed with their own speculations, views, and emotions as it reflects on the course 5 years later in preparation to their eventual return to 
+school after a 2 year break from Mathematics. This course is a follow up on <a href="/blog/math1052">MATH1052</a> exploring integrals, different types of convergence such as point-wise and uniform convergence, and 
+ends with taylor series and its applications.</p>
+
+<p>As a side note, the commentary presented below heavily resembles Elementary Analysis: The Theory of Calculus by Kenneth A. Ross. This is on purpose as Starling heavily based on the course notes based on this 
+textbook.</p>
+
+<p>The course is broken down into 3 main components:</p>
+<ol>
+  <li><a href="#darboux">Darboux Sums and Integrability</a></li>
+  <li><a href="#int-tech">Integration Techniques</a></li>
+  <li><a href="#power">Power Series</a></li>
+  <li><a href="#taylor">Taylor Series</a></li>
+</ol>
+
+<hr />
+
+<p><a name="darboux"></a></p>
+
+<h2 id="darboux-sums-and-integrability">Darboux Sums and Integrability</h2>
+
+<p>From any regular calculus course, one would know that integration is the process of finding the area under its approximation of the area of a curve using extremely thin and equally-sized rectangles. 
+But one can be more formal in how the area is calculated. From elementary school, one learned that to calculate the area of a rectangle by multiplying the length by its width. It turns out we can expand this concept to calculate the area of any curve 
+by drawing a series of equally wide rectangles under the curve to approximate the area as seen below:</p>
+
+<div style="background-color: #ffe4c8; width: fit-content; margin: auto">
+<img src="/assets/math-physics/courses/math2052/iarea3.png" alt="Approximation of the area of a curve using increasingly narrower rectangles" />
+</div>
+<p class="caption">Approximation of the area of a curve using increasingly narrower rectangles. Taken from <a href="http://hyperphysics.phy-astr.gsu.edu/hbase/imgmth/iarea3.gif">HyperPhysics</a></p>
+
+<p>Eventually when the width of the rectangles becomes infinitesimally thin, the sum of these infinitesimally thin rectangles gives us the true area under the curve.</p>
+
+<p>This technique of dividing an interval of a curve with increasingly smaller subintervals resulting in thinner and thinner rectangles to approximate area is not a mere theoretical concept but something that’s actually used in real life. I recall in one of my geography 
+courses, the class was sent to a nearby bridge, tasked on measuring the depth of the river at different points, repeating the measurements in smaller partitions to get an approximate area of the 
+river.</p>
+
+<p><img src="/assets/math-physics/riverstream_discharge.jpg" alt="" /></p>
+<p class="caption">An image I found on google that looked familiar to what I learned in Geography to measure discharge. Source: <a href="https://www.fondriest.com/environmental-measurements/measurements/hydrological-measurements/streamflow-measurements/">Fondriest</a></p>
+
+<p>One question that may arise is how to determine the height of these rectangles as it is clear that these rectangles don’t capture the curves nicely. There are a few ways to determine the height such 
+as grabbing the function’s value at the midpoint between each subinterval $[t_i, t_{i+1}]$, the way the author first encountered in their time as a student in computer science. But this choice can feel arbitrary 
+with no guarantees whether the height of each subinterval under-estimates or over-estimates the true area. One elegant approach introduced in this course is to consider both cases and see if the two cases 
+can reconcile (i.e. be equal to each other) and this approach is called Darboux Sums or Darboux Integrals.</p>
+
+<p>Formally, we define a partition for a function $f$ bounded on $[a,b]$ to be:</p>
+
+<blockquote>
+  <p><strong>Partition</strong> of $[a,b]$ is a finite sequence $(t_m)$ with $a = t_0 \lt t_1 \lt t_2 \lt \dots \lt t_n = b$.
+Thus $P = \{t_0, t_1, t_2, \dots, t_n\}$</p>
+
+  <p>Put simply, it is a partition is a set of ordered numbers between $a$ and $b$.</p>
+</blockquote>
+
+<p>The over-estimated area is called the UPPER darboux sum and the under-estimated rectangles are called the lower darboux sum making use of the definitions of supremum and infimum encountered in the previous 
+course. As one can easily imagine, the two darboux sums take the “max” (supremum) and “min” (infimum) of the curve within each subinterval as the height of the rectangles.</p>
+
+<blockquote>
+  <p>For a subset $S \subseteq [a, b]$, we let:</p>
+
+  <p>$M(f,S) = sup\{ f(x) : x \in S\}$ i.e. “Max height of each rectangle”</p>
+
+  <p>$m(f,S) = \inf\{ f(x) : x \in S \}$ i.e. “Min height of each rectange”</p>
+</blockquote>
+
+<p>Thus we can formally define the upper and lower darboux sums as the following:</p>
+
+<blockquote>
+  <p><strong>UPPER Darboux Sum:</strong> $U(f,P) = \sum\limits^n_{k=1} \underbrace{M(f, [t_{k-1}, t_k])}_{\text{height}} \cdot \underbrace{(t_k-t_{k-1})}_{\text{base}}$</p>
+</blockquote>
+
+<blockquote>
+  <p><strong>LOWER Darboux Sum:</strong> $L(f,P) = \sum\limits^n_{k=1} \underbrace{m(f,[t_{k-1}, t_k])}_{\text{height}}\underbrace{(t_k - t_{k-1})}_{\text{base}}$</p>
+</blockquote>
+
+<p>Recall the objective is to approximate and eventually get the true area under the curve by taking the sum of the area of extremely thin rectangles. Also recall that the area of a rectangle is simply 
+width multiplied by its height.</p>
+
+<p><img src="/assets/math-physics/courses/math2052/darboux-sums.png" alt="A sample of darboux sums" width="750px" /></p>
+<p class="caption">A sample of darboux sum where the lower sum is the area of the shaded rectangles and the upper sum is the area of the entire rectangles (shaded + unshaded regions). Taken from 
+<a href="https://ocw.mit.edu/courses/18-100a-real-analysis-fall-2020/mit18_100af20_basic_analysis.pdf">MIT OCW Real Analysis notes</a></p>
+
+<p>One may see the upper and lower darboux sums reformulated as the following:</p>
+
+<blockquote>
+  <p><strong>Upper Darboux Sum:</strong> $U(f,P) = \sum\limits^n_{k=1} M_i\Delta x_i$</p>
+
+  <p><strong>Lower Darboux Sum:</strong> $L(f,P) = \sum\limits^n_{k=1} m_i \Delta x_i$</p>
+
+  <p>where:</p>
+
+  <p>$M_i = \sup\{f(x): x_{i-1} \leq x \leq x_i \}$</p>
+
+  <p>$m_i = \inf\{f(x): x_{i-1} \leq x \leq x_i \}$</p>
+</blockquote>
+
+<p>Recall in our definition, $f$ is a bounded function on $[a,b]$ so it attains a global min and a global max value. In addition, every partition of $[a,b]$ will contain at least the endpoints $a$ and $b$. 
+One key observation is that the local min and max are bounded by the global extremas:</p>
+
+<ul>
+  <li>$M(f, [t_{k-1},t_k]) \leq M(f,[a,b]) = M$</li>
+  <li>$m(f, [t_{k-1}, t_k]) \geq m(f, [a,b]) = m$</li>
+</ul>
+
+<p>where $[t_{k-1},t_k] \subseteq [a,b]$. Intuitively, finer partitions capture the function more accurately, so the underestimate improves and the overestimate tightens (potentially 
+decreases). Given this fact, we have the following:</p>
+
+<blockquote>
+  <p>$m(b-a) = m(f, [a,b])(b-a) \leq L(f,P) \leq U(f,P) \leq M(f,[a,b])(b-a) = M(b-a)$</p>
+</blockquote>
+
+<p><strong>Quick Breakdown:</strong></p>
+
+\[\require{cancel}
+\begin{align*}
+U(f,P) = \sum\limits^n_{k=1} M(f,[t_{k-1},t_k])(t_k - t_{k-1}) &amp;\leq \sum\limits^n_{k=1} M(f,[a,b])(t_k - t_{k-1})\\
+&amp;= \underbrace{M(f, [a,b])}_{\text{const}} \sum\limits^n_{k=1} (t_k-t_{k-1}) \\
+&amp;= M((\bcancel{t_1} - t_0) + (\bcancel{t_2} - \bcancel{t_1}) + \dots + (\bcancel{t_{n-1}} - \bcancel{t_{n-2}})  + (t_n - \bcancel{t_{n-1}})) \\
+&amp;= M(t_n - t_0) \\
+&amp;= M(b - a) \\
+\therefore U(f,P) \leq M\sum\limits^n_{k=1} (t_k-t_{k-1}) \leq M(b-a)
+\end{align*}\]
+
+<p>Similar idea to show $m(f, [a,b])(b-a) \leq L(f,P) \leq U(f,P)$</p>
+
+<p>Since $m(f,[t_{k-1},t_k]) \leq M(f, [t_{k-1}, t_k])$ (since $\inf \leq \sup$ by definition), we have $L(f,P) \leq U(f,P)$ for any single Partition P. (
+Note: it is not immediately clear whether $L(f,P_1) \leq U(f.P_2)$ for <strong>different</strong> partitions $P_1,P_2$, a question we will address shortly.)</p>
+
+<p><img src="/assets/math-physics/courses/math2052/darboux-sums-under-over.png" alt="Hand-written Illustration of L(f) and U(f)" width="750" /></p>
+
+<p>Given this proposition, we see these darboux sums are bounded and by consequence are guaranteed of the existence of an upper Darboux Integral $U(f)$ and lower Integral $L(f)$:</p>
+
+<blockquote>
+  <p><strong>Upper Darboux Integral:</strong> $U(f) = \inf\{U(f,P) : P$ is a partition of $[a,b]$ $\}$. Often represented as $\overline{\int}_a^b f(x)dx$</p>
+
+  <p><strong>Lower Darboux Integral:</strong> $L(f) = \sup\{L(f,P): P$ is a partition of $[a,b]$ $\}$. Often represented as $\underline{\int}_a^b f(x)dx$</p>
+</blockquote>
+
+<p>Similar to how a limit exists if the LHS and RHS limits exist, we say $f$ is <strong>INTEGRABLE</strong> on $[a,b]$ if $U(f) = L(f)$ or $\overline{\int} a^b f(x)dx = \underline{\int}_a^b f(x)dx$</p>
+
+<blockquote>
+  <p><strong>Darboux Integral:</strong> f is <strong>INTEGRABLE</strong> on $[a,b]$ if $U(f)=L(f)$. Often represented as $U(f)=L(f)=\int\limits_a^b f(x)dx$</p>
+</blockquote>
+
+<p>where $f(x)$ can be seen as the height and $dx$ as the width of the rectangle approaching to 0.</p>
+
+<p>Showing whether a function is integrable is a lot of work and thus will be omitted. Please read Ross Analysis or search online for an example. However, what I will show and find more interesting is to 
+show a function $f$ this <strong>NOT</strong> integrable. In Engineering, we are always given ‘‘nice” functions that always have integrals but it turns out there are functions that don’t have an “area”. One 
+potential example is comparing the area between two functions that appear to be the same but one has finite number of holes and the other has infinitely many holes in the graph. One is integrable 
+and the other is not.</p>
+
+<p><strong>Example:</strong></p>
+
+<p>\(f(x) = \begin{cases} 
+      1 &amp; x \in \mathbb{Q} \\
+      0 &amp; x \notin \mathbb{Q} 
+\end{cases}\) on $[a,b]$. Show that f is not integrable.</p>
+
+<p>Note that every interval $[t_{k-1}, t_k]$ contains a rational and irrational number (i.e. by the density of $\mathbb{Q}$)</p>
+
+<p>We have:
+\(\begin{align*}
+M(f, [t_{k-1},t_k]) = 1 \forall k &amp;\implies U(f,P)=1(b-a) = (b-a) &amp;&amp;\implies U(f) = b-a \\
+m(f, [t_{k-1},t_k]) = 0 \forall k &amp;\implies L(f,P)=0(b-a) = 0 &amp;&amp;\implies L(f) = 0
+\end{align*}\)</p>
+
+<p>Thus $U(f) \ne L(f)$ and by definition, $f$ is not integrable on $[a,b]$</p>
+
+<p>Any engineering student should be surprised of this result, especially on the idea that one can be asked to determine if a function is integrable or not. This is one of many examples that differentiates 
+between Math and Engineering students. Math students are expected to not take anything for granted unless told otherwise (reality is that there are some materials that are just too complex at the moment 
+to learn).</p>
+
+<p>Previously, we saw that for any partition $P, U(f, P) \leq  U(f,[a,b])$. We previously reasoned that a finer partition does a much more accurate job in capturing the function’s true behavior. Geometrically, 
+we are summing more thinner rectangles whose lower and upper values $M_i$ and $m_i$ are tighter to the true value. Thus we can generalise the following:</p>
+
+<blockquote>
+  <p><strong>Lemma 1:</strong> Let $f$ be bounded function on $[a,b]$. If $P,Q$ are partitions of $[a,b]$ with $P\subseteq Q$ (i.e. $Q$ is a “finer” partition within $[a,b]$ / has more points in the partition). Then:</p>
+
+  <p>$L(f,P) \leq L(f,Q) \leq U(f,Q) \leq U(f,P)$</p>
+</blockquote>
+
+<p>Essentially the lemma is stating that adding points to the partition <strong>decreases</strong> the upper sum and <strong>increases</strong> the lower darboux sum. Geometrically, this would correspond to having more thinner 
+rectangles to approximate the area more accurately.</p>
+
+<p>Similarly, we can now make the claim that for any partition, the lower darboux sum will always be less than (or equal to) any upper darboux sum regardless of the partition.</p>
+
+<blockquote>
+  <p><strong>Lemma 2:</strong> Let $f$ be bounded on $[a,b]$ and let $P,Q$ be partitions of $[a,b]$. Then $L(f,P) \leq U(f,Q)$</p>
+</blockquote>
+
+<p><strong>Proof:</strong> Consider the partition $P \cup Q$. Note that we know nothing about the partitions $P$ and $Q$ but we do know we can construct a larger partition $P\cup Q$ such that:</p>
+<ul>
+  <li>$P\subseteq P \cup Q$</li>
+  <li>$Q\subseteq P \cup Q$</li>
+</ul>
+
+<p>So by the previous lemma (lemma 1),</p>
+<ul>
+  <li>$L(f,P) \leq L(f, P \cup Q)$ (i.e. adding points to the partition increases the lower darboux sum)</li>
+  <li>$U(f,P\cup Q) \leq U(f,Q)$ (i.e. adding points to the partition decreases upper darboux sum)</li>
+</ul>
+
+<p>Chaining these two conclusion, we have: $L(f,P) \leq L(f, P \cup Q) \leq U(f,P\cup Q) \leq U(f,Q)$</p>
+
+<p>Thus lemma 2 tells us tht any any lower sum is below any upper sum. But the supremum and infimum are the tightest bounds we can get. What does lemma 2 tells us about these bounds?</p>
+
+<blockquote>
+  <p><strong>Lemma 3:</strong> Let $f$ be bounded on [a,b]. Then $L(f) \leq U(f)$</p>
+</blockquote>
+
+<p>Previously in lemma 2, we proved that regardless of the partition, the upper darboux sum is always greater (or equal to) the lower darboux sum. 
+This is an extension of the previous lemma but even stronger by tighting the bound such that even the GREATEST lower darboux sum is less than the LEAST upper darboux sum.</p>
+
+<p>By the definition of Darboux Integrals, we know that a function is integrable if its lower and upper sum are equal (i.e. $L(f) = U(f)$). However, this definition requires us to verify this equality 
+directly which at times can be difficult due to $U(f)$ and $L(f)$ being defined as the infima and suprema of the upper and darboux sums of an infinitely many bounded finite-partitions respectively. 
+One can use the following characterisation to determine if a function is integrable:</p>
+
+<blockquote>
+  <p><strong>Theorem 1 (Cauchy Criterion):</strong> a bounded function $f$ on $[a,b]$ is integrable $\iff \forall \epsilon &gt; 0 \exists$ a partition $P$ of $[a,b]$ such that $U(f,P) - L(f,P) \lt \epsilon$</p>
+</blockquote>
+
+<p>As one may recall from the <a href="../math1052-commentary">previous course</a>: For any $\epsilon &gt; 0$, if the difference between two values is less than every positive $\epsilon$ then the difference must be 0.</p>
+
+\[\text{for any two real numbers } x, x_o, \text{ if } |x-x_o| \lt \epsilon, \forall \epsilon \gt 0 \nonumber \\
+\text{then }x = x_o\]
+
+<p>A common example is the value $1.\overline{9} = 1.9999\dots$ (i.e. the 9 repeats infinitely many times).</p>
+
+<p>No matter what $\epsilon \gt 0$ you choose, we have $2 - 1.\overline{9} \lt \epsilon$</p>
+
+<p>For instance:</p>
+<ul>
+  <li>$|2 - 1.9| &lt; 0.1$</li>
+  <li>$|2 - 1.99| &lt; 0.01$</li>
+  <li>$|2 - 1.999| &lt; 0.001$</li>
+</ul>
+
+<p>As we add more 9s, the difference gets smaller. In this limit, the difference converges to 0. Thus $2 - 1.\overline{9} = 0$ or $1.\overline{9} = 2$.</p>
+
+<p>Many integration problems found in Engineering have one thing in common, they tend to be continuous? Is there a particular reason for this? It turns out that it is easy to create integration 
+problems as long as the functions are continuous:</p>
+
+<blockquote>
+  <p><strong>Theorem 2:</strong> Every continuous function $f$ on $[a,b]$ is integrable</p>
+</blockquote>
+
+<p>However, sometimes a student can be blessed or cursed (depending on perspective) with a piecewise function. But in particular, these discontinuous functions tend to have one thing in common, 
+they are montonic functions. Recall that a monotone function is a function that is either increasing or decreasing (not strictly) and do not have to be continuous. For instance, take a piecewise 
+montonic function, the step function that jumps upward at finitely many points but never decreases. Professors don’t pose students integration problems out of nowhere, 
+they rely on the next theorem to pose piecewise functions to students:</p>
+
+<blockquote>
+  <p><strong>Theorem 3:</strong> Every monotone functions on $[a,b]$ is integrable</p>
+</blockquote>
+
+<p>The next set of facts will be given without any commentary:</p>
+<blockquote>
+  <p>let $f,g$ be integrable on $[a,b]$ and let $c\in\mathbb{R}$. Then:</p>
+  <ol>
+    <li>$cf$ is integrable with $\int^b_a cf = c\int^b_a f$ (scalar multiplication)</li>
+    <li>f+g is integrable with $\int_a^b (f + g) = \int_a^b f + \int_a^b g$ (additivity)</li>
+    <li>if $f(x) \leq g(x) \forall x\in [a,b]$ then $\int_a^b f(x)dx \leq \int_a^b g(x)dx$ (monotonicity)</li>
+    <li>if $g$ is a continuous non-negative function and  $\int_a^b g(x)dx = 0$ then $g(x) = 0 \forall x\in [a,b]$</li>
+    <li>let $a \lt c \lt b$ and if $f$ is integrable on $[a,c]$ and on $[c,b]$ then $\int_a^b f = \int_a^c + \int_c^b$ (additivity of intervals)</li>
+    <li>$|f|$ is integrable on $[a,b]$ and $|\int_a^b f| \leq  \int_a^b |f|$ (triangle inequality)
+<img src="/assets/math-physics/courses/math2052/integration-abs.png" alt="Visual illustration of the difference between taking absolute val of an integral v.s taking the integration of a abs(f)" /></li>
+  </ol>
+  <p class="caption">Illustration of $\|\int_a^b f\|$ on the left and $\int_a^b \|f\|$ on the right</p>
+</blockquote>
+
+<p>Previously, we stated that if $f$ is either montone or continuous, then it is integrable. But not all functions are monotone nor continuous which could severely restrict what types of curves we can 
+compute the area under. But what if we broke the functions into separate individual pieces? That is what piecewise functions attempt to do and we shall be exploring further the integrability of 
+such functions.</p>
+
+<blockquote>
+  <p><strong>Piecewise Monotone:</strong> $f$ is called <strong>piecewise monotone</strong> on $[a,b]$ if there is a partition $P$ of $[a,b]$ such that $f$ is monotone on each open subinterval $(t_{k-1},t_k)$.</p>
+</blockquote>
+
+<p><img src="/assets/math-physics/courses/math2052/piecewise-monotone.png" alt="Illustation of a piecewise monotone function" /></p>
+<p class="caption">A piecewise monotone function</p>
+
+<blockquote>
+  <p><strong>Piecewise Continuous:</strong> $f$ is called <strong>piecewise continuous</strong> on $[a,b]$ if there is a partition $P$ of $[a,b]$ such that $f$ is uniformly continuous on each open subinterval $(t_{k-1},t_k)$</p>
+</blockquote>
+
+<p><img src="/assets/math-physics/courses/math2052/piecewise-cts.png" alt="Illustation of a piecewise monotone function" /></p>
+<p class="caption">A piecewise continuous function</p>
+
+<blockquote>
+  <p><strong>Theorem 4:</strong> If $f$ is <strong>piecewise continuous</strong> or <strong>(bounded) piecewise monotone</strong> on $[a,b]$, then it is integrable on $[a,b]$</p>
+</blockquote>
+
+<p>With theorem 4, we have now covered the integrability of nearly all functions encountered in engineering and applied mathematics (at least at a freshman level).</p>
+
+<p>Now we have covered enough to discuss the one of the biggest theorem in calculus: the fundamental theorem of calculus (FTC). Specifically we will cover the first part of FTC but essentially 
+the fundamental theorem of calculus connects differentiation covered in the previous course with integration to show they are roughly inverses of each other. In addition, it also teaches us how to 
+compute the integral of a function much more efficiently (at least by hand).</p>
+
+<blockquote>
+  <p><strong>Theorem 5 (Fundamental Theorem of Calculus 1):</strong> if $f$ is continuous on $[a,b]$ and differentiable on $(a,b)$ and if $f’$ is integrable on $[a,b]$,
+then $\underbrace{\int_a^b f’(x)dx}_{\text{sum of infinitesimal changes}} = \underbrace{f(b)-f(a)}_{\text{total change}}$</p>
+</blockquote>
+
+<p>The first part of the theorem tells us that integrating a derivative gives us the original function’s change. Recall that the derivative $f’(x)$ tells us the rate of change of the function $f$ at 
+each point. Summing (i.e. integrating) all these infinitesimal changes from $a$ to $b$ should give the total change $f(b) - f(a)$.</p>
+
+<p>Thus, by the fundamental theorem of calculus part 1, we have a practical method to compute definite integrals. Instead of constructing darboux sums, we can use antiderivatives.</p>
+
+<p>You may see the term definite and indefinite integrals thrown around, essentially one specifies its bound and the other does not. But here’s a more complete definition:</p>
+<ul>
+  <li><strong>Definite Integral:</strong> the integral has bounds $[a,b]$ and evaluates to a single real number</li>
+  <li><strong>Indefinite Integral:</strong> the integral has no bounds and represents a family of antiderivatives $F(x) + C$ where $C\in\mathbb{R}$</li>
+</ul>
+
+<p>Suppose $a \lt b$, then what would it mean if we switch the bounds around? (i.e. $\int_b^a f(x)dx$?). By the fundamental theorem of calculus part 1, we have:</p>
+
+\[\int_a^b f(x)dx = F(b) - F(a) \nonumber\]
+
+<p>So if we were to swap the bounds, we would have: $\int_b^a f(x)dx = F(a) - F(b) = - (F(b) - F(a)) = - \int_a^b f(x)dx$</p>
+
+<blockquote>
+  <p>If $a \lt b$ then $\int_b^a f(x)dx = - \int_a^b f(x)dx$</p>
+</blockquote>
+
+<p>If $F$ is an antiderivative of $f$ (i.e. $F’ = f$), then:</p>
+
+\[\int_a^b f(x)dx = F(x)|_a^b = F(b) - F(a) \nonumber\]
+
+<p>As a consequence, we also have the following (the second part of the FTC):</p>
+
+\[\frac{d}{dx}\int f(x)dx = f(x) \nonumber\]
+
+<p>While FTC 1 lets us compute definite integrals using antiderivatives, FTC 2 guarantees that the antiderivatives exist.</p>
+
+<blockquote>
+  <p><strong>Theorem 6 (Fundamental Theorem of Calculus 2):</strong> let $f$ be integrable on $[a,b]$ and let $F(x) = \int_a^x f(t)dt$. Then $F$ is continuous on $[a,b]$. Moreover, 
+if $f$ is continuous at $x_o\in(a,b)$ then $F$ is differentiable at $x_o$, thus $F’(x_o) = f(x_o)$.</p>
+
+  <p>This is a complicated way of saying the derivative undoes the integration: $\frac{d}{dx}\int f(x)dx = f(x)$</p>
+</blockquote>
+
+<p><strong>Connection to Theorem 2:</strong> Recall from Theorem 2 that every continuous function on [a,b] is integrable. By FTC 2, we not have an explicit statement that every continuous function has an antiderivative.</p>
+
+<p>On the same subject, it is important to note that even if an antiderivative exists, it does <strong>NOT</strong> mean it is integrable. There is a strong reason for why the formal definition of the FTC 2 requires 
+$f$ to be continuous (or at least integrable). Having an antiderivative is not enough.</p>
+
+<p><strong>Example:</strong></p>
+
+\[F(x) = \begin{cases} 
+      x^2\sin(\frac{1}{x}) &amp; x \neq 0 \\ \nonumber
+      0 &amp; x = 0
+\end{cases}\]
+
+<p>$F(x)$ is differentiable everywhere but <strong>DIFFERENTIABILITY $\bcancel{\implies}$ Integrability</strong></p>
+
+<p>For $x \neq 0, f(x) = F’(x) = 2x\sin(\frac{1}{x}) + x^2(\cos(\frac{1}{x}))(\frac{-1}{x^2}) = 2x\sin(\frac{1}{x}) - \cos(\frac{1}{x})$</p>
+
+<p>As $x\to 0$, it widly oscillates between 1 and -1 according to Wikipedia and thus is discontinuous around the neighborhood $x = 0$. With some math I won’t get into, this function apparently broke 
+the accepted knowledge of what functions were differentiable everywhere and its derivative was bounded, the derivative was always integrable. As this is a first-year course in Calculus, 
+we are strictly referring Integrability as Riemann/Darboux integrable. Using the definitions presented in the blog, this function is not Darboux Integrable.</p>
+
+<hr />
+
+<p><a name="int-tech"></a></p>
+
+<h2 id="integration-techniques">Integration Techniques</h2>
+
+<p>Thus far we have covered what it means to take an integral of a function and what sorts of functions are integrable. Let us now use the fundamental theorem of calculus part 1 and various integration 
+techniques to compute integrals.</p>
+
+<p>Here are some basic integration rules to know:</p>
+
+<ul>
+  <li><strong>constant:</strong> $\int a dx = ax + C, a\in\mathbb{R}$</li>
+  <li><strong>power rule:</strong> $\int x^n dx = \frac{x^{n+1}}{n+1} + C, n\neq -1$</li>
+  <li><strong>reciprocal:</strong> $\int \frac{1}{x}dx = \ln |x| + C$</li>
+  <li><strong>sum/difference:</strong> $\int [f(x) \pm g(x)]dx = \int f(x)dx \pm \int g(x)dx$</li>
+</ul>
+
+<p><strong>Exponential and Logarithmic Functions:</strong></p>
+<ul>
+  <li>$\int e^x dx = e^x + C$</li>
+  <li>$\int a^x dx = \frac{a^x}{\ln(a)} + C, a \gt 0, a\neq 1$</li>
+  <li>$\int \ln(x) dx = x\ln(x) - x + C$</li>
+  <li>$\int \frac{1}{x\ln (x)} dx = \ln |\ln(x)| + C$</li>
+</ul>
+
+<p><strong>Trigonometric Functions:</strong></p>
+<ul>
+  <li>$\int \cos(x) dx = \sin(x) + C$</li>
+  <li>$\int \sin(x) dx = -\cos(x) + C$</li>
+  <li>$\int \sec^2(x)dx = \tan(x)+C$</li>
+  <li>$\int \sec(x)\tan(x)dx = \sec(x) + C$</li>
+  <li>And many more …</li>
+</ul>
+
+<p>The issue with computing integrals is that it tends to be an exercise of memorisation and practice to know what techniques to use and what the anti-derivatives are. Hence why I don’t find this section 
+particular interesting. But nonethless, it is important to go through different common integration techniques one needs to know to survive their calculus course.</p>
+
+<p>Most functions have no anti-derivatives, and thus Mathematicians have discovered or invented techniques to tackle each problem. Before the release of LLMs, integration calculators were notorious for 
+giving complicated solutions to integral problems as they often employed their own common generic integration techniques to solve the problem which weren’t student friendly solutions.</p>
+
+<p>The most basic and fundamental integration technique is <strong>substitution</strong> which is essential to understand. It is the most fundamental integration technique that gets employed in many other 
+integration techniques so it is primordial to master it.</p>
+
+<blockquote>
+  <p><strong>Substitution Rule:</strong> $\int_a^b f(g(x))g’(x)dx = \int_{u(a)}^{u(b)} f(u)du, $ where $u = g(x)$</p>
+</blockquote>
+
+<p>The substitution rule works by recognising composite functions. When you see an integrand with “chain rule” structure, you can often times simplify by substituting the problem to an easier integral.
+This looks more daunting than it should be so let’s look at a simple example:</p>
+
+<p><strong>Example:</strong> $\int_0^1 e^{2x} dx$</p>
+
+<p>The integrand $e^{2x}$ is composite: $f(x) = e^x$ and $g(x)$ = 2x, so $f(g(x)) = e^{2x}$.</p>
+
+<p>Our basic rule $\int e^x dx = e^x + C$ does not directly apply because of the coefficient 2 on $x$. This is where substitution helps:</p>
+
+<p>Let $u = 2x$. Then:</p>
+
+\[\begin{align*}
+u = 2x, \qquad \frac{du}{dx} &amp;= 2\\
+dx &amp;= \frac{du}{2}
+\end{align*}\]
+
+<p>Thus we can rewrite the integral as:</p>
+
+\[\begin{align*}
+\int e^{2x} dx = \int e^u \frac{du}{2} = \frac{1}{2}\int e^u du
+\end{align*}\]
+
+<p>The integrand now is in the correct form and thus is solvable.</p>
+
+\[\begin{align*}
+\frac{1}{2}\int e^u du = \frac{1}{2} e^u + C
+\end{align*}\]
+
+<p>However, as the question posed a definite integral, we must account for the bounds? There are two approaches:</p>
+
+<ol>
+  <li>
+    <p><strong>Change of Bounds</strong> Determine what the lower and upper bounds are by computing $u(a)$ and $u(b)$ are</p>
+
+\[x = 0: u(0) = 2(0) = 0 \\ \nonumber
+ x = 1: u(1) = 2(1) = 2 \nonumber\]
+
+    <p>So now we can integrate directly:</p>
+
+\[\begin{align*}
+ \frac{1}{2}\int_0^2 e^u du &amp;= \frac{1}{2} e^u|_0^2 \\
+ &amp;= \frac{1}{2}[e^2 - e^0] \\
+ &amp;= \frac{e^2 - 1}{2}
+ \end{align*}\]
+
+    <p>The benefit with this approach is that we can work entirely in terms of $u$, there is no need to substitute back</p>
+  </li>
+  <li>
+    <p><strong>Substitute Back:</strong> Solve the indefinite integral first, then substitute back $u = 2x$ before evaluating bounds:</p>
+
+\[\begin{align*}
+ \int_0^1 e^{2x}dx &amp;= \frac{1}{2}\int_{x=0}^{x=1} e^u du\\
+ &amp;= \frac{1}{2} e^u|_{x=0}^{x=1} \\
+ \end{align*}\]
+
+    <p>As the bounds are respect to $x$, let’s substitute back our original function $u = 2x$</p>
+
+\[\begin{align*}
+ \frac{1}{2} e^u|_{x=0}^{x=1} &amp;= \frac{1}{2}e^{2x}|_0^1 \\
+ &amp;= \frac{1}{2}[e^{2(1)} - e^{2(0)}] \\
+ &amp;= \frac{e^2 - e^0}{2} \\
+ &amp;= \frac{e^2 - 1}{2}
+ \end{align*}\]
+  </li>
+</ol>
+
+<p>I always stress to my students to verify their work if feasible (i.e. if time permits and isn’t overly complex to do so) by taking the derivative of their indefinite integral and see if it matches 
+the original integrand:</p>
+
+\[\begin{align*}
+(\frac{e^u}{2} + C)' &amp;= \left(\frac{e^u}{2}\right)(u') \\
+&amp;= (\frac{e^{2x}}{2})(2x)' \\
+&amp;= (\frac{e^{2x}}{\bcancel{2}})(\bcancel{2}) \\
+&amp;= \boxed{e^{2x}}
+\end{align*}\]
+
+<p>This matches our original integrand $e^{2x}$, so we can be confident our integration is correct.</p>
+
+<p>This verification step catches algebraic errors, wrong coefficients, and misapplied rules. If your derivative doesn’t match the integrand, you have made a mistake somewhere.</p>
+
+<p>The Substitution rule has various names including u-subitution rule or change of variables but the most important thing to take from this rule is its ability to simplify the integrand and it can 
+potentially achieve this by cancelling a term due to the derivative of $u$.</p>
+
+<p><strong>Example:</strong></p>
+
+<p>For instance, consider the following problem: $\int \frac{x}{x^2+1}dx$</p>
+
+<p>This problem looks very complicated but if we let $u = x^2+1$ then:</p>
+
+\[\begin{align*}
+u = x^2+1 \implies \frac{du}{dx} &amp;= 2x\\
+\frac{du}{2x} &amp;= dx
+\end{align*}\]
+
+<p>Resulting in the following:</p>
+
+\[\begin{align*}
+\int \frac{x}{x^2+1}dx &amp;= \int \frac{\bcancel{x}}{u}\left(\frac{du}{2\bcancel{x}}\right)\\
+&amp;= \frac{1}{2} \int \frac{1}{u}du \\
+&amp;= \frac{1}{2} \ln(u) \\
+&amp;= \boxed{\frac{1}{2} \ln(x^2+1)}
+\end{align*}\]
+
+<p><strong>Check:</strong></p>
+
+\[\begin{align*}
+\frac{1}{2} (\ln(x^2+1) &amp;= \frac{1}{2} \frac{1}{x^2+1} (x^2+1)') \\
+&amp;= \frac{1}{\bcancel{2}} \left(\frac{1}{x^2+1}\right)(\bcancel{2}x) \\
+&amp;= \boxed{\frac{x}{x^2+1}}
+\end{align*}\]
+
+<p>The next integration technique is called <strong>Integration By Parts</strong>, useful when the integrand is a product of two separate functions where one becomes simpler when differentiated:</p>
+
+<blockquote>
+  <p><strong>Integration By Parts:</strong> $\int uv’dx = uv - \int vdu$</p>
+</blockquote>
+
+<p><strong>Example:</strong> $\int x\sin(x) dx$</p>
+
+<p>The integrand is a product of two functions $x$ and $\sin(x)$.</p>
+
+<p>Choosing which function is to be $u$ or $v’$ takes practice but in general, I like to always default choosing $u$ to be a polynomial function like the linear function $x$ if applicable, 
+else consider whose integral (antiderivative) is the least difficult. According to <a href="https://en.wikipedia.org/wiki/Integration_by_parts">Wikipedia</a>, there is the <strong>LIATE</strong> rule, a rule 
+I never heard of till now. This rule is a general guide to choosing the $u$:</p>
+
+<ol>
+  <li><strong>L</strong> Logarithmic functions</li>
+  <li><strong>I</strong> Inverse Trigonometric Functions: $\arctan(x), \text{arcsec}(x)$, etc.</li>
+  <li><strong>A</strong> algebraic functions such as polynomials</li>
+  <li><strong>T:</strong> trigonmetric functions: $\sin(x), \tan(x)$, etc.</li>
+  <li><strong>E:</strong> Exponential functions</li>
+</ol>
+
+<p>Based on my personal experience and this rule, choose $u = x$ and $v’ = \sin(x)$. Thus we have:</p>
+
+\[\begin{align*}
+u &amp;= x \qquad v' = \sin(x) \\
+\frac{du}{dx} &amp;= 1 \qquad v \ = -\cos(x)
+\end{align*}\]
+
+<p>Apply the integration by parts rule, we have:</p>
+
+\[\begin{align*}
+\int x\sin(x) dx &amp;= uv - \int vdu\\
+&amp;= -x\cos(x) - \int -\cos(x)dx \\
+&amp;= -x\cos(x) + \int \cos(x)dx \\
+&amp;= \boxed{-x\cos(x) + \sin(x) + C}
+\end{align*}\]
+
+<p><strong>Check:</strong> 
+\(\begin{align*}
+(-x\cos(x) + \sin(x) + C)' &amp;= \bcancel{-\cos(x)} + (\bcancel{-}x)(\bcancel{-}\sin(x)) + \bcancel{\cos(x)} + 0 \\
+&amp;= \boxed{x\sin(x)}
+\end{align*}\)</p>
+
+<p>One trick to recall the rule is to start with the product rule and get the left side to be in the form $uv’$:</p>
+
+\[\begin{align*}
+(uv)' &amp;= u'v + v'u \\
+uv' &amp;= (uv)' - u'v \\
+\int uv' &amp;= \int (uv)' - \int u'v \\
+\int uv' &amp;= \boxed{uv - \int v du}
+\end{align*}\]
+
+<p>From my time as a teaching assistant in Calculus for Engineers, I learned there is an integration by parts table 
+that one could adopt to organise the various substitution required to the problem. This is particular useful when the question requires to apply the rule multiple times. Perhaps I’ll cover this 
+in the future.</p>
+
+<p>The integration by parts can be an effective tool to solve problems that doesn’t seem to be a product of two functions such as $\int \ln(x)dx$. Recall that a product between 1 and any function is the 
+function itself. This itself is a product:</p>
+
+<p><strong>Example:</strong></p>
+
+\[\begin{align*}
+\int \ln(x) &amp;= \int \ln(x) \cdot 1 \\
+\end{align*}\]
+
+<p>Based on LIATE rule, logarithmic takes precedent over algebraic functions thus take $u = \ln(x)$</p>
+
+\[\begin{align*}
+u &amp;= \ln(x)                &amp; dv &amp;= 1dx \\
+\frac{du}{dx} &amp;= \frac{1}{x} \implies \boxed{du = \frac{1}{x}dx} &amp;  v &amp;= x
+\end{align*}\]
+
+<p>Thus,</p>
+
+\[\begin{align*}
+\int \ln(x)dx &amp;= x\ln(x) - \int \bcancel{x}(\frac{dx}{\bcancel{x}}) \\
+&amp;= x\ln(x) - \int dx \\
+&amp;= \boxed{x\ln(x) - x + C}
+\end{align*}\]
+
+<p><strong>Check:</strong></p>
+
+\[\begin{align*}
+(x\ln(x) - x + C)' &amp;= \ln(x) + \bcancel{x}\left(\frac{1}{\bcancel{x}}\right) - 1 + 0 \\
+&amp;= \ln(x) + 1 - 1 \\
+&amp;= \boxed{\ln(x)}
+\end{align*}\]
+
+<p><strong>Trigonometric Substitution:</strong></p>
+
+<p>Consider the following integration: $\int \frac{1}{\sqrt{4-x^2}}dx$. One’s first instinct may be to utilise substitution or integration by parts. However this will likely end poorly. It turns out this 
+class of problems requires trigonometric substitution. Whenever one sees the following expressions in the following form, it is best to consider trigonmetric substitution first:</p>
+<ul>
+  <li>$\sqrt{a^2-x^2}$</li>
+  <li>$\sqrt{a^2+x^2}$</li>
+  <li>$\sqrt{x^2-a^2}$</li>
+</ul>
+
+<p>The key to knowing what trig to substitute x for lies in the identities which are convienently layed out below:</p>
+
+<blockquote>
+  <p><strong>Trigonometric Substitution:</strong></p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>form</th>
+        <th>substitution</th>
+        <th>identity used</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>$\sqrt{a^2-x^2}$</td>
+        <td>$x=a\sin\theta$</td>
+        <td>$1-\sin^2\theta = \cos^2\theta$</td>
+      </tr>
+      <tr>
+        <td>$\sqrt{a^2+x^2}$</td>
+        <td>$x=a\tan\theta$</td>
+        <td>$1+\tan^2\theta = \sec^2\theta$</td>
+      </tr>
+      <tr>
+        <td>$\sqrt{x^2-a^2}$</td>
+        <td>$x=a\sec\theta$</td>
+        <td>$\sec^2\theta-1=\tan^2\theta$</td>
+      </tr>
+    </tbody>
+  </table>
+</blockquote>
+
+<p>Let’s see how this works in practice by looking at the motivating example: $\int\frac{1}{\sqrt{4-x^2}}dx$</p>
+
+<p><strong>Step 1:</strong> Identify the form and choose a substitution</p>
+
+<p>The expression $\sqrt{4-x^2}$ fits the form $\sqrt{a^2-x^2}$ where $a = 2$.</p>
+
+<p>By the table above, use $x = 2\sin\theta$</p>
+
+<p><strong>Step 2:</strong> Compute the derivative and simplify the square root</p>
+
+<p>From $x = 2\sin\theta$:
+\(\begin{align*}
+x &amp;= 2\sin\theta \\
+\frac{dx}{d\theta} &amp;= 2\cos\theta \\
+dx &amp;= \boxed{2\cos\theta d\theta}
+\end{align*}\)</p>
+
+<p>Simplify $\sqrt{4-x^2}$:</p>
+
+\[\begin{align*}
+\sqrt{2^2-x^2} &amp;= \sqrt{2^2 - (2\sin\theta)^2} \\
+&amp;= \sqrt{4 - 4\sin\theta^2} \\
+&amp;= \sqrt{4(1 - \sin\theta^2)} \\
+&amp;= \sqrt{4}\sqrt{1 - \sin\theta^2} \\
+&amp;= 2\sqrt{\cos^2\theta} \\
+&amp;= 2|\cos\theta|
+\end{align*}\]
+
+<p>Let’s restrict $\theta \in [\frac{-\pi}{2},\frac{\pi}{2}]$ so $\cos\theta \geq 0$. Thus $|\cos\theta| = \cos\theta$.</p>
+
+<p><strong>Step 3:</strong> Substitute into the integral</p>
+
+\[\begin{align*}
+\int\frac{1}{\sqrt{4-x^2}}dx &amp;= \int\frac{1}{2\cos\theta}dx \\
+&amp;= \int \frac{1}{\bcancel{2\cos\theta}} (\bcancel{2\cos\theta} d\theta) \\
+&amp;= \int d\theta \\
+&amp;= \theta + C
+\end{align*}\]
+
+<p><strong>Step 4:</strong> Substitute $x$ back</p>
+
+<p>Recall that $x = 2\sin\theta$,</p>
+
+\[\begin{align*}
+x &amp;= 2\sin\theta \\
+\frac{x}{2} &amp;= \sin\theta \\
+\theta &amp;= \arcsin(\frac{x}{2}) + C
+\end{align*}\]
+
+<p>Thus, $\int\frac{1}{\sqrt{1-x^2}}dx = \theta = \arcsin(\frac{x}{2})$</p>
+
+<p><strong>Check:</strong></p>
+
+\[\begin{align*}
+(\arcsin(\frac{x}{2}))' &amp;= \frac{1}{\sqrt{1-(\frac{x}{2})^2}}\left(\frac{x}{2}\right)' \\
+&amp;= \frac{1}{\sqrt{1-\frac{x^2}{4}}}\left(\frac{1}{2}\right) \\
+&amp;= \frac{1}{2\sqrt{1-\frac{x^2}{4}}} \\
+&amp;= \frac{1}{\sqrt{4}\sqrt{1-\frac{x^2}{4}}} \\
+&amp;= \frac{1}{\sqrt{4(1-\frac{x^2}{4}})} \\
+&amp;= \boxed{\frac{1}{\sqrt{4-x^2}}}
+\end{align*}\]
+
+<p>Hopefully, this motivating example gave you a glimpse of the power of trig substitution. There are many more interesting questions that one could solve that requires one to recall special triangles 
+and the SOH CAH TOA rule to convert trig functions in respect to $\theta$ back to $x$ but will be a story for another time. But as an exercise, derive the area of a circle of radius r, you should 
+get $\pi r^2$.</p>
+
+<p><strong>Partial Fractions:</strong></p>
+
+<p>Another class of rational functions that can be integrated utilises a technique called partial fractions but this only works (from my memory) with rational functions whose numerator and denominators 
+are polynomials. The reason is quite simple, this technique relies on decomposing rational functions into smaller pieces.</p>
+
+<blockquote>
+  <p><strong>Decomposition:</strong> for a rational function $\frac{p(x)}{q(x)}, it can always be decomposed into smaller pieces, each of which can be integrated</p>
+
+  <p><strong>Example:</strong> $\frac{1}{x^2-1} = \frac{\frac{1}{2}}{x-1} - \frac{\frac{1}{2}}{x+1}$</p>
+</blockquote>
+
+<p>A condition for partial fractions in general is that deg$(p(x)) \lt $deg$q(x)$. If deg$(p(x)) \geq $deg$q(x)$, use polynomimal long divisionto separate the polynomial part from the remainer:</p>
+
+\[\frac{p(x)}{q(x)} = Q(x) + \frac{r(x)}{q(x)}\nonumber\]
+
+<p>Then apply partial fractions to $\frac{r(x)}{q(x)}$, where now deg$(r) \lt $deg$(q)$.</p>
+
+<p>The form of the partial fraction decomposition depends on the type of factors in the denominator:</p>
+
+<ul>
+  <li>
+    <p><strong>Case 1:</strong> Distinct Linear Factors</p>
+
+    <p>After factoring, if the denominators have distinct roots then we have each term in the form: $\frac{A}{ax+b}$</p>
+  </li>
+  <li>
+    <p><strong>Case 2:</strong> Repeated Linear Roots</p>
+
+    <p>After factoring, if the denominator has repeated roots (i.e. $(ax+b)^n$), then we need to create a term for each and every power up to $n$:</p>
+
+\[\begin{align*}
+\frac{A_1}{ax+b} + \frac{A_2}{(ax+b)^2} + \frac{A_3}{(ax+b)^3} + \cdots + \frac{A_n}{(ax+b)^n}
+\end{align*}\]
+  </li>
+  <li>
+    <p><strong>Case 3:</strong> Distinct Irreducible Quadratic Factors</p>
+
+    <p>Not all quadratics are reducible using real numbers and thus remain in the form: $ax^2+bx+c$. Then the term will have a corresponding partial fraction term: $\frac{Ax+B}{ax^2+bx+c}$</p>
+  </li>
+  <li>
+    <p><strong>Case 4:</strong> Repeated Quadratic Factors</p>
+
+    <p>Similar to case 2, if you notice irredicuble quadratic terms in the denominator of our rational functions, we need to build up the terms repeatedly with higher powers:</p>
+
+\[\begin{align*}
+\frac{A_1x+B_1}{ax^2+bx+c} + \frac{A_2x+B_2}{(ax^2+bx+c)^2} + \frac{A_3x+B_3}{(ax^2+bx+c)^3} + \cdots + \frac{A_nx+B_n}{(ax^2+bx+c)^n}
+\end{align*}\]
+  </li>
+</ul>
+
+<p>The constant terms $A_i, B_i$ are determine using linear algebra. Let’s go through a simple example:</p>
+
+<p>$\int \frac{1}{4x^2-1}dx$</p>
+
+<p>Immediately you should notice that this is in the form $a^2-b^2$ thus we can utilise what we saw in Highschool (differences in squares): $a^2-b^2 = (a+b)(a-b)$: $4x^2-1 = 4x^2 - 1^2 = (2x+1)(2x-1)$</p>
+
+<p>Based on our general rule, we have two distinct roots and thus each term corresponds to a linear root: $\frac{A}{ax+b}$. 
+Thus we reduced the rational function into the following parts:</p>
+
+\[\begin{align*}
+\int \frac{1}{4x^2-1}dx &amp;= \int \frac{1}{(2x+1)(2x-1)} \\
+&amp;= \int \frac{A}{2x+1} dx + \int \frac{B}{2x-1}dx \\
+&amp;= \int \frac{A(2x-1) + B(2x+1)}{(2x+1)(2x-1)} \\
+&amp;= \int \frac{2x(A+B) + (B-A)}{(2x+1)(2x-1)}
+\end{align*}\]
+
+<p>From here, we are left with two unknowns: $A, B$:</p>
+
+<p>The idea is to group each order as its own term such that we can solve the coefficients since the functions ${1, x, x^2, x^3, \dots}$ are linearly independent in the vectorspace for $x\in\mathbb{R}$</p>
+
+\[\begin{align*}
+1 &amp;= 2x(A+B) + (B-A) \\
+0x + 1 &amp;= 2x(A+B) + (B-A) 
+\end{align*}\]
+
+<p>Thus we have:</p>
+
+<ul>
+  <li>1:  $1 = B-A \implies B = 1 + A$</li>
+  <li>
+    <p>$x$: $0 = A+B$</p>
+
+\[\begin{align*}
+  0  &amp;= A+B\\
+  A &amp;= -B \\
+  &amp;= -(1+A) \\
+  A &amp;= -1 -A \\
+  2A &amp;= -1 \\
+  A &amp;= \boxed{\frac{-1}{2}}
+  \end{align*}\]
+  </li>
+</ul>
+
+<p>Plugging $\boxed{A = \frac{-1}{2}}$ into $B = 1 + A$, we have $\boxed{B = \frac{1}{2}}$</p>
+
+<p>Or alternatively, we could try to utilise nice numbers such as 0 or the roots to the equation to cancel out some terms to retrieve $A$ and $B$ more quickly:</p>
+
+<p>Consider: $1 = A(2x-1) + B(2x+1)$</p>
+
+<ul>
+  <li>if $x = \frac{1}{2}$:
+\(\begin{align*}
+1 &amp;= A(0) + B(2)
+B &amp;= \frac{1}{2}
+\end{align*}\)</li>
+  <li>if $x = \frac{-1}{2}$:
+\(\begin{align*}
+1 &amp;= A(-2) + B(0)
+A &amp;= \frac{-1}{2}
+\end{align*}\)</li>
+</ul>
+
+<p>By choosing the roots, we remove one term at a time, isolating each constant. This is faster than expanding and comparing coefficients. Plugging in nice numbers such as $x = 0$ at times is sufficient as well.</p>
+
+<p>Therefore, the integral is now:</p>
+
+\[\begin{align*}
+\int \frac{1}{4x^2-1}dx &amp;= \frac{-1}{2} \int \frac{1}{(2x+1)} dx + \frac{1}{2}\int \frac{1}{2x-1}dx
+\end{align*}\]
+
+<p>A much more manageable smaller pieces of integrals that can now be solved:</p>
+
+\[\begin{align*}
+\int \frac{1}{4x^2-1}dx &amp;= \frac{-1}{2} \int \frac{1}{(2x+1)} dx + \frac{1}{2}\int \frac{1}{2x-1}dx \\
+&amp;= \left(\frac{-1}{2}\right)\left(\frac{1}{2}\right)\ln|2x+1| + \frac{1}{2}\left(\frac{1}{2}\right) \ln|2x-1| \\
+&amp;= \frac{1}{4}\ln|2x-1| - \frac{1}{4}\ln|2x+1| \\
+&amp;= \boxed{\frac{1}{4}\ln\left|\frac{2x-1}{2x+1}\right| + C}
+\end{align*}\]
+
+<p><strong>Check:</strong></p>
+
+\[\begin{align*}
+\left(\frac{1}{4}\ln|2x-1| - \frac{1}{4}\ln|2x+1|\right) + C &amp;= \left(\frac{1}{4}\right)\left(\frac{1}{2x-1}\right)(2x-1)' - \left(\frac{1}{4}\right)\left(\frac{1}{2x+1}\right)(2x+1)' \\
+&amp;= \frac{1}{2}\left[\frac{1}{2x-1} - \frac{1}{2x+1}\right] \\
+&amp;= \frac{1}{2}\left[\frac{2x+1 - (2x-1)}{(2x+1)(2x-1)}\right] \\
+&amp;= \frac{1}{2}\left[\frac{2x + 1 - 2x + 1}{(2x+1)(2x-1)}\right] \\
+&amp;= \frac{1}{\bcancel{2}}\left[\frac{\bcancel{2}}{4x^2-1}\right] \\
+&amp;= \boxed{\frac{1}{4x^2 - 1}}
+\end{align*}\]
+
+<p><strong>Improper Integrals:</strong></p>
+
+<p>Thus far, we have studied integral of functions over closed, bounded intervals $[a,b]$. Even our integrability conditions required bounded domains. 
+But there is another class of integrals called the <strong>IMPROPER INTEGRALS</strong>, where either:</p>
+
+<ul>
+  <li>the domain extends to infinity OR</li>
+  <li>the function has a discontinuity at an end point</li>
+</ul>
+
+\[\int_1^\infty \frac{1}{x^2}dx \nonumber\]
+
+<p><img src="/assets/math-physics/courses/math2052/rational-x^2-1.png" alt="The area of a curve 1/x^2 from x &gt;= 1" /></p>
+<p class="caption">The area under the curve of $\frac{1}{x^2}$ from $x\geq 1$</p>
+
+<p>The remarkable result is that even though the domain is unbounded, the area is finite (equals to 1).</p>
+
+<blockquote>
+  <p><strong>Improper Integrals:</strong> Without loss of generality, consider $[a, b)$, where $b$ is finite or $\infty$. Let $f$ be defined on $[a,b)$ and integrable on each $[a,d]$ for $a \lt d \lt b$.</p>
+
+  <p>We define $\int_a^b f(x)dx = \lim\limits_{d\to b^{-}}\int_a^d f(x)dx$, provided the limit exists</p>
+</blockquote>
+
+<p>Consider the example: $\int_1^\infty \frac{1}{x^2}dx$:</p>
+
+\[\begin{align*}
+\int_1^\infty \frac{1}{x^2}dx &amp;= \lim\limits_{d\to\infty} \int_1^d \frac{1}{x^2}dx \\
+&amp;= \lim\limits_{d\to\infty} \left(\frac{x^{-1}}{-1}\bigg|_1^d\right) \\
+&amp;= \lim\limits_{d\to\infty} \left( \frac{-1}{d} - \left(-\frac{1}{1}\right) \right) \\
+&amp;= \lim\limits_{d\to\infty} \left(1 + \frac{-1}{d}\right) \\
+&amp;= 1
+\end{align*}\]
+
+<p>Let’s consider the region between $(0, 1]$. Intuitively, since the interval length is only 1 compared to $[1, \infty)$ which has infinite length, surely the area should be finite, right?</p>
+
+<p>Wrong! It turns out that $\int_0^1 \frac{1}{x^2}dx$ diverges (or converges to $\infty$), despite the bounded domain.</p>
+
+<p>As $0\notin dom(f)$, the integral is improper:</p>
+
+\[\begin{align*}
+\int_0^1 \frac{1}{x^2} &amp;= \lim\limits_{d\to 0^+} \int_d^1 \frac{1}{x^2}dx \\
+&amp;= \lim\limits_{d\to 0^+} \left(\frac{x^{-1}}{-1}\bigg|_d^1\right) \\
+&amp;= \lim\limits_{d\to 0^+} \left( \frac{-1}{1} - \left(-\frac{1}{d}\right) \right) \\
+&amp;= \lim\limits_{d\to 0^+} \left(\frac{1}{d} - 1\right) \\
+&amp;= \infty
+\end{align*}\]
+
+<p>We can generalise this behavior by solving $\int_1^\infty \frac{1}{x^p}$ and $\int_0^1 \frac{1}{x^p}$.</p>
+
+\[\begin{align*}
+\int_0^1 = \begin{cases} 
+      \infty &amp; p \geq 1 \\
+      \frac{1}{1-p} &amp; p \lt 1
+\end{cases}
+\end{align*}\]
+
+<p>and</p>
+
+\[\begin{align*}
+\int_1^\infty = \begin{cases}
+      \frac{1}{p-1} &amp; p \gt 1 \\
+      \infty &amp; p \leq 1
+\end{cases}
+\end{align*}\]
+
+<blockquote>
+  <table>
+    <thead>
+      <tr>
+        <th>Integral</th>
+        <th>p &lt; 1</th>
+        <th>p = 1</th>
+        <th>p &gt; 1</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>$\int_0^1 \frac{1}{x^p} dx$</td>
+        <td>Converges</td>
+        <td>Diverges</td>
+        <td>Diverges</td>
+      </tr>
+      <tr>
+        <td>$\int_1^\infty \frac{1}{x^p}dx$</td>
+        <td>Diverges</td>
+        <td>Diverges</td>
+        <td>Converges</td>
+      </tr>
+    </tbody>
+  </table>
+</blockquote>
+
+<p>What we can conclude from the past few examples is that the size of the domain does not matter, but rather its the behaviour of the function within the interval that matters. 
+An obvious result but sometimes taken forgranted.</p>
+
+<p>Recall in the previous <a href="../math1052-commentary">course</a>, we explore the $p$-test which stated:</p>
+
+<blockquote>
+  <p><strong>P-Series:</strong> $\sum \frac{1}{n^p}$ converges if $p \gt 1$ and diverges if $p\leq 1$</p>
+</blockquote>
+
+<p>$\int_1^\infty \frac{1}{x^p}dx$ and $\sum\limits_{n=1}^\infty \frac{1}{n^p}$ both diverge when $p \leq 1$. Is there a pattern between the two? Turns out yes and it’s called the integral test:</p>
+
+<blockquote>
+  <p><strong>Integral Test for Infinite Series:</strong> let $N\in\mathbb{Z}$ and suppose $f(x)$ is continuous, decreasing and non-negative on $[N, \infty]$ then $\sum\limits_{n=N}^\infty f(n)$ converges/diverges $\iff$ $\int_N^\infty f(x)dx$ converges/diverges respectively</p>
+</blockquote>
+
+<p>It can be difficult to determine whether an infinite series converge or diverge, so the Integral test will be a handy tool.</p>
+
+<p>If an integral is improper at both endpoints, one must split it up into 2 separate improper integrals and evaluate each integral separately.</p>
+
+<blockquote>
+  <p><strong>Improper Integrals (Improper at Both Ends):</strong> If $\int_a^b f(x)dx$ is improper at both ends, then by definition $\int_a^b f(x)dx = \int_a^c f(x)dx + \int_c^b f(x) dx$, where $c\in(a,b)$ and $f$ is defined at $c$.</p>
+
+  <p>If one of the two improper integrals evaluates to $\infty$ and the other is $-\infty$, then the integral is undefined</p>
+</blockquote>
+
+<p>For instance, consider the following example:</p>
+
+<p><img src="/assets/math-physics/courses/math2052/rational-improper-both-endpoints.png" alt="Area of 1/(1+x^2)" /></p>
+<p class="caption">Area of $\frac{1}{1+x^2}$</p>
+
+\[\begin{align*}
+\int_{-\infty}^\infty \frac{1}{x^2+1}dx
+\end{align*}\]
+
+<p>The two endpoints are improper and thus are broken into two pieces:</p>
+
+<ol>
+  <li>$\int_{-\infty}^0 \frac{1}{x^2+1}dx$</li>
+  <li>$\int_0^\infty \frac{1}{x^2+1}dx$</li>
+</ol>
+
+<p><strong>Important:</strong> Both pieces must converge for the original integral to converge. If even one diverges, the entire integral diverges.</p>
+
+<p>The problem will be left as an exercise to the readers.</p>
+
+<p>A common mistake is to compute an improper integral that is improper at both endpoints as one:</p>
+
+\[\begin{align*}
+\int_{-\infty}^\infty x dx &amp;= \lim\limits_{d\to\infty}\int_{-d}^d xdx \\
+&amp;= \lim\limits_{d\to\infty} \left(\frac{x^2}{2}\bigg|_{-d}^d\right) \\
+&amp;= \lim\limits_{d\to\infty} \frac{d^2}{2} - \left(\frac{(-d)^2}{2}\right) \\
+&amp;= 0 \quad\text{ THIS IS WRONG}
+\end{align*}\]
+
+<p>By symmetry, this seems fine. But it is <strong>invalid</strong> because the integral is improper at both endpoints and thus must be split. We will soon see that the integral is in fact undefined:</p>
+
+<p>Left Piece:</p>
+
+\[\begin{align*}
+\int_{-\infty}^0 x dx &amp;= \lim\limits_{d\to\infty}\int_{-d}^0 xdx \\
+&amp;= \lim\limits_{d\to\infty} \frac{x^2}{2}\bigg|_{-d}^0 \\
+&amp;= \lim\limits_{d\to\infty} \left(\frac{0^2}{2} - \frac{(-d)^2}{2}\right) \\
+&amp;= 0 - \infty \\
+&amp;= -\infty
+\end{align*}\]
+
+<p>Right Piece:</p>
+
+\[\begin{align*}
+\int_{0}^\infty x dx &amp;= \lim\limits_{d\to\infty}\int_{0}^\infty xdx \\
+&amp;= \lim\limits_{d\to\infty} \frac{x^2}{2}\bigg|_0^\infty \\
+&amp;= \lim\limits_{d\to\infty} \left(\frac{d^2}{2} - \frac{0^2}{2}\right) \\
+&amp;= \infty \\
+\end{align*}\]
+
+<p>As one diverges to $-\infty$ while the other to $\infty$, we cannot treat the two as equal opposites and thus they do not cancel each other.</p>
+
+<hr />
+
+<p><a name="power"></a></p>
+<h2 id="power-series">Power Series</h2>
+
+<p>Have you ever wondered how a calculator computes transcendentals such as $\sin x$ or $e^x$? The secret lies in <strong>power series</strong>, infinite sums of terms 
+that represent these functions accurately. Think of a power series as a polynomial with infinitely many terms. For instance, consider 
+$e^x$, it can be represented as the following:</p>
+
+\[\begin{align*}
+e^x = 1 + x + \frac{x^2}{2} + \frac{x^3}{6} + \frac{x^4}{24} + \cdots = \sum\limits_{n=0}^\infty \frac{x^n}{n!}
+\end{align*}\]
+
+<p>Evidentally, calculators must give an answer and thus cannot sum an infinite amount of terms. Therefore, it is important for us to know how many terms 
+are enough to sufficiently give us an answer that is precise to our needs. This approximation is a subject that is also explored in this course.</p>
+
+<blockquote>
+  <p><strong>Power Series:</strong> let $(a_n)_{n=0}^\infty$ be a sequence. The series $\sum\limits_{n=0}^\infty a_n x^n$ is called a <strong>power series</strong> (centered at 0) with coefficients $(a_n)^\infty_{n=0}$</p>
+</blockquote>
+
+<p>In the previous course, we studied series convergence:</p>
+
+\[\sum_{n=0}^{\infty} a_n \nonumber\]
+
+<p>And utilised tests (p-test, ratio test, comparison test, etc.) to answer whether the series converge or diverge. With power series, we face a new question:</p>
+
+\[\sum_{n=0}^{\infty} a_n x^n \nonumber\]
+
+<p>For which values of $x$ does this series converge? The questions and answers we seek is no longer simply whether a series converge but also to determine 
+the interval of x-values where converge occurs (called the radius of convergence). In power series, convergence is dependent on $x$, for instance:</p>
+
+\[\begin{align*}
+\sum\limits_{n=0}^\infty n^n x^n
+\end{align*}\]
+
+<p>By ratio test:</p>
+
+\[\begin{align*}
+\lim\limits_{n\to\infty} |n^n x^n|^\frac{1}{n} = \lim_{n \to \infty} n|x| = \begin{cases}
+    \infty &amp; x \neq 0 \\
+    0 &amp; x = 0
+\end{cases}
+\end{align*}\]
+
+<p>This power series converges only when $x = 0$. This is consistent to a fact about power series, they always converge when $x = 0$ unsurprisingly.</p>
+
+<blockquote>
+  <p><strong>Fact 1:</strong> every power series coverges at $x = 0$ as $0^0 = 1$</p>
+</blockquote>
+
+<p>Consider another example: $\sum\limits_{n=0}^\infty x^n$. By geometric series where $x = r$, we have $\sum\limits_{n=0}^\infty x^n = \frac{1}{1-x}$ which converges when $|x| \lt 1$.</p>
+
+<p>Thus, in this example, we have the power series converge when $x \lt 1$, a larger interval compare to the previous example which converged only at one point.</p>
+
+<p>Now consider the last example: $e^x = \sum\limits_{n=0}^\infty \frac{x^n}{n!}$. This is a power series with $a_n = \frac{1}{n!}$. By fixing $x$ and applying the ratio test, we have the following:</p>
+
+\[\begin{align*}
+\lim\limits_{n\to\infty} \bigg|\frac{\frac{1}{(n+1)!} x^{n+1}}{\frac{1}{n!} x^n}\bigg| &amp;=  \lim\limits_{n\to\infty} \bigg| \bcancel{\left(\frac{n!x^n}{n!x^n}\right)} \frac{x}{(n+1)}\bigg|\\
+&amp;= \lim\limits_{n\to\infty} \frac{|x|}{n+1} \\
+&amp;= |x| \lim\limits_{n\to\infty} \frac{1}{n+1} \\
+&amp;= 0 \lt 1
+\end{align*}\]
+
+<p>So by ratio test, $\sum\limits_{n=0}^\infty \frac{x^n}{n!}$ converges and since $x$ was arbitrary, it converges $\forall x\in\mathbb{R}$</p>
+
+<p>The last 3 examples illustrates 3 possibilities for a power series $\sum a_nx^n$, it can either:</p>
+<ol>
+  <li>converge only at $x = 0 \implies R = 0$</li>
+  <li>converges for all $x$ in a bounded interval certered at 0</li>
+  <li>converges $\forall x\in\mathbb{R} \implies R = \infty$</li>
+</ol>
+
+<blockquote>
+  <p><strong>Theorem 7 (Radius of Convergence):</strong> For the power series $\sum\limits_{n=0}^\infty a_n x^n$, let $R = \lim\limits_{n\to\infty} \bigg| \frac{a_n}{a_{n+1}} \bigg|$</p>
+
+  <p>Then $\sum\limits_{n=0}^\infty a_n x^n$ converges absoutely for $|x| \lt R$ and diverges for $|x| \gt R$</p>
+
+  <p>where $R$ is called the <strong>radius of convergence</strong> of $\sum\limits_{n=0}^\infty a_n x^n$</p>
+</blockquote>
+
+<p><strong>Note:</strong> Endpoints to be checked separately</p>
+
+<p><strong>Example:</strong> Find radius of convergence of $\sum\limits_{n=1}^\infty \frac{x^n}{n}$</p>
+
+<p>$\sum\limits_{n=1}^\infty \frac{x^n}{n} = \sum\limits_{n=1}^\infty a_nx^n$, where $a_n=\frac{1}{n}$</p>
+
+\[\lim\limits_{n\to\infty} \bigg|\frac{a_n}{a_{n+1}}\bigg| = \lim\limits_{n\to\infty} \bigg|\frac{\frac{1}{n}}{\frac{1}{n+1}}\bigg| = \lim\limits_{n\to\infty} \bigg|\frac{n+1}{n}\bigg| = 1 \nonumber\]
+
+<p>Since this limit exists, $R = 1$. Hence, $\sum\limits_{n=1}^\infty \frac{x^n}{n}$ converges $\forall x$ with $|x| \lt 1$ i.e. $\forall x\in(-1,1)$</p>
+
+<p>We need to check the endpoints separately since it may converge over there as well.</p>
+
+<p>For $x = -1$:</p>
+
+\[\sum\limits_{n=1}^\infty \frac{x^n}{n} = \sum\limits_{n=1}^\infty \frac{(-1)^n}{n}\nonumber\]
+
+<p>This converges by the alternating series test.</p>
+
+<p>For $x = 1$:</p>
+
+\[\sum\limits_{n=1}^\infty \frac{x^n}{n} = \sum\limits_{n=1}^\infty \frac{1^n}{n}\nonumber\]
+
+<p>Recall this is a harmonic series and thus diverges</p>
+
+<p>Thus, $\sum\limits_{n=1}^\infty \frac{x^n}{n}$ converges for $x\in[1, 1)$.</p>
+
+<p>Note that the radius of convergence is still 1, but we call $[-1,1)$ the <strong>interval of convergence</strong> which could be larger than your radius of convergence itself.</p>
+
+<blockquote>
+  <p><strong>Center of Power Series:</strong> Power series can be centered at values other than 0. For a power series centered at $x = x_o$, it is represented as $\sum\limits_{n=0}^\infty a_n(x-x_o)^n$</p>
+
+  <p>The power series converges on $|x-x_o|\lt R$ and diverges on $|x-x_o| \gt R$. Again, the endpoints needs to be checked separately.</p>
+</blockquote>
+
+<p><strong>Example:</strong> Find the interval of convergence of $\sum\limits_{n=0}^\infty \frac{5^n}{n}(x-2)^n$</p>
+
+<ol>
+  <li>
+    <p>Find the radius of convergence:
+ $a_n = \frac{5^n}{n}$ so:</p>
+
+\[\begin{align*}
+ \lim\limits_{n\to\infty} \bigg|\frac{a_n}{a_{n+1}}\bigg| &amp;= \lim\limits_{n\to\infty}\bigg|\frac{\frac{5^n}{n}}{\frac{5^{n+1}}{n+1}} \\
+ &amp;= \lim\limits_{n\to\infty} \left( \frac{5^n}{n} \right)\left(\frac{n+1}{5^{n+1}}\right) \\
+ &amp;= \frac{1}{5}\lim\limits_{n\to\infty} \frac{n+1}{n} \\
+ &amp;= \frac{1}{5}
+ \end{align*}\]
+
+    <p>Thus $\boxed{R = \frac{1}{5}}$ and $x\in(x_o - R, x_o + R) = (2 - \frac{1}{5}, 2 + \frac{1}{5}) = (\frac{9}{5}, \frac{11}{5})$</p>
+  </li>
+  <li>
+    <p>Check endpoints:
+ For $x = \frac{9}{5}$:</p>
+
+\[\begin{align*}
+ \sum\limits_{n=1}^\infty\frac{5^n}{n}\left(\frac{9}{5} - 2\right)^n &amp;= \sum\limits_{n=1}^\infty\frac{5^n}{n}\left(\frac{-1}{5}\right)^n \\
+ &amp;= \sum\limits_{n=1}^\infty\frac{5^n}{n}\left(\frac{(-1)^n}{5^n}\right) \\
+ &amp;= \sum\limits_{n=1}^\infty\frac{\bcancel{5^n}}{n}\left(\frac{(-1)^n}{\bcancel{5^n}}\right) \\
+ &amp;= \sum\limits_{n=1}^\infty \frac{(-1)^n)}{n}
+ \end{align*}\]
+
+    <p>By the alternating test, the series converges</p>
+
+    <p>For $x = \frac{11}{5}$:</p>
+
+\[\begin{align*}
+ \sum\limits_{n=1}^\infty\frac{5^n}{n}\left(\frac{11}{5} - 2\right)^n &amp;= \sum\limits_{n=1}^\infty\frac{5^n}{n}\left(\frac{1}{5} - 2\right)^n \\
+ &amp;= \sum\limits_{n=1}^\infty \frac{1}{n}
+ \end{align*}\]
+
+    <p>As this is a harmonic series, the series converges at $x= \frac{11}{5}$</p>
+  </li>
+</ol>
+
+<p>Therefore, the interval of convergence for this power series centered at $x_o = 2$ is $[\frac{9}{5}, \frac{11}{5})$</p>
+
+<p>As power series are a function of $x$ on its interval of convergence, a natural question in calculus is:</p>
+<ul>
+  <li>is it continuous</li>
+  <li>is it differentiable</li>
+  <li>is it integrable</li>
+</ul>
+
+<p>Power series is an accumulation over a sequence of functions, more specifically an accumulation of polynomials which we know are continuous. However, just because each function in a sequence is continuous 
+and converges to some function $f$, it does not mean the convergent function $f$ is continuous itself. Therefore, to guard this continuity property in convergent functions, we will need a different notion 
+or type of convergence, the uniform convergence. First we shall describe a type of convergence that does not guarantee continuity to the convergent function:</p>
+
+<blockquote>
+  <p><strong>Pointwise Convergence:</strong> Let $(f_n)$ be a sequence of funtions. We say that $(f_n)$ <strong>CONVERGES POINTWISE</strong> to $f$ on a set $S$ if $\forall x\in S$, the sequence $f_n(x)$ converges to $f(x)$</p>
+
+  <p><strong>Note:</strong> Does not guarantee $f$ is continuous even if each $f_n$ is continuous</p>
+</blockquote>
+
+<p>That is to say:</p>
+
+<blockquote>
+  <p><strong>Pointwise Convergence:</strong> $f_n\to f$ pointwise on $S$ if $\forall x\in S, \lim\limits_{n\to\infty} f_n(x)=f(x)$</p>
+
+  <p>i.e. $\forall x\in S, \forall \epsilon \gt 0 \exists N $ such that $n \gt N \implies |f_n(x)-f(x)|\lt \epsilon$</p>
+</blockquote>
+
+<p>A counterexample to the preservation of continuity to the convergent function  presented in the textbook is the following sequence $f_n(x) = x^n$ on $[0,1]$. $f_n \to f$ pointwise on [0,1] but is not continuous as:</p>
+
+\[f(x) = \begin{cases}
+    0 &amp; x\in[0,1) \nonumber\\
+    1 &amp; x = 1
+\end{cases}\]
+
+<p>Similarly to how uniform continuity differs from regular continuity by choosing a $\delta$ not dependent on $x$, uniform convergence also tries to pick a $N$ such that it only depends on $\epsilon$ and not $x$. 
+The idea is to have the values $f_n(x)$ be ``uniformly” close to the values of $f(x)$ for all $x$:</p>
+
+<blockquote>
+  <p><strong>Uniform Convergence:</strong> The sequence of function $(f_n)$ on $S\subseteq \mathbb{R}$ <strong>CONVERGES UNIFORMLY</strong> to a function $f$ on $S$ if $\forall \epsilon \gt 0, \exists N $ such that $n \gt N\implies |f_n(x) - f(x)|\lt \epsilon \forall x\in S$</p>
+</blockquote>
+
+<p>Uniform convergence is a stronger type of convergence as it applies to all $x$ and thus we have the following relation:</p>
+
+<blockquote>
+  <p>$(f_n)$ converges to $f$ uniformly $\implies (f_n)$ converges to $f$ pointwise</p>
+</blockquote>
+
+<p>This should not come to no surprise since if $(f_n)$ converges uniformly, it should converge to $f$ in a subset of $\mathbb{R}$.</p>
+
+<p>The contraire does not hold unexpectedly:</p>
+
+<blockquote>
+  <p>$(f_n)$ converges to $f$ pointwise $\bcancel{\implies} (f_n)$ converges to $f$ uniformly</p>
+</blockquote>
+
+<p><strong>Example:</strong> $f_n(x) = x^n$ on $[0,1]$. Recall that $f_n$ converges pointwise to:</p>
+
+\[f(x) = \begin{cases}
+    0 &amp; x\in[0,1) \nonumber\\
+    1 &amp; x = 1
+\end{cases}\]
+
+<p>But does it converge uniformly as well? Spoiler it does not, the reason we motivated uniform convergence is to show the preservation of continuity which will come next.</p>
+
+<p>Suppose by contraction that it does.</p>
+
+<p>Then take $\epsilon = \frac{1}{2}$, I can find $N$ such that</p>
+
+<p>$n \gt N \implies |f_n(x) - f(x)| \lt \frac{1}{2} \forall x \in [0,1]$.</p>
+
+<p>In particular, for $n = N+ 1 \gt N$ and $\forall x\in [0,1)$, we have:</p>
+
+<p>$f(x) = 0 \implies |f_{N+1}(x) - f(x)| = |f_{N+1}(x)| = x^{N+1} \lt \frac{1}{2} \forall x\in [0,1)$.</p>
+
+<p>Rearranging,</p>
+
+\[x^{N+1} \lt \frac{1}{2} \implies x \lt \frac{1}{2^\frac{1}{N+1}} \forall x\in [0,1) \quad (*) \nonumber\\\]
+
+<p>From here, I can think of two approaches:</p>
+
+<ol>
+  <li>
+    <p><strong>Limit Argument:</strong> Since $x^{N+1}$ is continuous and $x^{N+1} \lt \frac{1}{2} \forall x\in [0,1)$:</p>
+
+    <p>We have $1 = \lim\limits_{x\to 1^-} x^{N+1} \lt \frac{1}{2}$ which is a contradiction.</p>
+  </li>
+  <li>
+    <p><strong>Explicit Construction:</strong> We begin with the obvious fact that $1 \lt 2$ and build up to get $1 \lt 2^\frac{1}{N+1}$ and then choose an $L$ such that a contradiction arrives:
+ \(\begin{align*}
+ 2 \gt 1 &amp;\implies 2^\frac{1}{N+1} \gt 1^\frac{1}{N+1} \\
+ &amp;\implies 2^\frac{1}{N+1} \gt 1
+ \end{align*}\)</p>
+
+    <p>By the density of $\mathbb{Q}, \exists L\in\mathbb{Q}\subset \mathbb{R}$ such that $\frac{1}{2^\frac{1}{N+1}} \lt L \lt 1$.</p>
+
+    <p>By choosing such an $L$ that meets this criteria, we have $L\in[0,1)$ such that $L \gt \frac{1}{2^\frac{1}{N+1}}$ but by (*) we also have $L \lt \frac{1}{2^\frac{1}{N+1}}$ which is a contradiction.</p>
+  </li>
+</ol>
+
+<p>Let us now show an example in how to prove something is uniform convergent:</p>
+
+<p><strong>Example:</strong> Let $f_n(x) = \frac{1}{n}\sin(nx)$ for $x\in\mathbb{R}$. Prove that $f_n\to 0$ uniformly.</p>
+
+<p>Rough Work: Let $\epsilon \gt 0$ be given. Then,</p>
+
+\[\begin{align*}
+|f_n(x) - f(x)| &amp;= |\frac{1}{n}\sin(nx) - 0| \\
+&amp;= \frac{1}{n}|\sin(nx)|\leq \frac{1}{n} \forall x \\
+\frac{1}{n} &amp;\underset{\text{ want}}{&lt;} \epsilon \implies n \gt \frac{1}{\epsilon}
+\end{align*}\]
+
+<p>Choose $N = \frac{1}{\epsilon}$.</p>
+
+<blockquote>
+  <p><strong>Heurestic to show Uniform Convergence:</strong> In your rough work, you want to bound the function such that it is not dependent on $x$ such as $\frac{1}{n}$</p>
+
+  <p>e.g. take $N = \frac{1}{\epsilon}$ for instance where it does not depend on $x$ in a uniform convergence proof</p>
+</blockquote>
+
+<p><img src="/assets/math-physics/courses/math2052/uniform-convergence.png" alt="A diagram trying to illustrate uniform convergence" /></p>
+<p class="caption">An illustration how $f_n$ is bounded to the $\epsilon$ window and as $\epsilon$ gets smaller, the $f_n$ gets squeezed but remains in the window. i.e. Eventually as you go further down the sequence (a larger $N$), you will eventually find a function flat enough to squeeze into the window. Extracted from <a href="https://ocw.mit.edu/courses/18-100a-real-analysis-fall-2020/mit18_100af20_basic_analysis.pdf">MIT OCW Real Analysis Notes</a></p>
+
+<p>Now we have seen what it means for a function to converge pointwise and uniformly, let us now revisit the purpose of introducing a strongegr notion of convergence (uniform convergence):</p>
+
+<blockquote>
+  <p>$f_n$ is continuous $\forall n$ and $f_n \to f$ pointwise $\bcancel{\implies} f$ is continuous</p>
+</blockquote>
+
+<p>But</p>
+
+<blockquote>
+  <p>$f_n$ is continuous $\forall n$ and $f_\to f$ uniformly $\implies f $ is continuous</p>
+</blockquote>
+
+<blockquote>
+  <p><strong>Theorem (Uniform Convergence Preserving Continuity):</strong> let $(f_n)$ be a sequence of functions on $S$ such that $f_n \to f$ converges uniformly.
+If each $f_n$ is continuous, so is $f$</p>
+</blockquote>
+
+<p>If we take the contrapositive of this theorem above, we obtain another tool to disprove uniform convergence:</p>
+
+<blockquote>
+  <p><strong>Disproving Uniform Convergence via Continuity:</strong> If $f_n \to f$ pointwise and each $f_n$ is continuous but $f(x)$ is not continuous, then this convergence is not uniform</p>
+</blockquote>
+
+<p>Before proceeding to the consequences of uniform convergence and the preservation of continuity, let’s revisit our favorite function in this chapter: $f_n(x) = x^n$ and recall 
+that $f_n \to f$ pointwise on $[0,1]$ where,</p>
+
+\[f(x) = \begin{cases}
+    0 &amp; x\in[0,1) \nonumber\\
+    1 &amp; x = 1
+\end{cases}\]
+
+<p>This does not uniformly converge to $f$ as it was discontinuous at $x = 1$. But what about for $x\in[0,1)$?</p>
+
+<p>For $f_n = x^n$ on $[0,1), \lim\limits_{n\to\infty} f_n(x) = 0 \forall x$</p>
+
+<p>The constant function $0$ is continuous $\forall x$ but is it uniformly convergent on $[0,1)$? NO, we showed previously that it did not</p>
+
+<p>What about from a fixed positive number $b \lt 1$. We will make the claim that on $[0,b], f_n \to 0$ uniformly:</p>
+
+<p>Rough Work: Let $\epsilon \gt 0$. We want $N$ such that $n \gt N$:</p>
+
+\[\begin{align*}
+|x^n - 0| \lt \epsilon \forall x\in [0,b] \\
+|x^n| = x^n \leq b^n \underset{\text{want}}{\lt} \epsilon
+\end{align*}\]
+
+<p><strong>Note:</strong> $b^n \lt \epsilon$ is only possible because $b \lt 1$ thus $b^n \lt 1$ (i.e. for $b\lt 1 \implies b^{N+1} \lt b^{N}$)</p>
+
+<p>Thus we have,</p>
+
+\[\begin{align*}
+b^n \lt \epsilon &amp;\iff n\ln b \lt \ln \epsilon \\
+&amp;\iff n \gt \frac{\ln\epsilon}{\ln b}, \quad \text{inequality flipped because if $b\lt 1$ then $\ln b \lt 0$}
+\end{align*}\]
+
+<p>Thus choose $N = \frac{\ln\epsilon}{\ln b}$</p>
+
+<p>In conclusion, for the examples, we have seen for $f_n(x) = x^n$,</p>
+
+<p>\(f(x) = \begin{cases} 
+    0 &amp; 0\leq x \lt 1 \\ 
+    1 &amp; x = 1
+\end{cases}\)</p>
+<ul>
+  <li>on $[0,1], f_n \to f$ pointwise but not uniformly</li>
+  <li>on $[0,1), f_n \to 0$ pointwise but not uniformly</li>
+  <li>on $[0,b]$ for $b \lt 1, f_n \to 0$ uniformly</li>
+</ul>
+
+<p>I recall being a bit surprised by this result how fixing a point allows $f_n$ converge uniformly to $f$. But now that I think of it, if we were to start plugging in numbers as $x \to 1$, we’ll notice the 
+following:</p>
+
+<ul>
+  <li>$x = 0.5: 0.5^n \to 0$ fast ($N_1 &gt; N$)</li>
+  <li>$x = 0.9: 0.9^n \to 0$ slowly (i.e. $N_2 » N_1 &gt; N$)</li>
+  <li>$x = 0.99: 0.99^n \to 0$ even slower (i.e. $N_3 »&gt; N_2 » N_1 &gt; N$)</li>
+  <li>$x \to 1: x^n \to 0$ extremely and arbitrarily slowly  (i.e. $N_4 »»»»»»» N_3 »&gt; N_2 » N_1 &gt; N$)</li>
+</ul>
+
+<p>Thus as $x\to 1$, we observe the growth to converge $f_n(x)$ to 0 get slower and slower</p>
+
+<p>We can now say the following:</p>
+
+<blockquote>
+  <p><strong>Theorem:</strong> let $(t_n)$ be a sequence of continuous function on $[a,b]$ which converges uniformly to $f$.</p>
+
+  <p>Then $\lim\limits_{n\to\infty} \int_a^b f_n(x)dx = \int_a^b \lim\limits_{n\to\infty} f_n(x)dx = \int_a^b f(x)dx$</p>
+</blockquote>
+
+<p>Previously, we saw that $f_n = x^n$ does not converge uniformly from [0,1) as the terms converges to $f$ so slowly. In <a href="../math1052-commentary">MATH1052</a>, we introduced cauchy sequences, a sequence that 
+converges and exhibits a behavior whereby after some $N$, the distance of any two functions in the sequence are arbitrarily so close that convergence is guaranteed.</p>
+
+<blockquote>
+  <p><strong>Cauchy Sequences:</strong> a sequence $(s_n)$ is cauchy if $\forall \epsilon \gt 0, \exists N $ such that $m,n \gt N \implies |a_n-a_m| \lt \epsilon$</p>
+</blockquote>
+
+<blockquote>
+  <p>$(s_n)$ is cauchy $\iff (s_n)$ is convergent</p>
+</blockquote>
+
+<p>We want a similar result for functions because if you recalled, this entire section is dedicated to power series which are infinite series of functions (even though it may not seem like it with our 
+discussion in sequences and convergence).</p>
+
+<blockquote>
+  <p><strong>Uniformly Cauchy:</strong> a sequence $(f_n)$ of functions on $S\subseteq \mathbb{R}$ is called <strong>UNIFORMLY CAUCHY</strong> if $\forall \epsilon \gt 0, \exists N$ such that $m,n \gt N \implies |f_n(x) - f_m(x)| \lt \epsilon \quad\forall x\in S$</p>
+</blockquote>
+
+<p>To tie this together with uniform convergent, we have the following result:</p>
+
+<blockquote>
+  <p><strong>Lemma:</strong> if $f_n \to f$ uniformly then it is uniformly cauchy</p>
+</blockquote>
+
+<p>and</p>
+
+<blockquote>
+  <p><strong>Theorem:</strong> Let $(f_n)$ be a uniformly cauchy sequence of functions on $S\subseteq \mathbb{R}$ then $\exists$ a function $f$ on $S$ such that $f_n\to f$ uniformly</p>
+</blockquote>
+
+<p>Thus far, we have talked about functions in a sequence but never tied it with power series. Let us now be equipped with what it means for a series of functions to a power series:</p>
+
+<blockquote>
+  <p>$\sum\limits_{k = 0}^\infty g_k(x)$ is a power series of functions if $g_k(x) = a_kx^k$</p>
+</blockquote>
+
+<p>For instance, the following function is a series of function but is not a power series of functions: $\sum\limits_{k=0}^\infty \frac{x^k}{1+x^k}$ because it is not in the right form.</p>
+
+<blockquote>
+  <p><strong>Uniform Convergence of Function Power Series:</strong> let $\sum\limits_{k=0}^\infty g_k(x)$ be a series of functions on $S$ such that each $g_k$ is continuous.
+If $\sum\limits_{k=0}^\infty g_k(x)$ is uniformly convergent to $g(x)$, then $g$ is continuous</p>
+</blockquote>
+
+<p>This result should not be of any surprise as we previously saw that</p>
+<ul>
+  <li>sums of continuous functions are continuous</li>
+  <li>uniform convergence preserves continuity among convergent sequences of functions</li>
+</ul>
+
+<p>Let us now introduce another equivalence relation to uniformly cauchy in respect to function power series:</p>
+
+<blockquote>
+  <p><strong>Uniform Cauchy Definition for $\sum\limits_{k=0}^\infty g_k(x)$:</strong> $\sum\limits_{k=0}^\infty g_k(x)$ is uniformly cauchy on $S$</p>
+
+  <p>$\iff \forall \epsilon \gt 0, \exists N $ such that $m,n \gt N \implies |\sum\limits_{k=0}^n g_k(x) - \sum\limits_{k=0}^m g_k(x)|\lt \epsilon$</p>
+
+  <p>$\iff \forall \epsilon \gt 0, \exists N $ such that $n\geq m \gt N \implies |\sum\limits_{k=m}^n g_k(x)| \lt \epsilon$</p>
+</blockquote>
+
+<p>Now that we have seen what it means for a power series to uniformly converge, we can now introduce a nice test to determine whether it converges uniformly:</p>
+
+<blockquote>
+  <p><strong>Weierstrass M-Test:</strong> let $(M_K)$ be a sequence of non-negative numbers with $\sum\limits_{k=0}^\infty M_k \lt \infty$.
+If $|g_k(x)| \leq M_k \forall x\in S$, then $\sum\limits_{k=0}^\infty g_k(x)$ converges uniformly on $S$</p>
+</blockquote>
+
+<p>Let us see an example of how to utilise this test to determine whether an infinite function power series converges ot a continuous function:</p>
+
+<p><strong>Example:</strong> Show that $\sum\limits_{k=0}^\infty \frac{1}{n^2}\sin(nx)$ converges to a continuous function on $\mathbb{R}$</p>
+
+<p>First note that: $|\frac{1}{n^2}\sin(nx)| = \frac{1}{n^2}|\sin(nx)|\leq \frac{1}{n^2}$</p>
+
+<p>Let $M_n = \frac{1}{n^2}$. Then $\sum\limits_{k=0}^\infty M_n = \sum\limits_{k=0}^\infty \frac{1}{n^2} \lt \infty$ by P-series</p>
+
+<p>So by M-test, $\sum\limits_{k=0}^\infty \frac{1}{n^2}\sin(nx)$ converges uniformly on $\mathbb{R}$
+Since $g_n(x) = \frac{1}{n^2}\sin(nx)$ is continuous on $\mathbb{R} \forall n$ and converges uniformly, the limit must be continuous.</p>
+
+<blockquote>
+  <p><strong>Recall:</strong> if $\sum\limits_{k=0}^\infty a_k$ is a series of numbers then $\sum\limits_{k=0}^\infty a_k$ converges $\implies \lim\limits_{n\to\infty} a_n = 0$</p>
+
+  <p>Though the opposite direction does not hold (think of $\sum \frac{1}{n}$ diverges by P-series but the limit is 0.
+We have an analogous version of this fact for series of functions:</p>
+</blockquote>
+
+<blockquote>
+  <p>if $\sum\limits_{k=0}^\infty g_k(x)$ converges uniformly on $S$ then $\lim\limits_{n\to\infty} \sup\{|g_n(x)| : x\in S\} = 0$</p>
+</blockquote>
+
+<p>One consequence of this lemma above is that we can use the contrapositive to conclude whether a function power series does not converge uniformly, which is probably a much more useful fact:</p>
+
+<blockquote>
+  <p>if one can show $\lim\limits_{n\to\infty} \sup\{|g_n(x)| : x\in S\} \neq 0$, then one can conclude that $\sum g_k(x)$ does not converge uniformly on $S$</p>
+</blockquote>
+
+<p><strong>Example:</strong> Consider the power series $\sum \frac{x^n}{3^n}$</p>
+
+<p>Before utilising our new tool to determine whether this power series converges uniformly, let’s establish the convergence interval:</p>
+
+<p>Note that the radius of convergence is 3: $R = \lim\limits_{n\to\infty}\left|\frac{a_n}{a_{n+1}}\right| = \left|\frac{\frac{1}{3^n}}{\frac{1}{3^{n+1}}}\right| = 3$</p>
+
+<p>At $x = 3: \sum 1 = \infty$ and at $x = -3: \sum(-1)^n$ diverges. Thus our interval of convergence is: $I = (-3,3)$</p>
+
+<p>Using the new tool, we have $\sup\{|\frac{x^n}{3^n}| : x\in (-3,3)\} = 1 \forall n$ so $\lim_{x\to\infty} \sup\{|\frac{x^n}{3^n}| : x\in (-3,3)\} = 1 \neq 0$</p>
+
+<p>So by the lemma, we know $\sum \frac{x^n}{3^n}$ does not converge uniformly on $(-3,3)$</p>
+
+<p>But what if we restricted the interval to a concrete number similar to how we found $f_n(x) = x^n$ converges uniformly if we restricted $S$ from $[0,1)$ to $[0, b]$. It turns out if we restrict 
+the endpoints of our interval of convergence to be smaller and concrete, our once non-uniformly convergent sequence/power series does converge.</p>
+
+<blockquote>
+  <p><strong>Theorem:</strong> let $\sum a_n x^n$ be a power series with a radius of convergence $R \gt 0$. If $0 \lt b \lt R$, then the power series converges uniformly on $[-b,b]$ and converges to a continuous function on 
+$(-R,R)$</p>
+</blockquote>
+
+<p>Let’s revisit the previous example and restrict the interval to $b \lt R = 3$. For this exercise, we will avoid invoking the theorem above and show you the lengthy process to obtain the same result:</p>
+
+<p>Let $b\in(0,3)$ so if $x = b\implies \sum \frac{b^n}{3^n} = \sum\left(\frac{b}{3}\right)^n$ converges by gemoetric series (as $0 \lt b \lt 3$)</p>
+
+<ol>
+  <li>
+    <p>To show $\sum \frac{x^n}{3^n}$ converges uniformly on $[-b,b]$, we can utilise the Weierstrass M-test: $\forall x\in [-b,b], \left|\frac{x^n}{3^n} \right | \leq \left|\frac{b^n}{3^n}\right| = \left(\frac{b}{3}\right)^n = M_n$.
+ Since $\sum M_n$ converges, by the Weierstrass M-test, $\sum\frac{x^n}{3^n}$ converges uniformly on $[-b,b]$.</p>
+  </li>
+  <li>
+    <p>Now all that is left is to show $\sum \frac{x^n}{3^n}$ converges to a continuous function on $[-b,b]$:</p>
+
+    <p>Note that $\frac{x^n}{3^n}$ is continuous on $\forall n$. Thus, $\sum\frac{x^n}{3^n}$ is continuous on $[-b,b] \forall b\in[0,3)$. As $b$ is arbitrary, $\sum \frac{x^n}{3^n}$ converges to a continuous function on $(-3, 3)$.</p>
+  </li>
+</ol>
+
+<p>This is definitely much longer than simply invoking the theorem which gives us both uniformly convergence and convergence to a continuous function for free: Since $R = 3 \gt 0$ and $b \in (0,R)$, by the theorem above, we have $\sum \frac{x^n}{3^n}$ converges uniformly on $[-b,b]$ and converges to a continuous function on $(-3,3)$.</p>
+
+<p>Recall that one of the motivations of utilising power series is to represent transcendental functions such as $e^x$ as an infinite series of polynomials. What would be desirable is if we 
+could differentiate and integrate power series term by term. For instance, it would be nice if we could do the following</p>
+
+\[\begin{align*}
+\left(\sum\limits_{n=0}^\infty a_nx^n\right)' &amp;= (a_0 + a_1x + a_2x^2+\cdots)' \overset{?}{=} a_1 + 2a_2x+3a_3x^2+\cdots \overset{?}{=} \sum\limits_{n=1}^\infty na_nx^{n-1} \\
+\int \sum\limits_{n=0}^\infty a_nx^ndx &amp;\overset{?}{=} \sum\limits_{n=0}^\infty \frac{a_nx^{n+1}}{n+1}
+\end{align*}\]
+
+<p>But for these properties to work, we must ensure that the radius of convergence remains the same in these new forms:</p>
+
+<blockquote>
+  <p><strong>Lemma:</strong> If $\sum\limits_{n=0}^\infty a_n x^n$ has a radius of convergence $R$, then so does $\sum\limits_{n=1}^\infty na_nx^{n-1}$ and $\sum\limits_{n=0}^\infty \frac{a_n}{n+1}x^{n+1}$</p>
+</blockquote>
+
+<p>As the radius of convergence remains the same even after taking the form of what seems like to be its differentiatiable and integrable equivalences, let us now introduce the theorem that 
+ties this together to permit us to integrate and differentiate the series term by term:</p>
+
+<blockquote>
+  <p><strong>Theorem:</strong> Suppose $f(x) = \sum_{n=0}^\infty a_nx^n$ has a radius of convergence $R \gt 0$. Then,
+$\int_0^x f(t)dt = \sum\limits_{n=0}^\infty \frac{a_n}{n+1}x^{n+1}$ for $|x| \lt R$</p>
+</blockquote>
+
+<blockquote>
+  <p><strong>Theorem:</strong> Let $f(x) = \sum_{n=1}^\infty a_nx^n$ have radius of convergence $R \gt 0$. Then $f$ is differentiable on $(-R,R)$ and</p>
+
+  <p>$f’(x) = \sum_\limits{n=1}^\infty na_nx^{n-1}$ for $|x| \lt R$</p>
+
+  <p><strong>Note:</strong> Notice that the index changes from 0 to 1 in the differentiable form. The index does not change for the integral</p>
+</blockquote>
+
+<p>Thus far. the previous theorem only discusses differentiablity at the open intervals $(-R, R)$ but what about at its endpoint? That is what the next theorem, Abel’s Theorem, attempts to tackle. 
+We know from last year that differentiability implies continuity (i.e. to be differentiable at $x = a$, then by definition, it must also be continuous at $a$)</p>
+
+<blockquote>
+  <p><strong>Abel’s Theorem:</strong> let $f(x) = \sum a_nx^n$ have a radius of convergence $R \gt 0$, $R \lt \infty$. If $\sum a_nx^n$ converges at $x = R$, then it is continuous there. The same is true at $x = -R$.</p>
+</blockquote>
+
+<p>As a consequence, we have that every power series converge to a continuous function on its entire interval of convergence including at its endpoint provided it is defined and does indeed converge there.</p>
+
+<blockquote>
+  <p>Every power series converges to a continuous function on its entire interval of convergence (including its endpoints if defined and converges there)</p>
+
+  <p>i.e. $\sum \frac{x^n}{n^2}$ has an interval of convergence (I.O.C) on $[-1,1]$ and thus is continuous on $[-1,1]$</p>
+</blockquote>
+
+<hr />
+
+<p><a name="taylor"></a></p>
+<h2 id="taylor-series">Taylor Series</h2>
+
+<p>Recall that one of the motivations of power series is to represent transcendental functions as an infinite series of polynomials. This is the math that allows calculators be able to compute $e^x$ for 
+instance within an acceptable error or to allow oneself to integrate a complicated expression into simple series of polynomials. However, how does one translate a function such as $e^x$ or $\sin(x)$ 
+into a series of polynomials? That is what will be explored in this section, working with taylor series which gives us a methodical way to transform a function into a power series.</p>
+
+<blockquote>
+  <p><strong>Taylor Series:</strong> let $f$ be defined on an open interval containing $x_o$. Suppose that all order of derivatives of $f$ exist at $x_o$.
+Then the series</p>
+
+  <p>$\sum\limits_{n=0}^\infty \frac{f^{(n)}(x_o)}{n!}\left(x-x_o\right)^n$ is called the taylor series for $f$ about $x_o$</p>
+
+  <p>For $n\geq 1$, the remainder $R_n(x)$ is defined by:</p>
+
+  <p>$R_n(x) = f(x) - \sum\limits_{k=0}^{n-1}\frac{f^{(k)}(x_o)}{k!}(x-x_o)^k$</p>
+</blockquote>
+
+<p>When we approximate a function $f(x)$ using a finite Taylor polynomial of degree $n$ which we call $P_n(x)$, the approximation is rarely perfect. This difference must be taken into account and thus the remainder</p>
+
+\[\begin{align*}
+R_n(x) &amp;= f(x) - \sum\limits_{k=0}^{n-1} \frac{f^{(k)}(c)}{k!}(x-c)^k \\
+f(x) &amp;= \sum\limits_{k=0}^{n-1} \frac{f^{(k)}(c)}{k!}(x-c)^k + R_n(x) \\
+f(x) &amp;= P_n(x) + R_n(x)
+\end{align*}\]
+
+<p>On a note about the remainder, we also have this result:</p>
+
+<blockquote>
+  <p>$f(x) = \sum\limits_{k=0}^\infty \frac{f^{(k)}(x_o)}{k!}(x-x_o)^k \iff \lim\limits_{n\to\infty}R_n(x) = 0$</p>
+</blockquote>
+
+<p>Suppose we have a power series in the form $f(x) = \sum a_n(x-x_o)^n$. We have never discussed how to determine what $a_n$ is. In our definition of taylor series, all order of derivatives of $f$ exists at $x_o$. 
+This,</p>
+
+\[\begin{align*}
+f(x) &amp;= a_o + a_1(x-x_o) + a_2(x-x_o)^2 + a_3(x-x_o)^3 + \cdots \\
+f'(x) &amp;= a_1 + 2a_2(x-x_o) + 3a_3(x-x_o)^2 + \cdots \\
+f''(x) &amp;= 2a_2 + (3)(2)a_3(x-x_o) + 4(3)a_4(x-x_o)^2 + \cdots \\
+f'''(x) &amp;= 3(2)a_3 + 4(3)(2)a_4(x-x_o) + 5(4)(3)a_5(x-x_o)^2 + \cdots
+\end{align*}\]
+
+<p>Let $x = x_o$, then:</p>
+
+\[\begin{align*}
+f(x_o) &amp;= a_o &amp;= 0!a_o \\
+f'(x_o) &amp;= a_1 &amp;= 1! a_1 \\
+f''(x_o) &amp;= 2a_2 &amp;= 2!a_2 \\
+f'''(x_o) &amp;= 3(2)a_3 &amp;= 3! a_3
+\end{align*}\]
+
+<p>Then by induction, we have:</p>
+
+\[\begin{align*}
+f^{(n)} = n!a_n\\
+\boxed{a_n = \frac{f^{(n)}(x_o)}{n!}}
+\end{align*}\]
+
+<blockquote>
+  <p><strong>Taylor Coefficient:</strong> $a_n = \frac{f^{(n)}(x_o)}{n!}$</p>
+</blockquote>
+
+<p>Let us now go through an example to determine the taylor series of $\sin(x)$ centered at 0 (Note: This is also called a Maclaurin Series, a Taylor series centered at 0).</p>
+
+<p>First let’s observe the orders of the derivatives of $\sin(x)$:</p>
+
+\[\begin{align*}
+f(x) &amp;= \sin(x)  &amp; f(0) &amp;= 0 \\
+f'(x) &amp;= \cos(x) &amp; f'(0) &amp;= 1 \\
+f''(x) &amp;= -\sin(x) &amp; f''(0) &amp;= 0 \\
+f^{(3)}(x) &amp;= -\cos(x) &amp; f^{(3)}(0) &amp;= -1 \\
+f^{(4)}(x) &amp;= \sin(x) &amp; f^{(4)}(0) &amp;= 0 \\
+\cdots
+\end{align*}\]
+
+<p>So we have: 
+\(f^{(n)}(0) = \begin{cases}
+0 &amp; \text{if n is even} \\
+1 &amp; \text{if n = 4k+1} \\
+-1 &amp; \text{if n = 4k+3}
+\end{cases}\)</p>
+
+<p>and $a_n = \frac{f^{(n)}(0)}{n!}$ so the taylor series of $\sin(x)$ around 0 is</p>
+
+\[\begin{align*}
+\sum\limits_{k=0}^\infty \frac{f^{(k)}(0)}{k!}x^k &amp;= x - \frac{x^3}{3!} + \frac{x^5}{5!} - \frac{x^7}{7!} + \cdots \\
+&amp;= \sum\limits_{n=0}^\infty \frac{(-1)^nx^{2n+1}}{(2n+1)!}
+\end{align*}\]
+
+<p>Let’s now explore the one applications of taylor series I hinted at in the beginning to better understand the power of formulating a function as a taylor series:</p>
+
+<p><strong>For Approximations:</strong></p>
+
+<p>How many terms do we need to approximate $\sqrt{e} = e^\frac{1}{2} = \sum\limits_{n=0}^\infty \frac{\left(\frac{1}{2}\right)^n}{n!}$ with an error less than $0.0001$?</p>
+
+<p>Recall that $e^x = \sum\limits_{k=0}^\infty \frac{x^k}{k!} = \sum\limits_{k=0}^{n-1} \frac{x^k}{k!} + R(x)$</p>
+
+<p>where $R_n(x) = \frac{f^{(n)}(y)}{n!}x^n = \frac{e^y}{n!}x^n$ for some $y\in(0,x)$</p>
+
+<p>Since we are evaluate for $e^\frac{1}{2} = e^x \implies x = \frac{1}{2}$:</p>
+
+\[R_n\left(\frac{1}{2}\right) = \frac{e^y}{n!}\left(\frac{1}{2}\right)^n = \frac{e^y}{2^nn!}, y\in\left(0,\frac{1}{2}\right) \nonumber\]
+
+<p>So a crude estimate would be that $e \lt 3$ (recall $e = 2.71828\cdots$)</p>
+
+<p>We can bound $e^\frac{1}{2}$:</p>
+
+\[e^y \lt e^\frac{1}{2} \lt 3^\frac{1}{2} \lt 2 \nonumber\]
+
+<p>So we can bound the remainder:</p>
+
+\[\begin{align*}|R_n\left(\frac{1}{2}\right)| \lt \frac{2}{2^nn!} = \frac{1}{n!2^{n-1}} &amp;\overset{\text{want}}{\lt} 0.0001\\ 
+\iff 10000 &amp;\lt n!2^{n-1}
+\end{align*}\]
+
+<p>If we were to iterate, the first time this condition holds true is when $n = 6$ and thus the error is less than $\frac{1}{6!2^5} \approx 0.000043$</p>
+
+<p>While this does not give as the true error, it is nonethless cool that we can bound the error using what we know about Taylor series.</p>
+
+<p>There are plenty more applications of taylor series such as solving tough integrals, solving the Basel problem, and solving differential equations. 
+But that is all for this topic and my commentary on the course materials.</p>
+
+<hr />
+
+<h2 id="resources">Resources</h2>
+<ul>
+  <li>MATH2052 Notes from Charles Starling</li>
+  <li>Elementary Analysis: The Theory of Calculus by Kenneth A. Ross</li>
+  <li><a href="https://ocw.mit.edu/courses/18-100a-real-analysis-fall-2020/mit18_100af20_basic_analysis.pdf">MIT OCW Real Analysis Notes</a></li>
+</ul>
+
+<p><strong>Note:</strong> I refer to this page as a commentary to the course or an accompanying to the course, these are not class notes. I the author of this page will omit many details and only present the materials and proofs to things I find personally noteworthy and the proofs presented may differ from those listed in the textbook or from the course notes itself.</p>
+
+
+    <br/>
+    <hr>
+    <b>Note:</b> The reviews are bias and reflects my perception of the course. In addition, the information varies depending on the professor and will likely be outdated.
+    <hr>
+    <h2>For More Bias Course Reviews:</h2>
+    <ul>
+    
+      
+    
+      
+        
+        <li><a href = '../blog/math2052-commentary'>MATH2052 - A Commentary on Calculus and Introductory Analysis 2</a></li>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+        <li><a href = '../blog/math1052-commentary'>MATH1052 - A Commentary on Calculus and Introductory Analysis 1</a></li>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+        <li><a href = '../blog/math3001'>MATH3001 - Real Analysis 1</a></li>
+      
+    
+      
+        
+        <li><a href = '../blog/math1800'>MATH1800 - Introduction to Mathematical Reasoning</a></li>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+        <li><a href = '../blog/math2000'>MATH2000 -  Multivariable Calculus and Fundamentals of Analysis [Fall+Winter]</a></li>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+        <li><a href = '../blog/phys1004'>PHYS1004 - A Review on Introductory Electromagnetism and Wave Motion</a></li>
+      
+    
+      
+        
+        <li><a href = '../blog/math2107'>MATH2107 - Linear Algebra II</a></li>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+        <li><a href = '../blog/math2052'>MATH2052 - Calculus and Introductory Analysis II</a></li>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+        <li><a href = '../blog/phys1001'>PHYS1001 - A Review on Foundations of Physics 1</a></li>
+      
+    
+      
+        
+        <li><a href = '../blog/math1152'>MATH1152 - Introductory Algebra 1</a></li>
+      
+    
+      
+        
+        <li><a href = '../blog/math1052'>MATH1052 - Calculus and Introductory Analysis 1</a></li>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+        <li><a href = '../blog/bias-utm-cs-course-review'>Bias UTM CS Course Review</a></li>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+</ul>
+
+
+  </div>
+</div>
+
+
+<div id = "discuss">
+<script src="https://giscus.app/client.js"
+        data-repo="zakuarbor/discussions"
+        data-repo-id="R_kgDOMjvVJA"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOMjvVJM4Chqhy"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="1"
+        data-input-position="top"
+        data-theme="dark"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+
+
+    </div>
+
+  <footer>
+  <marquee id = "buttons">
+    <a href = "index.html"><img src = "/assets/buttons/button.png"></a>
+    <a href = "index.html"><img src = "/assets/buttons/button2.png"></a>
+    <a href = 'https://neocities.org/'><img src = "/assets/buttons/neocitiesorg.gif"></a>
+    <a href = 'https://www.vim.org/'><img src = "/assets/buttons/vim.gif"></a>
+    <a href = 'https://fedoraproject.org/'><img src = "/assets/buttons/gnu-linux.gif"></a>
+    <a href = "https://fedoraproject.org/"><img src = "/assets/buttons/powered_by_fedora_alt.png"></a>
+  </marquee>
+  <a href = "./feed.xml" alt = "rss"><i class="fa-solid fa-rss"></i></a>
+  <small><a href = "/credits" class = "credits">Credits</a></small>
+</footer>
+
+
+  <button onclick="toTop()" id="top_btn" title="Go to top">Top</button>
+  </body>
+</html>

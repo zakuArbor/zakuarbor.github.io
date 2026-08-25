@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>The Bit Size of the Resulting Matrix - RANDOM BITS</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/css/syntax_monokai.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="/assets/css/contrast.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/png" href="/assets/site/random-bits-favicon.png">
+    <meta name="og:title" content="Random Bits">
+    <meta name="og:image" content="">
+    <meta name="og:description"
+        content="Random bits of programming, math, and personal thoughts">
+    <meta name="keywords" content="zakuarbor, programming, math, random bits, pikachu">
+    <meta name="description" content="Random bits of programming, math, and personal thoughts">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script charset="utf-8" src="/assets/js/script.js"></script>
+<script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+     loader: {load: ['[tex]/cancel']},
+      TeX: { 
+        equationNumbers: { autoNumber: "all" },
+        packages: {'[+]': ['cancel']}
+      } 
+    }); 
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <!--<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>-->
+  <header>
+    <center>
+      <h1 id = "title"><a href = "/index.html">RANDOM BITS</a><img id = "pikachu-header" src = "/assets/site/flying-pikachu.png"/></h1>
+    A random site by a random clueless human
+    </center>
+    <!--<marquee scrollamount="4">-->
+    <center>
+      <!--<img src = "/assets/gifs/pikachu-run.gif"/>--><p>Random bits of programming, math, and thoughts
+      By a clueless human</p><!-- <img src = "/assets/gifs/pikachu-run.gif"/>-->
+    </center>
+      <!--&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      <img src = "/assets/gifs/pikachu-run.gif"/>Random bits of programming, math, and thoughts
+      By a clueless human <img src = "/assets/gifs/pikachu-run.gif"/>-->
+      <!--</marquee>-->
+
+    <a href="javascript:void(0);" class="hamburger-nav" onclick="toggleMenu()"><i class="fa fa-bars"></i></a>
+    <nav id="header-nav">
+    <center>
+      <a href="/index.html">Home</a>
+      <a href="/micro/"><span style = "letter-spacing: 1px;">µ</span>Blog</a>
+      <a href="/blog/"><span style = "letter-spacing: 1px;">Blog</a>
+      <a href="/link.html">LinkBlog</a>
+      <!--<a href="/math.html">Math</a>-->
+      <a href="/about.html">About</a>
+    </center>
+    </nav>
+</header>
+
+  </head>
+  <body>
+
+    <div id = "wrapper">
+    <div id = "content">
+<div class = "bits">
+  <h1 class = "title">The Bit Size of the Resulting Matrix</h1>
+
+  <div>
+    <p class = "date">March  7, 2025</p>
+    
+    <div class="tags">
+      
+      
+        <a href="/categories/#micro">micro</a>
+        &nbsp;
+      
+        <a href="/categories/#c/c++">c/c++</a>
+        
+      
+    </div>
+  </div>
+  <p>Recently I have started reading <a href="https://github.com/dendibakh/perf-book">Performance Analysis and Tuning</a>, and a passage made me ponder more time than I would 
+like to admit:</p>
+
+<blockquote>
+  <p>Intel’s AMX extension, supported in server processors since 2023, multiplies 8-bit matrices of shape 16x64 and 64x16, accumulating into a 32-bit 16x16 matrix.</p>
+</blockquote>
+
+<p>If you understand how matrix multiplication works, it is obvious as to why two non-square matrices results in a square matrix and also why 16x64 matrix must be 
+multiplied by some matrix that has 64 rows. However, what my brain was stuck on was why the entries in the resulting matrix had to be 32-bit long and 
+not 16 bits for instance.</p>
+
+<p>It was only when I got my calculator that I understood why which shows my lack of experience working with bits since in Mathematics class, we never need to care 
+about how many bits a number needs to be represented.</p>
+
+<p>If we assume unsigned 8-bit integer, the highest number that can be represented is $2^8 - 1 = 255$ or $1111\ 1111_2$. Multiplying 255 by itself would obviously result 
+in a larger number and therefore would require more than 8 bits to store the product. 255 * 255 = 65025 which can be represented in binary as:</p>
+
+\[1111\ 1111\ 0000\ 0001_2\]
+
+<p>To represent the largest possible product between two 8-bit unsigned integer requires 16 bits. But due to how matrix multiplication works, each entry of the resulting 
+matrix multiplication is the sum of 64 individual products. For an entry $c_{ij}$ in the resulting matrix:</p>
+
+\[c_{ij} = \sum_{k=1}^{64} a_{ik}b_{kj} \text{, for i,j = 1, ..., 16}\]
+
+<p>If we were to add the largest possible product 64 times, then it would be 64 * 65025 = 4 161 600 which far exceeds the maximum range that an unsigned 16-bit integer 
+can represent ($1111\ 1111\ 1111\ 1111_2 = 65\ 535$). Therefore each entry in the resulting matrix must be represented by at least 22 bits to taken into account of the 
+largest possible entry from the product between the two 8-bit matrices. However, as we prefer to have sizes that naturally aligns with a power of 2, 32 bits would be 
+the amount of bits required to store the product between 8-bit matrices of the shape 16x64 and 64x16.</p>
+
+</div>
+</div>
+
+    </div>
+
+  <footer>
+  <marquee id = "buttons">
+    <a href = "index.html"><img src = "/assets/buttons/button.png"></a>
+    <a href = "index.html"><img src = "/assets/buttons/button2.png"></a>
+    <a href = 'https://neocities.org/'><img src = "/assets/buttons/neocitiesorg.gif"></a>
+    <a href = 'https://www.vim.org/'><img src = "/assets/buttons/vim.gif"></a>
+    <a href = 'https://fedoraproject.org/'><img src = "/assets/buttons/gnu-linux.gif"></a>
+    <a href = "https://fedoraproject.org/"><img src = "/assets/buttons/powered_by_fedora_alt.png"></a>
+  </marquee>
+  <a href = "./feed.xml" alt = "rss"><i class="fa-solid fa-rss"></i></a>
+  <small><a href = "/credits" class = "credits">Credits</a></small>
+</footer>
+
+
+  <button onclick="toTop()" id="top_btn" title="Go to top">Top</button>
+  </body>
+</html>

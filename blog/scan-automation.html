@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>Document Feeder and PDF Utilities - How to Scan Big Documents with the help of Document Feeder and PDF Utilities - RANDOM BITS</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/css/syntax_monokai.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="/assets/css/contrast.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/png" href="/assets/site/random-bits-favicon.png">
+    <meta name="og:title" content="Random Bits">
+    <meta name="og:image" content="">
+    <meta name="og:description"
+        content="Random bits of programming, math, and personal thoughts">
+    <meta name="keywords" content="zakuarbor, programming, math, random bits, pikachu">
+    <meta name="description" content="Random bits of programming, math, and personal thoughts">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script charset="utf-8" src="/assets/js/script.js"></script>
+<script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+     loader: {load: ['[tex]/cancel']},
+      TeX: { 
+        equationNumbers: { autoNumber: "all" },
+        packages: {'[+]': ['cancel']}
+      } 
+    }); 
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <!--<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>-->
+  <header>
+    <center>
+      <h1 id = "title"><a href = "/index.html">RANDOM BITS</a><img id = "pikachu-header" src = "/assets/site/flying-pikachu.png"/></h1>
+    A random site by a random clueless human
+    </center>
+    <!--<marquee scrollamount="4">-->
+    <center>
+      <!--<img src = "/assets/gifs/pikachu-run.gif"/>--><p>Random bits of programming, math, and thoughts
+      By a clueless human</p><!-- <img src = "/assets/gifs/pikachu-run.gif"/>-->
+    </center>
+      <!--&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      <img src = "/assets/gifs/pikachu-run.gif"/>Random bits of programming, math, and thoughts
+      By a clueless human <img src = "/assets/gifs/pikachu-run.gif"/>-->
+      <!--</marquee>-->
+
+    <a href="javascript:void(0);" class="hamburger-nav" onclick="toggleMenu()"><i class="fa fa-bars"></i></a>
+    <nav id="header-nav">
+    <center>
+      <a href="/index.html">Home</a>
+      <a href="/micro/"><span style = "letter-spacing: 1px;">µ</span>Blog</a>
+      <a href="/blog/"><span style = "letter-spacing: 1px;">Blog</a>
+      <a href="/link.html">LinkBlog</a>
+      <!--<a href="/math.html">Math</a>-->
+      <a href="/about.html">About</a>
+    </center>
+    </nav>
+</header>
+
+  </head>
+  <body>
+
+    <div id = "wrapper">
+    <div id = "content">
+<div class = "bits">
+  <h1 class = "title">Document Feeder and PDF Utilities - How to Scan Big Documents with the help of Document Feeder and PDF Utilities</h1>
+
+  <div>
+    <p class = "date">August 23, 2022</p>
+    
+    <div class="tags">
+      
+      
+        <a href="/categories/#utilities">utilities</a>
+        &nbsp;
+      
+        <a href="/categories/#pdf">pdf</a>
+        &nbsp;
+      
+        <a href="/categories/#blog">blog</a>
+        
+      
+    </div>
+  </div>
+  <p>When the semester ends I often scan my notes but it has always been a huge pain to scan large amounts of papers. 
+A few months ago my brother was telling me how he scan his old notes and introduced me to the document feeder 
+where you can place your notes into the feeder and all the pages will be scanned automatically. This amazed me 
+because I’ve been painstakingly scanning each page individually, scanning the same paper twice but on a different 
+face (side).</p>
+
+<p><img src="/assets/personal/doc-feeder.jpg" alt="Image of how an Automatic feeder looks in a printer" /></p>
+<p class="caption">An illustration how to use an automatic document feeder (ADF). Adapted from <a href="https://files.support.epson.com/docid/cpd4/cpd42924/source/placing_originals/tasks/placing_originals_adf_et4500_4550.html">Epson</a></p>
+
+<p>However, there is one issue with the automatic feeder, at least the one we have. You can only scan one side of the page. When I heard the issue my brother was facing, I quickly knew the solution. There are 
+tons of PDF utilities that is available online. The procedure to scan large documents on a document feeder is the following:</p>
+
+<ol>
+  <li>Load the document on the document feeder as seen in the image above with the front side facing upwards (i.e. towards your face) and scan</li>
+  <li>Flip the paper such that the backside is facing upwards (i.e. towards your face) and scan</li>
+</ol>
+
+<p>You will now have two pdf documents: one front side (front.PDF) and the other is the backside but in reverse order (back-reverse.PDF). To reverse the order of the pages:
+<code class="language-plaintext highlighter-rouge">pdfjam back-reverse.PDF 'last-1' --outfile back.PDF</code></p>
+
+<p>You will need to install <strong>pdfjam</strong> from https://github.com/rrthomas/pdfjam which states you should install it via TexLive for convenience sakes.</p>
+
+<p>With the two pdf in the right order, you need to merge the two pdf such that each page interleaves the other so that we can have the document in the right 
+order (this is called <strong>shuffle</strong>). <strong>pdftk</strong> is a tool that can be installed via your local Linux software package manager is a tool that merges pdf with a bunch of other features such 
+as adding watermarks or encrypting pdfs. This tool actually originates from <a href="https://www.pdflabs.com/tools/pdftk-server/">PDF Labs</a> but open source enthusiast 
+has ported the program to <a href="https://gitlab.com/pdftk-java/pdftk">Java</a> from what I can recall.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pdftk A=front.PDF B=back.PDF shuffle A B output doc.pdf
+</code></pre></div></div>
+
+
+</div>
+</div>
+
+    </div>
+
+  <footer>
+  <marquee id = "buttons">
+    <a href = "index.html"><img src = "/assets/buttons/button.png"></a>
+    <a href = "index.html"><img src = "/assets/buttons/button2.png"></a>
+    <a href = 'https://neocities.org/'><img src = "/assets/buttons/neocitiesorg.gif"></a>
+    <a href = 'https://www.vim.org/'><img src = "/assets/buttons/vim.gif"></a>
+    <a href = 'https://fedoraproject.org/'><img src = "/assets/buttons/gnu-linux.gif"></a>
+    <a href = "https://fedoraproject.org/"><img src = "/assets/buttons/powered_by_fedora_alt.png"></a>
+  </marquee>
+  <a href = "./feed.xml" alt = "rss"><i class="fa-solid fa-rss"></i></a>
+  <small><a href = "/credits" class = "credits">Credits</a></small>
+</footer>
+
+
+  <button onclick="toTop()" id="top_btn" title="Go to top">Top</button>
+  </body>
+</html>

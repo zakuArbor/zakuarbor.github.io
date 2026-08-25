@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>ByPassing Read-Only Memory and Why mseal() is needed - RANDOM BITS</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/css/syntax_monokai.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="/assets/css/contrast.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/png" href="/assets/site/random-bits-favicon.png">
+    <meta name="og:title" content="Random Bits">
+    <meta name="og:image" content="">
+    <meta name="og:description"
+        content="Random bits of programming, math, and personal thoughts">
+    <meta name="keywords" content="zakuarbor, programming, math, random bits, pikachu">
+    <meta name="description" content="Random bits of programming, math, and personal thoughts">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script charset="utf-8" src="/assets/js/script.js"></script>
+<script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+     loader: {load: ['[tex]/cancel']},
+      TeX: { 
+        equationNumbers: { autoNumber: "all" },
+        packages: {'[+]': ['cancel']}
+      } 
+    }); 
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <!--<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>-->
+  <header>
+    <center>
+      <h1 id = "title"><a href = "/index.html">RANDOM BITS</a><img id = "pikachu-header" src = "/assets/site/flying-pikachu.png"/></h1>
+    A random site by a random clueless human
+    </center>
+    <!--<marquee scrollamount="4">-->
+    <center>
+      <!--<img src = "/assets/gifs/pikachu-run.gif"/>--><p>Random bits of programming, math, and thoughts
+      By a clueless human</p><!-- <img src = "/assets/gifs/pikachu-run.gif"/>-->
+    </center>
+      <!--&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      <img src = "/assets/gifs/pikachu-run.gif"/>Random bits of programming, math, and thoughts
+      By a clueless human <img src = "/assets/gifs/pikachu-run.gif"/>-->
+      <!--</marquee>-->
+
+    <a href="javascript:void(0);" class="hamburger-nav" onclick="toggleMenu()"><i class="fa fa-bars"></i></a>
+    <nav id="header-nav">
+    <center>
+      <a href="/index.html">Home</a>
+      <a href="/micro/"><span style = "letter-spacing: 1px;">µ</span>Blog</a>
+      <a href="/blog/"><span style = "letter-spacing: 1px;">Blog</a>
+      <a href="/link.html">LinkBlog</a>
+      <!--<a href="/math.html">Math</a>-->
+      <a href="/about.html">About</a>
+    </center>
+    </nav>
+</header>
+
+  </head>
+  <body>
+
+    <div id = "wrapper">
+    <div id = "content">
+<div class = "bits">
+  <h1 class = "title">ByPassing Read-Only Memory and Why mseal() is needed</h1>
+
+  <div>
+    <p class = "date">May 19, 2026</p>
+    
+    <div class="tags">
+      
+      
+        <a href="/categories/#programming">programming</a>
+        &nbsp;
+      
+        <a href="/categories/#c/c++">c/c++</a>
+        &nbsp;
+      
+        <a href="/categories/#mseal">mseal</a>
+        &nbsp;
+      
+        <a href="/categories/#blog">blog</a>
+        
+      
+    </div>
+  </div>
+  <p>As one may be familiar, the MMU (Memory Management Unit) enforces and supports memory protection such as marking a page to be READ-ONLY (RO). But it turns out there is an API <a href="https://man7.org/linux/man-pages/man2/mprotect.2.html"><code class="language-plaintext highlighter-rouge">mprotect()</code></a> 
+that allows us to change the access protection of the calling process’s memory pages. Thus <code class="language-plaintext highlighter-rouge">mprotect()</code> could be used to mark pages marked for RO as writable or executable, an undesirable behavior for 
+any critical program as attackers could utilise this weakness to write custom payloads to either gain rootshell or bypass local checks.</p>
+
+<p>To prevent tampering of permission flags of the process’s pages by sealing it, both the Linux Kernel and <a href="https://www.phoronix.com/news/Glibc-Linux-mseal-Function">glibc</a> introduced <a href="https://docs.kernel.org/userspace-api/mseal.html"><code class="language-plaintext highlighter-rouge">mseal()</code></a> 
+in the past year or two.</p>
+
+<p>In an ELF program, the read-only section (<code class="language-plaintext highlighter-rouge">.rodata</code>) should not be writtable and we can confirm this via <code class="language-plaintext highlighter-rouge">objdump</code> that was indeed the intention with the existence of <code class="language-plaintext highlighter-rouge">READONLY</code> label:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ objdump -h ./rodata_write | grep -A1 .rodata
+$ objdump -h ./rodata_write | grep -A1 .rodata
+./rodata_write:     format de fichier elf64-x86-64
+
+--
+13 .rodata       00000088  0000000000401358  0000000000401358  00001358  2**3
+                 CONTENTS, ALLOC, LOAD, READONLY, DATA
+</code></pre></div></div>
+
+<p>Thus, when the program is executed, we should be expecting something like this in their mappings (see <code class="language-plaintext highlighter-rouge">/proc/&lt;pid&gt;/maps</code>)</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>00401000-00402000 r--p 00001000 00:2d 26970                              /tmp/rodata_write
+</code></pre></div></div>
+<p>where this region of memory is marked as read-only as expected (i.e. notice how it <code class="language-plaintext highlighter-rouge">r--p</code> and not <code class="language-plaintext highlighter-rouge">rw-p</code> for instance in this region).</p>
+
+<p>However, if I invoke <code class="language-plaintext highlighter-rouge">mprotect()</code> which allows us to change protection of the calling process’s memory map, we can in fact modify the rodata. 
+If I define a constant string “Hello”, we can see that it is stored in rodata section:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ objdump -s -j .rodata ./rodata_write | grep -B2 Hello
+Contenu de la section .rodata :
+ 401358 01000200 00000000 00000000 00000000  ................
+ 401368 48656c6c 6f000000 55736167 653a2025  Hello...Usage: %
+</code></pre></div></div>
+
+<p>Normally I would not be able to overwrite this section of memory as it does not have write permission but thanks to <code class="language-plaintext highlighter-rouge">mprotect()</code>, I could:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mprotect((void *)page_start, len, PROT_READ | PROT_WRITE)
+</code></pre></div></div>
+<p>As seen below:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ./rodata_write Bye
+Before: Hello
+After:  Bye
+</code></pre></div></div>
+<p>And if we were to check the mapping again, we’ll now see the same region of memory is now marked as write (w):</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>00401000-00402000 rw-p 00001000 00:2d 26970                              /tmp/rodata_write
+</code></pre></div></div>
+<p>But if I comment out the line containing <code class="language-plaintext highlighter-rouge">mprotect()</code>, we eventually will hit a segfault when trying to overwrite the const string residing in the <code class="language-plaintext highlighter-rouge">.rodata</code> section with “Bye”:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">$</span> <span class="p">.</span><span class="o">/</span><span class="n">rodata_write</span> <span class="n">Bye</span>
+<span class="n">Before</span><span class="o">:</span> <span class="n">Hello</span>
+<span class="n">Erreur</span> <span class="n">de</span> <span class="n">segmentation</span>     <span class="p">(</span><span class="n">core</span> <span class="n">dumped</span><span class="p">).</span><span class="o">/</span><span class="n">rodata_write</span> <span class="n">Bye</span>
+</code></pre></div></div>
+
+<p>Hopefully this was a small enough example to illustrate what <code class="language-plaintext highlighter-rouge">mseal()</code> can be used for.</p>
+
+<p><strong>Resources:</strong></p>
+<ul>
+  <li><a href="https://lwn.net/Articles/958438/">mseal() gets closer</a></li>
+  <li><a href="https://docs.kernel.org/userspace-api/mseal.html">Introduction of mseal</a></li>
+  <li><a href="https://blog.trailofbits.com/2024/10/25/a-deep-dive-into-linuxs-new-mseal-syscall/">A deep dive into Linux’s new mseal syscall</a></li>
+</ul>
+
+<hr />
+
+<p>Out of laziness, the code below is mainly generated by Claude but one can easily replicate this by following along 
+<a href="https://blog.trailofbits.com/2024/10/25/a-deep-dive-into-linuxs-new-mseal-syscall/">trailofbits</a> example of using <code class="language-plaintext highlighter-rouge">mprotect()</code> to obtain rootshell.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define _GNU_SOURCE
+#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdint.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;sys/mman.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
+</span>
+<span class="k">static</span> <span class="k">const</span> <span class="kt">char</span> <span class="n">message</span><span class="p">[]</span> <span class="o">=</span> <span class="s">"Hello"</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">"Usage: %s &lt;replacement string&gt;</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">replacement</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+    <span class="kt">size_t</span> <span class="n">repl_len</span> <span class="o">=</span> <span class="n">strlen</span><span class="p">(</span><span class="n">replacement</span><span class="p">);</span>
+    <span class="kt">size_t</span> <span class="n">msg_len</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">message</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>  <span class="c1">// exclude null terminator</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">repl_len</span> <span class="o">&gt;</span> <span class="n">msg_len</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">"Replacement too long: max %zu chars (got %zu)</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>
+                <span class="n">msg_len</span><span class="p">,</span> <span class="n">repl_len</span><span class="p">);</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">long</span> <span class="n">page_size</span> <span class="o">=</span> <span class="n">sysconf</span><span class="p">(</span><span class="n">_SC_PAGESIZE</span><span class="p">);</span>
+    <span class="kt">uintptr_t</span> <span class="n">addr</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uintptr_t</span><span class="p">)</span><span class="n">message</span><span class="p">;</span>
+    <span class="kt">uintptr_t</span> <span class="n">page_start</span> <span class="o">=</span> <span class="n">addr</span> <span class="o">&amp;</span> <span class="o">~</span><span class="p">(</span><span class="n">page_size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="kt">size_t</span> <span class="n">len</span> <span class="o">=</span> <span class="p">(</span><span class="n">addr</span> <span class="o">-</span> <span class="n">page_start</span><span class="p">)</span> <span class="o">+</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">message</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Before: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">message</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"PID: %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">getpid</span><span class="p">());</span>
+    <span class="n">getchar</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">mprotect</span><span class="p">((</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="n">page_start</span><span class="p">,</span> <span class="n">len</span><span class="p">,</span> <span class="n">PROT_READ</span> <span class="o">|</span> <span class="n">PROT_WRITE</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">perror</span><span class="p">(</span><span class="s">"mprotect"</span><span class="p">);</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Zero out the old string first, then write replacement</span>
+    <span class="n">memset</span><span class="p">((</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="n">message</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">msg_len</span><span class="p">);</span>
+    <span class="n">memcpy</span><span class="p">((</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="n">message</span><span class="p">,</span> <span class="n">replacement</span><span class="p">,</span> <span class="n">repl_len</span><span class="p">);</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">"After:  %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">message</span><span class="p">);</span>
+    <span class="n">getchar</span><span class="p">();</span>
+    <span class="n">mprotect</span><span class="p">((</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="n">page_start</span><span class="p">,</span> <span class="n">len</span><span class="p">,</span> <span class="n">PROT_READ</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+</div>
+</div>
+
+    </div>
+
+  <footer>
+  <marquee id = "buttons">
+    <a href = "index.html"><img src = "/assets/buttons/button.png"></a>
+    <a href = "index.html"><img src = "/assets/buttons/button2.png"></a>
+    <a href = 'https://neocities.org/'><img src = "/assets/buttons/neocitiesorg.gif"></a>
+    <a href = 'https://www.vim.org/'><img src = "/assets/buttons/vim.gif"></a>
+    <a href = 'https://fedoraproject.org/'><img src = "/assets/buttons/gnu-linux.gif"></a>
+    <a href = "https://fedoraproject.org/"><img src = "/assets/buttons/powered_by_fedora_alt.png"></a>
+  </marquee>
+  <a href = "./feed.xml" alt = "rss"><i class="fa-solid fa-rss"></i></a>
+  <small><a href = "/credits" class = "credits">Credits</a></small>
+</footer>
+
+
+  <button onclick="toTop()" id="top_btn" title="Go to top">Top</button>
+  </body>
+</html>

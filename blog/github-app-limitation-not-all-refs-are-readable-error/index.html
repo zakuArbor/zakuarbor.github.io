@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>Github App Limitation - not all refs are readable - RANDOM BITS</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/css/syntax_monokai.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="/assets/css/contrast.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/png" href="/assets/site/random-bits-favicon.png">
+    <meta name="og:title" content="Random Bits">
+    <meta name="og:image" content="">
+    <meta name="og:description"
+        content="Random bits of programming, math, and personal thoughts">
+    <meta name="keywords" content="zakuarbor, programming, math, random bits, pikachu">
+    <meta name="description" content="Random bits of programming, math, and personal thoughts">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script charset="utf-8" src="/assets/js/script.js"></script>
+<script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+     loader: {load: ['[tex]/cancel']},
+      TeX: { 
+        equationNumbers: { autoNumber: "all" },
+        packages: {'[+]': ['cancel']}
+      } 
+    }); 
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <!--<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>-->
+  <header>
+    <center>
+      <h1 id = "title"><a href = "/index.html">RANDOM BITS</a><img id = "pikachu-header" src = "/assets/site/flying-pikachu.png"/></h1>
+    A random site by a random clueless human
+    </center>
+    <!--<marquee scrollamount="4">-->
+    <center>
+      <!--<img src = "/assets/gifs/pikachu-run.gif"/>--><p>Random bits of programming, math, and thoughts
+      By a clueless human</p><!-- <img src = "/assets/gifs/pikachu-run.gif"/>-->
+    </center>
+      <!--&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      <img src = "/assets/gifs/pikachu-run.gif"/>Random bits of programming, math, and thoughts
+      By a clueless human <img src = "/assets/gifs/pikachu-run.gif"/>-->
+      <!--</marquee>-->
+
+    <a href="javascript:void(0);" class="hamburger-nav" onclick="toggleMenu()"><i class="fa fa-bars"></i></a>
+    <nav id="header-nav">
+    <center>
+      <a href="/index.html">Home</a>
+      <a href="/micro/"><span style = "letter-spacing: 1px;">µ</span>Blog</a>
+      <a href="/blog/"><span style = "letter-spacing: 1px;">Blog</a>
+      <a href="/link.html">LinkBlog</a>
+      <!--<a href="/math.html">Math</a>-->
+      <a href="/about.html">About</a>
+    </center>
+    </nav>
+</header>
+
+  </head>
+  <body>
+
+    <div id = "wrapper">
+    <div id = "content">
+<div class = "bits">
+  <h1 class = "title">Github App Limitation - not all refs are readable</h1>
+
+  <div>
+    <p class = "date">September 18, 2020</p>
+    
+    <div class="tags">
+      
+      
+        <a href="/categories/#programming">programming</a>
+        &nbsp;
+      
+        <a href="/categories/#github">github</a>
+        &nbsp;
+      
+        <a href="/categories/#blog">blog</a>
+        
+      
+    </div>
+  </div>
+  <h2 id="introduction">Introduction</h2>
+<p>Recently I have been reading up and working on creating a Github App for work to automate some process to create a pull request that contains code changes from various branches. For those of you who are not familiar with Github Apps, a Github App is an app you can install or create to automate your workflow such as giving feedback on issues or pull requests if they don’t meet the guidelines or are missing information. The entire <a href="https://github.com/marketplace">Github marketplace</a> is dedicated to selling apps and actions to automate workflows.</p>
+
+<p>Github Apps can be created using a framework called <a href="https://probot.github.io/">Protobot</a> which is “optimized” for Github in the sense that you can receive webhooks and use the authenticated client to access the Github API. Essentially, it just makes communication between Github and your app much easier to work with.</p>
+
+<h2 id="not-all-refs-are-readable-error">Not All Refs Are Readable Error</h2>
+<p>While working on my Github App, I was originally working on testing if I could create a pull request from one repository to another. I had no issues writing the code for this on my Github App so when I decided it was time to test my app on the target repository, I was encountering issues. I kept on getting an error: <code class="language-plaintext highlighter-rouge">Not All Refs Are Readable</code> whenever I tried to create a pull request. This puzzled me because I was so lost as to why my application could not read all the git references from my repository. I originally thought perhaps there were some issues with Github App settings that control what accesses the app can have via REST API. However, I could not find any reason why the settings I applied to the app would restrict it from reading references from my target repository. Turns out this is a limitation that exists on Github App.</p>
+
+<p>To give context as to what I was trying to do, I am trying to give the ability for developers to create pull requests from creating an issue from some repository to our product’s repository. Both repositories are private repository meaning the access is restricted to only developers, engineers and support who are directly working on the product to have access and not some other team who is working on another unrelated product.</p>
+
+<h2 id="limitations-of-github-app">Limitations of Github App</h2>
+<p>Github Apps can be installed in multiple organizations and on your personal account, very easily. You just click a few buttons to select what repositories you want the app to have access to and then you are done. However, each instance of the app can only be authenticated on one organization or account at a time. So what happens if you want the app to perform any action that requires authentication of multiple accounts/organizations? It’s not possible.</p>
+
+<p>A user who was working on a similar app as mine encountered this issue much earlier than me in 2019 to Github Support. The issue was titled <a href="https://github.community/t/working-across-organizations-with-github-apps/13721">Working across organizations with Github apps</a>. This was the situation he was working on:</p>
+
+<ul>
+  <li>
+    <p>I have two organizations; org1 and org2. In each org there is a private repo; repo1. org2:repo1 is forked from org1:repo1.</p>
+  </li>
+  <li>
+    <p>I want to create a PR for org2:repo1 -&gt; org1:repo1. The app is authenticated with org1.</p>
+  </li>
+  <li>
+    <p>I always receive a “422: not all refs are readable” error when trying to create the PR. The app is installed on both organizations and I’ve checked that I can make a PR inside each org.</p>
+  </li>
+</ul>
+
+<p>The limitation of Github is that you cannot work with actions that involve two or more private organizations/accounts that require separate authentication. In my and the user’s case, we were trying to have the app create a pull request between a private fork and parent. Having developers work on forks is a common practice when working on a project. Although I am used to directly working on the parent repo only for school projects, there are some caveats in this method. You are giving too much power to developers if you allow them to modify the parent without any form of access control such as having a requirement for changes to be code reviewed via Pull Requests. So naturally, we would want to create an ability to create a PR via Github App  between a fork and parent repo where the parent repo is owned by the organization and the fork is owned by the developer themselves.</p>
+
+<h2 id="solution">Solution</h2>
+<p>Since you cannot work with two private repositories owned by different organizations/users, developers will have to avoid using Github App functionalities and do it the old way: POST Requests. For some reason, I am always thinking of OAuth App (which is similar to Github App except your app acts as a Github user and not as its own entity - think of Github App as a Discord bot) when I am writing this post. Using the regular old fashion POST requests gives us the flexibility to create a request as an authenticated user as long as we provide the Github token on the header of the request. This allows us to be authenticated to more than one account at the same time and hence will solve the issue.</p>
+
+</div>
+</div>
+
+    </div>
+
+  <footer>
+  <marquee id = "buttons">
+    <a href = "index.html"><img src = "/assets/buttons/button.png"></a>
+    <a href = "index.html"><img src = "/assets/buttons/button2.png"></a>
+    <a href = 'https://neocities.org/'><img src = "/assets/buttons/neocitiesorg.gif"></a>
+    <a href = 'https://www.vim.org/'><img src = "/assets/buttons/vim.gif"></a>
+    <a href = 'https://fedoraproject.org/'><img src = "/assets/buttons/gnu-linux.gif"></a>
+    <a href = "https://fedoraproject.org/"><img src = "/assets/buttons/powered_by_fedora_alt.png"></a>
+  </marquee>
+  <a href = "./feed.xml" alt = "rss"><i class="fa-solid fa-rss"></i></a>
+  <small><a href = "/credits" class = "credits">Credits</a></small>
+</footer>
+
+
+  <button onclick="toTop()" id="top_btn" title="Go to top">Top</button>
+  </body>
+</html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>Polluting the Web With a Useless 5 argument main function - RANDOM BITS</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/css/syntax_monokai.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="/assets/css/contrast.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/png" href="/assets/site/random-bits-favicon.png">
+    <meta name="og:title" content="Random Bits">
+    <meta name="og:image" content="">
+    <meta name="og:description"
+        content="Random bits of programming, math, and personal thoughts">
+    <meta name="keywords" content="zakuarbor, programming, math, random bits, pikachu">
+    <meta name="description" content="Random bits of programming, math, and personal thoughts">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script charset="utf-8" src="/assets/js/script.js"></script>
+<script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+     loader: {load: ['[tex]/cancel']},
+      TeX: { 
+        equationNumbers: { autoNumber: "all" },
+        packages: {'[+]': ['cancel']}
+      } 
+    }); 
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <!--<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>-->
+  <header>
+    <center>
+      <h1 id = "title"><a href = "/index.html">RANDOM BITS</a><img id = "pikachu-header" src = "/assets/site/flying-pikachu.png"/></h1>
+    A random site by a random clueless human
+    </center>
+    <!--<marquee scrollamount="4">-->
+    <center>
+      <!--<img src = "/assets/gifs/pikachu-run.gif"/>--><p>Random bits of programming, math, and thoughts
+      By a clueless human</p><!-- <img src = "/assets/gifs/pikachu-run.gif"/>-->
+    </center>
+      <!--&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      <img src = "/assets/gifs/pikachu-run.gif"/>Random bits of programming, math, and thoughts
+      By a clueless human <img src = "/assets/gifs/pikachu-run.gif"/>-->
+      <!--</marquee>-->
+
+    <a href="javascript:void(0);" class="hamburger-nav" onclick="toggleMenu()"><i class="fa fa-bars"></i></a>
+    <nav id="header-nav">
+    <center>
+      <a href="/index.html">Home</a>
+      <a href="/micro/"><span style = "letter-spacing: 1px;">µ</span>Blog</a>
+      <a href="/blog/"><span style = "letter-spacing: 1px;">Blog</a>
+      <a href="/link.html">LinkBlog</a>
+      <!--<a href="/math.html">Math</a>-->
+      <a href="/about.html">About</a>
+    </center>
+    </nav>
+</header>
+
+  </head>
+  <body>
+
+    <div id = "wrapper">
+    <div id = "content">
+<div class = "bits">
+  <h1 class = "title">Polluting the Web With a Useless 5 argument main function</h1>
+
+  <div>
+    <p class = "date">June 22, 2024</p>
+    
+    <div class="tags">
+      
+      
+        <a href="/categories/#programming">programming</a>
+        &nbsp;
+      
+        <a href="/categories/#c/c++">c/c++</a>
+        &nbsp;
+      
+        <a href="/categories/#ghidara">ghidara</a>
+        &nbsp;
+      
+        <a href="/categories/#blog">blog</a>
+        
+      
+    </div>
+  </div>
+  <p>A random blog post that does not have a good definite answer nor have much purpose aside from writing my random bits of nonesensical information. 
+You have been warned.</p>
+
+<p>Recently I got an invitation to try <a href="https://www.hextree.io/">hextree.io</a> before their official launch date. For those who do not know,
+hextree is a future cybersecurity learning platform created by two popular educational hacking youtubers <a href="https://www.youtube.com/liveoverflow">LiveOverflow</a> 
+and <a href="https://www.youtube.com/stacksmashing">stacksmashing</a>. I always wanted to try Ghidra, an open source reverse engineering tool developed by 
+the NSA, after watching a few decompilation projects on youtube and on Github appear in my feeds. So when I saw a short introductory course 
+was offered for free on Hextree, I jumped in. This also means I only have 2-3 hours of Ghidra experience, so please excuse my ignorance of 
+how Ghidra works.</p>
+
+<p>One of my initial surprises about its decompilation is how “bad” it decompiles <code class="language-plaintext highlighter-rouge">main</code>.
+For context, a decompilation tool like Ghidra takes in a binary and does its best to decompile the code into some human readable code like C. It is the user’s job to fill in the blanks, correct and 
+make their own analysis of the resulting code. Let’s look at a simple example of what is expected that may be of surprise to those who have 
+not used Ghidra before:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">undefined8</span> <span class="n">main</span><span class="p">(</span><span class="n">undefined8</span> <span class="n">param_1</span><span class="p">,</span><span class="n">undefined8</span> <span class="o">*</span><span class="n">param_2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>or</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">undefined8</span> <span class="n">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">param_1</span><span class="p">,</span><span class="kt">long</span> <span class="n">param_2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>One would naturally expect any decompilers to be able to correctly decompile the function signature of main to be:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>On a 64-bit x86 Linux machine, <code class="language-plaintext highlighter-rouge">int</code> has a size of 4 bytes. But Ghidra states the return type of <code class="language-plaintext highlighter-rouge">main</code> and <code class="language-plaintext highlighter-rouge">argc</code> which are both of type <code class="language-plaintext highlighter-rouge">int</code> 
+to have a size of 8 bytes. I do not know enough to comment about this particular issue nor had I have any success figuring out an answer that 
+is satisfactory. Through <a href="dogbolt.org">dogbolt</a>, I always see BinaryNinja decompiling <code class="language-plaintext highlighter-rouge">main</code> properly so I guess either BinaryNinja has a 
+better decompilation algorithm or it simply translate <code class="language-plaintext highlighter-rouge">main</code> using “common-sense”. I think it’s the latter as we will see in the next section.</p>
+
+<blockquote>
+  <p>Random Note: This post was originally intended to go over assembly and potentially explain why Ghidra decompiled <code class="language-plaintext highlighter-rouge">main</code> terribly but I 
+gave up after I found out my hypothesis was wrong :(</p>
+</blockquote>
+
+<h2 id="bizarre-decompilation-of-main-5-arguments">Bizarre Decompilation of Main: 5 arguments</h2>
+
+<p><code class="language-plaintext highlighter-rouge">main()</code> function has one of the following number of arguments:</p>
+<ul>
+  <li>0 arguments as stated in the C standard</li>
+  <li>2 arguments <code class="language-plaintext highlighter-rouge">(int argc, char **argv)</code> - as stated in the C standard</li>
+  <li>3 arguments <code class="language-plaintext highlighter-rouge">(int argc, char **argv, char **envp)</code> - which is not POSIX compliant (refer to <code class="language-plaintext highlighter-rouge">man execve</code> for more details)</li>
+  <li>4 arguments <code class="language-plaintext highlighter-rouge">(int argc, char **argv, char **envp, char **apple)</code> - apparently this is a thing on <a href="https://en.wikipedia.org/wiki/Entry_point">Darwin-based OS such as macOS</a></li>
+</ul>
+
+<p>However, on one of the decompilation challenges, Ghidra decompiled main with 5 parameters:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">undefined8</span> <span class="n">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">param_1</span><span class="p">,</span><span class="kt">long</span> <span class="n">param_2</span><span class="p">,</span><span class="n">undefined8</span> <span class="n">param_3</span><span class="p">,</span><span class="n">uchar</span> <span class="o">*</span><span class="n">param_4</span><span class="p">,</span><span class="kt">size_t</span> <span class="n">param_5</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>This stumped me because I have never seen <code class="language-plaintext highlighter-rouge">main</code> in any standards and implementation with more than 3 arguments (minus macOS which 
+I never knew was a thing till I started my research for this blog post). 
+This prompted me to see how one would even replicate this behavior as the original C code was not provided in the challenge.
+There was no way Ghidra can do such a bad job that it decompiles <code class="language-plaintext highlighter-rouge">main</code> with 5 parameters unless the programmer tricked Ghidra 
+to output such madness because all Ghidra does is decompiles the binary into C code based on disassembling the binary into assembly 
+first (I think) and do some tricks to know where to start disassembling and perhaps follow all jumps and branches 
+(I got zero clue to be honest). Astute readers should realize that I am truly unqualified to make any assumptions about Ghidra 
+as I only have 2-3 hours of experience with the tool.</p>
+
+<p>Regardless of how Ghidra managed to decompile <code class="language-plaintext highlighter-rouge">main()</code> to have 5 arguments, I am approaching this problem assuming the 
+programmer purposely obfuscated <code class="language-plaintext highlighter-rouge">main()</code> to trip beginners to the tool (it is an excercise after all).</p>
+
+<p>I now present to the internet the most useless <code class="language-plaintext highlighter-rouge">main()</code> function in existence that has 5 parameters for no good reason aside 
+from polluting the web with nonesense like most of my content:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span>
+<span class="kt">void</span> <span class="nf">foo</span><span class="p">(</span><span class="kt">int</span> <span class="n">param1</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">arg2</span><span class="p">,</span> <span class="kt">char</span> <span class="n">status</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"%p"</span><span class="p">,</span> <span class="n">arg2</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">b</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">c</span><span class="p">,</span> <span class="kt">short</span> <span class="kt">int</span> <span class="n">d</span><span class="p">,</span> <span class="kt">char</span> <span class="n">e</span><span class="p">,</span> <span class="p">...)</span> <span class="p">{</span>
+  <span class="n">foo</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">e</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>With the symbols stripped, Ghidra will decompile the following <code class="language-plaintext highlighter-rouge">main()</code> as:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>undefined8
+FUN_00401153(undefined4 param_1,undefined8 param_2,undefined8 param_3,undefined8 param_4,
+            char param_5)
+
+{
+  FUN_00401126(param_1,param_2,(int)param_5);
+  return 0;
+}
+</code></pre></div></div>
+
+<p>However, <a href="https://dogbolt.org/?id=74e519e9-b8b6-4b70-bd06-bbe500b07833#BinaryNinja=75">BinaryNinja</a> will decompile <code class="language-plaintext highlighter-rouge">main</code> properly, completely ignoring my trick:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int32_t main(int32_t argc, char** argv, char** envp)
+</code></pre></div></div>
+<p>Seeing the resulting decompilation from BinaryNinja, I don’t think it’s even bothering to respect the code I wrote seeing how it passes <code class="language-plaintext highlighter-rouge">argv</code> 
+into the function <code class="language-plaintext highlighter-rouge">foo</code>.</p>
+
+<p>A pattern I figured out to either trick gcc or Ghidra to obtain the 5 parameter <code class="language-plaintext highlighter-rouge">main()</code> function was to ensure the 
+5th parameter is mentioned in <code class="language-plaintext highlighter-rouge">main()</code> even if it’s useless as passing it to another function that completely ignores it.</p>
+
+<h2 id="why-is-this-possible">Why is this Possible?</h2>
+
+<p>Contrary to popular beliefs, <code class="language-plaintext highlighter-rouge">main()</code> is not the first function that gets executed. There’s a whole hidden world that your teachers don’t tell 
+you about (unless you happen to have a need to learn it). On a Linux environment, <code class="language-plaintext highlighter-rouge">gcc</code> by default will link your code with a few <code class="language-plaintext highlighter-rouge">crt</code> object 
+files which are c runtime object code that deals with stuff before and after main. When you execute your program, the dynamic linker should 
+link your program with glibc, where it’ll call <code class="language-plaintext highlighter-rouge">main()</code>. The very first program that actually executes (once the loader runs) is <code class="language-plaintext highlighter-rouge">_start()</code>.</p>
+
+<p>I am not going into specifics but here are links I only skimmed for a minute or two:</p>
+<ul>
+  <li>Brief: <a href="https://www.vishalchovatiya.com/posts/crt-run-time-before-starting-main/">CRT: C Run Time Before Starting main()</a></li>
+  <li>In-Depth: <a href="http://dbp-consulting.com/tutorials/debugging/linuxProgramStartup.html">Linux x86 Program Start Up or - How the heck do we get to main()? </a></li>
+</ul>
+
+<p>Here is an overview of what goes on before we call <code class="language-plaintext highlighter-rouge">main()</code> based on a quick trace I did on gdb:</p>
+<ol>
+  <li>Program begins at the function <code class="language-plaintext highlighter-rouge">_start</code></li>
+  <li><code class="language-plaintext highlighter-rouge">_start</code> will call <code class="language-plaintext highlighter-rouge">__libc_start_main_impl</code></li>
+  <li><code class="language-plaintext highlighter-rouge">__libc_start_main_impl</code> will initialize and prepare to execute <code class="language-plaintext highlighter-rouge">main</code> such as retrieving the secret <code class="language-plaintext highlighter-rouge">envp</code> pointer</li>
+  <li>Eventually when everything is ready, <code class="language-plaintext highlighter-rouge">__libc_start_main_impl</code> will call <code class="language-plaintext highlighter-rouge">__libc_start_call_main</code> which will eventually call <code class="language-plaintext highlighter-rouge">main</code></li>
+</ol>
+
+<p>The answer as to why we can pass in more than 3 arguments lies in the following line under <code class="language-plaintext highlighter-rouge">glibc/glibc/sysdeps/nptl/libc_start_call_main.h</code>:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="n">main</span> <span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">,</span> <span class="n">__environ</span> <span class="n">MAIN_AUXVEC_PARAM</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Notice after <code class="language-plaintext highlighter-rouge">__environ</code> which is our mysterious <code class="language-plaintext highlighter-rouge">envp</code> pointer, there is the macro <code class="language-plaintext highlighter-rouge">MAIN_AUXVEC_PARAM</code> whose possible definition can be found 
+under <code class="language-plaintext highlighter-rouge">csu/libc-start.c</code>:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># define MAIN_AUXVEC_PARAM	, auxvec
+</span></code></pre></div></div>
+
+<p>Despite my attempts to discover what the value of <code class="language-plaintext highlighter-rouge">auxvec</code> is or if <code class="language-plaintext highlighter-rouge">MAIN_AUXVEC_PARAM</code> expands to anything else, I was unable to. I was 
+initially hoping that this macro <code class="language-plaintext highlighter-rouge">MAIN_AUXVEC_PARAM</code> has the answer to my question. However, it does not seem to but rather have a 
+disappointing answer. The closest thing I could find about <code class="language-plaintext highlighter-rouge">auxvec</code> is that it stores a certain set of information that is passed to the 
+userspace by the Kernel’s ELF binary loader such as the size of data cache block.</p>
+
+<p>The best I could come up with is simply that the code before <code class="language-plaintext highlighter-rouge">main()</code> doesn’t care if you provide it 3 or 6 arguments to <code class="language-plaintext highlighter-rouge">main()</code>, it’ll 
+execute <code class="language-plaintext highlighter-rouge">main</code> as if it was a 3 or 4 parameter function. Which closes this blog post on a sad and disappointing note. 
+As the title suggest, this blog post is a post that simply pollutes the internet.</p>
+
+<h3 id="random-notes---ignore">Random Notes - Ignore</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">argc</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">main:</span>
+        <span class="nf">push</span>    <span class="nb">rbp</span>                     <span class="c1">; push the base pointer into the stack</span>
+        <span class="nf">mov</span>     <span class="nb">rbp</span><span class="p">,</span> <span class="nb">rsp</span>                <span class="c1">; replace the base pointer with the current stack pointer</span>
+        <span class="nf">mov</span>     <span class="kt">DWORD</span> <span class="nv">PTR</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">4</span><span class="p">],</span> <span class="nb">edi</span>  <span class="c1">; set edi with the value of argc</span>
+        <span class="nf">mov</span>     <span class="kt">QWORD</span> <span class="nv">PTR</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">16</span><span class="p">],</span> <span class="nb">rsi</span> <span class="c1">; set rsi with the value of argv (the 2nd argument)</span>
+        <span class="nf">mov</span>     <span class="nb">eax</span><span class="p">,</span> <span class="kt">DWORD</span> <span class="nv">PTR</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span>  <span class="c1">; set the eax register, the register that will hold the return value with argc </span>
+                                        <span class="c1">;   setting eax with edi should also be valid I think </span>
+        <span class="nf">pop</span>     <span class="nb">rbp</span>                     <span class="c1">; pop the top of the stack and store it to rbp register</span>
+                                        <span class="c1">;   i.e.restores the caller's rbp</span>
+        <span class="nf">ret</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>return_type (* pointer_name) (datatype_arg_1, datatype_arg_1, ...);
+</code></pre></div></div>
+
+
+</div>
+</div>
+
+    </div>
+
+  <footer>
+  <marquee id = "buttons">
+    <a href = "index.html"><img src = "/assets/buttons/button.png"></a>
+    <a href = "index.html"><img src = "/assets/buttons/button2.png"></a>
+    <a href = 'https://neocities.org/'><img src = "/assets/buttons/neocitiesorg.gif"></a>
+    <a href = 'https://www.vim.org/'><img src = "/assets/buttons/vim.gif"></a>
+    <a href = 'https://fedoraproject.org/'><img src = "/assets/buttons/gnu-linux.gif"></a>
+    <a href = "https://fedoraproject.org/"><img src = "/assets/buttons/powered_by_fedora_alt.png"></a>
+  </marquee>
+  <a href = "./feed.xml" alt = "rss"><i class="fa-solid fa-rss"></i></a>
+  <small><a href = "/credits" class = "credits">Credits</a></small>
+</footer>
+
+
+  <button onclick="toTop()" id="top_btn" title="Go to top">Top</button>
+  </body>
+</html>

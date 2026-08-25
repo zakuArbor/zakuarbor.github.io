@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>A First Glance at Raspberry Pi 4 Running QNX 8.0 - RANDOM BITS</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/css/syntax_monokai.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="/assets/css/contrast.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/png" href="/assets/site/random-bits-favicon.png">
+    <meta name="og:title" content="Random Bits">
+    <meta name="og:image" content="">
+    <meta name="og:description"
+        content="Random bits of programming, math, and personal thoughts">
+    <meta name="keywords" content="zakuarbor, programming, math, random bits, pikachu">
+    <meta name="description" content="Random bits of programming, math, and personal thoughts">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script charset="utf-8" src="/assets/js/script.js"></script>
+<script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+     loader: {load: ['[tex]/cancel']},
+      TeX: { 
+        equationNumbers: { autoNumber: "all" },
+        packages: {'[+]': ['cancel']}
+      } 
+    }); 
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <!--<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>-->
+  <header>
+    <center>
+      <h1 id = "title"><a href = "/index.html">RANDOM BITS</a><img id = "pikachu-header" src = "/assets/site/flying-pikachu.png"/></h1>
+    A random site by a random clueless human
+    </center>
+    <!--<marquee scrollamount="4">-->
+    <center>
+      <!--<img src = "/assets/gifs/pikachu-run.gif"/>--><p>Random bits of programming, math, and thoughts
+      By a clueless human</p><!-- <img src = "/assets/gifs/pikachu-run.gif"/>-->
+    </center>
+      <!--&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      <img src = "/assets/gifs/pikachu-run.gif"/>Random bits of programming, math, and thoughts
+      By a clueless human <img src = "/assets/gifs/pikachu-run.gif"/>-->
+      <!--</marquee>-->
+
+    <a href="javascript:void(0);" class="hamburger-nav" onclick="toggleMenu()"><i class="fa fa-bars"></i></a>
+    <nav id="header-nav">
+    <center>
+      <a href="/index.html">Home</a>
+      <a href="/micro/"><span style = "letter-spacing: 1px;">µ</span>Blog</a>
+      <a href="/blog/"><span style = "letter-spacing: 1px;">Blog</a>
+      <a href="/link.html">LinkBlog</a>
+      <!--<a href="/math.html">Math</a>-->
+      <a href="/about.html">About</a>
+    </center>
+    </nav>
+</header>
+
+  </head>
+  <body>
+
+    <div id = "wrapper">
+    <div id = "content">
+<div class = "bits">
+  <h1 class = "title">A First Glance at Raspberry Pi 4 Running QNX 8.0</h1>
+
+  <div>
+    <p class = "date">January  4, 2025</p>
+    
+    <div class="tags">
+      
+      
+        <a href="/categories/#micro">micro</a>
+        &nbsp;
+      
+        <a href="/categories/#qnx">qnx</a>
+        &nbsp;
+      
+        <a href="/categories/#rpi">rpi</a>
+        
+      
+    </div>
+  </div>
+  <p>I recently purchased a Raspberry 4 to fiddle around with QNX 8.0 that has been released to the educational and hobbyist community. Being frustrated with 
+running QNX virtual machines via Momentics, I decided it would be much easier to run QNX on a piece of hardware. I do not know if it is just me 
+but I find my newly created virtual machines have a one-time boot lifespan. Any attempts to restart my virtual machines via Momentics, I would have network 
+related issues and therefore would not be able to connect to the virtual machine remotely. This means that I cannot transfer files. I long forgotten how to 
+create QNX image and run them on QEMU via commandline so I took the opportunity to buy myself a raspberry Pi (tbh I was just being lazy to resolve my issues).</p>
+
+<p>Anyhow, enough idle chatter. Upon booting QNX on the Raspberry Pi, you’ll be first greeted with what appears to be <code class="language-plaintext highlighter-rouge">demolauncher</code> (though I did not confirm this):</p>
+
+<p><img src="/assets/micro/qnx-raspberry/qnx-welcome.png" alt="QNX Welcome Screen on Raspberry Pi" /></p>
+
+<p>Honestly this screen is annoying because I have to connect a mouse to simply open a terminal. Once authenticated, the terminal will greet you 
+with a message along with a few bundled samples you can try:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Welcome to QNX 8.0!
+
+This QNX 8 target is now ready for your QNX applications. There are
+some sample applications included here to help you get started with
+development. Find the source code for most of them at gitlab.com/qnx.
+
+Here's how to run some of the bundled samples:
+
+|------------------|----------------------------------------------------------|
+| $ gles2-gears    | Displays hardware-rendered content using OpenGL ES 2.x.  |
+| $ gles2-maze     | Shows how to use texture, vertex, and fragment shaders.  |
+| $ vkcubepp       | Demonstrates 3D rendering capabilities using Vulkan.     |
+| $ camera_example | Displays a simulated camera signal or live camera feed.  |
+| $ st             | The default terminal. Run it to open a new instance.     |
+| $ blinq          | A simple web browser. Make sure your system date is set. |
+|------------------|----------------------------------------------------------|
+
+(You can use ALT-TAB to switch between windows.)
+
+Have questions? Find the community on Reddit at r/QNX, ask on StackOverflow,
+or log an issue at https://gitlab.com/qnx .
+</code></pre></div></div>
+
+<p>Below are some of the bundled samples mentioned above along with some additional samples that I found on the image</p>
+
+<p><strong>The sample renderings are for illustration purposes only.</strong> To post them on the internet within a resaonable size, I had to <strong>significantly reduce</strong> the quality 
+of the recordings:</p>
+
+<div class="dual-image-container">
+<img alt="3 gears rotating and spinning" src="/assets/micro/qnx-raspberry/gles2-gears.gif" />
+<img alt="first person view of going through a maze" src="/assets/micro/qnx-raspberry/gles2-maze.gif" />
+<p class="caption">gles2-gears or gless3-gears</p>
+<p class="caption">gles2-maze</p>
+</div>
+
+<div class="dual-image-container">
+<img alt="a camera view going around a red teapot" src="/assets/micro/qnx-raspberry/gles2-teapot.gif" />
+<img alt="a cube spinning" src="/assets/micro/qnx-raspberry/vkcubepp.gif" />
+<p class="caption">gless2-teapot</p>
+<p class="caption">vkcubepp</p>
+</div>
+<p><img alt="a simulation of SMPTE color bars when the TV has no signal" src="/assets/micro/qnx-raspberry/camera_example.gif" /></p>
+<p class="caption">camera_example: brings back memories of <a href="https://en.wikipedia.org/wiki/SMPTE_color_bars">SMPTE color bars</a> from the old days</p>
+
+<p>As one can observe, most of these samples demonstrate graphical rendering using either OpenGL 2 (and 3) or Vulkan. I do think it is quite a neat
+demo but it does not demonstate QNX’s potential and abilities. It is hard to demonstrate QNX’s abilities without going into the weeds and pushing the OS. 
+I did not fiddled around with QNX much so to be honest, these graphical demos surprised me as I haven’t seen QNX having anything graphical aside from the 
+QNX 1.44MB Demo disk and QNX 6.5. I am more used to the plain old terminal experience I had with QNX 7 and 7.1.</p>
+
+<p><code class="language-plaintext highlighter-rouge">st</code> is a useful command to spawn a new terminal without going to the awful welcome screen and manually press the button to spawn a new terminal. As much as 
+I dislike the welcome demo screen, the page demonstrated to hobbyists that QNX raspberry Pi image has graphical capabilities that they can utilize for their own 
+side projects. The <code class="language-plaintext highlighter-rouge">blinq</code> browser as stated in the description is indeed a simple web browser.</p>
+
+<p>There is nothing impressive about the web browser, as advertised, it is a bare bone web browser that can be quite slow. Weirdly enough, the web browser is not able to 
+immediately report that a webpage does not exist. I do not know if that is an issue with the browser itself or the default network settings because it would load 
+a non-existing page forever (well to be more precise, I gave up waiting).</p>
+
+<p><img src="/assets/micro/qnx-raspberry/blinq-1.png" alt="A look into Blinq Web browser" /></p>
+
+<p>Unsurprisingly, <code class="language-plaintext highlighter-rouge">blinq</code> is a Chromium based browser that is severely out of date.</p>
+
+<p><img src="/assets/micro/qnx-raspberry/blinq-2.png" alt="Blinq " /></p>
+
+<p>There are a good number of useful binaries bundles in the raspberry pi image by default:</p>
+
+<p><img src="/assets/micro/qnx-raspberry/binaries.png" alt="a listing of some of the binaries available on the system" /></p>
+
+<p>One of the features I greatly appreciate is the <code class="language-plaintext highlighter-rouge">screenshot</code> and <code class="language-plaintext highlighter-rouge">vncserv</code> utilities to take screenshots and access the machine remotely with graphical interface respectively.
+Hopefully we can see some interesting projects from the hobbyist community in the near future.</p>
+
+</div>
+</div>
+
+    </div>
+
+  <footer>
+  <marquee id = "buttons">
+    <a href = "index.html"><img src = "/assets/buttons/button.png"></a>
+    <a href = "index.html"><img src = "/assets/buttons/button2.png"></a>
+    <a href = 'https://neocities.org/'><img src = "/assets/buttons/neocitiesorg.gif"></a>
+    <a href = 'https://www.vim.org/'><img src = "/assets/buttons/vim.gif"></a>
+    <a href = 'https://fedoraproject.org/'><img src = "/assets/buttons/gnu-linux.gif"></a>
+    <a href = "https://fedoraproject.org/"><img src = "/assets/buttons/powered_by_fedora_alt.png"></a>
+  </marquee>
+  <a href = "./feed.xml" alt = "rss"><i class="fa-solid fa-rss"></i></a>
+  <small><a href = "/credits" class = "credits">Credits</a></small>
+</footer>
+
+
+  <button onclick="toTop()" id="top_btn" title="Go to top">Top</button>
+  </body>
+</html>

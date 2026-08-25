@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>A Look Into Virtual Table via Assembly - RANDOM BITS</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/css/syntax_monokai.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="/assets/css/contrast.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/png" href="/assets/site/random-bits-favicon.png">
+    <meta name="og:title" content="Random Bits">
+    <meta name="og:image" content="">
+    <meta name="og:description"
+        content="Random bits of programming, math, and personal thoughts">
+    <meta name="keywords" content="zakuarbor, programming, math, random bits, pikachu">
+    <meta name="description" content="Random bits of programming, math, and personal thoughts">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script charset="utf-8" src="/assets/js/script.js"></script>
+<script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+     loader: {load: ['[tex]/cancel']},
+      TeX: { 
+        equationNumbers: { autoNumber: "all" },
+        packages: {'[+]': ['cancel']}
+      } 
+    }); 
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <!--<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>-->
+  <header>
+    <center>
+      <h1 id = "title"><a href = "/index.html">RANDOM BITS</a><img id = "pikachu-header" src = "/assets/site/flying-pikachu.png"/></h1>
+    A random site by a random clueless human
+    </center>
+    <!--<marquee scrollamount="4">-->
+    <center>
+      <!--<img src = "/assets/gifs/pikachu-run.gif"/>--><p>Random bits of programming, math, and thoughts
+      By a clueless human</p><!-- <img src = "/assets/gifs/pikachu-run.gif"/>-->
+    </center>
+      <!--&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      <img src = "/assets/gifs/pikachu-run.gif"/>Random bits of programming, math, and thoughts
+      By a clueless human <img src = "/assets/gifs/pikachu-run.gif"/>-->
+      <!--</marquee>-->
+
+    <a href="javascript:void(0);" class="hamburger-nav" onclick="toggleMenu()"><i class="fa fa-bars"></i></a>
+    <nav id="header-nav">
+    <center>
+      <a href="/index.html">Home</a>
+      <a href="/micro/"><span style = "letter-spacing: 1px;">µ</span>Blog</a>
+      <a href="/blog/"><span style = "letter-spacing: 1px;">Blog</a>
+      <a href="/link.html">LinkBlog</a>
+      <!--<a href="/math.html">Math</a>-->
+      <a href="/about.html">About</a>
+    </center>
+    </nav>
+</header>
+
+  </head>
+  <body>
+
+    <div id = "wrapper">
+    <div id = "content">
+<div class = "bits">
+  <h1 class = "title">A Look Into Virtual Table via Assembly</h1>
+
+  <div>
+    <p class = "date">August 20, 2025</p>
+    
+    <div class="tags">
+      
+      
+        <a href="/categories/#programming">programming</a>
+        &nbsp;
+      
+        <a href="/categories/#c/c++">c/c++</a>
+        &nbsp;
+      
+        <a href="/categories/#asm">asm</a>
+        &nbsp;
+      
+        <a href="/categories/#blog">blog</a>
+        
+      
+    </div>
+  </div>
+  <p>Polymorphism is an important feature of Object Oriented Programming whereby one can represent an object in different forms, hence the name. However, its implementation between 
+Java and C++ which could bite you if you are not aware. This blog is going to explore the following topics:</p>
+<ul>
+  <li><a href="#static">Static Dispatch</a></li>
+  <li><a href="#virtual-fun">The need for <code class="language-plaintext highlighter-rouge">virtual</code> functions</a></li>
+  <li><a href="#asm">Dynamic Dispatcher - Looking Into Assembly</a></li>
+  <li><a href="#virtual-table">Virtual Pointers and Virtual Tables</a></li>
+</ul>
+
+<p><a name="static"></a></p>
+<h2 id="static-dispatch">Static Dispatch</h2>
+
+<p>Here’s a snippet of Java code that would behave differently in C++:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Shape</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">draw</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Shape"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">Triangle</span> <span class="kd">extends</span> <span class="nc">Shape</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">draw</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Triangle"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Shape</span> <span class="n">shape</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Triangle</span><span class="o">();</span>
+        <span class="n">shape</span><span class="o">.</span><span class="na">draw</span><span class="o">();</span>   <span class="c1">// prints "Triangle"</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><strong>Output:</strong> <code class="language-plaintext highlighter-rouge">Triangle</code></p>
+
+<p>In Java, the base (parent) class can be utilized to represent different forms. Although <code class="language-plaintext highlighter-rouge">shape</code> is of type <code class="language-plaintext highlighter-rouge">Shape</code>, its value is of type <code class="language-plaintext highlighter-rouge">Triangle</code>. This 
+is completely legal as <code class="language-plaintext highlighter-rouge">Triangle</code> is a child class (the derived class) of <code class="language-plaintext highlighter-rouge">Shape</code> (i.e. <code class="language-plaintext highlighter-rouge">Triangle</code> is a <code class="language-plaintext highlighter-rouge">Shape</code>). Note that the relation is one way akin to the relationship between 
+a Rectangle and a Square, a square is a rectangle but a rectangle is not a square. This is one of the power of polymorphism, the ability to have 
+a base class act as a generic container that can represent different things.</p>
+
+<p>Here’s a typical C++ implementation a novice would write:</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span><span class="k">class</span> <span class="nc">Shape</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="kt">void</span> <span class="n">draw</span><span class="p">()</span> <span class="p">{</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Shape</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">Triangle</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Shape</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="kt">void</span> <span class="n">draw</span><span class="p">()</span> <span class="p">{</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Triangle</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    
+    <span class="n">Shape</span> <span class="o">*</span><span class="n">shape</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Triangle</span><span class="p">();</span>
+
+    <span class="n">shape</span><span class="o">-&gt;</span><span class="n">draw</span><span class="p">();</span> <span class="c1">// prints "Shape"</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Output:</strong> <code class="language-plaintext highlighter-rouge">Shape</code></p>
+
+<p>Unlike the Java Implementation, the novice C++ conversion gives a different output as it’s missing one important keyword.</p>
+
+<hr />
+
+<p><a name="virtual-fun"></a></p>
+<h2 id="virtual-functions---the-missing-key-ingredient-to-polymorphism">Virtual Functions - The Missing Key Ingredient to Polymorphism</h2>
+
+<p>For polymorphism to work in C++, the <code class="language-plaintext highlighter-rouge">virtual</code> keyword was introduced to allow dynamic dispatching of function calls (i.e. resolve function calls at <strong>runtime</strong>).
+In simpler terms, <code class="language-plaintext highlighter-rouge">virtual</code> tells the compiler that the function could be overridden in the derived class (i.e. child class). For instance,</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span><span class="k">class</span> <span class="nc">Shape</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">draw</span><span class="p">()</span> <span class="p">{</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Shape</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">Triangle</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Shape</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="kt">void</span> <span class="n">draw</span><span class="p">()</span> <span class="p">{</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Triangle</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">Shape</span> <span class="o">*</span><span class="n">shape</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Triangle</span><span class="p">();</span>
+
+    <span class="n">shape</span><span class="o">-&gt;</span><span class="n">draw</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Output:</strong> <code class="language-plaintext highlighter-rouge">Triangle</code></p>
+
+<hr />
+
+<p><a name="asm"></a></p>
+<h2 id="a-peak-under-the-hood---assembly">A Peak Under The Hood - Assembly</h2>
+<p>The behavior of the object slicing will make have the following:</p>
+<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">mov</span>     <span class="nb">rax</span><span class="p">,</span> <span class="kt">QWORD</span> <span class="nv">PTR</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">8</span><span class="p">]</span>
+<span class="nf">mov</span>     <span class="nb">rdi</span><span class="p">,</span> <span class="nb">rax</span>
+<span class="nf">call</span>    <span class="nv">Shape</span><span class="p">::</span><span class="nv">draw</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><strong>Note:</strong> GCC 15.2 amd64 with default compiler settings (i.e. no optimization) with C++ demangling enabled on Godbolt.</p>
+
+<p>To bind the correct <code class="language-plaintext highlighter-rouge">draw()</code> call, we need to either tell the compiler the correct method to bind statically (via <code class="language-plaintext highlighter-rouge">static_cast&lt;&gt;()</code>) or via dynamic dispatch.
+Simply adding the <code class="language-plaintext highlighter-rouge">virtual</code> keyword will give us the intended result but it would generate significantly more code as it has to invoke the correct method during runtime and 
+therefore does more jumping to get to the correct function (i.e. virtual dispatch):</p>
+
+<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">mov</span>     <span class="nb">rax</span><span class="p">,</span> <span class="kt">QWORD</span> <span class="nv">PTR</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">24</span><span class="p">]</span>
+<span class="nf">mov</span>     <span class="nb">rax</span><span class="p">,</span> <span class="kt">QWORD</span> <span class="nv">PTR</span> <span class="p">[</span><span class="nb">rax</span><span class="p">]</span>
+<span class="nf">mov</span>     <span class="nb">rdx</span><span class="p">,</span> <span class="kt">QWORD</span> <span class="nv">PTR</span> <span class="p">[</span><span class="nb">rax</span><span class="p">]</span>
+<span class="nf">mov</span>     <span class="nb">rax</span><span class="p">,</span> <span class="kt">QWORD</span> <span class="nv">PTR</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">24</span><span class="p">]</span>
+<span class="nf">mov</span>     <span class="nb">rdi</span><span class="p">,</span> <span class="nb">rax</span>
+<span class="nf">call</span>    <span class="nb">rdx</span>
+</code></pre></div></div>
+
+<p>Here’s some interesting snippet of the code. Do not worry about understanding all of it, it’s just there to illustrate how much more code is generated to get this (note: scrollable):</p>
+<style>
+.scrollable {
+    overflow-y: auto;
+    max-height: 500px;
+}
+</style>
+
+<div class="language-nasm highlighter-rouge" style="overflow-y:auto;max-height:60vh">
+<div class="highlight"><pre class="highlight"><code><span class="nl">Shape:</span><span class="p">:</span><span class="nf">Shape</span><span class="p">()</span> <span class="p">[</span><span class="nv">base</span> <span class="nv">object</span> <span class="nv">constructor</span><span class="p">]:</span>
+        <span class="nf">push</span>    <span class="nb">rbp</span>
+        <span class="nf">mov</span>     <span class="nb">rbp</span><span class="p">,</span> <span class="nb">rsp</span>
+        <span class="nf">mov</span>     <span class="kt">QWORD</span> <span class="nv">PTR</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">8</span><span class="p">],</span> <span class="nb">rdi</span>
+        <span class="nf">mov</span>     <span class="nb">edx</span><span class="p">,</span> <span class="nv">OFFSET</span> <span class="nv">FLAT</span><span class="p">:</span><span class="nv">vtable</span> <span class="nv">for</span> <span class="nv">Shape</span><span class="o">+</span><span class="mi">16</span>
+        <span class="nf">mov</span>     <span class="nb">rax</span><span class="p">,</span> <span class="kt">QWORD</span> <span class="nv">PTR</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">8</span><span class="p">]</span>
+        <span class="nf">mov</span>     <span class="kt">QWORD</span> <span class="nv">PTR</span> <span class="p">[</span><span class="nb">rax</span><span class="p">],</span> <span class="nb">rdx</span>
+        <span class="nf">nop</span>
+        <span class="nf">pop</span>     <span class="nb">rbp</span>
+        <span class="nf">ret</span>
+        <span class="nf">.set</span>    <span class="nv">Shape</span><span class="p">::</span><span class="nv">Shape</span><span class="p">()</span> <span class="p">[</span><span class="nv">complete</span> <span class="nv">object</span> <span class="nv">constructor</span><span class="p">],</span><span class="nv">Shape</span><span class="p">::</span><span class="nv">Shape</span><span class="p">()</span> <span class="p">[</span><span class="nv">base</span> <span class="nv">object</span> <span class="nv">constructor</span><span class="p">]</span>
+<span class="nl">Triangle:</span><span class="p">:</span><span class="nf">Triangle</span><span class="p">()</span> <span class="p">[</span><span class="nv">base</span> <span class="nv">object</span> <span class="nv">constructor</span><span class="p">]:</span>
+        <span class="nf">push</span>    <span class="nb">rbp</span>
+        <span class="nf">mov</span>     <span class="nb">rbp</span><span class="p">,</span> <span class="nb">rsp</span>
+        <span class="nf">sub</span>     <span class="nb">rsp</span><span class="p">,</span> <span class="mi">16</span>
+        <span class="nf">mov</span>     <span class="kt">QWORD</span> <span class="nv">PTR</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">8</span><span class="p">],</span> <span class="nb">rdi</span>
+        <span class="nf">mov</span>     <span class="nb">rax</span><span class="p">,</span> <span class="kt">QWORD</span> <span class="nv">PTR</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">8</span><span class="p">]</span>
+        <span class="nf">mov</span>     <span class="nb">rdi</span><span class="p">,</span> <span class="nb">rax</span>
+        <span class="nf">call</span>    <span class="nv">Shape</span><span class="p">::</span><span class="nv">Shape</span><span class="p">()</span> <span class="p">[</span><span class="nv">base</span> <span class="nv">object</span> <span class="nv">constructor</span><span class="p">]</span>
+        <span class="nf">mov</span>     <span class="nb">edx</span><span class="p">,</span> <span class="nv">OFFSET</span> <span class="nv">FLAT</span><span class="p">:</span><span class="nv">vtable</span> <span class="nv">for</span> <span class="nv">Triangle</span><span class="o">+</span><span class="mi">16</span>
+        <span class="nf">mov</span>     <span class="nb">rax</span><span class="p">,</span> <span class="kt">QWORD</span> <span class="nv">PTR</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">8</span><span class="p">]</span>
+        <span class="nf">mov</span>     <span class="kt">QWORD</span> <span class="nv">PTR</span> <span class="p">[</span><span class="nb">rax</span><span class="p">],</span> <span class="nb">rdx</span>
+        <span class="nf">nop</span>
+        <span class="nf">leave</span>
+        <span class="nf">ret</span>
+        <span class="nf">.set</span>    <span class="nv">Triangle</span><span class="p">::</span><span class="nv">Triangle</span><span class="p">()</span> <span class="p">[</span><span class="nv">complete</span> <span class="nv">object</span> <span class="nv">constructor</span><span class="p">],</span><span class="nv">Triangle</span><span class="p">::</span><span class="nv">Triangle</span><span class="p">()</span> <span class="p">[</span><span class="nv">base</span> <span class="nv">object</span> <span class="nv">constructor</span><span class="p">]</span>
+<span class="nl">main:</span>
+        <span class="nf">push</span>    <span class="nb">rbp</span>
+        <span class="nf">mov</span>     <span class="nb">rbp</span><span class="p">,</span> <span class="nb">rsp</span>
+        <span class="nf">push</span>    <span class="nb">rbx</span>
+        <span class="nf">sub</span>     <span class="nb">rsp</span><span class="p">,</span> <span class="mi">24</span>
+        <span class="nf">mov</span>     <span class="nb">edi</span><span class="p">,</span> <span class="mi">8</span>
+        <span class="nf">call</span>    <span class="nv">operator</span> <span class="nv">new</span><span class="p">(</span><span class="nv">unsigned</span> <span class="nv">long</span><span class="p">)</span>
+        <span class="nf">mov</span>     <span class="nb">rbx</span><span class="p">,</span> <span class="nb">rax</span>
+        <span class="nf">mov</span>     <span class="kt">QWORD</span> <span class="nv">PTR</span> <span class="p">[</span><span class="nb">rbx</span><span class="p">],</span> <span class="mi">0</span>
+        <span class="nf">mov</span>     <span class="nb">rdi</span><span class="p">,</span> <span class="nb">rbx</span>
+        <span class="nf">call</span>    <span class="nv">Triangle</span><span class="p">::</span><span class="nv">Triangle</span><span class="p">()</span> <span class="p">[</span><span class="nv">complete</span> <span class="nv">object</span> <span class="nv">constructor</span><span class="p">]</span>
+        <span class="nf">mov</span>     <span class="nb">eax</span><span class="p">,</span> <span class="mi">0</span>
+        <span class="nf">mov</span>     <span class="kt">QWORD</span> <span class="nv">PTR</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">24</span><span class="p">],</span> <span class="nb">rbx</span>
+        <span class="nf">test</span>    <span class="nb">al</span><span class="p">,</span> <span class="nb">al</span>
+        <span class="nf">je</span>      <span class="nv">.L6</span>
+        <span class="nf">mov</span>     <span class="nb">esi</span><span class="p">,</span> <span class="mi">8</span>
+        <span class="nf">mov</span>     <span class="nb">rdi</span><span class="p">,</span> <span class="nb">rbx</span>
+        <span class="nf">call</span>    <span class="nv">operator</span> <span class="nv">delete</span><span class="p">(</span><span class="nv">void</span><span class="o">*</span><span class="p">,</span> <span class="nv">unsigned</span> <span class="nv">long</span><span class="p">)</span>
+<span class="nl">.L6:</span>
+        <span class="nf">mov</span>     <span class="nb">rax</span><span class="p">,</span> <span class="kt">QWORD</span> <span class="nv">PTR</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">24</span><span class="p">]</span>
+        <span class="nf">mov</span>     <span class="nb">rax</span><span class="p">,</span> <span class="kt">QWORD</span> <span class="nv">PTR</span> <span class="p">[</span><span class="nb">rax</span><span class="p">]</span>
+        <span class="nf">mov</span>     <span class="nb">rdx</span><span class="p">,</span> <span class="kt">QWORD</span> <span class="nv">PTR</span> <span class="p">[</span><span class="nb">rax</span><span class="p">]</span>
+        <span class="nf">mov</span>     <span class="nb">rax</span><span class="p">,</span> <span class="kt">QWORD</span> <span class="nv">PTR</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">24</span><span class="p">]</span>
+        <span class="nf">mov</span>     <span class="nb">rdi</span><span class="p">,</span> <span class="nb">rax</span>
+        <span class="nf">call</span>    <span class="nb">rdx</span>
+        <span class="nf">mov</span>     <span class="nb">eax</span><span class="p">,</span> <span class="mi">0</span>
+        <span class="nf">mov</span>     <span class="nb">rbx</span><span class="p">,</span> <span class="kt">QWORD</span> <span class="nv">PTR</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">8</span><span class="p">]</span>
+        <span class="nf">leave</span>
+        <span class="nf">ret</span>
+<span class="nf">vtable</span> <span class="nv">for</span> <span class="nv">Triangle</span><span class="p">:</span>
+        <span class="nf">.quad</span>   <span class="mi">0</span>
+        <span class="nf">.quad</span>   <span class="nv">typeinfo</span> <span class="nv">for</span> <span class="nv">Triangle</span>
+        <span class="nf">.quad</span>   <span class="nv">Triangle</span><span class="p">::</span><span class="nv">draw</span><span class="p">()</span>
+<span class="nf">vtable</span> <span class="nv">for</span> <span class="nv">Shape</span><span class="p">:</span>
+        <span class="nf">.quad</span>   <span class="mi">0</span>
+        <span class="nf">.quad</span>   <span class="nv">typeinfo</span> <span class="nv">for</span> <span class="nv">Shape</span>
+        <span class="nf">.quad</span>   <span class="nv">Shape</span><span class="p">::</span><span class="nv">draw</span><span class="p">()</span>
+<span class="nf">typeinfo</span> <span class="nv">for</span> <span class="nv">Triangle</span><span class="p">:</span>
+        <span class="nf">.quad</span>   <span class="nv">vtable</span> <span class="nv">for</span> <span class="nv">__cxxabiv1</span><span class="p">::</span><span class="nv">__si_class_type_info</span><span class="o">+</span><span class="mi">16</span>
+        <span class="nf">.quad</span>   <span class="nv">typeinfo</span> <span class="nv">name</span> <span class="nv">for</span> <span class="nv">Triangle</span>
+        <span class="nf">.quad</span>   <span class="nv">typeinfo</span> <span class="nv">for</span> <span class="nv">Shape</span>
+<span class="nf">typeinfo</span> <span class="nv">name</span> <span class="nv">for</span> <span class="nv">Triangle</span><span class="p">:</span>
+        <span class="nf">.string</span> <span class="err">"</span><span class="mi">8</span><span class="nv">Triangle</span><span class="err">"</span>
+<span class="nf">typeinfo</span> <span class="nv">for</span> <span class="nv">Shape</span><span class="p">:</span>
+        <span class="nf">.quad</span>   <span class="nv">vtable</span> <span class="nv">for</span> <span class="nv">__cxxabiv1</span><span class="p">::</span><span class="nv">__class_type_info</span><span class="o">+</span><span class="mi">16</span>
+        <span class="nf">.quad</span>   <span class="nv">typeinfo</span> <span class="nv">name</span> <span class="nv">for</span> <span class="nv">Shape</span>
+<span class="nf">typeinfo</span> <span class="nv">name</span> <span class="nv">for</span> <span class="nv">Shape</span><span class="p">:</span>
+        <span class="nf">.string</span> <span class="s">"5Shape"</span>
+</code></pre></div>
+</div>
+
+<p>Let’s go line by line of the virtual dispatch to understand what is going on:</p>
+<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">mov</span>     <span class="nb">rax</span><span class="p">,</span> <span class="kt">QWORD</span> <span class="nv">PTR</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">24</span><span class="p">]</span> <span class="c1">; rax = address of `Triangle` object</span>
+<span class="nf">mov</span>     <span class="nb">rax</span><span class="p">,</span> <span class="kt">QWORD</span> <span class="nv">PTR</span> <span class="p">[</span><span class="nb">rax</span><span class="p">]</span>    <span class="c1">; rax = address of the vtable for `Triangle`</span>
+<span class="nf">mov</span>     <span class="nb">rdx</span><span class="p">,</span> <span class="kt">QWORD</span> <span class="nv">PTR</span> <span class="p">[</span><span class="nb">rax</span><span class="p">]</span>    <span class="c1">; rdx = address of `Triangle::draw()``</span>
+<span class="nf">mov</span>     <span class="nb">rax</span><span class="p">,</span> <span class="kt">QWORD</span> <span class="nv">PTR</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">24</span><span class="p">]</span> <span class="c1">; rax = address of `Triangle` object</span>
+<span class="nf">mov</span>     <span class="nb">rdi</span><span class="p">,</span> <span class="nb">rax</span>                <span class="c1">; rdi = address of `Triangle` object acting as our first hidden `this` argument</span>
+<span class="nf">call</span>    <span class="nb">rdx</span>                     <span class="c1">; call  `Triangle::draw(this)`</span>
+</code></pre></div></div>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">mov     rax, QWORD PTR [rbp-24]</code>
+    <ul>
+      <li>load the value stored at <code class="language-plaintext highlighter-rouge">[rbp-24]</code> into <code class="language-plaintext highlighter-rouge">rax</code></li>
+      <li><code class="language-plaintext highlighter-rouge">rbp-24</code> is where our variable <code class="language-plaintext highlighter-rouge">shape</code> is located pointing to a <code class="language-plaintext highlighter-rouge">Triangle</code> object in the heap
+        <div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nl">main:</span>
+   <span class="nf">push</span>    <span class="nb">rbp</span>
+   <span class="nf">mov</span>     <span class="nb">rbp</span><span class="p">,</span> <span class="nb">rsp</span>
+   <span class="nf">push</span>    <span class="nb">rbx</span>
+   <span class="nf">sub</span>     <span class="nb">rsp</span><span class="p">,</span> <span class="mi">24</span> <span class="c1">; &lt;- allocates `shape` into the stack</span>
+   <span class="nf">mov</span>     <span class="nb">edi</span><span class="p">,</span> <span class="mi">8</span>
+   <span class="nf">call</span>    <span class="nv">operator</span> <span class="nv">new</span><span class="p">(</span><span class="nv">unsigned</span> <span class="nv">long</span><span class="p">)</span>
+   <span class="nf">...</span>
+</code></pre></div>        </div>
+      </li>
+      <li><code class="language-plaintext highlighter-rouge">[rbp-24]</code> will give us the value located in <code class="language-plaintext highlighter-rouge">rbp-24</code> (i.e. value of <code class="language-plaintext highlighter-rouge">shape</code> variable), the address of the <code class="language-plaintext highlighter-rouge">Triangle</code> object into <code class="language-plaintext highlighter-rouge">rax</code> register</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">mov     rax, QWORD PTR [rax]</code>
+    <ul>
+      <li>load the value stored at <code class="language-plaintext highlighter-rouge">[rax]</code></li>
+      <li><code class="language-plaintext highlighter-rouge">[rax]</code> is the value of the vtable of <code class="language-plaintext highlighter-rouge">Triangle</code>, the first field in the class</li>
+    </ul>
+    <ul>
+      <li>we refer this as the <strong>virtual pointer</strong> which points to the virtual table, more specifically to the first virtual function in the table</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">mov     rdx, QWORD PTR [rax]</code>
+    <ul>
+      <li>load value stored at <code class="language-plaintext highlighter-rouge">[rax]</code> - this resembles the previous instruction except it stores in <code class="language-plaintext highlighter-rouge">rdx</code> register</li>
+      <li><code class="language-plaintext highlighter-rouge">[rax]</code> will give us the first function pointer in the virtual table (i.e. <code class="language-plaintext highlighter-rouge">vtbl_ptr[0]</code>)</li>
+      <li>first function pointer in virtual table is <code class="language-plaintext highlighter-rouge">Triangle::draw()</code></li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">mov     rdx, QWORD PTR [rax]</code>
+    <ul>
+      <li>similar to step 1 - store address of <code class="language-plaintext highlighter-rouge">Triangle</code> object into <code class="language-plaintext highlighter-rouge">rax</code> register</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">mov     rdi, rax</code>
+    <ul>
+      <li>In AMD64, <code class="language-plaintext highlighter-rouge">rdi</code> holds the first argument to pass onto the function</li>
+      <li><strong>Recall:</strong> <a href="../this-asm"><code class="language-plaintext highlighter-rouge">this</code> is a hidden argument to a method</a></li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">call    rdx</code>
+    <ul>
+      <li>invokes <code class="language-plaintext highlighter-rouge">Triangle::draw()</code> obtained from step 3</li>
+    </ul>
+  </li>
+</ol>
+
+<p><a name="virtual-table"></a></p>
+<h2 id="virtual-pointers-and-virtual-tables">Virtual Pointers and Virtual Tables</h2>
+
+<p>Recall that in our <strong>object slicing</strong> example, the call to <code class="language-plaintext highlighter-rouge">draw()</code> generated the following assembly code:</p>
+
+<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">mov</span>     <span class="nb">rax</span><span class="p">,</span> <span class="kt">QWORD</span> <span class="nv">PTR</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">8</span><span class="p">]</span>
+<span class="nf">mov</span>     <span class="nb">rdi</span><span class="p">,</span> <span class="nb">rax</span>
+<span class="nf">call</span>    <span class="nv">Shape</span><span class="p">::</span><span class="nv">draw</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>However, once we declare <code class="language-plaintext highlighter-rouge">draw()</code> to be a <code class="language-plaintext highlighter-rouge">virtual</code> function, we observed that the compiler generated significantly more code to dynamically dispatch the correct <code class="language-plaintext highlighter-rouge">draw()</code> 
+implementation:</p>
+
+<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">1</span> <span class="nf">mov</span>     <span class="nb">rax</span><span class="p">,</span> <span class="kt">QWORD</span> <span class="nv">PTR</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">24</span><span class="p">]</span>
+<span class="err">2</span> <span class="nf">mov</span>     <span class="nb">rax</span><span class="p">,</span> <span class="kt">QWORD</span> <span class="nv">PTR</span> <span class="p">[</span><span class="nb">rax</span><span class="p">]</span>
+<span class="err">3</span> <span class="nf">mov</span>     <span class="nb">rdx</span><span class="p">,</span> <span class="kt">QWORD</span> <span class="nv">PTR</span> <span class="p">[</span><span class="nb">rax</span><span class="p">]</span>
+<span class="err">4</span> <span class="nf">mov</span>     <span class="nb">rax</span><span class="p">,</span> <span class="kt">QWORD</span> <span class="nv">PTR</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">24</span><span class="p">]</span>
+<span class="err">5</span> <span class="nf">mov</span>     <span class="nb">rdi</span><span class="p">,</span> <span class="nb">rax</span>
+<span class="err">6</span> <span class="nf">call</span>    <span class="nb">rdx</span>
+</code></pre></div></div>
+
+<p>Notice how the <code class="language-plaintext highlighter-rouge">call</code> to our function is indirect (i.e. calls a function stored in <code class="language-plaintext highlighter-rouge">rdx</code> register instead of a named label).
+Line 2 suggests that the first 8B in memory allocated for our <code class="language-plaintext highlighter-rouge">Triangle</code> object is a pointer to our first virtual function in the virtual table (called a virtual pointer).
+This behavior can be observed by looking at the construction of the <code class="language-plaintext highlighter-rouge">Triangle</code> constructor:</p>
+
+<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">Triangle:</span><span class="p">:</span><span class="nf">Triangle</span><span class="p">()</span> <span class="p">[</span><span class="nv">base</span> <span class="nv">object</span> <span class="nv">constructor</span><span class="p">]:</span>
+<span class="c1">; 1   push    rbp</span>
+<span class="c1">; 2   mov     rbp, rsp</span>
+<span class="c1">; 3   sub     rsp, 16</span>
+<span class="c1">; 4   mov     QWORD PTR [rbp-8], rdi</span>
+<span class="c1">; 5   mov     rax, QWORD PTR [rbp-8]</span>
+<span class="c1">; 6   mov     rdi, rax</span>
+<span class="c1">; 7   call    Shape::Shape() [base object constructor]</span>
+  <span class="err">8</span>   <span class="nf">mov</span>     <span class="nb">edx</span><span class="p">,</span> <span class="nv">OFFSET</span> <span class="nv">FLAT</span><span class="p">:</span><span class="nv">vtable</span> <span class="nv">for</span> <span class="nv">Triangle</span><span class="o">+</span><span class="mi">16</span>
+  <span class="err">9</span>   <span class="nf">mov</span>     <span class="nb">rax</span><span class="p">,</span> <span class="kt">QWORD</span> <span class="nv">PTR</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">8</span><span class="p">]</span>
+ <span class="err">10</span>   <span class="nf">mov</span>     <span class="kt">QWORD</span> <span class="nv">PTR</span> <span class="p">[</span><span class="nb">rax</span><span class="p">],</span> <span class="nb">rdx</span>
+<span class="c1">;11   nop</span>
+<span class="c1">;12   leave</span>
+<span class="c1">;13   ret</span>
+<span class="c1">;14   .set    Triangle::Triangle() [complete object constructor],Triangle::Triangle() [base object constructor]</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Line 8 shows that we store a pointer to the virtual table into <code class="language-plaintext highlighter-rouge">edx</code> register.</li>
+  <li>Line 9 shows we load <code class="language-plaintext highlighter-rouge">this</code>, the address where our object begins into <code class="language-plaintext highlighter-rouge">rax</code> register</li>
+  <li>Line 10 states that we move the value in register <code class="language-plaintext highlighter-rouge">rdx</code> into where <code class="language-plaintext highlighter-rouge">rax</code> register is pointing into, which is <code class="language-plaintext highlighter-rouge">this</code>, the start of our newly constructed object
+    <ul>
+      <li>recall how the virtual pointer is stored into <code class="language-plaintext highlighter-rouge">edx</code> register but we are now moving the contents of <code class="language-plaintext highlighter-rouge">rdx</code> into <code class="language-plaintext highlighter-rouge">this</code> rather than from <code class="language-plaintext highlighter-rouge">edx</code> register</li>
+      <li><code class="language-plaintext highlighter-rouge">edx</code> register is the 32 bit version of <code class="language-plaintext highlighter-rouge">rdx</code> whereby the upper bits are zeroed</li>
+      <li><strong>TODO:</strong> Figure out why only the vtable address fits in 32 bits</li>
+      <li>AT&amp;T syntax produces: <code class="language-plaintext highlighter-rouge">movl    $vtable for Triangle+16, %edx</code> instead</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>Note:</strong> The location of virtual pointers is compiler-dependent according to <a href="https://stackoverflow.com/questions/2125862/virtual-functions-table-offset">stackoverflow</a></p>
+
+<p>Let’s disect what the virtual pointer points to seeing that it does not point to the start of the virtual table as evident of the 16B offset.</p>
+<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">vtable</span> <span class="nv">for</span> <span class="nv">Triangle</span><span class="p">:</span>
+        <span class="nf">.quad</span>   <span class="mi">0</span>
+        <span class="nf">.quad</span>   <span class="nv">typeinfo</span> <span class="nv">for</span> <span class="nv">Triangle</span>
+        <span class="nf">.quad</span>   <span class="nv">Triangle</span><span class="p">::</span><span class="nv">draw</span><span class="p">()</span>
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Offset</th>
+      <th>Size</th>
+      <th>Content</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>+0</td>
+      <td>8B</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>+8</td>
+      <td>8B</td>
+      <td><a href="https://en.wikipedia.org/wiki/Run-time_type_information">RTTI pointer</a></td>
+    </tr>
+    <tr>
+      <td>+16</td>
+      <td>8B</td>
+      <td><code class="language-plaintext highlighter-rouge">Triangle::draw()</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>A 16B offset points to the first virtual function in the table, <code class="language-plaintext highlighter-rouge">Triangle::draw()</code>, the desired function to invoke. A virtual table is simply a lookup table 
+generated by the compiler to allow us invoke dynamically the desired function.</p>
+
+<p>Suppose we add a new virtual method <code class="language-plaintext highlighter-rouge">erase()</code> to <code class="language-plaintext highlighter-rouge">Triangle</code>, we’ll see the following in our virtual table:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">vtable</span> <span class="k">for</span> <span class="n">Triangle</span><span class="o">:</span>
+        <span class="p">.</span><span class="n">quad</span>   <span class="mi">0</span>
+        <span class="p">.</span><span class="n">quad</span>   <span class="n">typeinfo</span> <span class="k">for</span> <span class="n">Triangle</span>
+        <span class="p">.</span><span class="n">quad</span>   <span class="n">Triangle</span><span class="o">::</span><span class="n">draw</span><span class="p">()</span>
+        <span class="p">.</span><span class="n">quad</span>   <span class="n">Triangle</span><span class="o">::</span><span class="n">erase</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>As pointers are 8B, an offset of 8 bytes from the virtual pointer will point us to <code class="language-plaintext highlighter-rouge">Triangle::erase()</code> as evident from the additional offset during the dynamic dispatch: <code class="language-plaintext highlighter-rouge">add     rax, 8</code></p>
+
+<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">; mov     rax, QWORD PTR [rbp-24]</span>
+<span class="c1">; mov     rax, QWORD PTR [rax]</span>
+<span class="nf">add</span>     <span class="nb">rax</span><span class="p">,</span> <span class="mi">8</span>
+<span class="c1">; mov     rdx, QWORD PTR [rax]</span>
+<span class="c1">; mov     rax, QWORD PTR [rbp-24]</span>
+<span class="c1">; mov     rdi, rax</span>
+<span class="c1">; call    rdx</span>
+</code></pre></div></div>
+
+<p>That will conclude this blog post as we now understand why <code class="language-plaintext highlighter-rouge">virtual</code> keyword is needed, what <code class="language-plaintext highlighter-rouge">virtual</code> pointers are, and how virtual functions are invoked.</p>
+
+<hr />
+
+<h2 id="bonus---issue-with-references">Bonus - Issue With References</h2>
+
+<p>Don’t make <code class="language-plaintext highlighter-rouge">Shape</code>, our base class, as a C++ reference if you want to dynamically dispatch different types of shapes like a Circle with the same <code class="language-plaintext highlighter-rouge">Shape</code> object. 
+Use pointers to ensure <code class="language-plaintext highlighter-rouge">shape</code> rebinds to the correct derived object.</p>
+
+<p>For instance, suppose we introduce a <code class="language-plaintext highlighter-rouge">Circle</code> object and use references instead of pointers</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span><span class="k">class</span> <span class="nc">Shape</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">draw</span><span class="p">()</span> <span class="p">{</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Shape</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">Triangle</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Shape</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="kt">void</span> <span class="n">draw</span><span class="p">()</span> <span class="p">{</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Triangle</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">Circle</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Shape</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="kt">void</span> <span class="n">draw</span><span class="p">()</span> <span class="p">{</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Circle</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">Triangle</span> <span class="n">tri</span><span class="p">;</span>
+    <span class="n">Circle</span> <span class="n">circ</span><span class="p">;</span>
+    <span class="n">Shape</span> <span class="o">&amp;</span><span class="n">shape</span> <span class="o">=</span> <span class="n">tri</span><span class="p">;</span>
+    <span class="n">shape</span><span class="p">.</span><span class="n">draw</span><span class="p">();</span> <span class="c1">//displays Triangle</span>
+
+    <span class="n">shape</span> <span class="o">=</span> <span class="n">circ</span><span class="p">;</span>
+    <span class="n">shape</span><span class="p">.</span><span class="n">draw</span><span class="p">();</span> <span class="c1">//displays Triangle</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Recall that C++ references must always be initialized and therefore a type is binded to references during initialization. i.e. this is a compiler error:</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Shape</span> <span class="o">&amp;</span><span class="n">shape</span><span class="p">;</span>
+<span class="n">shape</span> <span class="o">=</span> <span class="n">tri</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>As C++ references cannot change type after initialization, this is what we call <strong>object slicing</strong> where the extra components from <code class="language-plaintext highlighter-rouge">Circle</code> are sliced away and thus retaining
+only the <code class="language-plaintext highlighter-rouge">Shape</code> subobject.</p>
+
+<p>When we reassign <code class="language-plaintext highlighter-rouge">shape = circ</code>, the reference is not rebinded but instead we see the following invocation:</p>
+
+<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">leaq</span>    <span class="o">-</span><span class="mi">24</span><span class="p">(</span><span class="o">%</span><span class="nb">rbp</span><span class="p">),</span> <span class="o">%</span><span class="nb">rdx</span>
+<span class="nf">movq</span>    <span class="o">-</span><span class="mi">8</span><span class="p">(</span><span class="o">%</span><span class="nb">rbp</span><span class="p">),</span> <span class="o">%</span><span class="nb">rax</span>
+<span class="nf">movq</span>    <span class="o">%</span><span class="nb">rdx</span><span class="p">,</span> <span class="o">%</span><span class="nb">rsi</span>
+<span class="nf">movq</span>    <span class="o">%</span><span class="nb">rax</span><span class="p">,</span> <span class="o">%</span><span class="nb">rdi</span>
+<span class="nf">call</span>    <span class="nv">Shape</span><span class="p">::</span><span class="nv">operator</span><span class="err">=</span><span class="p">(</span><span class="nv">Shape</span> <span class="nv">const</span><span class="o">&amp;</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Specifically, it calls the copy assignment <code class="language-plaintext highlighter-rouge">Shape::operator=(Shape const&amp;)</code> whereby only the <code class="language-plaintext highlighter-rouge">Shape</code> components of the  circle object is copied and hence is object sliced.</p>
+
+<p>Here’s a more clearer example of what happens during object slicing:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span><span class="k">class</span> <span class="nc">Shape</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">virtual</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">draw</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="s">"Shape "</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">Triangle</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Shape</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">draw</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="s">"Triangle "</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">Circle</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Shape</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">draw</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="s">"Circle "</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">Triangle</span> <span class="n">tri</span><span class="p">;</span>
+    <span class="n">Circle</span> <span class="n">circ</span><span class="p">;</span>
+    <span class="n">Shape</span> <span class="o">&amp;</span><span class="n">shape</span> <span class="o">=</span> <span class="n">tri</span><span class="p">;</span>
+    <span class="n">shape</span> <span class="o">=</span> <span class="n">circ</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">shape</span><span class="p">.</span><span class="n">draw</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">shape</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Output:</strong> <code class="language-plaintext highlighter-rouge">Triangle 0</code></p>
+
+<p>Recall that we set <code class="language-plaintext highlighter-rouge">shape = tri</code>, this performs an object slice to <code class="language-plaintext highlighter-rouge">tri</code> to conform to <code class="language-plaintext highlighter-rouge">Shape</code> layout. This explains why <code class="language-plaintext highlighter-rouge">x</code> is zero instead of 1.</p>
+
+
+</div>
+</div>
+
+    </div>
+
+  <footer>
+  <marquee id = "buttons">
+    <a href = "index.html"><img src = "/assets/buttons/button.png"></a>
+    <a href = "index.html"><img src = "/assets/buttons/button2.png"></a>
+    <a href = 'https://neocities.org/'><img src = "/assets/buttons/neocitiesorg.gif"></a>
+    <a href = 'https://www.vim.org/'><img src = "/assets/buttons/vim.gif"></a>
+    <a href = 'https://fedoraproject.org/'><img src = "/assets/buttons/gnu-linux.gif"></a>
+    <a href = "https://fedoraproject.org/"><img src = "/assets/buttons/powered_by_fedora_alt.png"></a>
+  </marquee>
+  <a href = "./feed.xml" alt = "rss"><i class="fa-solid fa-rss"></i></a>
+  <small><a href = "/credits" class = "credits">Credits</a></small>
+</footer>
+
+
+  <button onclick="toTop()" id="top_btn" title="Go to top">Top</button>
+  </body>
+</html>

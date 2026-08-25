@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>The Sign of Char - RANDOM BITS</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/css/syntax_monokai.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="/assets/css/contrast.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/png" href="/assets/site/random-bits-favicon.png">
+    <meta name="og:title" content="Random Bits">
+    <meta name="og:image" content="">
+    <meta name="og:description"
+        content="Random bits of programming, math, and personal thoughts">
+    <meta name="keywords" content="zakuarbor, programming, math, random bits, pikachu">
+    <meta name="description" content="Random bits of programming, math, and personal thoughts">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script charset="utf-8" src="/assets/js/script.js"></script>
+<script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+     loader: {load: ['[tex]/cancel']},
+      TeX: { 
+        equationNumbers: { autoNumber: "all" },
+        packages: {'[+]': ['cancel']}
+      } 
+    }); 
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <!--<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>-->
+  <header>
+    <center>
+      <h1 id = "title"><a href = "/index.html">RANDOM BITS</a><img id = "pikachu-header" src = "/assets/site/flying-pikachu.png"/></h1>
+    A random site by a random clueless human
+    </center>
+    <!--<marquee scrollamount="4">-->
+    <center>
+      <!--<img src = "/assets/gifs/pikachu-run.gif"/>--><p>Random bits of programming, math, and thoughts
+      By a clueless human</p><!-- <img src = "/assets/gifs/pikachu-run.gif"/>-->
+    </center>
+      <!--&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      <img src = "/assets/gifs/pikachu-run.gif"/>Random bits of programming, math, and thoughts
+      By a clueless human <img src = "/assets/gifs/pikachu-run.gif"/>-->
+      <!--</marquee>-->
+
+    <a href="javascript:void(0);" class="hamburger-nav" onclick="toggleMenu()"><i class="fa fa-bars"></i></a>
+    <nav id="header-nav">
+    <center>
+      <a href="/index.html">Home</a>
+      <a href="/micro/"><span style = "letter-spacing: 1px;">µ</span>Blog</a>
+      <a href="/blog/"><span style = "letter-spacing: 1px;">Blog</a>
+      <a href="/link.html">LinkBlog</a>
+      <!--<a href="/math.html">Math</a>-->
+      <a href="/about.html">About</a>
+    </center>
+    </nav>
+</header>
+
+  </head>
+  <body>
+
+    <div id = "wrapper">
+    <div id = "content">
+<div class = "bits">
+  <h1 class = "title">The Sign of Char</h1>
+
+  <div>
+    <p class = "date">January 20, 2025</p>
+    
+    <div class="tags">
+      
+      
+        <a href="/categories/#programming">programming</a>
+        &nbsp;
+      
+        <a href="/categories/#c/c++">c/c++</a>
+        &nbsp;
+      
+        <a href="/categories/#arm">arm</a>
+        &nbsp;
+      
+        <a href="/categories/#blog">blog</a>
+        
+      
+    </div>
+  </div>
+  <blockquote>
+  <p><strong>Note:</strong> This is a follow up post from my <a href="https://randombits.neocities.org/micro/2025/01/char-unsigned">microblog</a></p>
+
+  <p><strong>WARNING:</strong> I am no expert in Assembly. The last and only time I ever wrote assembly was computing the Fibbonacci Sequences 8 years ago for the MIPS architecture</p>
+</blockquote>
+
+<p>The following below has a value that is vague:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> <span class="n">i</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>The issue with the above line is that the value of <code class="language-plaintext highlighter-rouge">i</code> is not immediately obvious as compilers for different architectures could treat this as <code class="language-plaintext highlighter-rouge">signed</code> or <code class="language-plaintext highlighter-rouge">unsigned</code>.
+The signedness of a data type can be simply thought as whether or not there is a dedicated sign bit that indicates whether or not the number is postive or negative.</p>
+
+<h2 id="a-quick-review-of-signedness">A Quick Review of Signedness</h2>
+
+<p>The size of <code class="language-plaintext highlighter-rouge">char</code> is 1 byte as defined in the <a href="https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1256.pdf">C specification (C99 3.7.1)</a> which corresponds to 8 bits. 
+This effectively gives <code class="language-plaintext highlighter-rouge">char</code> the ability to represent 2<sup>8</sup> = 256 values which is more than enough to represent all 128 characters of ASCII and other 
+encodings that slightly extended ASCII to utilize the other remaining unused slots (i.e. ASCII utilizes only maps to 128 values) such as <a href="https://en.wikipedia.org/wiki/JIS_X_0201">JIS X 0201</a>.</p>
+
+<p>There are different ways to represent negative numbers but the most common, at least from what I recall, is that negative numbers are represented using two’s complements.
+From what I read online, it would seem that the advantage of two’s complement is that we can treat operations on the numbers the same regardless if it is negative or 
+positive. This also allows us to not have a concept of negative 0 which would be quite odd to deal with.</p>
+
+<p>Two’s complement is quite simple but it does require you to be familiar with binary since that is how computers represent any piece of data. The most significant bit 
+(the left most bit) represents whether the number is negative or not. If set (i.e. set to 1 or true), then the number is negative and we must apply two’s complement 
+to retrieve the number in decimal.</p>
+
+<p>In our case, let’s look at how <code class="language-plaintext highlighter-rouge">-1</code> is represented using two’s complement: <code class="language-plaintext highlighter-rouge">1111 1111</code> or <code class="language-plaintext highlighter-rouge">0xFF</code></p>
+
+<ol>
+  <li>Invert all bits:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1111 1111 =&gt; 0000 0000
+</code></pre></div>    </div>
+  </li>
+  <li>Add 1:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0000 0000
+0000 0001
+---------
+0000 0001
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>Since the result is a 1 and we know the most significant bit was set (or else we would not have to do 2’s complement), <code class="language-plaintext highlighter-rouge">1111 1111</code> represents <code class="language-plaintext highlighter-rouge">-1</code></p>
+
+<h2 id="signedness-of-char-in-arm">Signedness of Char in ARM</h2>
+
+<p>In Robert Love’s section on “Signedness of Chars” (Chapter 19 - Portability) of his book on the Linux Kernel Development, he notes that on some systems such as in ARM
+would treat <code class="language-plaintext highlighter-rouge">char</code> as <code class="language-plaintext highlighter-rouge">unsigned</code> which goes against the logic of us AMD64 (x86-64) programmers. Effectively, the value of <code class="language-plaintext highlighter-rouge">i</code> will be stored as 255 rather than -1.
+The reason for this is apparently due to performance.</p>
+
+<p>Let’s verify this on my Raspberry Pi 4 machine running Linux:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> <span class="n">i</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">255</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"char is unsigned</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"char is signed</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Result:</strong>  <code class="language-plaintext highlighter-rouge">char is unsigned</code></p>
+
+<p>Let’s examine under the hood (using Godbolt GCC 14.2 with no optimization enabled):</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">i</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="kt">signed</span> <span class="kt">char</span> <span class="n">j</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</code></pre></div></div>
+<p>The corresponding assembly is:</p>
+<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">; unsigned char i = -1;</span>
+<span class="nf">mov</span>	<span class="nv">w0</span><span class="p">,</span> <span class="err">#</span><span class="mh">0xffffffff</span>            	<span class="o">//</span> <span class="err">#</span><span class="o">-</span><span class="mi">1</span>
+<span class="nf">strb</span>	<span class="nv">w0</span><span class="p">,</span> <span class="p">[</span><span class="nb">sp</span><span class="p">,</span> <span class="err">#</span><span class="mi">15</span><span class="p">]</span>
+
+<span class="c1">; signed char j = -1</span>
+<span class="nf">mov</span>	<span class="nv">w0</span><span class="p">,</span> <span class="err">#</span><span class="mh">0xffffffff</span>            	<span class="o">//</span> <span class="err">#</span><span class="o">-</span><span class="mi">1</span>
+<span class="nf">strb</span>	<span class="nv">w0</span><span class="p">,</span> <span class="p">[</span><span class="nb">sp</span><span class="p">,</span> <span class="err">#</span><span class="mi">14</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>As you can observe, both signed and unasigned char results set of instructions to store its value. The differences should be the way the compiler treats each 
+variable such as utilizing the signed or unsigned instructions.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">i</span><span class="o">++</span><span class="p">;</span>
+<span class="n">j</span><span class="o">++</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>The corresponding assembly is:</p>
+<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">; i++</span>
+<span class="nf">ldrb</span>	<span class="nv">w0</span><span class="p">,</span> <span class="p">[</span><span class="nb">sp</span><span class="p">,</span> <span class="err">#</span><span class="mi">15</span><span class="p">]</span> <span class="c1">; w0 = -1 = 255 (treated as unsigned)</span>
+<span class="nf">add</span>	<span class="nv">w0</span><span class="p">,</span> <span class="nv">w0</span><span class="p">,</span> <span class="err">#</span><span class="mh">0x1</span>      <span class="c1">; let's ignore the fact it'll ovevrflow   </span>
+<span class="nf">strb</span>	<span class="nv">w0</span><span class="p">,</span> <span class="p">[</span><span class="nb">sp</span><span class="p">,</span> <span class="err">#</span><span class="mi">15</span><span class="p">]</span>
+
+<span class="c1">;j++</span>
+<span class="nf">ldrsb</span>	<span class="nv">w0</span><span class="p">,</span> <span class="p">[</span><span class="nb">sp</span><span class="p">,</span> <span class="err">#</span><span class="mi">14</span><span class="p">]</span> <span class="c1">; w0 = -1 (treated as signed)</span>
+<span class="nf">and</span>	<span class="nv">w0</span><span class="p">,</span> <span class="nv">w0</span><span class="p">,</span> <span class="err">#</span><span class="mh">0xff</span>
+<span class="nf">add</span>	<span class="nv">w0</span><span class="p">,</span> <span class="nv">w0</span><span class="p">,</span> <span class="err">#</span><span class="mh">0x1</span>
+<span class="nf">and</span>	<span class="nv">w0</span><span class="p">,</span> <span class="nv">w0</span><span class="p">,</span> <span class="err">#</span><span class="mh">0xff</span>
+<span class="nf">strb</span>	<span class="nv">w0</span><span class="p">,</span> <span class="p">[</span><span class="nb">sp</span><span class="p">,</span> <span class="err">#</span><span class="mi">14</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>As we can see, the variable <code class="language-plaintext highlighter-rouge">signed j</code> utilizes <code class="language-plaintext highlighter-rouge">ldrsb</code> instead of <code class="language-plaintext highlighter-rouge">ldrb</code> to load a <strong>signed</strong> byte and generates significatly more instructions than incrementing 
+the <code class="language-plaintext highlighter-rouge">unsigned i</code>.</p>
+
+<p>Let’s focus our attention to <code class="language-plaintext highlighter-rouge">ldr<b>s</b>b</code> which is loading the value (a byte) pointed by sp - 14 which corresponds to 
+the value of <code class="language-plaintext highlighter-rouge">j</code>. <code class="language-plaintext highlighter-rouge">0xFF</code> is 255 if we treat it as unsigned but we must be able to distinguish between the number <code class="language-plaintext highlighter-rouge">255</code> and <code class="language-plaintext highlighter-rouge">-1</code>.
+Recall that <code class="language-plaintext highlighter-rouge">w0</code> is a 32 bit register but we are only loading a single byte which is 8 bits long. 
+This is where the sign extend 
+comes into the story.</p>
+
+<p><code class="language-plaintext highlighter-rouge">ldrb w0, #0xff</code> will look like the following:</p>
+
+<table class="bit-table">
+<tbody>
+    <tr>
+        <th>31</th><th>30</th><th>29</th><th>28</th>
+        <th>27</th><th>26</th><th>25</th><th>24</th>
+        <th>23</th><th>22</th><th>21</th><th>20</th>
+        <th>19</th><th>18</th><th>17</th><th>16</th>
+        <th>15</th><th>14</th><th>13</th><th>12</th>
+        <th>11</th><th>10</th><th>9</th><th>8</th>
+        <th>7</th><th>6</th><th>5</th><th>4</th>
+        <th>3</th><th>2</th><th>1</th><th>0</th></tr>
+    <tr class="bits-row">
+        <td>0</td><td class="">0</td><td class="">0</td><td class="">0</td><td>0</td>
+        <td class="">0</td><td class="">0</td><td class="">0</td><td class=" left-border">0</td><td class="">0</td><td class="">0</td><td class="">0</td><td class=" left-border">0</td><td class="">0</td><td class="">0</td><td class="">0</td><td class=" left-border">0</td><td class="">0</td><td class="">0</td><td class="">0</td><td class=" left-border">0</td><td class="">0</td><td class="">0</td><td class="">0</td><td class="highlight left-border">1</td><td class="highlight">1</td><td class="highlight">1</td><td class="highlight">1</td><td class="highlight left-border">1</td><td class="highlight">1</td><td class="highlight">1</td><td class="highlight right-border">1</td></tr>
+    <tr class="hex-row"><td colspan="4">0</td><td colspan="4">0</td><td colspan="4">0</td><td colspan="4">0</td><td colspan="4">0</td><td colspan="4">0</td><td colspan="4">F</td><td colspan="4">F</td>
+    </tr>
+</tbody>
+</table>
+
+<p>Notice how bits 8-31 are set to 0, this is what we call <strong>zero-extends</strong> whereby the byte value is extended with 0s to obtain a 32-bit word.
+Meanwhile for <code class="language-plaintext highlighter-rouge">ldrsb</code>, it loads the byte and then <code class="language-plaintext highlighter-rouge">sign extend to 32 bits</code> with 1s by setting the upper remaining bits 8-31 to 1:</p>
+
+<table class="bit-table">
+<tbody>
+    <tr>
+        <th>31</th><th>30</th><th>29</th><th>28</th>
+        <th>27</th><th>26</th><th>25</th><th>24</th>
+        <th>23</th><th>22</th><th>21</th><th>20</th>
+        <th>19</th><th>18</th><th>17</th><th>16</th>
+        <th>15</th><th>14</th><th>13</th><th>12</th>
+        <th>11</th><th>10</th><th>9</th><th>8</th>
+        <th>7</th><th>6</th><th>5</th><th>4</th>
+        <th>3</th><th>2</th><th>1</th><th>0</th></tr>
+    <tr class="bits-row">
+        <td class="highlight2">1</td><td class="highlight2">1</td><td class="highlight2">1</td><td class="highlight2">1</td>
+        <td class="highlight2">1</td><td class="highlight2">1</td><td class="highlight2">1</td><td class="highlight2">1</td>
+        <td class="highlight2 left-border">1</td><td class="highlight2">1</td><td class="highlight2">1</td><td class="highlight2">1</td>
+        <td class="highlight2 left-border">1</td><td class="highlight2">1</td><td class="highlight2">1</td><td class="highlight2">1</td>
+        <td class="highlight2 left-border">1</td><td class="highlight2">1</td><td class="highlight2">1</td><td class="highlight2">1</td>
+        <td class="highlight2 left-border">1</td><td class="highlight2">1</td><td class="highlight2">1</td><td class="highlight2">1</td>
+        <td class="highlight left-border">1</td><td class="highlight">1</td><td class="highlight">1</td><td class="highlight">1</td>
+        <td class="highlight left-border">1</td><td class="highlight">1</td><td class="highlight">1</td><td class="highlight right-border">1</td></tr>
+    <tr class="hex-row"><td colspan="4" class="highlight2">F</td><td colspan="4" class="highlight2">F</td><td colspan="4" class="highlight2">F</td><td colspan="4" class="highlight2">F</td><td colspan="4" class="highlight2">F</td><td colspan="4" class="highlight2">F</td><td colspan="4">F</td><td colspan="4">F</td>
+    </tr>
+</tbody>
+</table>
+
+<p>After loading the byte (as signed) to <code class="language-plaintext highlighter-rouge">w0</code>, there are two extra instructions that differs between adding a <strong>signed</strong> and <strong>unsigned</strong> integer:</p>
+<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">and</span>	<span class="nv">w0</span><span class="p">,</span> <span class="nv">w0</span><span class="p">,</span> <span class="err">#</span><span class="mh">0xff</span>
+<span class="nf">add</span>	<span class="nv">w0</span><span class="p">,</span> <span class="nv">w0</span><span class="p">,</span> <span class="err">#</span><span class="mh">0x1</span>
+<span class="nf">and</span>	<span class="nv">w0</span><span class="p">,</span> <span class="nv">w0</span><span class="p">,</span> <span class="err">#</span><span class="mh">0xff</span>
+</code></pre></div></div>
+
+<p>As to why these instructions are necessary is still something that is not clear to me why it is necessary to “truncate” <code class="language-plaintext highlighter-rouge">w0</code> such that 
+all bits after the first 8 are set to 0 (if I understood this correctly). I know we are only interested on adding onto a single byte 
+but I was under the impression that truncation wouldn’t be necessary as we are using <code class="language-plaintext highlighter-rouge">strb</code> to store the result back to memory.
+Of course, I expect these <code class="language-plaintext highlighter-rouge">and</code> instructions to not exist when we tune the optimization. 
+As this is a simple program, I do not think it’s worth the effort to look into this in further details.</p>
+
+<h2 id="unsigned-char-in-other-architectures">Unsigned Char in Other Architectures</h2>
+
+<p>ARM is not the only unique architecture that treats <code class="language-plaintext highlighter-rouge">char</code> as unsigned. <a href="https://trofi.github.io/posts/203-signed-char-or-unsigned-char.html">trofi</a> also did a nice 
+overview of looking at the signedness of other architecture after encountering a bug in <a href="https://bugs.gentoo.org/630698">SQLite</a> whereby SQLite would hang 
+(i.e. be stuck in an infinite loop) on PowerPC architecture. After looking at various architecture, he concluded that ARM, PowerPC, and s390 have unsigned char.</p>
+
+<h2 id="signedness-based-on-os">Signedness based on OS</h2>
+
+<p>The size and range for each data types is not solely based architecture as different OS could impose their own limits as well. On the same architecture, 
+the size of <code class="language-plaintext highlighter-rouge">int</code> does differ between 64-bit Windows and 64-bit Linux (i.e. LP64 v.s. LLP64).</p>
+
+<blockquote>
+  <p>So amongst common 64 bit OSes, there are two different implementations of the sizes of int, long and long long. UNIX-based systems tend to use length of 4/8/8 (in bytes, as returned by sizeof()), whereas Windows uses 4/4/8. In a different terminology, 4/8/8 is called LP64 (long and pointers 64 bit) and 4/4/8 is LLP64 (long long and pointers 64 bit).</p>
+
+  <p><a href="Portable C and long">Portable C and long</a></p>
+</blockquote>
+
+<p><img src="/assets/programming/builds/windows-linux-longint.gif" alt="A gif showing the difference between size of long on Windows and Linux on the same architecture" /></p>
+<p class="caption">The differences between the size of `long int` on Linux and Windows</p>
+
+<p>I do not have a Windows running on ARM processor to know what would be the signedness of <code class="language-plaintext highlighter-rouge">char</code> but as for MacOS, I did manage to ask a random stranger to confirm 
+the signedness. Interestingly, MacOS running on its ARM chips such as the M3 treat <code class="language-plaintext highlighter-rouge">char</code> as <code class="language-plaintext highlighter-rouge">signed</code>. 
+In QNX on ARM, <code class="language-plaintext highlighter-rouge">char</code> is unsigned as I expected, it’s just MacOS being weird. I wonder if there is a technical or historical reason for this. Perhaps this was due 
+to the desire to port x86 code to ARM by emulating portability differences between the two architecture but that’s just speculation on my part.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Therefore to make your code portable, one should ensure to explicitly state whether or not <code class="language-plaintext highlighter-rouge">char</code> is signed or unsigned instead of making assumptions if they know
+their <code class="language-plaintext highlighter-rouge">char</code> will lie outside of 0 to 127. All that the C standard guarantees is that its size is 1 byte.</p>
+
+<hr />
+
+<p><strong>Resources:</strong></p>
+<ul>
+  <li>Linux Kernel Development by Robert Love</li>
+  <li><a href="http://computerscience.chemeketa.edu/armTutorial/Memory/LoadStoreBytes.html">http://computerscience.chemeketa.edu/armTutorial/Memory/LoadStoreBytes.html</a></li>
+  <li><a href="https://developer.arm.com/documentation/102374/0102/Loads-and-stores---zero-and-sign-extension">https://developer.arm.com/documentation/102374/0102/Loads-and-stores—zero-and-sign-extension</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/cpp/cpp/data-type-ranges?view=msvc-170">https://learn.microsoft.com/en-us/cpp/cpp/data-type-ranges?view=msvc-170</a></li>
+  <li><a href="https://abstractexpr.com/2023/04/30/the-anomaly-of-the-char-type-in-c/">https://abstractexpr.com/2023/04/30/the-anomaly-of-the-char-type-in-c/</a></li>
+</ul>
+
+</div>
+</div>
+
+    </div>
+
+  <footer>
+  <marquee id = "buttons">
+    <a href = "index.html"><img src = "/assets/buttons/button.png"></a>
+    <a href = "index.html"><img src = "/assets/buttons/button2.png"></a>
+    <a href = 'https://neocities.org/'><img src = "/assets/buttons/neocitiesorg.gif"></a>
+    <a href = 'https://www.vim.org/'><img src = "/assets/buttons/vim.gif"></a>
+    <a href = 'https://fedoraproject.org/'><img src = "/assets/buttons/gnu-linux.gif"></a>
+    <a href = "https://fedoraproject.org/"><img src = "/assets/buttons/powered_by_fedora_alt.png"></a>
+  </marquee>
+  <a href = "./feed.xml" alt = "rss"><i class="fa-solid fa-rss"></i></a>
+  <small><a href = "/credits" class = "credits">Credits</a></small>
+</footer>
+
+
+  <button onclick="toTop()" id="top_btn" title="Go to top">Top</button>
+  </body>
+</html>

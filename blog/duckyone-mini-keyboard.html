@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>Ducky One 2 Mini - Replace Caps Lock as Function Key - RANDOM BITS</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/css/syntax_monokai.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="/assets/css/contrast.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/png" href="/assets/site/random-bits-favicon.png">
+    <meta name="og:title" content="Random Bits">
+    <meta name="og:image" content="">
+    <meta name="og:description"
+        content="Random bits of programming, math, and personal thoughts">
+    <meta name="keywords" content="zakuarbor, programming, math, random bits, pikachu">
+    <meta name="description" content="Random bits of programming, math, and personal thoughts">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script charset="utf-8" src="/assets/js/script.js"></script>
+<script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+     loader: {load: ['[tex]/cancel']},
+      TeX: { 
+        equationNumbers: { autoNumber: "all" },
+        packages: {'[+]': ['cancel']}
+      } 
+    }); 
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <!--<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>-->
+  <header>
+    <center>
+      <h1 id = "title"><a href = "/index.html">RANDOM BITS</a><img id = "pikachu-header" src = "/assets/site/flying-pikachu.png"/></h1>
+    A random site by a random clueless human
+    </center>
+    <!--<marquee scrollamount="4">-->
+    <center>
+      <!--<img src = "/assets/gifs/pikachu-run.gif"/>--><p>Random bits of programming, math, and thoughts
+      By a clueless human</p><!-- <img src = "/assets/gifs/pikachu-run.gif"/>-->
+    </center>
+      <!--&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      <img src = "/assets/gifs/pikachu-run.gif"/>Random bits of programming, math, and thoughts
+      By a clueless human <img src = "/assets/gifs/pikachu-run.gif"/>-->
+      <!--</marquee>-->
+
+    <a href="javascript:void(0);" class="hamburger-nav" onclick="toggleMenu()"><i class="fa fa-bars"></i></a>
+    <nav id="header-nav">
+    <center>
+      <a href="/index.html">Home</a>
+      <a href="/micro/"><span style = "letter-spacing: 1px;">µ</span>Blog</a>
+      <a href="/blog/"><span style = "letter-spacing: 1px;">Blog</a>
+      <a href="/link.html">LinkBlog</a>
+      <!--<a href="/math.html">Math</a>-->
+      <a href="/about.html">About</a>
+    </center>
+    </nav>
+</header>
+
+  </head>
+  <body>
+
+    <div id = "wrapper">
+    <div id = "content">
+<div class = "bits">
+  <h1 class = "title">Ducky One 2 Mini - Replace Caps Lock as Function Key</h1>
+
+  <div>
+    <p class = "date">February 21, 2022</p>
+    
+    <div class="tags">
+      
+      
+        <a href="/categories/#keyboard">keyboard</a>
+        &nbsp;
+      
+        <a href="/categories/#blog">blog</a>
+        
+      
+    </div>
+  </div>
+  <p><img src="/assets/personal/ducky-keyboard.jpg" alt="An image of my ducky one 2 mini keyboard with stencil filter" /></p>
+
+<p>Last month I got interested trying out a 60% keyboard which is a keyboard that does not have a numpad, Function keys, navigation keys (i.e. page up), and arrow keys. 
+During my research, I found the Ducky One 2 Mini is one of the two best 60% keyboard for Linux users.</p>
+
+<p>To utilize the stripped out keys such as the arrow keys, users need to press the function key which is inconveniently on the right side of the keyboard. This makes it 
+extremely uncomfortable to use the arrow keys (ijkl keys) which I use very frequently when I write. Proposed solutions I found online were unsatisfactory as they were 
+not for DKON2061ST model which I have. Proposed solutions online state that you could use the dip switches to have the <code class="language-plaintext highlighter-rouge">Caps Lock</code> act as the function key.</p>
+
+<p>Luckily the manufacturer has a decent user manual on their site which explains how. 
+According to the <a href="https://duckychannel.net/download/user_manual/2020/Ducky_Mecha_One2mini_2061ST_usermanual.pdf">manual</a> on page 36, to replace the <code class="language-plaintext highlighter-rouge">Caps Lock</code> key 
+as the function key, you first need to press <code class="language-plaintext highlighter-rouge">fn+alt+k</code> for a few seconds. Then you press the <code class="language-plaintext highlighter-rouge">ESC, L_Ctrl, L_Win, L_Alt, R_Alt, R_Win, Fn, R_Ctrl, and Caps lock keys</code> 
+will all light up. Then tap the <code class="language-plaintext highlighter-rouge">Caps Lock</code> once to set the function key to <code class="language-plaintext highlighter-rouge">Caps Lock</code>. Press <code class="language-plaintext highlighter-rouge">ESC</code> to exit the programming mode.</p>
+
+<p>Now that your <code class="language-plaintext highlighter-rouge">Caps Lock</code> key acts a function key, if you want to use the caps lock functionality, you will need to press <code class="language-plaintext highlighter-rouge">caps lock + tab</code> (not at the same time). 
+I accidentally found out about this when I tried to write the backtick which is <code class="language-plaintext highlighter-rouge">CAPS LOCK + ESC</code> but pressed <code class="language-plaintext highlighter-rouge">tab</code> instead of <code class="language-plaintext highlighter-rouge">ESC</code>.</p>
+
+<p><strong>Note [2021-03-25]:</strong> It came to my attention that you will require the latest firmware for this feature to work</p>
+
+<p><strong>Note:</strong> I dislike how the arrow keys do not follow VIM bindings so I get confused whenever I write on any applications that have vim bindings enabled</p>
+
+<p><strong>Note:</strong> The cover image is an image of my keyboard but with sketch filter which I found out existed today</p>
+
+
+</div>
+</div>
+
+    </div>
+
+  <footer>
+  <marquee id = "buttons">
+    <a href = "index.html"><img src = "/assets/buttons/button.png"></a>
+    <a href = "index.html"><img src = "/assets/buttons/button2.png"></a>
+    <a href = 'https://neocities.org/'><img src = "/assets/buttons/neocitiesorg.gif"></a>
+    <a href = 'https://www.vim.org/'><img src = "/assets/buttons/vim.gif"></a>
+    <a href = 'https://fedoraproject.org/'><img src = "/assets/buttons/gnu-linux.gif"></a>
+    <a href = "https://fedoraproject.org/"><img src = "/assets/buttons/powered_by_fedora_alt.png"></a>
+  </marquee>
+  <a href = "./feed.xml" alt = "rss"><i class="fa-solid fa-rss"></i></a>
+  <small><a href = "/credits" class = "credits">Credits</a></small>
+</footer>
+
+
+  <button onclick="toTop()" id="top_btn" title="Go to top">Top</button>
+  </body>
+</html>

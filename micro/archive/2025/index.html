@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>µBlog Archive - RANDOM BITS</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/css/syntax_monokai.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="/assets/css/contrast.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/png" href="/assets/site/random-bits-favicon.png">
+    <meta name="og:title" content="Random Bits">
+    <meta name="og:image" content="">
+    <meta name="og:description"
+        content="Random bits of programming, math, and personal thoughts">
+    <meta name="keywords" content="zakuarbor, programming, math, random bits, pikachu">
+    <meta name="description" content="Random bits of programming, math, and personal thoughts">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script charset="utf-8" src="/assets/js/script.js"></script>
+<script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+     loader: {load: ['[tex]/cancel']},
+      TeX: { 
+        equationNumbers: { autoNumber: "all" },
+        packages: {'[+]': ['cancel']}
+      } 
+    }); 
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <!--<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>-->
+  <header>
+    <center>
+      <h1 id = "title"><a href = "/index.html">RANDOM BITS</a><img id = "pikachu-header" src = "/assets/site/flying-pikachu.png"/></h1>
+    A random site by a random clueless human
+    </center>
+    <!--<marquee scrollamount="4">-->
+    <center>
+      <!--<img src = "/assets/gifs/pikachu-run.gif"/>--><p>Random bits of programming, math, and thoughts
+      By a clueless human</p><!-- <img src = "/assets/gifs/pikachu-run.gif"/>-->
+    </center>
+      <!--&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      <img src = "/assets/gifs/pikachu-run.gif"/>Random bits of programming, math, and thoughts
+      By a clueless human <img src = "/assets/gifs/pikachu-run.gif"/>-->
+      <!--</marquee>-->
+
+    <a href="javascript:void(0);" class="hamburger-nav" onclick="toggleMenu()"><i class="fa fa-bars"></i></a>
+    <nav id="header-nav">
+    <center>
+      <a href="/index.html">Home</a>
+      <a href="/micro/"><span style = "letter-spacing: 1px;">µ</span>Blog</a>
+      <a href="/blog/"><span style = "letter-spacing: 1px;">Blog</a>
+      <a href="/link.html">LinkBlog</a>
+      <!--<a href="/math.html">Math</a>-->
+      <a href="/about.html">About</a>
+    </center>
+    </nav>
+</header>
+
+  </head>
+  <body>
+
+    <div id = "wrapper">
+    <div id = "content">
+  
+
+
+<h1>µBlog Archive (2025)</h1>
+
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/micro/2025/12/crlf-png">The Unintended Consequence of Replacing CRLF (\r\n) to LF (\n) on PNG Images</a></h1>
+<div>
+<p class = "date">December 11, 2025</p>
+<div class="tags">
+
+<a href="/categories/#micro">micro</a>
+&nbsp;
+
+<a href="/categories/#encoding">encoding</a>
+
+
+</div>
+Today there was a PR at work that tried to address the issue of engineers submitting code with DOS (Window) end of line (EOL) to the codebase. Background (Skip if you are a Programmer) \r and \n are what we call control characters, non-printable characters that have effects to data and devices. For instance, \a will ring a bell, \n (line feed) will cause the cursor to go to the next line and \r (carriage return) causes the cursor to return to the first character in the same line. DOS (Microsoft’s text-based OS) uses \r\n to indicate an end of...
+<p><a href="/micro/2025/12/crlf-png">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/micro/2025/11/pokemon-braille">Braille in Pokémon Sapphire and Ruby Game and Manga</a></h1>
+<div>
+<p class = "date">November 23, 2025</p>
+<div class="tags">
+
+<a href="/categories/#micro">micro</a>
+&nbsp;
+
+<a href="/categories/#braille">braille</a>
+
+
+</div>
+Pokémon Crystal was the first to introduce symbols or glyphs for players to decode according to my research. [1] Thankfully the Unknowns ressemble the English or the latin alphabet so the task to decode the ruins was feasible for children. However, in generation III, in the Hoenn region, decoding the ruins has gotten much more tricker with their use of Braille. Braille is for the blind and the visual impaired and therefore would likely not be able to play the game. So the task of decoding the ruins would be a great challenge. Reading the manga, Pokémon: La Grande Aventure...
+<p><a href="/micro/2025/11/pokemon-braille">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/micro/2025/11/firefox-video-decode">Firefox - MP4 Cannot be Decoded</a></h1>
+<div>
+<p class = "date">November 21, 2025</p>
+<div class="tags">
+
+<a href="/categories/#micro">micro</a>
+&nbsp;
+
+<a href="/categories/#firefox">firefox</a>
+
+
+</div>
+One constant issue I have with Firefox is the instability of playing videos outside of Youtube. Often when watching anime online, I would often encounter issues where skipping even a second would cause the video to stop playing. Hence why I have mention in my FAQ that I use Brave, a privacy-focused chromium browser, to stream anime. While making my gallery featuring retro tech on neocities, I encountered a similar issue. Firefox was unable to loop a MP4 video I uploaded. Though Brave unsurprisingly could. The simple solution to the problem was to convert the MP4 video into webm, an...
+<p><a href="/micro/2025/11/firefox-video-decode">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/micro/2025/11/gallery-tech">Anime and Manga Tech Gallery</a></h1>
+<div>
+<p class = "date">November 18, 2025</p>
+<div class="tags">
+
+<a href="/categories/#micro">micro</a>
+
+
+</div>
+For years, I always wanted to create a webpage with a collection of images from manga and anime that featured code or computers. I did amass a large collection but loss many of them over the years and the ones I do still have, I no longer remember where it is from. You can view the galllery under /galllery Watching Patlabor Movie 3 (ya I know it’s not good), I decided to start a new collection from scratch. Here are some notable snippets: The movie was released in 2002, around the year my family got our first set of desktops...
+<p><a href="/micro/2025/11/gallery-tech">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/micro/2025/11/f43-roap">Fedora 43: Random Request to Access Macbook Pro Microphone</a></h1>
+<div>
+<p class = "date">November 18, 2025</p>
+<div class="tags">
+
+<a href="/categories/#micro">micro</a>
+
+
+</div>
+Fedora 43 was released in October 28 and my only gripe against this update is their inclusion of ROAP, some feature to connect to Apple devices. It was honestly annoying because my microphone would stop working once the video platform demands if I wish to connect to someone’s Macbook nearby. And this happens often during classes so I often had to re-enter the room to resolve my microphone issue. Within my audio settings in the quick access menu on the top right of GNOME Desktop shows various Apple devices that can be used for audio output: It is not clear...
+<p><a href="/micro/2025/11/f43-roap">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/micro/2025/11/rand-photos">Random Photos</a></h1>
+<div>
+<p class = "date">November 14, 2025</p>
+<div class="tags">
+
+<a href="/categories/#micro">micro</a>
+
+
+</div>
+Nothing technical, just some random photos I took that I found on my phone. It snowed recently in the city I currently moved into. Though it quickly melted. It’s definitely a lot warmer here compared to where I am from. Disassembling my laptop because I spilled coffee over it … nothing got damaged thankfully. Though if any components got damaged, it would be easy to repair (#Framework). Reminds me how I once destroyed my Lenovo P50 workstation years ago … the company did not give me an expensive laptop after that incident. While I don’t use my pull-up bar as...
+<p><a href="/micro/2025/11/rand-photos">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/micro/2025/11/exec-script-elf">How Linux Executes Executable Scripts</a></h1>
+<div>
+<p class = "date">November  8, 2025</p>
+<div class="tags">
+
+<a href="/categories/#micro">micro</a>
+&nbsp;
+
+<a href="/categories/#linux">linux</a>
+&nbsp;
+
+<a href="/categories/#C/C++">C/C++</a>
+
+
+</div>
+One is traditionally taught that when running an executable (a file with execute permission), the shell will fork() itself and have the child process replace itself using execve(). One winter a few years back, I random question popped in my head: Who determines whether a file is a script or an executable and where in the code does this logic lie in? Recall to invoke a script or any non-ELF executables such as Python and Bash script, one needs to specify the path to the interpreter using the shebang directive (#!) such as #!/usr/bin/bash or #!/usr/bin/python I was unsure whether...
+<p><a href="/micro/2025/11/exec-script-elf">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/micro/2025/10/hangul-unicode">Hangul - Unicode Visualiser</a></h1>
+<div>
+<p class = "date">October 31, 2025</p>
+<div class="tags">
+
+<a href="/categories/#micro">micro</a>
+&nbsp;
+
+<a href="/categories/#utf">utf</a>
+&nbsp;
+
+<a href="/categories/#unicode">unicode</a>
+
+
+</div>
+Inspired by the best video I have encountered on Unicode, I was inspired to create a visualiser of how unicode represents Hangul, the Korean writing system, that was covered in the video. Link to visualiser: https://zakuarbor.codeberg.page/unicode/hangul/ It is fascinating how one can represent all 11,172 possible combination so elegantly. The visualiser allows one to determine the codepoint of any Korean syllabic blocks. For those unfamiliar with the language, Korean is made up of 19 consonants (자음) and 21 vowels (모음) though some sources may say there are 24 basic letters (Jamo). The number does differ depending on how you count...
+<p><a href="/micro/2025/10/hangul-unicode">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/micro/2025/10/best-unicode-video">UTF-8 Explained Simply - The Best Video on UTF-8</a></h1>
+<div>
+<p class = "date">October  6, 2025</p>
+<div class="tags">
+
+<a href="/categories/#micro">micro</a>
+&nbsp;
+
+<a href="/categories/#utf">utf</a>
+&nbsp;
+
+<a href="/categories/#unicode">unicode</a>
+
+
+</div>
+Video: UTF-8, Explained Simply Channel: @nicbarkeragain (Nic Barker) This is the best explanation I have found on UTF-8 thus far. I previously said UTF-8 is Brilliant was the cleanest explanation I’ve seen on this subject, well that was shortly beaten on October 2 2025. There are a few reasons why I love this video: Builds up the need for unicode via history and how the 8th bit on ASCII could be used as parity bit Interoperability How Unicode-8 is backward compatible - old ASCII format works with new decoder a brief history of how UTF-16 came to existence How Unicode-8...
+<p><a href="/micro/2025/10/best-unicode-video">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/micro/2025/10/old-hirigana">Render Archaic Hirigana</a></h1>
+<div>
+<p class = "date">October  6, 2025</p>
+<div class="tags">
+
+<a href="/categories/#micro">micro</a>
+&nbsp;
+
+<a href="/categories/#utf">utf</a>
+&nbsp;
+
+<a href="/categories/#unicode">unicode</a>
+
+
+</div>
+What does does U+1B002 look like on your screen? 𛀂 Did it look like some some unicode box inscribing the unicode value? That is because your system lacks the typefont to render the unicode. If you visit the following wikipedia page on 変体仮名, you’ll likely notice the following: Instead of: To resolve this, essentially install the true type font *.ttf file from BabelStone Credits to the following article as it outlines much clearly how to install the font: A Beginner’s Guide to Inputting Historical Kana: Installing a Font for “Hentaigana”. I instead went through the harder route before reading this...
+<p><a href="/micro/2025/10/old-hirigana">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/micro/2025/10/migration-codeberg">Migrating Away Github: One Small Step To Migrate Away From US BigTech</a></h1>
+<div>
+<p class = "date">October  3, 2025</p>
+<div class="tags">
+
+<a href="/categories/#micro">micro</a>
+
+
+</div>
+As title suggests, I no longer actively use Github as my personal Git hosting service. This does not mean I have abandoned Github entirely as I still visit the site and use it regularly for work. For a while, the code for this site, my blog, and my personal side projects have been hosted on Codeberg, a non-profit German organization that hosts their servers in Europe. Similar to my migration from Wordpress to Github, none of my content have been deleted but rather has been archived for data preservation and to prevent link rot. I originally discovered and created my...
+<p><a href="/micro/2025/10/migration-codeberg">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/micro/2025/10/gdb-bindump">Binary Dump via GDB</a></h1>
+<div>
+<p class = "date">October  2, 2025</p>
+<div class="tags">
+
+<a href="/categories/#micro">micro</a>
+&nbsp;
+
+<a href="/categories/#gdb">gdb</a>
+&nbsp;
+
+<a href="/categories/#hex">hex</a>
+
+
+</div>
+Recently at work, I’ve been relying on a very handy tool on GDB called dump memory to dump the contents of any contiguous range of memory. I first came aware of this tool from a stackoverflow answer that a coworker linked as each of us had a need to dump the contents of memory copied from the GPU to the host memory for our respective tickets. Syntax: dump memory &lt;filename&gt; &lt;starting address&gt; &lt;ending address&gt; For instance, dump memory vectorData.bin 0x7ffff2d96010 0x7ffff53bba10 or suppose you have a vector vec, you could dump the contents of the vector via: dump memory vectorData.bin...
+<p><a href="/micro/2025/10/gdb-bindump">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/micro/2025/08/gundam-jisx">Gundam With Decent Portrayal of Code</a></h1>
+<div>
+<p class = "date">August 27, 2025</p>
+<div class="tags">
+
+<a href="/categories/#micro">micro</a>
+
+
+</div>
+Years ago I encountered a Reddit post asking us redditors to rate a piece of code shown in Mobile Suit Gundam 0083: Stardust Memory. This led to an interesting discussion and analysis of the code from a few redditors, particularly the analysis from gralamin who disected the code revealing a few interesting aspects of the code such as the potential architecture, OS, and purpose of the code. Based on the release date of the anime along with the provided code, we can infer the following: Code is written for x86-16-bit DOS based on the use of far pointers reference to...
+<p><a href="/micro/2025/08/gundam-jisx">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/micro/2025/07/enum-switch">The Issue With Default in Switch Statements with Enums</a></h1>
+<div>
+<p class = "date">July  4, 2025</p>
+<div class="tags">
+
+<a href="/categories/#micro">micro</a>
+&nbsp;
+
+<a href="/categories/#c/c++">c/c++</a>
+
+
+</div>
+Reading the coding standards at a company I recently joined revealed to me the issue with default label within the switch statement and why it’s prohibitted when its being used to enumerate through an enum. default label is convenient to handle any edge cases and it’s often used to handle errors. However, when working with enums, it is often the case that the prpogrammer intends to handle all possible values in the enum and would turn on -Wswitch or -Werror=switch. Let’s suppose I have an enum to represent the different suite in a deck of cards: enum Suit { Diamonds,...
+<p><a href="/micro/2025/07/enum-switch">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/micro/2025/05/2025-update">2025 Update</a></h1>
+<div>
+<p class = "date">May 24, 2025</p>
+<div class="tags">
+
+<a href="/categories/#micro">micro</a>
+
+
+</div>
+Website Since the last last update when I decided to revive my neocities website, there has been a lot more activities. Unfortunately, due to low motivation and laziness, I have not been able to finish a number of blogs and microblogs … There are definitely a number of topics I want to explore but I am in a slump and need to make some changes in how I manage my time … to be more productive. I’ve been reading less blogs and articles so the LinkBlog is starting to look bare … Academic Studies Previously I mention that I lost...
+<p><a href="/micro/2025/05/2025-update">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/micro/2025/05/dynamic-icons">DuoLingo Dynamic Icons on Android</a></h1>
+<div>
+<p class = "date">May  6, 2025</p>
+<div class="tags">
+
+<a href="/categories/#micro">micro</a>
+&nbsp;
+
+<a href="/categories/#android">android</a>
+
+
+</div>
+Recently, I have been noticing that the icons for Duolingo changes throughout the day depending whether if I have done my daily exercise: Originally I thought this feature is called adaptive icons due to its name but it is not. In Android Development, there is a file that contains information about your app such as the permissions, minimum device versions, name of the app and etc in the AndroidManifest.xml. This file also includes the icon to use for the app if provided. Apparently there is something called activity-alias provides more flexibility and allows you to enter the same activity (i.e....
+<p><a href="/micro/2025/05/dynamic-icons">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/micro/2025/04/sqrt">Behavior of Square Roots When x is between 0 and 1</a></h1>
+<div>
+<p class = "date">April 14, 2025</p>
+<div class="tags">
+
+<a href="/categories/#micro">micro</a>
+&nbsp;
+
+<a href="/categories/#math">math</a>
+
+
+</div>
+Small numbers between 0-1 has always stumped me as it’s behaviors seemed unintuitive. For instance: $0.5^2 = 0.5 \cdot 0.5 = 0.25$ $\sqrt{0.5} \approx 0.707106781$ which implies for $x \in (0,1)$: $x^2 \lt x$ $\sqrt{x} \gt x$ I can rationalize in my head the first example by transforming the problem $x^2$ from an abstract equation into a more concrete word problem: What is half of a half Half is 50% and a half of 50% is 25%. While suffice enough to convince my brain, this lacks sufficient rigor in Mathematics. So let’s go through the proof a bit more formally...
+<p><a href="/micro/2025/04/sqrt">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/micro/2025/04/trump-epsilon-tarrif-calc">4 is less than 0 apparently according to US Trade Representative</a></h1>
+<div>
+<p class = "date">April  8, 2025</p>
+<div class="tags">
+
+<a href="/categories/#micro">micro</a>
+&nbsp;
+
+<a href="/categories/#math">math</a>
+
+
+</div>
+Note: After publishing the post, turns out $\epsilon &lt; 0$ could be correct, but $\epsilon$ should have been -4 instead. A friend shared with me the recent and infamous Math equation that has trade and economic experts scratching their head: \[\Delta \tau_i = \frac{x_i - m_i}{\epsilon \varphi m_i}\] I am not going to discuss about poltics nor my opinions about the use of this equation. Nor will I discuss about the equation itslef, there’s plenty of journalists, economists, and mathematicians who could comment more on this. I will instead be talking about a contradiction that appears in their website taken...
+<p><a href="/micro/2025/04/trump-epsilon-tarrif-calc">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/micro/2025/03/row-col-tlb-cache">Row Major v.s Column Major: A look into Spatial Locality, TLB and Cache Misses</a></h1>
+<div>
+<p class = "date">March 16, 2025</p>
+<div class="tags">
+
+<a href="/categories/#micro">micro</a>
+&nbsp;
+
+<a href="/categories/#c/c++">c/c++</a>
+
+
+</div>
+Memory is often the bottleneck of programs. When writing programs, it is important to consider how data is structured based on their data accesses patterns. A classic example is accessing a matrix via row or column major i.e. going through a matrix by row or by column order. Theory: Accessing a matrix by row-major will benefit from spatial locality as the next few elements will be accessed in the subsequent iterations and thus benefit from cacheline populating the next few elements on each cache miss. As column-major accesses elements that are spread apart, it will not benefit from the cache...
+<p><a href="/micro/2025/03/row-col-tlb-cache">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/micro/2025/03/matrix-multi-bits-size">The Bit Size of the Resulting Matrix</a></h1>
+<div>
+<p class = "date">March  7, 2025</p>
+<div class="tags">
+
+<a href="/categories/#micro">micro</a>
+&nbsp;
+
+<a href="/categories/#c/c++">c/c++</a>
+
+
+</div>
+Recently I have started reading Performance Analysis and Tuning, and a passage made me ponder more time than I would like to admit: Intel’s AMX extension, supported in server processors since 2023, multiplies 8-bit matrices of shape 16x64 and 64x16, accumulating into a 32-bit 16x16 matrix. If you understand how matrix multiplication works, it is obvious as to why two non-square matrices results in a square matrix and also why 16x64 matrix must be multiplied by some matrix that has 64 rows. However, what my brain was stuck on was why the entries in the resulting matrix had to be...
+<p><a href="/micro/2025/03/matrix-multi-bits-size">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/micro/2025/02/aarch64-qemu-user">Compiling and Running AARCH64 on x86-64 (amd64)</a></h1>
+<div>
+<p class = "date">March  7, 2025</p>
+<div class="tags">
+
+<a href="/categories/#micro">micro</a>
+&nbsp;
+
+<a href="/categories/#c/c++">c/c++</a>
+&nbsp;
+
+<a href="/categories/#linux">linux</a>
+&nbsp;
+
+<a href="/categories/#gcc">gcc</a>
+
+
+</div>
+Cross-compilation targetting ARM architecture does not work out of the box in Fedora unlike what it would seem on Ubuntu based on what I am reading online. Nonetheless, the unofficial packages for arm gnu gcc toolchain works like a charm unlike the official toolchain. While I have not done my due diligence to figure out how to cross-compile on Fedora properly as I tried to cross-compile right before I sleep. My impatience and tiredness, I did not manage to get the official toolchain from the ARM website to work as it would complain about missing some libraries. I cannot recall...
+<p><a href="/micro/2025/02/aarch64-qemu-user">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/micro/2025/02/kthread-top">top and Kernel Threads</a></h1>
+<div>
+<p class = "date">February 23, 2025</p>
+<div class="tags">
+
+<a href="/categories/#micro">micro</a>
+&nbsp;
+
+<a href="/categories/#c/c++">c/c++</a>
+&nbsp;
+
+<a href="/categories/#linux">linux</a>
+
+
+</div>
+Recently I was curious if I am able to trick top to believing a userspace thread is a kernel thread. For context, a kernel thread unlike its userspace counterpart only exists within kernel space and lacks an address space. Another note is that kernel threads can only be created by other kernel threads such as forking the kthreadd process (PID 2) via the clone() systemcall. Kernel threads can be spawned by struct task_struct *kthread_create(). There are lots of kernel threads running on your system such as ksoftirq or kworker threads as seen below: $ ps -ef | grep -E "UID|\["...
+<p><a href="/micro/2025/02/kthread-top">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/micro/2025/02/this-asm">this: the implicit parameter in OOP</a></h1>
+<div>
+<p class = "date">February 11, 2025</p>
+<div class="tags">
+
+<a href="/categories/#micro">micro</a>
+&nbsp;
+
+<a href="/categories/#c/c++">c/c++</a>
+&nbsp;
+
+<a href="/categories/#asm">asm</a>
+
+
+</div>
+I was recently reminded that the variable this is an implicit parameter passed to all methods in OOP such as C++. We can observe this by comparing a regular function vs a method belonging to some class: #include &lt;iostream&gt; void greet() { std::cout &lt;&lt; "Hello World\n"; } class Human { public: void greet() { std::cout &lt;&lt; "Hello World\n"; } }; int main() { greet(); Human human = Human(); human.greet(); } Output: $ g++ test.C $ ./a.out Hello World Hello World Both may output the same thing but under the hood is where the differences shines. Note: I’ll be only showing...
+<p><a href="/micro/2025/02/this-asm">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/micro/2025/01/sw-ver-num">Software Version Numbers are Weird</a></h1>
+<div>
+<p class = "date">January 28, 2025</p>
+<div class="tags">
+
+<a href="/categories/#micro">micro</a>
+
+
+</div>
+It is important to install the right version of dependencies, libraries, and software to obtain the desired features. I made the mistake twice thus far where I misunderstood version numbers. Here’s my grievances about how software versioning system works in how incompatible it is to the numbering system we use in our everyday life. Let’s look at FileUtils.readFileToString(): public static String readFileToString(File file, Charset charsetName) throws IOException Reads the contents of a file into a String. The file is always closed. Parameters: file - the file to read, must not be null charsetName - the name of the requested charset,...
+<p><a href="/micro/2025/01/sw-ver-num">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/micro/2025/01/vim-view">view is just vim in disguise</a></h1>
+<div>
+<p class = "date">January 23, 2025</p>
+<div class="tags">
+
+<a href="/categories/#micro">micro</a>
+&nbsp;
+
+<a href="/categories/#unix">unix</a>
+&nbsp;
+
+<a href="/categories/#utilities">utilities</a>
+&nbsp;
+
+<a href="/categories/#vim">vim</a>
+
+
+</div>
+I recently found out accidentally at work that vim and view were the same thing when I happened to be editing a file on view instead of my beloved vim editor. This should not come to any surprise, plenty of documentation will state this such as the man pages: $ man -Leng view VIM(1) General Commands Manual VIM(1) NAME vim - Vi IMproved, a programmer's text editor SYNOPSIS vim [options] [file ..] vim [options] - vim [options] -t tag vim [options] -q [errorfile] ex gex view gvim gview vimx evim eview rvim rview rgvim rgview Interestingly, the man pages for...
+<p><a href="/micro/2025/01/vim-view">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/micro/2025/01/browser-firefox-chrome">My Thoughts on the Future of Firefox</a></h1>
+<div>
+<p class = "date">January 21, 2025</p>
+<div class="tags">
+
+<a href="/categories/#micro">micro</a>
+&nbsp;
+
+<a href="/categories/#web">web</a>
+&nbsp;
+
+<a href="/categories/#firefox">firefox</a>
+
+
+</div>
+I’ve been a Firefox user since around 2010 and tried various “flavors” of Firefox including Aurora (a build of Firefox version that is more stable than their nightly builds but less polished than the Beta version) and Firefox Developer Edition. I was also hyped for the short-lived FirefoxOS where I developed my first “mobile” application. Back around 2011, the marketshare between Internet Explorer, Firefox, and Chrome were relatively shared among each other having a 36.6%, 28.5%, and 20.2% of the market respectively by July 2011. Google Chrome was the new kid in town that reportedly was faster than Internet Explorer...
+<p><a href="/micro/2025/01/browser-firefox-chrome">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/micro/2025/01/char-unsigned">The Sign of Char in ARM</a></h1>
+<div>
+<p class = "date">January 15, 2025</p>
+<div class="tags">
+
+<a href="/categories/#micro">micro</a>
+&nbsp;
+
+<a href="/categories/#arm">arm</a>
+&nbsp;
+
+<a href="/categories/#C/C++">C/C++</a>
+
+
+</div>
+The following below has a value that is vague: char i = -1; The issue with the above line is that the value of i is not immediately obvious as compilers for different architectures could treat this as signed or unsigned. The signedness of a data type can be simply thought as whether or not there is a dedicated sign bit that indicates whether or not the number is postive or negative. In Robert Love’s section on “Signedness of Chars” (Chapter 19 - Portability) of his book on the Linux Kernel Development, he notes that on some systems such as...
+<p><a href="/micro/2025/01/char-unsigned">Read More...</a></p>
+</div>
+</div>
+
+<hr class = "bits-hr">
+<div class = "bits">
+  <h1 class = "title"><a href="/micro/2024/10/qnx-raspberrypi-first-look">A First Glance at Raspberry Pi 4 Running QNX 8.0</a></h1>
+<div>
+<p class = "date">January  4, 2025</p>
+<div class="tags">
+
+<a href="/categories/#micro">micro</a>
+&nbsp;
+
+<a href="/categories/#qnx">qnx</a>
+&nbsp;
+
+<a href="/categories/#rpi">rpi</a>
+
+
+</div>
+I recently purchased a Raspberry 4 to fiddle around with QNX 8.0 that has been released to the educational and hobbyist community. Being frustrated with running QNX virtual machines via Momentics, I decided it would be much easier to run QNX on a piece of hardware. I do not know if it is just me but I find my newly created virtual machines have a one-time boot lifespan. Any attempts to restart my virtual machines via Momentics, I would have network related issues and therefore would not be able to connect to the virtual machine remotely. This means that I...
+<p><a href="/micro/2024/10/qnx-raspberrypi-first-look">Read More...</a></p>
+</div>
+</div>
+
+
+
+</div>
+
+    </div>
+
+  <footer>
+  <marquee id = "buttons">
+    <a href = "index.html"><img src = "/assets/buttons/button.png"></a>
+    <a href = "index.html"><img src = "/assets/buttons/button2.png"></a>
+    <a href = 'https://neocities.org/'><img src = "/assets/buttons/neocitiesorg.gif"></a>
+    <a href = 'https://www.vim.org/'><img src = "/assets/buttons/vim.gif"></a>
+    <a href = 'https://fedoraproject.org/'><img src = "/assets/buttons/gnu-linux.gif"></a>
+    <a href = "https://fedoraproject.org/"><img src = "/assets/buttons/powered_by_fedora_alt.png"></a>
+  </marquee>
+  <a href = "./feed.xml" alt = "rss"><i class="fa-solid fa-rss"></i></a>
+  <small><a href = "/credits" class = "credits">Credits</a></small>
+</footer>
+
+
+  <button onclick="toTop()" id="top_btn" title="Go to top">Top</button>
+  </body>
+</html>

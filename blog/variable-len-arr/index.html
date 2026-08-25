@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>C Programming - Variable Length Array (VLA) - RANDOM BITS</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/css/syntax_monokai.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="/assets/css/contrast.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/png" href="/assets/site/random-bits-favicon.png">
+    <meta name="og:title" content="Random Bits">
+    <meta name="og:image" content="">
+    <meta name="og:description"
+        content="Random bits of programming, math, and personal thoughts">
+    <meta name="keywords" content="zakuarbor, programming, math, random bits, pikachu">
+    <meta name="description" content="Random bits of programming, math, and personal thoughts">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script charset="utf-8" src="/assets/js/script.js"></script>
+<script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+     loader: {load: ['[tex]/cancel']},
+      TeX: { 
+        equationNumbers: { autoNumber: "all" },
+        packages: {'[+]': ['cancel']}
+      } 
+    }); 
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <!--<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>-->
+  <header>
+    <center>
+      <h1 id = "title"><a href = "/index.html">RANDOM BITS</a><img id = "pikachu-header" src = "/assets/site/flying-pikachu.png"/></h1>
+    A random site by a random clueless human
+    </center>
+    <!--<marquee scrollamount="4">-->
+    <center>
+      <!--<img src = "/assets/gifs/pikachu-run.gif"/>--><p>Random bits of programming, math, and thoughts
+      By a clueless human</p><!-- <img src = "/assets/gifs/pikachu-run.gif"/>-->
+    </center>
+      <!--&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      <img src = "/assets/gifs/pikachu-run.gif"/>Random bits of programming, math, and thoughts
+      By a clueless human <img src = "/assets/gifs/pikachu-run.gif"/>-->
+      <!--</marquee>-->
+
+    <a href="javascript:void(0);" class="hamburger-nav" onclick="toggleMenu()"><i class="fa fa-bars"></i></a>
+    <nav id="header-nav">
+    <center>
+      <a href="/index.html">Home</a>
+      <a href="/micro/"><span style = "letter-spacing: 1px;">µ</span>Blog</a>
+      <a href="/blog/"><span style = "letter-spacing: 1px;">Blog</a>
+      <a href="/link.html">LinkBlog</a>
+      <!--<a href="/math.html">Math</a>-->
+      <a href="/about.html">About</a>
+    </center>
+    </nav>
+</header>
+
+  </head>
+  <body>
+
+    <div id = "wrapper">
+    <div id = "content">
+<div class = "bits">
+  <h1 class = "title">C Programming - Variable Length Array (VLA)</h1>
+
+  <div>
+    <p class = "date">June 29, 2021</p>
+    
+    <div class="tags">
+      
+      
+        <a href="/categories/#programming">programming</a>
+        &nbsp;
+      
+        <a href="/categories/#c/c++">c/c++</a>
+        &nbsp;
+      
+        <a href="/categories/#blog">blog</a>
+        
+      
+    </div>
+  </div>
+  <p>I always thought it was not possible to create a “dynamic” array in C without the use of <code class="language-plaintext highlighter-rouge">malloc</code> till 
+recently where I was introduced to <strong>variable length arrays (VLA)</strong>. Although the use of “dynamic” is 
+a poor choice, the ability to allocate an array at runtime based on a variable whose value is not known 
+till runtime came as a shock to me.</p>
+
+<p>Variable length arrays came into C starting from C99 standard (hence not suitable for anyone who 
+works on legacy systems or in projects that follow C89 standard). To illustrate, here’s an example of 
+an array whose size is dependent on the variable <code class="language-plaintext highlighter-rouge">len</code> whose value is set to any number passed as an 
+argument to the program. Hence, the length of the array is not known during compiled time.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kt">size_t</span> <span class="n">len</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+	<span class="kt">int</span> <span class="n">arr</span><span class="p">[</span><span class="n">len</span><span class="p">];</span>
+	<span class="c1">//do stuff</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>If I were to compile this using <code class="language-plaintext highlighter-rouge">gcc</code> using purely <code class="language-plaintext highlighter-rouge">c89</code> standard (<strong>note:</strong> use <code class="language-plaintext highlighter-rouge">-pedantic</code> option 
+to turn off gcc extensions because gcc adds vla support by default), I would get the following error:</p>
+<pre class="highlight">$ gcc -std=c89 --pedantic /tmp/test.c
+<b>/tmp/test.c:</b> In function ‘<b>main</b>’:
+<b>/tmp/test.c:6:9:</b> <font color="#AD7FA8"><b>warning: </b></font>ISO C90 forbids variable length array ‘<b>arr</b>’ [<font color="#AD7FA8"><b>-Wvla</b></font>]
+         <font color="#AD7FA8"><b>int</b></font> arr[len];
+         <font color="#AD7FA8"><b>^~~</b></font>
+<b>/tmp/test.c:6:9:</b> <font color="#AD7FA8"><b>warning: </b></font>ISO C90 forbids mixed declarations and code [<font color="#AD7FA8"><b>-Wdeclaration-after-statement</b></font>]
+</pre>
+
+<p>However, if I were to run this using c99, I would have no issue at all:</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>gcc <span class="nt">-std</span><span class="o">=</span>c99 <span class="nt">--pedantic</span> /tmp/test.c
+<span class="nv">$ </span><span class="nb">echo</span> <span class="nv">$?</span>
+0
+</code></pre></div></div>
+
+<p>This behavior stumbled me. It went against my understanding of the language. It 
+would seem that I am not alone in this. Another <a href="http://ayekat.ch/blog/vla">blogger ayekat</a> 
+was also very puzzled by this behavior:</p>
+<blockquote>
+  <p>In my case it was a simple sequence of code that I thought would never compile — and the moment it did, I feared I would not be on good terms with it
+- <a href="http://ayekat.ch/blog/vla">ayekat</a></p>
+</blockquote>
+
+<hr />
+
+<h2 id="what-are-vla">What are VLA</h2>
+
+<hr />
+
+<p>VLA (Variable Length Arrays) were introduced in C99 as a way to introduce the 
+ability to create arrays whose length is determined at runtime. VLA in C 
+has automatic storage duration on the stack.</p>
+
+<p>The main benefit I can think of why anyone would want to use VLA is for its 
+convenience and readability. For instance, representing matrices 
+becomes simple:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">matrix</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="n">n</span><span class="p">];</span>
+</code></pre></div></div>
+
+<p>Unlike the traditional way to allocate memory whose size is determined during 
+runtime using <code class="language-plaintext highlighter-rouge">malloc</code>, VLA allocates memory in the stack.
+According to what I read on the internet, people claim that the overhead with VLA 
+is less compared to allocating in the heap. Allocating memory in the stack does 
+not require the OS to find a free contiguous block of memory in the heap. 
+However, this claim is questionable and maybe true only in certain scenarios. 
+I would need more time and fiddling to know for certain. I’ll trust in the 
+words of Linus that VLA isn’t efficient.</p>
+
+<p>VLA has automatic storage duration meaning the scope of a VLA is limited to 
+its local scope. Effectively making VLA only great as a short lived and for 
+small arrays only. You cannot allocate a big array with VLA as the data lives 
+in the stack and can easily be filled up.</p>
+
+<p>VLA is similar to <code class="language-plaintext highlighter-rouge">alloca</code> where both concepts allocate memory in the stack. 
+As <a href="http://ayekat.ch/blog/vla">blogger ayekat</a> 
+mentions on his take on VLA, using VLA is very risky because the behavior of 
+<code class="language-plaintext highlighter-rouge">alloca</code> is undefined if allocation causes a stack overflow and VLA will behave in a similar manner.</p>
+
+<pre class="highlight">$ man alloca | grep -A 2 "RETURN VALUE"
+<font color="#C01C28"><b>RETURN VALUE</b></font>
+       The alloca() function returns a pointer to the beginning of the allocated space.  If the allocation causes stack overflow, program behavior is undefined.
+</pre>
+
+<p>For those who are not familiar, a stack overflow not only breaks the program, 
+it may also introduce a backdoor to exploit your system by feeding it malicious 
+input to overwrite sections of memory it should have no access to (look up 
+buffer overflow).</p>
+
+<p>A nice way to create a n x n matrix addressable as <code class="language-plaintext highlighter-rouge">matrix[x][y]</code> as described 
+by someone on <a href="https://stackoverflow.com/a/7326654">stackoverflow</a> is 
+the following:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">size_t</span> <span class="n">n</span><span class="p">;</span>
+<span class="kt">double</span> <span class="p">(</span><span class="o">*</span><span class="n">matrix</span><span class="p">)[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="k">sizeof</span> <span class="o">*</span><span class="n">matrix</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>This is much more preferred than addressing a matrix as <code class="language-plaintext highlighter-rouge">matrix[y*n + x]</code> or 
+allocating a non-contiguous nxn matrix (i.e. each row points to a different 
+section in memory) to achieve the same thing but with performance hits 
+(i.e. cannot utilize cache line and so you would need the CPU to fetch to the 
+memory multiple times).</p>
+
+<p><strong>Note:</strong> VLA and <code class="language-plaintext highlighter-rouge">alloca</code> are different because data created via <code class="language-plaintext highlighter-rouge">alloca</code> are 
+destroyed when the function is terminated. While VLA is local to its scope. 
+So if you were to create a VLA within the loop, it can only be used within the 
+loop itself and nowhere else in the function.</p>
+
+<hr />
+
+<h2 id="should-i-use-vla">Should I use VLA</h2>
+
+<hr />
+
+<p>My first instinct is to say no. There are a few things wrong about VLA, some 
+of which I stated in the previous section.</p>
+
+<ul>
+  <li>VLA is allocated in the stack -&gt; need to ensure the size is small to avoid buffer overflow</li>
+  <li>VLA has automatic storage - &gt; need to ensure array is created in the oldest stack frame as possible to avoid referencing a 
+section of memory that is freed (i.e. want to avoid dangling pointers).</li>
+  <li>portability:
+    <ul>
+      <li>It’s only supported in C99 -&gt; not portable for older systems</li>
+      <li>Optional in C11 meaning it’s up to the compiler’s discretion whether to add support or not</li>
+      <li>MSVC does not have VLA support since it <a href="https://docs.microsoft.com/en-us/cpp/c-language/ansi-conformance?view=msvc-160">conforms to ANSI C standard</a></li>
+    </ul>
+  </li>
+</ul>
+<center>
+<iframe style="width: 100% !important; height: 40vh !important" src="https://godbolt.org/e?readOnly=true#g:!((g:!((g:!((h:codeEditor,i:(fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,source:'%23include+%3Cmap%3E%0A%23include+%3Cstring%3E%0A%23include+%3Ciostream%3E%0A%0Aint+main(void)+%7B%0A++++int+n+%3D+10%3B%0A++++int+arr%5Bn%5D%3B%0A%0A%0A++++return+0%3B%0A%7D'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:55.08679411118436,l:'4',m:100,n:'0',o:'',s:0,t:'0'),(g:!((h:conformance,i:(compilers:!((compilerId:g92,options:''),(compilerId:clang900,options:''),(compilerId:icc191,options:''),(compilerId:vcpp_v19_22_x64,options:'')),editorid:1,langId:c%2B%2B,libs:!()),l:'5',n:'0',o:'Conformance+viewer+(Editor+%231)+4/10',t:'0')),k:44.91320588881564,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4"></iframe>
+<small><b>iframe 1:</b> Using godbolt (Compiler Explorer) to see what Compilers support VLA</small>
+</center>
+
+<ul>
+  <li>VLA aren’t efficient
+    <ul>
+      <li>VLA has a small runtime overhead to determine the size of the array</li>
+      <li>generates more, slower, and fragile code according to Linus Trovalds</li>
+    </ul>
+  </li>
+</ul>
+
+<blockquote>
+  <p>unsigned long key[geo-&gt;keylen];</p>
+
+  <p>(note: skipping some content)</p>
+
+  <p>AND USING VLA’S IS ACTIVELY STUPID! It generates much more code, and
+much <em>slower</em> code (and more fragile code), than just using a fixed
+key size would have done. - <a href="https://lwn.net/Articles/749089/">Linus Trovalds</a></p>
+</blockquote>
+
+<hr />
+
+<h2 id="summary">Summary</h2>
+
+<hr />
+
+<p>Variable Length Array (VLA) allows you to create arrays whose size is determined 
+at runtime but at the cost of runtime overhead and security. VLA 
+is only supported in C99 and not mandatory in C11 meaning VLA is not a portable 
+solution. It is best to avoid using VLA.</p>
+
+<p><strong>sidenote:</strong> I highly encourage you to 
+read <a href="http://ayekat.ch/blog/vla">Ayekat’s take on VLA</a> as it explores something interesting when working 
+with 2D arrays.</p>
+
+
+</div>
+</div>
+
+    </div>
+
+  <footer>
+  <marquee id = "buttons">
+    <a href = "index.html"><img src = "/assets/buttons/button.png"></a>
+    <a href = "index.html"><img src = "/assets/buttons/button2.png"></a>
+    <a href = 'https://neocities.org/'><img src = "/assets/buttons/neocitiesorg.gif"></a>
+    <a href = 'https://www.vim.org/'><img src = "/assets/buttons/vim.gif"></a>
+    <a href = 'https://fedoraproject.org/'><img src = "/assets/buttons/gnu-linux.gif"></a>
+    <a href = "https://fedoraproject.org/"><img src = "/assets/buttons/powered_by_fedora_alt.png"></a>
+  </marquee>
+  <a href = "./feed.xml" alt = "rss"><i class="fa-solid fa-rss"></i></a>
+  <small><a href = "/credits" class = "credits">Credits</a></small>
+</footer>
+
+
+  <button onclick="toTop()" id="top_btn" title="Go to top">Top</button>
+  </body>
+</html>

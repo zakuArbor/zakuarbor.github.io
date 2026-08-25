@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>Digital Signatures on PDF - RANDOM BITS</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/css/syntax_monokai.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="/assets/css/contrast.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/png" href="/assets/site/random-bits-favicon.png">
+    <meta name="og:title" content="Random Bits">
+    <meta name="og:image" content="">
+    <meta name="og:description"
+        content="Random bits of programming, math, and personal thoughts">
+    <meta name="keywords" content="zakuarbor, programming, math, random bits, pikachu">
+    <meta name="description" content="Random bits of programming, math, and personal thoughts">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script charset="utf-8" src="/assets/js/script.js"></script>
+<script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+     loader: {load: ['[tex]/cancel']},
+      TeX: { 
+        equationNumbers: { autoNumber: "all" },
+        packages: {'[+]': ['cancel']}
+      } 
+    }); 
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <!--<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>-->
+  <header>
+    <center>
+      <h1 id = "title"><a href = "/index.html">RANDOM BITS</a><img id = "pikachu-header" src = "/assets/site/flying-pikachu.png"/></h1>
+    A random site by a random clueless human
+    </center>
+    <!--<marquee scrollamount="4">-->
+    <center>
+      <!--<img src = "/assets/gifs/pikachu-run.gif"/>--><p>Random bits of programming, math, and thoughts
+      By a clueless human</p><!-- <img src = "/assets/gifs/pikachu-run.gif"/>-->
+    </center>
+      <!--&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      <img src = "/assets/gifs/pikachu-run.gif"/>Random bits of programming, math, and thoughts
+      By a clueless human <img src = "/assets/gifs/pikachu-run.gif"/>-->
+      <!--</marquee>-->
+
+    <a href="javascript:void(0);" class="hamburger-nav" onclick="toggleMenu()"><i class="fa fa-bars"></i></a>
+    <nav id="header-nav">
+    <center>
+      <a href="/index.html">Home</a>
+      <a href="/micro/"><span style = "letter-spacing: 1px;">µ</span>Blog</a>
+      <a href="/blog/"><span style = "letter-spacing: 1px;">Blog</a>
+      <a href="/link.html">LinkBlog</a>
+      <!--<a href="/math.html">Math</a>-->
+      <a href="/about.html">About</a>
+    </center>
+    </nav>
+</header>
+
+  </head>
+  <body>
+
+    <div id = "wrapper">
+    <div id = "content">
+<div class = "bits">
+  <h1 class = "title">Digital Signatures on PDF</h1>
+
+  <div>
+    <p class = "date">January 17, 2026</p>
+    
+    <div class="tags">
+      
+      
+        <a href="/categories/#micro">micro</a>
+        &nbsp;
+      
+        <a href="/categories/#signing">signing</a>
+        
+      
+    </div>
+  </div>
+  <p>Recently, I came across my electronic copy of my degree and transcript from several years ago and remembered that it was digitally signed. I previously wrote about how to 
+<a href="/micro/2024/10/email-gpg-signature">manually verify an email signature</a> 2 years ago and that got me thinking: how can I verify the signature of my degree and transcript to ensure that 
+it has indeed come from my University and that it has not been tampered with?</p>
+
+<p><strong>Note:</strong> When referring to digital signatures on PDFs, I am not referring to e-signature i.e. the graphical signature that contains a name for instance</p>
+
+<p>For this post, I won’t go through the nitty-gritty details this time, and instead I will use various tools to do the 
+work for me. In other words, this is not a technical post on digital signatures.</p>
+
+<p>Digitally signing documents is a brilliant idea and I wished the France Éducation International did the same for their DELF/DALF exams. They used to email PDF results of the exam till the embassy 
+and the organization later directed test centers to prioritize in-person collection:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>We used to send result certificates by email in PDF format. However, the management center at the Embassy and France Éducation international 
+now recommend prioritizing in-person collection to reduce the risk of fraud, which has become increasingly common.
+</code></pre></div></div>
+
+<p>Here’s a sample of attached to my transcript:</p>
+
+<p><img src="/assets/micro/misc/transcript-sign-note.png" alt="Note attched to my academic transcript" /></p>
+
+<p>Each page also contains a footer indicating that the document is digitall signed and encourages recipients to perform their due diligence to ensure that it has not been tampered with:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>THIS TRANSCRIPT HAS BEEN DIGITALLY SIGNED AND CERTIFIED BY THE UNIVERSITY OF &lt;REDACTED&gt;. IT IS OFFICIAL
+ONLY WHEN BEARING THE BLUE RIBBON SYMBOL, AND A VALID CERTIFICATE ISSUED BY GLOBALSIGN CA FOR ADOBE
+</code></pre></div></div>
+
+<p>While I do not own a Windows machine to verify this through Adobe Reader, I can confirm that the document indeed display a Blue Ribbon on my work laptop. For us Linux users, there are plenty of 
+options to verify the authenticity of the document itself such as through GNOME Document Reader or via command-line using <code class="language-plaintext highlighter-rouge">pdfsig</code>:</p>
+
+<p><img src="/assets/micro/misc/gnome-document-transcript-sign.png" alt="Note attched to my academic transcript" /></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>pdfsig etranscript.pdf 
+Digital Signature Info of: etranscript.pdf
+Signature <span class="c">#1:</span>
+  - Signature Field Name: ParchmentSig1
+  - Signer Certificate Common Name: Parchment
+  - Signer full Distinguished Name: <span class="nv">CN</span><span class="o">=</span>Parchment,O<span class="o">=</span>Parchment,C<span class="o">=</span>US
+  - Signing Time: Nov 28 2020 03:50:29
+  - Signing Hash Algorithm: SHA-256
+  - Signature Type: adbe.pkcs7.detached
+  - Signed Ranges: <span class="o">[</span>0 - 185], <span class="o">[</span>16571 - 699076]
+  - Not total document signed
+  - Signature Validation: Signature is Valid.
+  - Certificate Validation: Certificate has Expired
+</code></pre></div></div>
+
+<p>However, unlike GNOME Document Reader, <code class="language-plaintext highlighter-rouge">pdfsig</code> does not provide when the certificate expires and whichi certificate authority issued it.
+To obtain ths information, we’ll first need to extract the signature from the PDF using the <code class="language-plaintext highlighter-rouge">-dump</code> option:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>pdfsig <span class="nt">-dump</span> ./etranscript.pdf 
+Dumping Signatures: 1
+Signature <span class="c">#0 (8192 bytes) =&gt; etranscript.pdf.sig0</span>
+</code></pre></div></div>
+
+<p>We can then use <code class="language-plaintext highlighter-rouge">openssl</code> to extract the certificates from the signature:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>openssl pkcs7 <span class="nt">-inform</span> DER <span class="nt">-in</span> ./etranscript.pdf.sig0 <span class="nt">-print_certs</span> <span class="nt">-out</span> etranscript.pem
+<span class="nv">$ </span>openssl x509 <span class="nt">-in</span> ./etranscript.pem <span class="nt">-text</span> <span class="nt">-noout</span>
+Certificate:
+    Data:
+        Version: 3 <span class="o">(</span>0x2<span class="o">)</span>
+        Serial Number:
+            01:c8:e8:dc:70:35:44:3b:ae:fd:f2:20:5a:ce:09:b6
+        Signature Algorithm: sha256WithRSAEncryption
+        Issuer: <span class="nv">C</span><span class="o">=</span>BE, <span class="nv">O</span><span class="o">=</span>GlobalSign nv-sa, <span class="nv">CN</span><span class="o">=</span>GlobalSign CA 5 <span class="k">for </span>AATL
+        Validity
+            Not Before: Nov 28 08:45:21 2020 GMT
+            Not After : Nov 28 08:55:21 2020 GMT
+        Subject: <span class="nv">C</span><span class="o">=</span>US, <span class="nv">O</span><span class="o">=</span>Parchment, <span class="nv">CN</span><span class="o">=</span>Parchment
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: <span class="o">(</span>2048 bit<span class="o">)</span>
+                Modulus:
+</code></pre></div></div>
+
+<p><strong>Side Note:</strong> One can observe that the certificate expired within 10 minutes of its creation and is likely to minimize potential risks.</p>
+
+<hr />
+
+<h2 id="verify-hash-of-document">Verify Hash of Document</h2>
+
+<p>From what I can observe, it seems to be a common practice to embed the digital signature directly into the document itself rather than storing it in a separate file as shown below:</p>
+
+<p><img src="/assets/micro/misc/pdf-embed-signature.png" alt="Embedding certificate and signature into the PDF" /></p>
+<p class="caption">Extracted from <a href="https://web.archive.org/web/20170214124258/http://www.adobe.com/devnet-docs/acrobatetk/tools/DigSig/Acrobat_DigitalSignatures_in_PDF.pdf">Adobe - Digital Signatures in a PDF</a></p>
+
+<p>During the signing process of a document, the software would typically hashes the document before using the private key of the signer to encrypt the resulting hash value. This signature is then typically 
+provided to the receipient as a separate file. However, for PDFs that embed the signature, the process will differ as the software cannot simply just hash the document and then insert the signature 
+arbitrarily as doing so will break the document.</p>
+
+<p>Instead, the PDF will reserve a region within the document to fit the signature value and some related metadata. One such piece of metadata is the <code class="language-plaintext highlighter-rouge">ByteRange</code> entry to indicate exactly 
+what portions of the file is included in the signature as seen in the image above. For instance, <code class="language-plaintext highlighter-rouge">ByteRange [0, 840,  960, 240]</code> are simply pairs of offset in the file and its length:</p>
+<ul>
+  <li>0, 840:
+    <ul>
+      <li><strong>Offset:</strong> 0B</li>
+      <li><strong>Size:</strong> 840B</li>
+    </ul>
+  </li>
+  <li>960, 240:
+    <ul>
+      <li><strong>Offset:</strong> 960B</li>
+      <li><strong>Size:</strong> 240B</li>
+    </ul>
+  </li>
+</ul>
+
+<p>In the case of my transcript, <code class="language-plaintext highlighter-rouge">pdfsig</code> indicated that the signed ranges of the document was: <code class="language-plaintext highlighter-rouge">[0 - 185], [16571 - 699076]</code>.
+To verify the signature indeed only verifies the indicated bytes, we can reconstruct the signed content by removing the embedded signature byte:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Remove the digital signature from the document
+dd if=./etranscript.pdf of=chunk1.bin bs=1 count=185 skip=0
+dd if=etranscript.pdf of=chunk2.bin bs=1 count=682505 skip=16571
+cat chunk1.bin chunk2.bin &gt; reduced-transcript2.bin
+</code></pre></div></div>
+
+<p>We can now observe that approximately 37KiB of data corresponding to the unsigned content has been removed:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ stat --printf="%s\n" etranscript.pdf
+720645
+$ stat --printf="%s\n" reduced-etranscript2.bin
+682690
+</code></pre></div></div>
+
+<p>At this point, we should be able to verify the signature against the reconstructed document:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ openssl cms -verify -binary -inform DER -in etranscript.pdf.sig0 -content reduced-etranscript2.bin -noverify | grep success
+CMS Verification successful
+</code></pre></div></div>
+
+<p>This confirms that the signature has indeed only signed the specified bytes indicated by <code class="language-plaintext highlighter-rouge">pdfsig</code>. An important note, this does not 
+establish trust in the signer as I omitted the certificate check.</p>
+
+<hr />
+
+<p>Based on my research and consulting with friends who have graduated, it does not seem my current institution will provide me a digitally signed degree when I graduate in 2027. This news is a bit disappointing 
+but unsurprising. Digital signed PDFs is still a piece of technology that is not widespread unlike HTTPS with their SSL/TLS certificates to cryptographically prove the identity of the webserver. With the 
+widespread impersonnation and fraud, I think it would be of the best interest for my institution to adopt digitally signing documents. They instead encourage employers to use AuraData which 
+<code class="language-plaintext highlighter-rouge">provides risk prevention in the number one area of résumé fraud, post-secondary/professional designation education claims</code>.</p>
+
+<p>Any employer should do their due diligence and it would seem AuraData is a solution that works as evident from <a href="https://governingcouncil.utoronto.ca/sites/default/files/university-tribunal-decisions/Case%20989.pdf">Case 989</a> 
+where AuraData were mentioned in this tribunal case. In this case, a student fraudently stated they graduated from the university in 2015 and provided a copy of their degree which AuraData tried to verify. 
+As this was supposedly issued in 2015, this was before <a href="https://www.parchment.com/en-ca/blog/the-first-digital-diplomas-issued-and-the-registrars-and-learners-who-love-them/">Parchment Award existed</a> and therefore 
+probably before the university in question adopted this system. Therefore as the document was not digitally signed, AuraData did their due diligence and contacted the university to verify the student’s graduation 
+which one can do on the university’s website for a fee of $22.50 CAD. But if the document had been digitally signed, AuraData would have been able to report to their client that the document is authentic. Of course, 
+this is not foolproof if the student shares the same name as another graduate.</p>
+
+<p>Interestingly enough, I have not been provided digitally signed letters of my employment status at the various companies I have worked at. I guess we got to make our security background check providers do 
+something. On another note, it seems like Parchment, the provider of my digitally signed transcript and degree, is not a well liked platform. I got no complaints as I was given the two for free of charge 
+upon graduation along with the physical copy of my degree and I never had to use their service to submit my documents to other institutions.</p>
+
+
+</div>
+</div>
+
+    </div>
+
+  <footer>
+  <marquee id = "buttons">
+    <a href = "index.html"><img src = "/assets/buttons/button.png"></a>
+    <a href = "index.html"><img src = "/assets/buttons/button2.png"></a>
+    <a href = 'https://neocities.org/'><img src = "/assets/buttons/neocitiesorg.gif"></a>
+    <a href = 'https://www.vim.org/'><img src = "/assets/buttons/vim.gif"></a>
+    <a href = 'https://fedoraproject.org/'><img src = "/assets/buttons/gnu-linux.gif"></a>
+    <a href = "https://fedoraproject.org/"><img src = "/assets/buttons/powered_by_fedora_alt.png"></a>
+  </marquee>
+  <a href = "./feed.xml" alt = "rss"><i class="fa-solid fa-rss"></i></a>
+  <small><a href = "/credits" class = "credits">Credits</a></small>
+</footer>
+
+
+  <button onclick="toTop()" id="top_btn" title="Go to top">Top</button>
+  </body>
+</html>

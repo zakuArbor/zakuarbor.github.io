@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>Floating Point Numbers are Not Associative - RANDOM BITS</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/css/syntax_monokai.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="/assets/css/contrast.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/png" href="/assets/site/random-bits-favicon.png">
+    <meta name="og:title" content="Random Bits">
+    <meta name="og:image" content="">
+    <meta name="og:description"
+        content="Random bits of programming, math, and personal thoughts">
+    <meta name="keywords" content="zakuarbor, programming, math, random bits, pikachu">
+    <meta name="description" content="Random bits of programming, math, and personal thoughts">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script charset="utf-8" src="/assets/js/script.js"></script>
+<script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+     loader: {load: ['[tex]/cancel']},
+      TeX: { 
+        equationNumbers: { autoNumber: "all" },
+        packages: {'[+]': ['cancel']}
+      } 
+    }); 
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <!--<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>-->
+  <header>
+    <center>
+      <h1 id = "title"><a href = "/index.html">RANDOM BITS</a><img id = "pikachu-header" src = "/assets/site/flying-pikachu.png"/></h1>
+    A random site by a random clueless human
+    </center>
+    <!--<marquee scrollamount="4">-->
+    <center>
+      <!--<img src = "/assets/gifs/pikachu-run.gif"/>--><p>Random bits of programming, math, and thoughts
+      By a clueless human</p><!-- <img src = "/assets/gifs/pikachu-run.gif"/>-->
+    </center>
+      <!--&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      <img src = "/assets/gifs/pikachu-run.gif"/>Random bits of programming, math, and thoughts
+      By a clueless human <img src = "/assets/gifs/pikachu-run.gif"/>-->
+      <!--</marquee>-->
+
+    <a href="javascript:void(0);" class="hamburger-nav" onclick="toggleMenu()"><i class="fa fa-bars"></i></a>
+    <nav id="header-nav">
+    <center>
+      <a href="/index.html">Home</a>
+      <a href="/micro/"><span style = "letter-spacing: 1px;">µ</span>Blog</a>
+      <a href="/blog/"><span style = "letter-spacing: 1px;">Blog</a>
+      <a href="/link.html">LinkBlog</a>
+      <!--<a href="/math.html">Math</a>-->
+      <a href="/about.html">About</a>
+    </center>
+    </nav>
+</header>
+
+  </head>
+  <body>
+
+    <div id = "wrapper">
+    <div id = "content">
+<div class = "bits">
+  <h1 class = "title">Floating Point Numbers are Not Associative</h1>
+
+  <div>
+    <p class = "date">March 15, 2026</p>
+    
+    <div class="tags">
+      
+      
+        <a href="/categories/#micro">micro</a>
+        &nbsp;
+      
+        <a href="/categories/#math">math</a>
+        &nbsp;
+      
+        <a href="/categories/#programming">programming</a>
+        &nbsp;
+      
+        <a href="/categories/#fp">fp</a>
+        
+      
+    </div>
+  </div>
+  <p>Every programmer who has worked with floats know that representing fractions is weird. For instance, suppose we multiply 3.14 with 10. In Python, we get to see some ridiculous number:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="mf">3.14</span><span class="o">*</span><span class="mi">10</span>
+<span class="mf">31.400000000000002</span>
+</code></pre></div></div>
+
+<p>This behavior can have unintended consequences which I intend to explore a bit more in a future blog. But what I want to share with you is about the additive associativity property that we come 
+to love when operating on a <a href="https://en.wikipedia.org/wiki/Field_(mathematics)">field</a>. For simplicity’s sake, especially for those without Mathematical background, think of the field as the number system 
+you use in your everyday life that has a set of additive and multiplicative properties that you are already familiar with. Additive Associativity is the property that allows you to regroup operations and thus changing the order of priority to perform the addition such as:</p>
+
+<p>(a + b) + c = a + (b + c)</p>
+
+<p>If something is associative, then this regrouping of priority of operations should not affect the final outcome. At work, I have been attending some classes to learn more about using GPUs to do 
+Mathematical computations. In one of the classes, it came to my attention that floating point numbers are not associative. This fact shocked me. We were working on computing the Basel problem 
+which is a famous mathematical problem taught to first years:</p>
+
+\[\lim_{N \to \infty} \sum_{n=1}^{N} \frac{1}{n^2} = \frac{\pi^2}{6} \notag\]
+
+<p>In Mathematics, infinite series are not <a href="https://en.wikipedia.org/wiki/Riemann_series_theorem">associative</a> but finite series are. For some fixed $N$, I was expecting the order in which we add these 
+numbers would not matter but it apparently does.</p>
+
+<p>To illustrate:</p>
+
+\[{\small
+\begin{align*}
+&amp;\left( \left( \left( \left( \left( \left( \left( \left( \frac{1}{1^2} + \frac{1}{2^2} \right) + \frac{1}{3^2} \right) + \frac{1}{4^2} \right) + \frac{1}{5^2} \right) + \frac{1}{6^2} \right) + \frac{1}{7^2} \right) + \frac{1}{8^2} \right) + \frac{1}{9^2} \right) \\
+&amp;=
+\left( \frac{1}{1^2} + \left( \frac{1}{2^2} + \left( \frac{1}{3^2} + \left( \frac{1}{4^2} + \left( \frac{1}{5^2} + \left( \frac{1}{6^2} + \left( \frac{1}{7^2} + \left( \frac{1}{8^2} + \frac{1}{9^2} \right) \right) \right) \right) \right) \right) \right) \right)
+\end{align*}
+}\]
+
+<p>is what I would expect but this does not appear to be the case as seen in the last digit:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> forward:1.539767731166540<b style="color:red">8</b>
+backward:1.539767731166540<b style="color:red">5</b>
+</code></pre></div></div>
+
+<p>Now one might question which direction is correct or at least more accurate. The most accurate way for this particular example, the basel problem, is to add the numbers in the opposite (backwards) direction 
+due to how starting with a large number like 1 will dominate the subsequent additions and hence lose accuracy as the hardware will round off the smaller terms and eventually deviate from the true 
+sum as the rounding errors accumulate. However, when working on many threads, this can complicate things as one needs to now consider how to reduce the independent terms in such a way that minimises 
+inaccuracy while remain performant. But that’s a topic for another time (I am still researching this).</p>
+
+
+</div>
+</div>
+
+    </div>
+
+  <footer>
+  <marquee id = "buttons">
+    <a href = "index.html"><img src = "/assets/buttons/button.png"></a>
+    <a href = "index.html"><img src = "/assets/buttons/button2.png"></a>
+    <a href = 'https://neocities.org/'><img src = "/assets/buttons/neocitiesorg.gif"></a>
+    <a href = 'https://www.vim.org/'><img src = "/assets/buttons/vim.gif"></a>
+    <a href = 'https://fedoraproject.org/'><img src = "/assets/buttons/gnu-linux.gif"></a>
+    <a href = "https://fedoraproject.org/"><img src = "/assets/buttons/powered_by_fedora_alt.png"></a>
+  </marquee>
+  <a href = "./feed.xml" alt = "rss"><i class="fa-solid fa-rss"></i></a>
+  <small><a href = "/credits" class = "credits">Credits</a></small>
+</footer>
+
+
+  <button onclick="toTop()" id="top_btn" title="Go to top">Top</button>
+  </body>
+</html>

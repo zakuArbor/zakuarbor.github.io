@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>printf - Reordering Arguments using $ - RANDOM BITS</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/css/syntax_monokai.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="/assets/css/contrast.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/png" href="/assets/site/random-bits-favicon.png">
+    <meta name="og:title" content="Random Bits">
+    <meta name="og:image" content="">
+    <meta name="og:description"
+        content="Random bits of programming, math, and personal thoughts">
+    <meta name="keywords" content="zakuarbor, programming, math, random bits, pikachu">
+    <meta name="description" content="Random bits of programming, math, and personal thoughts">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script charset="utf-8" src="/assets/js/script.js"></script>
+<script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+     loader: {load: ['[tex]/cancel']},
+      TeX: { 
+        equationNumbers: { autoNumber: "all" },
+        packages: {'[+]': ['cancel']}
+      } 
+    }); 
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <!--<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>-->
+  <header>
+    <center>
+      <h1 id = "title"><a href = "/index.html">RANDOM BITS</a><img id = "pikachu-header" src = "/assets/site/flying-pikachu.png"/></h1>
+    A random site by a random clueless human
+    </center>
+    <!--<marquee scrollamount="4">-->
+    <center>
+      <!--<img src = "/assets/gifs/pikachu-run.gif"/>--><p>Random bits of programming, math, and thoughts
+      By a clueless human</p><!-- <img src = "/assets/gifs/pikachu-run.gif"/>-->
+    </center>
+      <!--&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      <img src = "/assets/gifs/pikachu-run.gif"/>Random bits of programming, math, and thoughts
+      By a clueless human <img src = "/assets/gifs/pikachu-run.gif"/>-->
+      <!--</marquee>-->
+
+    <a href="javascript:void(0);" class="hamburger-nav" onclick="toggleMenu()"><i class="fa fa-bars"></i></a>
+    <nav id="header-nav">
+    <center>
+      <a href="/index.html">Home</a>
+      <a href="/micro/"><span style = "letter-spacing: 1px;">µ</span>Blog</a>
+      <a href="/blog/"><span style = "letter-spacing: 1px;">Blog</a>
+      <a href="/link.html">LinkBlog</a>
+      <!--<a href="/math.html">Math</a>-->
+      <a href="/about.html">About</a>
+    </center>
+    </nav>
+</header>
+
+  </head>
+  <body>
+
+    <div id = "wrapper">
+    <div id = "content">
+<div class = "bits">
+  <h1 class = "title">printf - Reordering Arguments using $</h1>
+
+  <div>
+    <p class = "date">February 28, 2021</p>
+    
+    <div class="tags">
+      
+      
+        <a href="/categories/#programming">programming</a>
+        &nbsp;
+      
+        <a href="/categories/#c/c++">c/c++</a>
+        &nbsp;
+      
+        <a href="/categories/#blog">blog</a>
+        
+      
+    </div>
+  </div>
+  <p>I was recently watching a video by <a href="https://youtu.be/F6UerHkVdLA?t=435">Live Overflow</a> helping a person troubleshoot a format string exploit through Twitter, and saw something I was very curious about. In the video, the Yotuber poses a 
+question to the person if they could describe how <code class="language-plaintext highlighter-rouge">%2$s</code> prints a string. I have never seen this syntax before. What does the dollar sign (<code class="language-plaintext highlighter-rouge">$</code>) serve in the format string? This got me curious so I went 
+searching on the internet and the man pages to find out.</p>
+
+<p>Turns out <code class="language-plaintext highlighter-rouge">$</code> is from the POSIX extension and does not appear in C99. Its purpose is to display parameters (argument) in different orders. By default, <code class="language-plaintext highlighter-rouge">printf</code> displays the argument in the order you specify them.
+For instance, if we look at the code below, <code class="language-plaintext highlighter-rouge">printf</code> will display <code class="language-plaintext highlighter-rouge">Feb 28 2021</code></p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">printf</span><span class="p">(</span><span class="s">"%s %d %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">,</span> <span class="n">year</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>However, what if we want to change the order of the date to be <code class="language-plaintext highlighter-rouge">year month day</code> instead. One way is to reorder the arguments. This can get very tedious when you have a lot of parameters to reorder so that’s where the dollar sign (<code class="language-plaintext highlighter-rouge">$</code>) comes to play:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">printf</span><span class="p">(</span><span class="s">"%3$d %1$s %2$d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">,</span> <span class="n">year</span><span class="p">);</span>
+</code></pre></div></div>
+<p>The code above achieves the same result as the code below, outputting <code class="language-plaintext highlighter-rouge">2021 Feb 28</code>.</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">printf</span><span class="p">(</span><span class="s">"%d %s %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">);</span>                                    
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="how--format-works">How $ format works</h2>
+
+<p>From the man page and experimenting around, here’s the follow what I learned:</p>
+<ul>
+  <li><strong>Format</strong> <code class="language-plaintext highlighter-rouge">%m$</code> where <strong>m</strong> is the index of the argument list starting from 1
+    <ul>
+      <li><strong>i.e.</strong> <code class="language-plaintext highlighter-rouge">%3$d</code> to denote the 3rd argument in the list</li>
+    </ul>
+  </li>
+  <li>Once the order is explicitly stated using $ style, the order of all conversions in the format string must be included explicitly. Failure to do so will result in a warning if compiled with <code class="language-plaintext highlighter-rouge">-Wall</code> option</li>
+  <li>Gaps cannot exist: All arguments must appear once in the format string. For instance, if arguments 1 &amp; 3 are used, argument 2 must also be used in the string to not raise a warning</li>
+</ul>
+
+<hr />
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">$</code> style in <code class="language-plaintext highlighter-rouge">printf</code> allows programmers to change the order of the arguments easily through the format string. This saves a lot of time and headache of manually reordering all the arguments in <code class="language-plaintext highlighter-rouge">printf</code>.
+Another benefit is to simplify or select what element you wish to see on the stack. For instance, if you want to see the 13th element in the stack, you could simply write <code class="language-plaintext highlighter-rouge">%13$x</code> instead of repeating <code class="language-plaintext highlighter-rouge">%x</code> 13 times.</p>
+
+
+</div>
+</div>
+
+    </div>
+
+  <footer>
+  <marquee id = "buttons">
+    <a href = "index.html"><img src = "/assets/buttons/button.png"></a>
+    <a href = "index.html"><img src = "/assets/buttons/button2.png"></a>
+    <a href = 'https://neocities.org/'><img src = "/assets/buttons/neocitiesorg.gif"></a>
+    <a href = 'https://www.vim.org/'><img src = "/assets/buttons/vim.gif"></a>
+    <a href = 'https://fedoraproject.org/'><img src = "/assets/buttons/gnu-linux.gif"></a>
+    <a href = "https://fedoraproject.org/"><img src = "/assets/buttons/powered_by_fedora_alt.png"></a>
+  </marquee>
+  <a href = "./feed.xml" alt = "rss"><i class="fa-solid fa-rss"></i></a>
+  <small><a href = "/credits" class = "credits">Credits</a></small>
+</footer>
+
+
+  <button onclick="toTop()" id="top_btn" title="Go to top">Top</button>
+  </body>
+</html>
