@@ -1,4 +1,161 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://randombits.ca/feed.xml" rel="self" type="application/atom+xml" /><link href="https://randombits.ca/" rel="alternate" type="text/html" /><updated>2026-08-12T02:08:28-04:00</updated><id>https://randombits.ca/feed.xml</id><title type="html">RANDOM BITS</title><entry><title type="html">MATH2052 - A Commentary on Calculus and Introductory Analysis 2</title><link href="https://randombits.ca/blog/math2052-commentary" rel="alternate" type="text/html" title="MATH2052 - A Commentary on Calculus and Introductory Analysis 2" /><published>2026-06-11T00:00:00-04:00</published><updated>2026-06-11T00:00:00-04:00</updated><id>https://randombits.ca/blog/math2052-commentary</id><content type="html" xml:base="/blog/math2052-commentary"><![CDATA[<p>This is a commentary to the second introductory course to calculus and analysis which I have a <a href="https://randombits.ca/blog/math2052">course review</a> on if you are interested. The content presented below are from winter 
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://randombits.ca/feed.xml" rel="self" type="application/atom+xml" /><link href="https://randombits.ca/" rel="alternate" type="text/html" /><updated>2026-11-22T21:40:17-05:00</updated><id>https://randombits.ca/feed.xml</id><title type="html">RANDOM BITS</title><entry><title type="html">Random Thoughts on Reproducible Builds</title><link href="https://randombits.ca/micro/2026/11/thoughts-reproducible-builds" rel="alternate" type="text/html" title="Random Thoughts on Reproducible Builds" /><published>2026-11-22T00:00:00-05:00</published><updated>2026-11-22T00:00:00-05:00</updated><id>https://randombits.ca/micro/2026/11/thoughts-reproducible-builds</id><content type="html" xml:base="/micro/2026/11/thoughts-reproducible-builds"><![CDATA[<p>Part of a series of mini thoughts I had while looking into Trusted Computing, a topic I am not too familiar with. The topic for today is on reproducible builds that I shared with my class back on September 22.
+Reproducible builds have been on my feed since <a href="https://lwn.net/Articles/985739/">2024</a> and it turns out to be an interesting topic and is a trend within the open source community to ensure 
+security, trust and regulatory compliance. Reproducible builds are <a href="https://reproducible-builds.org/docs/definition/">defined</a> as:</p>
+
+<blockquote>
+  <p>A build is reproducible if given the same source code, build environment and build instructions, any party can recreate bit-by-bit identical copies of all specified artifacts.</p>
+</blockquote>
+
+<p>In other words, a binary that is reproducible provides users with a way to be certain that the software is genuine and has not been tampered with by reproducing the build themselves or 
+by placing their trust in an independent third party to reproduce the build. The ability for others to compile code given the same source code, build environment and build instructions is important 
+for software longevity. Reproducibility pushes developers to create better documentation and tooling.</p>
+
+<p>As a former Build DevOps developer who inherited a legacy blackbox, it astonished me how bad the state of our legacy product was because we could not physically rebuild artifacts 
+without cloning the VM running on the same machines  as before. The lack of expertise and documentation required us to replicate the exact build environment and automation (which contained our build instructions) 
+to even push out a build. Reproducible builds are marketed as a solution for security and compliance but this side effect of enabling others to create the same artifact is powerful.</p>
+
+<p>Of course I am over-exaggerating of the state of the legacy product I worked at in my previous life, it was nonetheless a mess. Anyhow, back to the topic at hand, at the time I shared about reproducible builds, 
+I was contemplating how we could incorporate this idea into trusted computing.</p>
+
+<p>Reproducible builds, at least from what I have seen, are seen through the lens of supply chain attacks and give users a trusted software source (initial integrity) to build on. 
+For instance, if a solution relies on interacting with a crypto library, having the library be reproducible can give us confidence that the library code has not been tampered with. 
+So its hash could be a measurement. The only obvious relevant relation I can think of is to have open source firmware, bootloader, etc. be reproducible so that other manufacturers could rely on the same 
+hash as part of some standardised Reference Integrity Metrics.</p>
+
+<p>There have been efforts by Linux distributions to have the kernel and their packages be reproducible, having achieved 95% or higher reproducibility with Debian having a policy for packages to be 
+reproducibile. The reason I specified firmware and bootloader is because we want our trusted computing base (TCB) to be as small as possible. 
+Yes it would be nice to have reproducible builds on all the libraries relied upon by the OS and critical services, as we do not want to assume trust in the entire OS and its libraries. But if we 
+are able to reproduce the OS, we could be reassured that the OS and its packages have not been tampered with. Though the question of whether we wish to assume trust is a different story, sometimes we have to 
+assume trust depending on what we are working on. In our definition, a component is <strong>trusted</strong> if it behaves in the expected manner for the intended purpose. 
+This still means a component can be considered trusted even if it contains a security flaw. Also recall that reproducible builds do not guarantee the source code is without flaws, it guarantees 
+independent verification that the resulting binary corresponds to the same source code and build environment.</p>
+
+<p>Rather than trusting the entire OS as that could make the TCB too large, we could chain measurements on top of an anchor (root of trust) and verify step by step the individual 
+components (called the chain of trust). Essentially, at each stage, the previous stage will endorse what is to be loaded next.
+With the many different hardware configurations that exist, this would be a challenge as there would be too many different measurements to consider.</p>
+
+<p>On a topic of secure boot and TPMs, TPMs are passive devices that are separate from secure boot. TPMs record measurements of what gets loaded and can attest to these measurements but it never blocks anything.
+Secure boot on the other hand refuses to load any components not signed by a trusted key, verifying the signature of components from the firmware, bootloader, and even potentially 
+up to the kernel modules. Reproducible builds could potentially be used in measurements as one could verify its hashes independently. Secure boot provides provenance (origin) and not 
+reassurance of the contents.</p>
+
+<p>Some random interesting articles about reproducibility, although a bit dated:</p>
+
+<ul>
+  <li><a href="https://dl.acm.org/doi/10.1145/2664243.2664288">Challenges and implications of verifiable builds for security-critical open-source software</a></li>
+  <li><a href="https://xavier2dc.fr/truecrypt-binaries-analysis/">Works on Reproducibility of TrueCrypt on Windows</a></li>
+</ul>]]></content><author><name></name></author><category term="micro" /><summary type="html"><![CDATA[Part of a series of mini thoughts I had while looking into Trusted Computing, a topic I am not too familiar with. The topic for today is on reproducible builds that I shared with my class back on September 22. Reproducible builds have been on my feed since 2024 and it turns out to be an interesting topic and is a trend within the open source community to ensure security, trust and regulatory compliance. Reproducible builds are defined as:]]></summary></entry><entry><title type="html">Québec City Tour: Pictures</title><link href="https://randombits.ca/micro/2026/08/random-quebec-week1" rel="alternate" type="text/html" title="Québec City Tour: Pictures" /><published>2026-08-23T00:00:00-04:00</published><updated>2026-08-23T00:00:00-04:00</updated><id>https://randombits.ca/micro/2026/08/random-quebec-week1</id><content type="html" xml:base="/micro/2026/08/random-quebec-week1"><![CDATA[<p>While I dislike travelling, I decided to take a 3 week vacation to Québec City, mainly to improve my French. At the insistence of German classmate, I decided to make “most” of the vacation and participate 
+in some tourist activities, even if I dislike it. Here are some dumps from my tour thus far:</p>
+
+<p><img src="/assets/micro/quebec/voltigeurs.jpg" alt="Les Voltigeurs de Québec" /></p>
+
+<p>On my way to <a href="https://www.plainesdabraham.ca/">Musée des Plaines d’Abraham</a>, came across <a href="https://www.canada.ca/fr/armee/organisation/2-division-du-canada/les-voltigeurs-de-quebec.html">Les Voltigeurs de Québec</a> 
+which I had no clue was a Military Reserve till I searched it up as I am writing this post. According to the government website, les Voltigeurs de Québec est le plus ancien régiment canadien-français that still exists. However, 
+this unit likely only consists members of the Canadian Force reserves because if I recall correctly, the only French-Canadian regiment active is the Royal 22e Régiment.</p>
+
+<p><img src="/assets/micro/quebec/memorial-list-korea.jpg" alt="List of Canadian soldiers who fell in combat in the Korean and Afghanistan war" /></p>
+
+<p>In the same area held memorials and monuments to honor the soldiers who died in the war. While hard to see with this resolution, the list consists of French names which I assume are Canadian soldiers of 
+the Royal 22e Régiment. As member of the United Nations Armed Forces, Canada has deployed over 26 000 personnels to the war effort where at least 516 personnels lost their lives. Also in the image is 
+the list of soldiers from what I presumed is also part of the Royal 22e Régiment who fell during the Afghanistan War.</p>
+
+<p><img src="/assets/micro/quebec/cannon-types.jpg" alt="Different types of ammunitions for the cannons" /></p>
+
+<p>One interesting part of <a href="https://www.plainesdabraham.ca/">Musée des Plaines d’Abraham</a> was learning the different types of cannon munitions. Starting from the far left is just a regular cannon ball 
+typically used in the 18th century. The small ball next to it is part of the many clustered munitions used to go against a massed infantry called the grapeshot. A term I only have heard previously 
+from Bloons Tower Defense. The next set I don’t recall but I believe it had to do with piercing ship hulls (I could be wrong). The final one I cannot find its name on the internet but is apparently 
+capable of burning its target. I am going to be honest, I have 0 clue how that works because this bullet seems to be for piercing due to the presence of spikes. So I may have confused 
+3 and 4. One of the two is supposed to burn upon ignition due to placing some type of cloth that would go on fire once ejected from the cannon. I unfortunately did not take pictures of their 
+descriptions so I have no way to verify this fact.</p>
+
+<div class="dual-image-container">
+    <img alt="Confucius Monument" src="/assets/micro/quebec/confucius.jpg" />
+    <img alt="Gandhi Monument" src="/assets/micro/quebec/gandhi.jpg" />
+</div>
+
+<p>Exiting the museum and on my way to Vieux-Québec, I was greeted with a Confucius statue which got me confused. According to the description, this was a gift from the <a href="https://ici.radio-canada.ca/nouvelle/438247/statue-confucius">people of Shandong China in Spring 2009</a> 
+as a symbol of their friendship with the province of Québec. There is a similar statue of Gandhi given to Québec in 2006. There are a lot of statues around the area.</p>
+
+<p><img src="/assets/micro/quebec/parliment.jpg" alt="l'hôtel du Parlement du Québec" /></p>
+
+<p>At l’hôtel du Parlement du Québec, there are many statues. Careful to not confuse this building ni l’hôtel de ville as an actual hotel where voyagers sleep. According to a signboard, the building 
+est inspiré du Palais du Louvre. There’s also a lot of statues around and on the buildings.</p>
+
+<p><img src="/assets/micro/quebec/femmes-droits-1.jpg" alt="Lacoste-Gérin-Lajoie, Idola St-Jean, Thèrese Casgrain" /></p>
+
+<p>These are the statues of the three women who led the effort to allow women to vote for the Québec provincial elections, many years after other provinces such as Ontario and the federal election. 
+As soon as I came across these statues on my way to Vieux-Québec, I decided to take a detour and visit l’Hôtel du Parlement du Québec because I wanted to know why there were only 4 (only 3 are shown in the 
+photos) instead of Célèbres cinq (the <a href="https://en.wikipedia.org/wiki/The_Famous_Five_(Canada)">famous five</a>) who paved the way to allow women to be a senator. I mistakenly thought les Célèbres cinq 
+had paved the way for women to vote in Canada but apparently most women were able to vote about a decade before the famous <a href="https://en.wikipedia.org/wiki/Edwards_v_Canada_(AG)">Persons Case (1929)</a> (women of age over 21 
+years old had the right to vote in Federal elections since 1918). I did not realise that Québec would be the last or one of the last provinces to allow women to vote provincially.</p>
+
+<p><img src="/assets/micro/quebec/femmes-droits-2.jpg" alt="Marie-Claire Kirkland" /></p>
+
+<p>A statue of Marie-Claire Kirkland who was apparently the first woman to be elected to l’Assemblée législative du Québec in 1961. After finishing my quick detour, I continued my way to Vieux-Québec.</p>
+
+<div class="dual-image-container">
+    <img alt="Winston Churchill" src="/assets/micro/quebec/churchill.jpg" />
+    <img alt="Franklin D. Roosevelt" src="/assets/micro/quebec/roosevelt.jpg" />
+</div>
+
+<p>Seeing monuments depicting figures from around the world including a poet from Ukraine and Vietnam, it came to no surprise to me to see Winston Churchill and Franklin D. Roosevelt, the leaders of 
+United Kingdom and USA respectively during la Seconde Guerre mondiale. However, there was more to meet the eyes (hopefully I did not butcher this English idiom; edit: it should have been “more than meets the eye”). The two leaders convened 
+at the hotel Château Frontenac in 1943 to discuss war plans which includes the D-Day Invasion or what we also call the Normandy Landings. I do have some recollection during my younger years learning about this event but 
+it did not click till the tourist guide recounted the event, including how the plans were left at the hotel and was later <a href="https://www.cbc.ca/news/canada/montreal/young-quebec-soldier-walked-away-with-d-day-plans-1943-1.5257652">found by a low ranking soldier</a> 
+who was cleaning the conference room. Luckily for the soldier, he was not placed in confinement to guard the secrets and remained silent on the plans till after the operations.</p>
+
+<p><img src="/assets/micro/quebec/building1.jpg" alt="An image of a few buildings in Vieux-Québec" /></p>
+
+<p>One interesting thing about Vieux-Québec is how incoherent the architecture is. I do not have a good image of the various buildings that exist in the city but according to the guides, Québec was rich with 
+Scottish Yellow Bricks because the English would often use them to help stabilise empty cargo ships as the goods would be sent to UK but there was nothing to send back that would stabilise these now 
+empty ships. So one can see the influence of the buildings due to this. Not that I have an image of such building, at least not that I am aware of. But from the images below and above, one can notice 
+differences in the masonry.</p>
+
+<p><img src="/assets/micro/quebec/building2.jpg" alt="An image of a few buildings in Vieux-Québec" /></p>
+
+<p>On the first day at Vieux-Québec, I saw work being done to paint the roof but I guess the man left it undone or it’s a process that takes a span of a few days to properly paint the roof.</p>
+
+<p><img src="/assets/micro/quebec/sherman.jpg" alt="Sherman Tank" /></p>
+
+<p>A random sherman tank found at the Citadelle, a star fortress to defend Québec City. Vieux-Québec is a fortified city but I guess the British felt the need to build a star fortress to better protect 
+the area from the Americans.</p>
+
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/La_Citadelle_de_Qu%C3%A9bec%2C_vue_du_ciel.JPG/960px-La_Citadelle_de_Qu%C3%A9bec%2C_vue_du_ciel.JPG?utm_source=commons.wikimedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail" alt="Citadelle from Wikipedia" width="750" /></p>
+<p class="caption">The Star Fortress, la Citadelle du Québec extracted from Wikipedia taken by Cpl David Robert</p>
+
+<p><img src="/assets/micro/quebec/universal-carrier.jpg" alt="Universal Carrier probably, a vehiclue to transport weapons" /></p>
+
+<p>A vehicule, presumably a <a href="https://en.wikipedia.org/wiki/Universal_Carrier">universal carrier</a> to transport weapons, ammunition and soldiers in the battlefield.</p>
+
+<p><img src="https://web.archive.org/web/20251115115930if_/https://www.quebec-cite.com/sites/otq/files/styles/gallery_desktop_retina/public/simpleview/GG2014-0266-042_DCA43069-50CC-4728-BF2E72202A0FA663_d12fab54-c406-4790-8862f4aefab6f141.webp?itok=H7cgY1i8" alt="The gouverneur general's second Residence" width="750" /></p>
+<p class="caption">Residence of the gouverneur général at the Citadelle taken from their official site</p>
+
+<p>Within the Citadelle lies the second residence for the gouverneur général du Canada, the King’s representative in Canada. Canada is a constitional monarchy meaning our head of state is actually the King/Queen of 
+Canada (i.e. the King/Queen of England) while the Prime Minister is the Head of Government. In practice, the King/Queen of UK has no power over Canada, it is merely a symbolic relationship. The gouverneur géneral is our representative 
+of the King/Queen of England selected by the Prime Minister. The primary residence is located in Ottawa which I have yet to visit even though it is the city I have “lived” for the most part of my life. 
+As the citadelle was originally a military installation, the residence does not look anything spectacular but I can assure you that they renovated the inside to be much more impressive and luxurious.</p>
+
+<p><img src="/assets/micro/quebec/cannon-noon.jpg" alt="Soldiers preparing to shoot a cannon at noon" /></p>
+
+<p>Two soldiers preparing to shoot a cannon at noon. I did not stay for the shot and failed to hear the cannon. Rather I heard instead the church bells which also rang around the same time period unless I 
+was hallucinating.</p>
+
+<p><img src="/assets/micro/quebec/time-capsule.jpg" alt="Time capsule" /></p>
+
+<p>Apparently a monument to commemerate a time capsule and the members of the Royal 22e Régiment? I did not take a close look at the plaque, it just caught my eye for one reason, it contained the insignia of 
+the Royal 22e Régiment. The phrase “Je me souviens” can have different meanings in Canada depending on context and where you are located.</p>
+
+<p>In the military context, it refers to remembering the sacrifices of the armed forces. On November 11, this is the phrase we invoke in remembrance of the sacrifice made during the World Wars and the loss of 
+lives in subsequent wars such as the Korean War (1950-1953) and the War in Afghanistan (2001-2014).</p>
+
+<p>However, in Québec, this phrase has another meaning as described in the following plaque:</p>
+
+<p><img src="/assets/micro/quebec/je-me-souviens.jpg" alt="Je me souviens" /></p>
+
+<p>According to the plaque, the motto was created by Eugène-Étienne Taché and is used currently to recall the rich history of Québec or more literally to “evoke the rich past of the nation of Québec”. The motto summarises in 
+three words the assembly of themes on the facade of the Parlement (the front exterior wall).</p>
+
+<p>The government’s <a href="https://www.quebec.ca/gouvernement/portrait-quebec/drapeau-symboles-nationaux/devise">website</a> explains this better so I’ll leave it to them to explain the meaning.</p>]]></content><author><name></name></author><category term="micro" /><summary type="html"><![CDATA[While I dislike travelling, I decided to take a 3 week vacation to Québec City, mainly to improve my French. At the insistence of German classmate, I decided to make “most” of the vacation and participate in some tourist activities, even if I dislike it. Here are some dumps from my tour thus far:]]></summary></entry><entry><title type="html">MATH2052 - A Commentary on Calculus and Introductory Analysis 2</title><link href="https://randombits.ca/blog/math2052-commentary" rel="alternate" type="text/html" title="MATH2052 - A Commentary on Calculus and Introductory Analysis 2" /><published>2026-06-11T00:00:00-04:00</published><updated>2026-06-11T00:00:00-04:00</updated><id>https://randombits.ca/blog/math2052-commentary</id><content type="html" xml:base="/blog/math2052-commentary"><![CDATA[<p>This is a commentary to the second introductory course to calculus and analysis which I have a <a href="https://randombits.ca/blog/math2052">course review</a> on if you are interested. The content presented below are from winter 
 2022 which may not reflect what is covered in your class today. Furthermore, the information presented will have the author’s own commentary and is <strong>NOT</strong> and should <strong>NOT</strong> be a replacement to attending class. 
 The author simply wishes to review the content of the course mixed with their own speculations, views, and emotions as it reflects on the course 5 years later in preparation to their eventual return to 
 school after a 2 year break from Mathematics. This course is a follow up on <a href="https://randombits.ca/blog/math1052">MATH1052</a> exploring integrals, different types of convergence such as point-wise and uniform convergence, and 
@@ -3835,120 +3992,4 @@ There’s also an issue with what file types I can upload in neocities. I would 
 <p>I have no qualms paying for the subscription for a year or two to return the service for what neocities has provided me. But I don’t think that would be a viable long-term solution considering I could 
 rent a cloud instance for about the same price with more capabilities. I recognise that hosting is not cheap nor does it scale linearly so it is my intention to eventually buy a Neocities pro member 
 in a year time from now once I graduate university and get a job. Sadly I cannot go straight to masters as I don’t simply have the funds to justify spending another tens of thousands of dollars. 
-I already spent a lot doing a 2nd undergraduate degree for fun … a very bad financial decision.</p>]]></content><author><name></name></author><category term="micro" /><summary type="html"><![CDATA[As returning visitors may have noticed, the site has changed for better or worse with a few new sections in the past month or so. Notably:]]></summary></entry><entry><title type="html">Singularity Rootkit</title><link href="https://randombits.ca/micro/2026/02/singularity-rootkit" rel="alternate" type="text/html" title="Singularity Rootkit" /><published>2026-02-19T00:00:00-05:00</published><updated>2026-02-19T00:00:00-05:00</updated><id>https://randombits.ca/micro/2026/02/singularity-rootkit</id><content type="html" xml:base="/micro/2026/02/singularity-rootkit"><![CDATA[<p>An interesting yet scary piece of software I read about on the weekly Linux news is <a href="https://lwn.net/Articles/1053099/">Singularity</a>, an open-source rootkit, 
-which can hide itself from being detected, at least does a decent job at it. It hides its existence by removing itself from the list of active kernel modules, 
-and also attempts to hide attacker-controlled processes, network communication, and related files. As it has kernel-level access, it can hook and
-intercept syscalls that could reveal files that singularity wishes to hide from.</p>
-
-<p>Not totally related but this reminds me of a shared library exploit whereby the shared library intercepts the filesystem calls to <code class="language-plaintext highlighter-rouge">readdir</code> and <code class="language-plaintext highlighter-rouge">getdents</code> which is a neat trick. Though this is at a
-userspace-level exploit and requires one to preload the malicious library (<code class="language-plaintext highlighter-rouge">LD_PRELOAD</code>).</p>
-
-<p>The scary thing about this rootkit and any decent rootkits in general is its ability to hide itself. It is designed to hide itself thanks to it’s kernel-level privileges. It can intercept calls
-to various filesystem and network syscalls and APIs to conceal itself. This is why I am against the idea of allowing kernel-level anti-cheat code to be on my system. The idea of introducing a new level/ring
-in between userspace and kernel space or to introduce some new capabilities in userspace with controlled but limited and secured access to the kernel has been floated for years
-(though we do have eBPF which sort of functions like this). The <a href="https://en.wikipedia.org/wiki/2024_CrowdStrike-related_IT_outages">2024 Crowdstrike Incident</a>
-for instance has compelled Microsoft to roll out a new security level to hopefully prevent this from ever occurring. Though it is not the issue of ensuring availability of the system that I am worried about,
-its the fact that we are placing trust to a non-open source third-party to have access to the kernel. Who knows what craziness they could do even if not intentionally (i.e. supply chain attacks).</p>
-
-<p>Thankfully it would appear that this rootkit can be detected if observed at a third-party computer (i.e. examining the hard drive on another computer) or capture network traffic on a non-infected system.
-Fun fact, you can snoop harddrives without knowing their login as long as the drive is not encrypted. This was an eye-opener experience and made me think of my family desktops that we threw out
-over a decade ago.</p>
-
-<p>On a weird note, Singularity also happens to be the name of an <a href="https://en.wikipedia.org/wiki/Singularity_(operating_system)">experimental microkernel OS</a> by Microsoft that relied on software construction and
-memory safe language to ensure memory isolation and failure containment.</p>]]></content><author><name></name></author><category term="micro" /><summary type="html"><![CDATA[An interesting yet scary piece of software I read about on the weekly Linux news is Singularity, an open-source rootkit, which can hide itself from being detected, at least does a decent job at it. It hides its existence by removing itself from the list of active kernel modules, and also attempts to hide attacker-controlled processes, network communication, and related files. As it has kernel-level access, it can hook and intercept syscalls that could reveal files that singularity wishes to hide from.]]></summary></entry><entry><title type="html">When Did Programming/Coding Start to Click for You?</title><link href="https://randombits.ca/blog/when-it-click-programming" rel="alternate" type="text/html" title="When Did Programming/Coding Start to Click for You?" /><published>2026-01-31T00:00:00-05:00</published><updated>2026-01-31T00:00:00-05:00</updated><id>https://randombits.ca/blog/when-it-click-programming</id><content type="html" xml:base="/blog/when-it-click-programming"><![CDATA[<p>Months ago on a university Reddit page, a student asked when programming started to click because they are in their second year of their studies in Computer Science and feel lost. This was my response 
-to them (with some edits to expand on certain topics):</p>
-
-<hr />
-
-<p>Unclear what you mean “click” but here’s my three stage answer. 
-Sorry for its length in advance. Also this is from an old student who started most of their programming journey way before LLMs like ChatGPT even existed. 
-In my opinion, you will experience many clicks in your career.</p>
-
-<p><strong>Summary:</strong></p>
-
-<ol>
-  <li>
-    <p><strong>Think Like a Programmer:</strong> 
-The first “click” occurs when one is able to break down a problem into smaller tasks and then have the ability to translate their ideas on how to translate each small task into code</p>
-  </li>
-  <li>
-    <p><strong>Think Like a Computer Scientist:</strong> Another “click” occurs when one makes the realization that there are different ways of approaching a problem that are more space or time efficient. 
-The ability to solve hard problems by making use the tools you acquired from your education and personal experience and thinking outside of the box.</p>
-  </li>
-  <li>
-    <p><strong>Having a Personal Connection:</strong> Another “click” occurs when one has a personal or professional relationship with programming. 
-When one writes a program that someone can actually use and benefit from.
-This is the experience of creating a program with more initimate relation with as school projects are just for grades and your tiny simple programs previously were just for practice and familiarization.</p>
-  </li>
-</ol>
-
-<hr />
-
-<p><strong>1. The Beginning - Think Like A Programmer</strong></p>
-
-<p>From my observation, there seems to be a learning curve to think like a programmer. 
-This is the ability to breakdown an assignment into smaller tasks and then reason how to approach each task.
-This often takes the average student anywhere between 2-6 months typically. 
-However, this wall only gives you access to think like a programmer. 
-I am unsure how first year CS courses are like at this university but at some universities, they would give a student a 2-4 page document that describes 
-the overall goal of the project and some minimal starter code and have students bang their head from going through the starter code and the document to figure out how to achieve 
-the objectives and what is even wanted for the assignment.</p>
-
-<p>This phase is crucial to overcome and you will gain an extremely important ability, the ability to think like a programmer. In addition, programmers often work on existing codebase 
-so gaining the ability to read existing codebase and connecting how various components come together to solve your problems that will continue throughout your programming career.</p>
-
-<p><strong>Advice:</strong> Do not panic if you are lost in your first month or two of programming. It is normal not being able to translate high level ideas to code. 
-This takes practice. I often tell students try writing something simple outside of class to review what they learned. 
-When I was a kid self learning programming from books and from whatever resources there were on the internet, 
-I would often write stupid little 10-20 line program in C such as asking a user their name and age and determine if they can vote or not, 
-making a simple calculator that takes in two numbers and an operation to execute, printing alternative messages and etc. 
-Small Text adventure or other simple games like Black Jack are great simple ideas. Text parsing are also great ideas.</p>
-
-<p>Students often want to write complex programs which is great but you got to start from somewhere.</p>
-
-<p><strong>2. Think Like A Computer Scientists: Introduction to Data Structures</strong></p>
-
-<p>Now that you got a hang onto the basics of programming, you are ready to learn the foundations of Computer Science which may be after your first CS course or 
-in 2nd year depending on your university. This is where you need to think more critically how you organize your data more critically and create different approaches 
-to solve the same problem to be more efficient. 
-Time complexity and various data structures are shown.</p>
-
-<p>[A 2nd-year introductory Data structure and algorithm course] is a great course to witness the power of time complexity and making use of different data structures. 
-You are in 2nd year and perhaps you have not taken this course yet but this course will equip you with the basic understanding and appreciation of different algorithms and data structures. 
-If you can do all the assignments, this is where I think the “click” will occur. 
-At least this will click to you that coding is more than copying and pasting. 
-The course was a fun elective because it required you to understand the concepts from the course and think outside of the box sometimes. 
-It gave me nostalgic memories of when I was young hitting my head to the wall till I can think of a potential solution.</p>
-
-<p><strong>Note:</strong> I am a Mathematics student who took a data structure course for fun at some university</p>
-
-<p>I had the fortunate realization of the importance of time complexity and data structures when I was in Highschool trying to parse large sets of text data to create a relationship between 
-different sets of data which required a lot of insertion and searches. That was when I theorized the basics of time complexity and data structures as I would spend hours and days writing several 
-implementations on paper (I made sure to carry a pencil and paper everywhere). 
-It was so fun to see that many of my theories were actually a known concept taught in university (all my chemistry theories were debunked unfortunately but it was fun discussing it with my teachers).
-I have other examples such as in first year (not [university]), we had to write a generic primitive puzzle solver “AI” that can solve different puzzles. 
-The condition of the assignment was that we needed to have the AI solve a set of different puzzles like sudoku and Peg solitaire under 3 mins using Bread-first search and Depth-first search. 
-My initial implementation took an hour and I kept iterating and then I had this genius idea of pruning the trees to reduce the search space which I later found out was a common technique in AI years later. 
-Why am I babbling about this? Good question, I am bored but to answer more seriously, this is an example of “click”. 
-The ability to think of a solution outside of what you learned or being able to identify and make use of whatever it is in your toolbox to solve your problem is more than copying and pasting.</p>
-
-<p><strong>3. Solving Real Life Problems: Finally writing something useful for once</strong></p>
-
-<p>Many students have said over the years to me of their frustration with their relationship with coding. 
-They know the basics but are stuck on how to make use of their knowledge. Coding has become some abstract concept to them similar to Math. 
-They know the basics but they don’t see personally how coding can help them do anything cool. 
-This is a bigger problem in Mathematics but this can occur in CS. These students don’t have a personal nor professional realtionship with programming. 
-They want to go outside of Hello World or whatever pet assignments they are given in class. 
-Some students don’t understand the beauty of data structures and might say “what’s so cool about arranging numbers” or “counting the number of times a letter occurs in a string”. 
-For them, programming will “click” when they can apply what they learn to solve more <strong>personal</strong> real world problems, something they have a connection with. 
-Creating websites and games are amazing for this if they cannot secure a job. 
-Being able to visualize and interact with your program is such an amazing experience or having your code being used by someone. 
-I started my programming journey with web programming back in middle school and for some reason it was such a cool experience. 
-Seeing how my text written in notepad could be rendered into an actual webpage was such a fascinating sight. 
-It’s as if I was partipcating in those blogs and personal sites from Angelfire and Geocities era. 
-Though for me, this is when it “clicked” to me that programming wasn’t for some genius wizards and motivated me to go to the library, writing notes from programming book in Indigo [a Canadian Bookstore] 
-(which is like a library if we are honest), and browsing Youtube back when there wasn’t many videos on programming.</p>
-
-<p>Scripts are such a powerful tool as well, I’ve written scripts to help automate my tedious data entry job in the past, 
-process and analyze volumes of data for different disciplines such as in geography and in helping someone with their linguistic research. 
-Programming is such a powerful tool and for some, programming “clicks” when it becomes a useful tool.</p>]]></content><author><name></name></author><category term="blog" /><summary type="html"><![CDATA[A response to a Reddit Post on when programming clicked for me]]></summary></entry></feed>
+I already spent a lot doing a 2nd undergraduate degree for fun … a very bad financial decision.</p>]]></content><author><name></name></author><category term="micro" /><summary type="html"><![CDATA[As returning visitors may have noticed, the site has changed for better or worse with a few new sections in the past month or so. Notably:]]></summary></entry></feed>

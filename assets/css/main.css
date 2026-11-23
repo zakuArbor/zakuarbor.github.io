@@ -980,5 +980,40 @@ details[open] {
     display: inline !important;
   }
 }
+/** Credits: https://brennenputh.me/blog/printable-websites/ */
+.onlyPrint {
+  display: none;
+}
+
+@media print {
+  .noPrint {
+    display: none;
+  }
+  .onlyPrint {
+    display: inline;
+  }
+  p,
+  ol {
+    font-size: 12pt;
+  }
+  h3, h4 {
+    font-size: 13pt;
+  }
+  h2 {
+    font-size: 14pt;
+  }
+  h1 {
+    font-size: 16pt;
+  }
+  .giallo {
+    border: 3px solid black;
+  }
+  .giallo-l {
+    font-size: 11pt;
+  }
+  a {
+    color: black !important;
+  }
+}
 
 /*# sourceMappingURL=main.css.map */

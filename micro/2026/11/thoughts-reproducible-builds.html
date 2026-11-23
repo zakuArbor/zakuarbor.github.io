@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>Random Thoughts on Reproducible Builds - RANDOM BITS</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/css/syntax_monokai.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="/assets/css/contrast.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/png" href="/assets/site/random-bits-favicon.png">
+    <meta name="og:title" content="Random Bits">
+    <meta name="og:image" content="">
+    <meta name="og:description"
+        content="Random bits of programming, math, and personal thoughts">
+    <meta name="keywords" content="zakuarbor, programming, math, random bits, pikachu">
+    <meta name="description" content="Random bits of programming, math, and personal thoughts">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script charset="utf-8" src="/assets/js/script.js"></script>
+<script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+     loader: {load: ['[tex]/cancel']},
+      TeX: { 
+        equationNumbers: { autoNumber: "all" },
+        packages: {'[+]': ['cancel']}
+      } 
+    }); 
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <!--<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>-->
+  <header>
+    <center>
+      <h1 id = "title"><a href = "/index.html">RANDOM BITS</a><img id = "pikachu-header" src = "/assets/site/flying-pikachu.png"/></h1>
+    A random site by a random clueless human
+    </center>
+    <!--<marquee scrollamount="4">-->
+    <center>
+      <!--<img src = "/assets/gifs/pikachu-run.gif"/>--><p>Random bits of programming, math, and thoughts
+      By a clueless human</p><!-- <img src = "/assets/gifs/pikachu-run.gif"/>-->
+    </center>
+      <!--&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      <img src = "/assets/gifs/pikachu-run.gif"/>Random bits of programming, math, and thoughts
+      By a clueless human <img src = "/assets/gifs/pikachu-run.gif"/>-->
+      <!--</marquee>-->
+
+    <a href="javascript:void(0);" class="hamburger-nav" onclick="toggleMenu()"><i class="fa fa-bars"></i></a>
+    <nav id="header-nav">
+    <center>
+      <a href="/index.html">Home</a>
+      <a href="/micro/"><span style = "letter-spacing: 1px;">µ</span>Blog</a>
+      <a href="/blog/"><span style = "letter-spacing: 1px;">Blog</a>
+      <a href="/link.html">LinkBlog</a>
+      <!--<a href="/math.html">Math</a>-->
+      <a href="/about.html">About</a>
+    </center>
+    </nav>
+</header>
+
+  </head>
+  <body>
+
+    <div id = "wrapper">
+    <div id = "content">
+<div class = "bits">
+  <h1 class = "title">Random Thoughts on Reproducible Builds</h1>
+
+  <div>
+    <p class = "date">November 22, 2026</p>
+    
+    <div class="tags">
+      
+      
+        <a href="/categories/#micro">micro</a>
+        &nbsp;
+      
+        <a href="/categories/#programming">programming</a>
+        &nbsp;
+      
+        <a href="/categories/#trusted-computing">trusted-computing</a>
+        
+      
+    </div>
+  </div>
+  <p>Part of a series of mini thoughts I had while looking into Trusted Computing, a topic I am not too familiar with. The topic for today is on reproducible builds that I shared with my class back on September 22.
+Reproducible builds have been on my feed since <a href="https://lwn.net/Articles/985739/">2024</a> and it turns out to be an interesting topic and is a trend within the open source community to ensure 
+security, trust and regulatory compliance. Reproducible builds are <a href="https://reproducible-builds.org/docs/definition/">defined</a> as:</p>
+
+<blockquote>
+  <p>A build is reproducible if given the same source code, build environment and build instructions, any party can recreate bit-by-bit identical copies of all specified artifacts.</p>
+</blockquote>
+
+<p>In other words, a binary that is reproducible provides users with a way to be certain that the software is genuine and has not been tampered with by reproducing the build themselves or 
+by placing their trust in an independent third party to reproduce the build. The ability for others to compile code given the same source code, build environment and build instructions is important 
+for software longevity. Reproducibility pushes developers to create better documentation and tooling.</p>
+
+<p>As a former Build DevOps developer who inherited a legacy blackbox, it astonished me how bad the state of our legacy product was because we could not physically rebuild artifacts 
+without cloning the VM running on the same machines  as before. The lack of expertise and documentation required us to replicate the exact build environment and automation (which contained our build instructions) 
+to even push out a build. Reproducible builds are marketed as a solution for security and compliance but this side effect of enabling others to create the same artifact is powerful.</p>
+
+<p>Of course I am over-exaggerating of the state of the legacy product I worked at in my previous life, it was nonetheless a mess. Anyhow, back to the topic at hand, at the time I shared about reproducible builds, 
+I was contemplating how we could incorporate this idea into trusted computing.</p>
+
+<p>Reproducible builds, at least from what I have seen, are seen through the lens of supply chain attacks and give users a trusted software source (initial integrity) to build on. 
+For instance, if a solution relies on interacting with a crypto library, having the library be reproducible can give us confidence that the library code has not been tampered with. 
+So its hash could be a measurement. The only obvious relevant relation I can think of is to have open source firmware, bootloader, etc. be reproducible so that other manufacturers could rely on the same 
+hash as part of some standardised Reference Integrity Metrics.</p>
+
+<p>There have been efforts by Linux distributions to have the kernel and their packages be reproducible, having achieved 95% or higher reproducibility with Debian having a policy for packages to be 
+reproducibile. The reason I specified firmware and bootloader is because we want our trusted computing base (TCB) to be as small as possible. 
+Yes it would be nice to have reproducible builds on all the libraries relied upon by the OS and critical services, as we do not want to assume trust in the entire OS and its libraries. But if we 
+are able to reproduce the OS, we could be reassured that the OS and its packages have not been tampered with. Though the question of whether we wish to assume trust is a different story, sometimes we have to 
+assume trust depending on what we are working on. In our definition, a component is <strong>trusted</strong> if it behaves in the expected manner for the intended purpose. 
+This still means a component can be considered trusted even if it contains a security flaw. Also recall that reproducible builds do not guarantee the source code is without flaws, it guarantees 
+independent verification that the resulting binary corresponds to the same source code and build environment.</p>
+
+<p>Rather than trusting the entire OS as that could make the TCB too large, we could chain measurements on top of an anchor (root of trust) and verify step by step the individual 
+components (called the chain of trust). Essentially, at each stage, the previous stage will endorse what is to be loaded next.
+With the many different hardware configurations that exist, this would be a challenge as there would be too many different measurements to consider.</p>
+
+<p>On a topic of secure boot and TPMs, TPMs are passive devices that are separate from secure boot. TPMs record measurements of what gets loaded and can attest to these measurements but it never blocks anything.
+Secure boot on the other hand refuses to load any components not signed by a trusted key, verifying the signature of components from the firmware, bootloader, and even potentially 
+up to the kernel modules. Reproducible builds could potentially be used in measurements as one could verify its hashes independently. Secure boot provides provenance (origin) and not 
+reassurance of the contents.</p>
+
+<p>Some random interesting articles about reproducibility, although a bit dated:</p>
+
+<ul>
+  <li><a href="https://dl.acm.org/doi/10.1145/2664243.2664288">Challenges and implications of verifiable builds for security-critical open-source software</a></li>
+  <li><a href="https://xavier2dc.fr/truecrypt-binaries-analysis/">Works on Reproducibility of TrueCrypt on Windows</a></li>
+</ul>
+
+</div>
+</div>
+
+    </div>
+
+  <footer>
+  <marquee id = "buttons">
+    <a href = "index.html"><img src = "/assets/buttons/button.png"></a>
+    <a href = "index.html"><img src = "/assets/buttons/button2.png"></a>
+    <a href = 'https://neocities.org/'><img src = "/assets/buttons/neocitiesorg.gif"></a>
+    <a href = 'https://www.vim.org/'><img src = "/assets/buttons/vim.gif"></a>
+    <a href = 'https://fedoraproject.org/'><img src = "/assets/buttons/gnu-linux.gif"></a>
+    <a href = "https://fedoraproject.org/"><img src = "/assets/buttons/powered_by_fedora_alt.png"></a>
+  </marquee>
+  <a href = "./feed.xml" alt = "rss"><i class="fa-solid fa-rss"></i></a>
+  <small><a href = "/credits" class = "credits">Credits</a></small>
+</footer>
+
+
+  <button onclick="toTop()" id="top_btn" title="Go to top">Top</button>
+  </body>
+</html>
